@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="cbm_iso_sart.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="iso_cargo">
+          <Key>
+            <PropertyRef Name="icg_id_cargo" />
+          </Key>
+          <Property Name="icg_id_cargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="icg_nombre" Type="varchar" MaxLength="255" />
+          <Property Name="icg_descripcion" Type="varchar" MaxLength="250" />
+          <Property Name="icg_cod_clase_cargo" Type="int" />
+          <Property Name="icg_num_trabajadores" Type="int" />
+          <Property Name="icg_area" Type="varchar" MaxLength="100" />
+          <Property Name="icg_jefe_inmediato" Type="varchar" MaxLength="200" />
+          <Property Name="icg_edad" Type="varchar" MaxLength="20" />
+          <Property Name="icg_genero" Type="varchar" MaxLength="50" />
+          <Property Name="icg_instruccion" Type="varchar" MaxLength="300" />
+          <Property Name="icg_experiencia" Type="varchar" MaxLength="300" />
+          <Property Name="icg_conocimiento_adicional" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="iso_cargo_puesto_t">
+          <Key>
+            <PropertyRef Name="icp_id_puesto_t" />
+            <PropertyRef Name="icp_id_cargo" />
+          </Key>
+          <Property Name="icp_id_puesto_t" Type="int" Nullable="false" />
+          <Property Name="icp_id_cargo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="iso_consulta_medica">
+          <Key>
+            <PropertyRef Name="icm_id_consulta" />
+            <PropertyRef Name="icm_id_historia_clinica" />
+            <PropertyRef Name="icm_id_personal" />
+          </Key>
+          <Property Name="icm_id_consulta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="icm_id_historia_clinica" Type="int" Nullable="false" />
+          <Property Name="icm_id_personal" Type="int" Nullable="false" />
+          <Property Name="icm_tipo_consulta" Type="int" />
+          <Property Name="icm_fecha_consulta" Type="datetime" />
+          <Property Name="icm_motivo_consulta" Type="varchar" MaxLength="500" />
+          <Property Name="icm_observaciones" Type="varchar" MaxLength="500" />
+          <Property Name="icm_nombre_medico" Type="varchar" MaxLength="150" />
+          <Property Name="icm_val_especialista" Type="varchar" MaxLength="255" />
+          <Property Name="icm_nombre_especialista" Type="varchar" MaxLength="150" />
+          <Property Name="icm_control" Type="varchar" MaxLength="255" />
+          <Property Name="icm_apto_cont_puesto" Type="varchar" MaxLength="50" />
+          <Property Name="icm_apto_cont_vmedica" Type="varchar" MaxLength="50" />
+          <Property Name="icm_requiere_cambiop" Type="varchar" MaxLength="50" />
+          <Property Name="icm_enfermedad_actual" Type="varchar" MaxLength="500" />
+          <Property Name="icm_reubicacion" Type="varchar" MaxLength="60" />
+          <Property Name="icm_tiempo_reintegro" Type="varchar" MaxLength="25" />
+          <Property Name="icm_crit_reintegro" Type="varchar" MaxLength="500" />
+          <Property Name="icm_exam_preocu" Type="varchar" MaxLength="4" />
+          <Property Name="icm_ctrl_period" Type="varchar" MaxLength="4" />
+          <Property Name="icm_cuantos_periodo" Type="varchar" MaxLength="10" />
+          <Property Name="icm_enfer_prexistentes" Type="varchar" MaxLength="4" />
+          <Property Name="icm_ert" Type="varchar" MaxLength="4" />
+          <Property Name="icm_enfer_laboral" Type="varchar" MaxLength="4" />
+          <Property Name="icm_accidente_trab" Type="varchar" MaxLength="4" />
+          <Property Name="icm_discapacidad" Type="varchar" MaxLength="4" />
+          <Property Name="icm_r1" Type="char" MaxLength="1" />
+          <Property Name="icm_r2" Type="char" MaxLength="1" />
+          <Property Name="icm_r3" Type="char" MaxLength="1" />
+          <Property Name="icm_r4" Type="char" MaxLength="1" />
+          <Property Name="icm_fecha_salida" Type="datetime" />
+        </EntityType>
+        <EntityType Name="iso_departamento">
+          <Key>
+            <PropertyRef Name="ide_id_departamento" />
+          </Key>
+          <Property Name="ide_id_departamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ide_nombre_departamento" Type="nvarchar" MaxLength="60" />
+          <Property Name="ide_descripcion_departamento" Type="nvarchar" MaxLength="255" />
+          <Property Name="ide_id_empresa" Type="int" />
+          <Property Name="ide_id_departamento_padre" Type="int" />
+          <Property Name="ide_deshabilitar" Type="bit" />
+          <Property Name="ide_cod_documento" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="iso_empresa">
+          <Key>
+            <PropertyRef Name="iem_cod_empresa" />
+          </Key>
+          <Property Name="iem_cod_empresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iem_nombre_empresa" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="iem_nemonico_empresa" Type="varchar" MaxLength="20" />
+          <Property Name="iem_ruc_empresa" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="iem_direccion_empresa" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="iem_telefono_empresa" Type="varchar" MaxLength="30" />
+          <Property Name="iem_rep_legal_empresa" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="iem_personeria_empresa" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="iem_icono_empresa" Type="varchar" MaxLength="255" />
+          <Property Name="iem_vision_empresa" Type="varchar" MaxLength="1000" />
+          <Property Name="iem_mision_empresa" Type="varchar" MaxLength="1000" />
+          <Property Name="iem_politica_empresa" Type="varchar" MaxLength="1000" />
+          <Property Name="iem_objetivo_empresa" Type="varchar" MaxLength="2000" />
+          <Property Name="iem_valores_empresa" Type="varchar" MaxLength="2000" />
+          <Property Name="iem_icono_archivo" Type="image" />
+          <Property Name="iem_politica_general" Type="varchar" MaxLength="2000" />
+          <Property Name="iem_politica_calidad" Type="varchar" MaxLength="2000" />
+          <Property Name="iem_estrategia_general" Type="varchar" MaxLength="2000" />
+          <Property Name="iem_razon_social" Type="varchar" MaxLength="255" />
+          <Property Name="iem_numero_patronal" Type="varchar" MaxLength="30" />
+          <Property Name="iem_actividad" Type="varchar" MaxLength="100" />
+          <Property Name="iem_numero_trab_administrativos" Type="int" />
+          <Property Name="iem_numero_trab_planta" Type="int" />
+        </EntityType>
+        <EntityType Name="iso_historia_clinica">
+          <Key>
+            <PropertyRef Name="ihc_id_historia" />
+            <PropertyRef Name="ihc_id_personal" />
+          </Key>
+          <Property Name="ihc_id_historia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ihc_id_personal" Type="int" Nullable="false" />
+          <Property Name="ihc_id_empresa" Type="varchar" MaxLength="80" />
+          <Property Name="ihc_lugar_historia_clinica" Type="varchar" MaxLength="80" />
+          <Property Name="ihc_fecha_historia_clinica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="iso_puesto_trabajo">
+          <Key>
+            <PropertyRef Name="ipt_id_puesto_t" />
+          </Key>
+          <Property Name="ipt_id_puesto_t" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ipt_nombre_puesto_t" Type="varchar" MaxLength="200" />
+          <Property Name="ipt_descrip_puesto_t" Type="varchar" MaxLength="500" />
+          <Property Name="ipt_nro_trbajadores" Type="int" />
+        </EntityType>
+        <Association Name="FK_iso_cargo_puesto_t_iso_cargo">
+          <End Role="iso_cargo" Type="Self.iso_cargo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_cargo_puesto_t" Type="Self.iso_cargo_puesto_t" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_cargo">
+              <PropertyRef Name="icg_id_cargo" />
+            </Principal>
+            <Dependent Role="iso_cargo_puesto_t">
+              <PropertyRef Name="icp_id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_cargo_puesto_t_iso_puesto_trabajo">
+          <End Role="iso_puesto_trabajo" Type="Self.iso_puesto_trabajo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_cargo_puesto_t" Type="Self.iso_cargo_puesto_t" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_puesto_trabajo">
+              <PropertyRef Name="ipt_id_puesto_t" />
+            </Principal>
+            <Dependent Role="iso_cargo_puesto_t">
+              <PropertyRef Name="icp_id_puesto_t" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_consulta_medica_iso_historia_clinica">
+          <End Role="iso_historia_clinica" Type="Self.iso_historia_clinica" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_consulta_medica" Type="Self.iso_consulta_medica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_historia_clinica">
+              <PropertyRef Name="ihc_id_historia" />
+              <PropertyRef Name="ihc_id_personal" />
+            </Principal>
+            <Dependent Role="iso_consulta_medica">
+              <PropertyRef Name="icm_id_historia_clinica" />
+              <PropertyRef Name="icm_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_departamento_iso_empresa">
+          <End Role="iso_empresa" Type="Self.iso_empresa" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_departamento" Type="Self.iso_departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_empresa">
+              <PropertyRef Name="iem_cod_empresa" />
+            </Principal>
+            <Dependent Role="iso_departamento">
+              <PropertyRef Name="ide_id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cbm_iso_sartStoreContainer">
+          <EntitySet Name="iso_cargo" EntityType="Self.iso_cargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_cargo_puesto_t" EntityType="Self.iso_cargo_puesto_t" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_consulta_medica" EntityType="Self.iso_consulta_medica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_departamento" EntityType="Self.iso_departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_empresa" EntityType="Self.iso_empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_historia_clinica" EntityType="Self.iso_historia_clinica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_puesto_trabajo" EntityType="Self.iso_puesto_trabajo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_iso_cargo_puesto_t_iso_cargo" Association="Self.FK_iso_cargo_puesto_t_iso_cargo">
+            <End Role="iso_cargo" EntitySet="iso_cargo" />
+            <End Role="iso_cargo_puesto_t" EntitySet="iso_cargo_puesto_t" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_cargo_puesto_t_iso_puesto_trabajo" Association="Self.FK_iso_cargo_puesto_t_iso_puesto_trabajo">
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+            <End Role="iso_cargo_puesto_t" EntitySet="iso_cargo_puesto_t" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_consulta_medica_iso_historia_clinica" Association="Self.FK_iso_consulta_medica_iso_historia_clinica">
+            <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+            <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_departamento_iso_empresa" Association="Self.FK_iso_departamento_iso_empresa">
+            <End Role="iso_empresa" EntitySet="iso_empresa" />
+            <End Role="iso_departamento" EntitySet="iso_departamento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cbm_iso_sart" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="iso_cargo">
+          <Key>
+            <PropertyRef Name="icg_id_cargo" />
+          </Key>
+          <Property Name="icg_id_cargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="icg_nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="icg_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="icg_cod_clase_cargo" Type="Int32" />
+          <Property Name="icg_num_trabajadores" Type="Int32" />
+          <Property Name="icg_area" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="icg_jefe_inmediato" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="icg_edad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="icg_genero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="icg_instruccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="icg_experiencia" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="icg_conocimiento_adicional" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_puesto_trabajo" Relationship="Self.iso_cargo_puesto_t" FromRole="iso_cargo" ToRole="iso_puesto_trabajo" />
+        </EntityType>
+        <EntityType Name="iso_consulta_medica">
+          <Key>
+            <PropertyRef Name="icm_id_consulta" />
+            <PropertyRef Name="icm_id_historia_clinica" />
+            <PropertyRef Name="icm_id_personal" />
+          </Key>
+          <Property Name="icm_id_consulta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="icm_id_historia_clinica" Type="Int32" Nullable="false" />
+          <Property Name="icm_id_personal" Type="Int32" Nullable="false" />
+          <Property Name="icm_tipo_consulta" Type="Int32" />
+          <Property Name="icm_fecha_consulta" Type="DateTime" Precision="3" />
+          <Property Name="icm_motivo_consulta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="icm_observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="icm_nombre_medico" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="icm_val_especialista" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="icm_nombre_especialista" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="icm_control" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="icm_apto_cont_puesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="icm_apto_cont_vmedica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="icm_requiere_cambiop" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="icm_enfermedad_actual" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="icm_reubicacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="icm_tiempo_reintegro" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="icm_crit_reintegro" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="icm_exam_preocu" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="icm_ctrl_period" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="icm_cuantos_periodo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="icm_enfer_prexistentes" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="icm_ert" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="icm_enfer_laboral" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="icm_accidente_trab" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="icm_discapacidad" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="icm_r1" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="icm_r2" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="icm_r3" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="icm_r4" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="icm_fecha_salida" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="iso_historia_clinica" Relationship="Self.FK_iso_consulta_medica_iso_historia_clinica" FromRole="iso_consulta_medica" ToRole="iso_historia_clinica" />
+        </EntityType>
+        <EntityType Name="iso_departamento">
+          <Key>
+            <PropertyRef Name="ide_id_departamento" />
+          </Key>
+          <Property Name="ide_id_departamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ide_nombre_departamento" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="ide_descripcion_departamento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ide_id_empresa" Type="Int32" />
+          <Property Name="ide_id_departamento_padre" Type="Int32" />
+          <Property Name="ide_deshabilitar" Type="Boolean" />
+          <Property Name="ide_cod_documento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_empresa" Relationship="Self.FK_iso_departamento_iso_empresa" FromRole="iso_departamento" ToRole="iso_empresa" />
+        </EntityType>
+        <EntityType Name="iso_empresa">
+          <Key>
+            <PropertyRef Name="iem_cod_empresa" />
+          </Key>
+          <Property Name="iem_cod_empresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iem_nombre_empresa" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iem_nemonico_empresa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="iem_ruc_empresa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iem_direccion_empresa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iem_telefono_empresa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="iem_rep_legal_empresa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iem_personeria_empresa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iem_icono_empresa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="iem_vision_empresa" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="iem_mision_empresa" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="iem_politica_empresa" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="iem_objetivo_empresa" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="iem_valores_empresa" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="iem_icono_archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="iem_politica_general" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="iem_politica_calidad" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="iem_estrategia_general" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="iem_razon_social" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="iem_numero_patronal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="iem_actividad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="iem_numero_trab_administrativos" Type="Int32" />
+          <Property Name="iem_numero_trab_planta" Type="Int32" />
+          <NavigationProperty Name="iso_departamento" Relationship="Self.FK_iso_departamento_iso_empresa" FromRole="iso_empresa" ToRole="iso_departamento" />
+        </EntityType>
+        <EntityType Name="iso_historia_clinica">
+          <Key>
+            <PropertyRef Name="ihc_id_historia" />
+            <PropertyRef Name="ihc_id_personal" />
+          </Key>
+          <Property Name="ihc_id_historia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ihc_id_personal" Type="Int32" Nullable="false" />
+          <Property Name="ihc_id_empresa" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ihc_lugar_historia_clinica" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ihc_fecha_historia_clinica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="iso_consulta_medica" Relationship="Self.FK_iso_consulta_medica_iso_historia_clinica" FromRole="iso_historia_clinica" ToRole="iso_consulta_medica" />
+        </EntityType>
+        <EntityType Name="iso_puesto_trabajo">
+          <Key>
+            <PropertyRef Name="ipt_id_puesto_t" />
+          </Key>
+          <Property Name="ipt_id_puesto_t" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ipt_nombre_puesto_t" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ipt_descrip_puesto_t" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ipt_nro_trbajadores" Type="Int32" />
+          <NavigationProperty Name="iso_cargo" Relationship="Self.iso_cargo_puesto_t" FromRole="iso_puesto_trabajo" ToRole="iso_cargo" />
+        </EntityType>
+        <Association Name="FK_iso_consulta_medica_iso_historia_clinica">
+          <End Role="iso_historia_clinica" Type="Self.iso_historia_clinica" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_consulta_medica" Type="Self.iso_consulta_medica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_historia_clinica">
+              <PropertyRef Name="ihc_id_historia" />
+              <PropertyRef Name="ihc_id_personal" />
+            </Principal>
+            <Dependent Role="iso_consulta_medica">
+              <PropertyRef Name="icm_id_historia_clinica" />
+              <PropertyRef Name="icm_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_departamento_iso_empresa">
+          <End Role="iso_empresa" Type="Self.iso_empresa" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_departamento" Type="Self.iso_departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_empresa">
+              <PropertyRef Name="iem_cod_empresa" />
+            </Principal>
+            <Dependent Role="iso_departamento">
+              <PropertyRef Name="ide_id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="iso_cargo_puesto_t">
+          <End Role="iso_cargo" Type="Self.iso_cargo" Multiplicity="*" />
+          <End Role="iso_puesto_trabajo" Type="Self.iso_puesto_trabajo" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="cbm_iso_sart_entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="iso_cargo" EntityType="Self.iso_cargo" />
+          <EntitySet Name="iso_consulta_medica" EntityType="Self.iso_consulta_medica" />
+          <EntitySet Name="iso_departamento" EntityType="Self.iso_departamento" />
+          <EntitySet Name="iso_empresa" EntityType="Self.iso_empresa" />
+          <EntitySet Name="iso_historia_clinica" EntityType="Self.iso_historia_clinica" />
+          <EntitySet Name="iso_puesto_trabajo" EntityType="Self.iso_puesto_trabajo" />
+          <AssociationSet Name="FK_iso_consulta_medica_iso_historia_clinica" Association="Self.FK_iso_consulta_medica_iso_historia_clinica">
+            <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+            <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_departamento_iso_empresa" Association="Self.FK_iso_departamento_iso_empresa">
+            <End Role="iso_empresa" EntitySet="iso_empresa" />
+            <End Role="iso_departamento" EntitySet="iso_departamento" />
+          </AssociationSet>
+          <AssociationSet Name="iso_cargo_puesto_t" Association="Self.iso_cargo_puesto_t">
+            <End Role="iso_cargo" EntitySet="iso_cargo" />
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cbm_iso_sartStoreContainer" CdmEntityContainer="cbm_iso_sart_entities">
+          <EntitySetMapping Name="iso_cargo">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_cargo">
+              <MappingFragment StoreEntitySet="iso_cargo">
+                <ScalarProperty Name="icg_id_cargo" ColumnName="icg_id_cargo" />
+                <ScalarProperty Name="icg_nombre" ColumnName="icg_nombre" />
+                <ScalarProperty Name="icg_descripcion" ColumnName="icg_descripcion" />
+                <ScalarProperty Name="icg_cod_clase_cargo" ColumnName="icg_cod_clase_cargo" />
+                <ScalarProperty Name="icg_num_trabajadores" ColumnName="icg_num_trabajadores" />
+                <ScalarProperty Name="icg_area" ColumnName="icg_area" />
+                <ScalarProperty Name="icg_jefe_inmediato" ColumnName="icg_jefe_inmediato" />
+                <ScalarProperty Name="icg_edad" ColumnName="icg_edad" />
+                <ScalarProperty Name="icg_genero" ColumnName="icg_genero" />
+                <ScalarProperty Name="icg_instruccion" ColumnName="icg_instruccion" />
+                <ScalarProperty Name="icg_experiencia" ColumnName="icg_experiencia" />
+                <ScalarProperty Name="icg_conocimiento_adicional" ColumnName="icg_conocimiento_adicional" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_consulta_medica">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_consulta_medica">
+              <MappingFragment StoreEntitySet="iso_consulta_medica">
+                <ScalarProperty Name="icm_id_consulta" ColumnName="icm_id_consulta" />
+                <ScalarProperty Name="icm_id_historia_clinica" ColumnName="icm_id_historia_clinica" />
+                <ScalarProperty Name="icm_id_personal" ColumnName="icm_id_personal" />
+                <ScalarProperty Name="icm_tipo_consulta" ColumnName="icm_tipo_consulta" />
+                <ScalarProperty Name="icm_fecha_consulta" ColumnName="icm_fecha_consulta" />
+                <ScalarProperty Name="icm_motivo_consulta" ColumnName="icm_motivo_consulta" />
+                <ScalarProperty Name="icm_observaciones" ColumnName="icm_observaciones" />
+                <ScalarProperty Name="icm_nombre_medico" ColumnName="icm_nombre_medico" />
+                <ScalarProperty Name="icm_val_especialista" ColumnName="icm_val_especialista" />
+                <ScalarProperty Name="icm_nombre_especialista" ColumnName="icm_nombre_especialista" />
+                <ScalarProperty Name="icm_control" ColumnName="icm_control" />
+                <ScalarProperty Name="icm_apto_cont_puesto" ColumnName="icm_apto_cont_puesto" />
+                <ScalarProperty Name="icm_apto_cont_vmedica" ColumnName="icm_apto_cont_vmedica" />
+                <ScalarProperty Name="icm_requiere_cambiop" ColumnName="icm_requiere_cambiop" />
+                <ScalarProperty Name="icm_enfermedad_actual" ColumnName="icm_enfermedad_actual" />
+                <ScalarProperty Name="icm_reubicacion" ColumnName="icm_reubicacion" />
+                <ScalarProperty Name="icm_tiempo_reintegro" ColumnName="icm_tiempo_reintegro" />
+                <ScalarProperty Name="icm_crit_reintegro" ColumnName="icm_crit_reintegro" />
+                <ScalarProperty Name="icm_exam_preocu" ColumnName="icm_exam_preocu" />
+                <ScalarProperty Name="icm_ctrl_period" ColumnName="icm_ctrl_period" />
+                <ScalarProperty Name="icm_cuantos_periodo" ColumnName="icm_cuantos_periodo" />
+                <ScalarProperty Name="icm_enfer_prexistentes" ColumnName="icm_enfer_prexistentes" />
+                <ScalarProperty Name="icm_ert" ColumnName="icm_ert" />
+                <ScalarProperty Name="icm_enfer_laboral" ColumnName="icm_enfer_laboral" />
+                <ScalarProperty Name="icm_accidente_trab" ColumnName="icm_accidente_trab" />
+                <ScalarProperty Name="icm_discapacidad" ColumnName="icm_discapacidad" />
+                <ScalarProperty Name="icm_r1" ColumnName="icm_r1" />
+                <ScalarProperty Name="icm_r2" ColumnName="icm_r2" />
+                <ScalarProperty Name="icm_r3" ColumnName="icm_r3" />
+                <ScalarProperty Name="icm_r4" ColumnName="icm_r4" />
+                <ScalarProperty Name="icm_fecha_salida" ColumnName="icm_fecha_salida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_departamento">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_departamento">
+              <MappingFragment StoreEntitySet="iso_departamento">
+                <ScalarProperty Name="ide_id_departamento" ColumnName="ide_id_departamento" />
+                <ScalarProperty Name="ide_nombre_departamento" ColumnName="ide_nombre_departamento" />
+                <ScalarProperty Name="ide_descripcion_departamento" ColumnName="ide_descripcion_departamento" />
+                <ScalarProperty Name="ide_id_empresa" ColumnName="ide_id_empresa" />
+                <ScalarProperty Name="ide_id_departamento_padre" ColumnName="ide_id_departamento_padre" />
+                <ScalarProperty Name="ide_deshabilitar" ColumnName="ide_deshabilitar" />
+                <ScalarProperty Name="ide_cod_documento" ColumnName="ide_cod_documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_empresa">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_empresa">
+              <MappingFragment StoreEntitySet="iso_empresa">
+                <ScalarProperty Name="iem_cod_empresa" ColumnName="iem_cod_empresa" />
+                <ScalarProperty Name="iem_nombre_empresa" ColumnName="iem_nombre_empresa" />
+                <ScalarProperty Name="iem_nemonico_empresa" ColumnName="iem_nemonico_empresa" />
+                <ScalarProperty Name="iem_ruc_empresa" ColumnName="iem_ruc_empresa" />
+                <ScalarProperty Name="iem_direccion_empresa" ColumnName="iem_direccion_empresa" />
+                <ScalarProperty Name="iem_telefono_empresa" ColumnName="iem_telefono_empresa" />
+                <ScalarProperty Name="iem_rep_legal_empresa" ColumnName="iem_rep_legal_empresa" />
+                <ScalarProperty Name="iem_personeria_empresa" ColumnName="iem_personeria_empresa" />
+                <ScalarProperty Name="iem_icono_empresa" ColumnName="iem_icono_empresa" />
+                <ScalarProperty Name="iem_vision_empresa" ColumnName="iem_vision_empresa" />
+                <ScalarProperty Name="iem_mision_empresa" ColumnName="iem_mision_empresa" />
+                <ScalarProperty Name="iem_politica_empresa" ColumnName="iem_politica_empresa" />
+                <ScalarProperty Name="iem_objetivo_empresa" ColumnName="iem_objetivo_empresa" />
+                <ScalarProperty Name="iem_valores_empresa" ColumnName="iem_valores_empresa" />
+                <ScalarProperty Name="iem_icono_archivo" ColumnName="iem_icono_archivo" />
+                <ScalarProperty Name="iem_politica_general" ColumnName="iem_politica_general" />
+                <ScalarProperty Name="iem_politica_calidad" ColumnName="iem_politica_calidad" />
+                <ScalarProperty Name="iem_estrategia_general" ColumnName="iem_estrategia_general" />
+                <ScalarProperty Name="iem_razon_social" ColumnName="iem_razon_social" />
+                <ScalarProperty Name="iem_numero_patronal" ColumnName="iem_numero_patronal" />
+                <ScalarProperty Name="iem_actividad" ColumnName="iem_actividad" />
+                <ScalarProperty Name="iem_numero_trab_administrativos" ColumnName="iem_numero_trab_administrativos" />
+                <ScalarProperty Name="iem_numero_trab_planta" ColumnName="iem_numero_trab_planta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_historia_clinica">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_historia_clinica">
+              <MappingFragment StoreEntitySet="iso_historia_clinica">
+                <ScalarProperty Name="ihc_id_historia" ColumnName="ihc_id_historia" />
+                <ScalarProperty Name="ihc_id_personal" ColumnName="ihc_id_personal" />
+                <ScalarProperty Name="ihc_id_empresa" ColumnName="ihc_id_empresa" />
+                <ScalarProperty Name="ihc_lugar_historia_clinica" ColumnName="ihc_lugar_historia_clinica" />
+                <ScalarProperty Name="ihc_fecha_historia_clinica" ColumnName="ihc_fecha_historia_clinica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_puesto_trabajo">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_puesto_trabajo">
+              <MappingFragment StoreEntitySet="iso_puesto_trabajo">
+                <ScalarProperty Name="ipt_id_puesto_t" ColumnName="ipt_id_puesto_t" />
+                <ScalarProperty Name="ipt_nombre_puesto_t" ColumnName="ipt_nombre_puesto_t" />
+                <ScalarProperty Name="ipt_descrip_puesto_t" ColumnName="ipt_descrip_puesto_t" />
+                <ScalarProperty Name="ipt_nro_trbajadores" ColumnName="ipt_nro_trbajadores" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="iso_cargo_puesto_t" TypeName="cbm_iso_sart.iso_cargo_puesto_t" StoreEntitySet="iso_cargo_puesto_t">
+            <EndProperty Name="iso_cargo">
+              <ScalarProperty Name="icg_id_cargo" ColumnName="icp_id_cargo" />
+            </EndProperty>
+            <EndProperty Name="iso_puesto_trabajo">
+              <ScalarProperty Name="ipt_id_puesto_t" ColumnName="icp_id_puesto_t" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

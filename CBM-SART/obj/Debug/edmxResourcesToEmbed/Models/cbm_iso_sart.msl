@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="cbm_iso_sartStoreContainer" CdmEntityContainer="cbm_iso_sart_entities">
+    <EntitySetMapping Name="iso_cargo">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_cargo">
+        <MappingFragment StoreEntitySet="iso_cargo">
+          <ScalarProperty Name="icg_id_cargo" ColumnName="icg_id_cargo" />
+          <ScalarProperty Name="icg_nombre" ColumnName="icg_nombre" />
+          <ScalarProperty Name="icg_descripcion" ColumnName="icg_descripcion" />
+          <ScalarProperty Name="icg_cod_clase_cargo" ColumnName="icg_cod_clase_cargo" />
+          <ScalarProperty Name="icg_num_trabajadores" ColumnName="icg_num_trabajadores" />
+          <ScalarProperty Name="icg_area" ColumnName="icg_area" />
+          <ScalarProperty Name="icg_jefe_inmediato" ColumnName="icg_jefe_inmediato" />
+          <ScalarProperty Name="icg_edad" ColumnName="icg_edad" />
+          <ScalarProperty Name="icg_genero" ColumnName="icg_genero" />
+          <ScalarProperty Name="icg_instruccion" ColumnName="icg_instruccion" />
+          <ScalarProperty Name="icg_experiencia" ColumnName="icg_experiencia" />
+          <ScalarProperty Name="icg_conocimiento_adicional" ColumnName="icg_conocimiento_adicional" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_consulta_medica">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_consulta_medica">
+        <MappingFragment StoreEntitySet="iso_consulta_medica">
+          <ScalarProperty Name="icm_id_consulta" ColumnName="icm_id_consulta" />
+          <ScalarProperty Name="icm_id_historia_clinica" ColumnName="icm_id_historia_clinica" />
+          <ScalarProperty Name="icm_id_personal" ColumnName="icm_id_personal" />
+          <ScalarProperty Name="icm_tipo_consulta" ColumnName="icm_tipo_consulta" />
+          <ScalarProperty Name="icm_fecha_consulta" ColumnName="icm_fecha_consulta" />
+          <ScalarProperty Name="icm_motivo_consulta" ColumnName="icm_motivo_consulta" />
+          <ScalarProperty Name="icm_observaciones" ColumnName="icm_observaciones" />
+          <ScalarProperty Name="icm_nombre_medico" ColumnName="icm_nombre_medico" />
+          <ScalarProperty Name="icm_val_especialista" ColumnName="icm_val_especialista" />
+          <ScalarProperty Name="icm_nombre_especialista" ColumnName="icm_nombre_especialista" />
+          <ScalarProperty Name="icm_control" ColumnName="icm_control" />
+          <ScalarProperty Name="icm_apto_cont_puesto" ColumnName="icm_apto_cont_puesto" />
+          <ScalarProperty Name="icm_apto_cont_vmedica" ColumnName="icm_apto_cont_vmedica" />
+          <ScalarProperty Name="icm_requiere_cambiop" ColumnName="icm_requiere_cambiop" />
+          <ScalarProperty Name="icm_enfermedad_actual" ColumnName="icm_enfermedad_actual" />
+          <ScalarProperty Name="icm_reubicacion" ColumnName="icm_reubicacion" />
+          <ScalarProperty Name="icm_tiempo_reintegro" ColumnName="icm_tiempo_reintegro" />
+          <ScalarProperty Name="icm_crit_reintegro" ColumnName="icm_crit_reintegro" />
+          <ScalarProperty Name="icm_exam_preocu" ColumnName="icm_exam_preocu" />
+          <ScalarProperty Name="icm_ctrl_period" ColumnName="icm_ctrl_period" />
+          <ScalarProperty Name="icm_cuantos_periodo" ColumnName="icm_cuantos_periodo" />
+          <ScalarProperty Name="icm_enfer_prexistentes" ColumnName="icm_enfer_prexistentes" />
+          <ScalarProperty Name="icm_ert" ColumnName="icm_ert" />
+          <ScalarProperty Name="icm_enfer_laboral" ColumnName="icm_enfer_laboral" />
+          <ScalarProperty Name="icm_accidente_trab" ColumnName="icm_accidente_trab" />
+          <ScalarProperty Name="icm_discapacidad" ColumnName="icm_discapacidad" />
+          <ScalarProperty Name="icm_r1" ColumnName="icm_r1" />
+          <ScalarProperty Name="icm_r2" ColumnName="icm_r2" />
+          <ScalarProperty Name="icm_r3" ColumnName="icm_r3" />
+          <ScalarProperty Name="icm_r4" ColumnName="icm_r4" />
+          <ScalarProperty Name="icm_fecha_salida" ColumnName="icm_fecha_salida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_departamento">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_departamento">
+        <MappingFragment StoreEntitySet="iso_departamento">
+          <ScalarProperty Name="ide_id_departamento" ColumnName="ide_id_departamento" />
+          <ScalarProperty Name="ide_nombre_departamento" ColumnName="ide_nombre_departamento" />
+          <ScalarProperty Name="ide_descripcion_departamento" ColumnName="ide_descripcion_departamento" />
+          <ScalarProperty Name="ide_id_empresa" ColumnName="ide_id_empresa" />
+          <ScalarProperty Name="ide_id_departamento_padre" ColumnName="ide_id_departamento_padre" />
+          <ScalarProperty Name="ide_deshabilitar" ColumnName="ide_deshabilitar" />
+          <ScalarProperty Name="ide_cod_documento" ColumnName="ide_cod_documento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_empresa">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_empresa">
+        <MappingFragment StoreEntitySet="iso_empresa">
+          <ScalarProperty Name="iem_cod_empresa" ColumnName="iem_cod_empresa" />
+          <ScalarProperty Name="iem_nombre_empresa" ColumnName="iem_nombre_empresa" />
+          <ScalarProperty Name="iem_nemonico_empresa" ColumnName="iem_nemonico_empresa" />
+          <ScalarProperty Name="iem_ruc_empresa" ColumnName="iem_ruc_empresa" />
+          <ScalarProperty Name="iem_direccion_empresa" ColumnName="iem_direccion_empresa" />
+          <ScalarProperty Name="iem_telefono_empresa" ColumnName="iem_telefono_empresa" />
+          <ScalarProperty Name="iem_rep_legal_empresa" ColumnName="iem_rep_legal_empresa" />
+          <ScalarProperty Name="iem_personeria_empresa" ColumnName="iem_personeria_empresa" />
+          <ScalarProperty Name="iem_icono_empresa" ColumnName="iem_icono_empresa" />
+          <ScalarProperty Name="iem_vision_empresa" ColumnName="iem_vision_empresa" />
+          <ScalarProperty Name="iem_mision_empresa" ColumnName="iem_mision_empresa" />
+          <ScalarProperty Name="iem_politica_empresa" ColumnName="iem_politica_empresa" />
+          <ScalarProperty Name="iem_objetivo_empresa" ColumnName="iem_objetivo_empresa" />
+          <ScalarProperty Name="iem_valores_empresa" ColumnName="iem_valores_empresa" />
+          <ScalarProperty Name="iem_icono_archivo" ColumnName="iem_icono_archivo" />
+          <ScalarProperty Name="iem_politica_general" ColumnName="iem_politica_general" />
+          <ScalarProperty Name="iem_politica_calidad" ColumnName="iem_politica_calidad" />
+          <ScalarProperty Name="iem_estrategia_general" ColumnName="iem_estrategia_general" />
+          <ScalarProperty Name="iem_razon_social" ColumnName="iem_razon_social" />
+          <ScalarProperty Name="iem_numero_patronal" ColumnName="iem_numero_patronal" />
+          <ScalarProperty Name="iem_actividad" ColumnName="iem_actividad" />
+          <ScalarProperty Name="iem_numero_trab_administrativos" ColumnName="iem_numero_trab_administrativos" />
+          <ScalarProperty Name="iem_numero_trab_planta" ColumnName="iem_numero_trab_planta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_historia_clinica">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_historia_clinica">
+        <MappingFragment StoreEntitySet="iso_historia_clinica">
+          <ScalarProperty Name="ihc_id_historia" ColumnName="ihc_id_historia" />
+          <ScalarProperty Name="ihc_id_personal" ColumnName="ihc_id_personal" />
+          <ScalarProperty Name="ihc_id_empresa" ColumnName="ihc_id_empresa" />
+          <ScalarProperty Name="ihc_lugar_historia_clinica" ColumnName="ihc_lugar_historia_clinica" />
+          <ScalarProperty Name="ihc_fecha_historia_clinica" ColumnName="ihc_fecha_historia_clinica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_puesto_trabajo">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_puesto_trabajo">
+        <MappingFragment StoreEntitySet="iso_puesto_trabajo">
+          <ScalarProperty Name="ipt_id_puesto_t" ColumnName="ipt_id_puesto_t" />
+          <ScalarProperty Name="ipt_nombre_puesto_t" ColumnName="ipt_nombre_puesto_t" />
+          <ScalarProperty Name="ipt_descrip_puesto_t" ColumnName="ipt_descrip_puesto_t" />
+          <ScalarProperty Name="ipt_nro_trbajadores" ColumnName="ipt_nro_trbajadores" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="iso_cargo_puesto_t" TypeName="cbm_iso_sart.iso_cargo_puesto_t" StoreEntitySet="iso_cargo_puesto_t">
+      <EndProperty Name="iso_cargo">
+        <ScalarProperty Name="icg_id_cargo" ColumnName="icp_id_cargo" />
+      </EndProperty>
+      <EndProperty Name="iso_puesto_trabajo">
+        <ScalarProperty Name="ipt_id_puesto_t" ColumnName="icp_id_puesto_t" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

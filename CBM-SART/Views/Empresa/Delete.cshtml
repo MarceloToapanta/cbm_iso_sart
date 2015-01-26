@@ -1,0 +1,201 @@
+﻿@model CBM_SART.Models.iso_empresa
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>iso_empresa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_nombre_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_nombre_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_nemonico_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_nemonico_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_ruc_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_ruc_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_direccion_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_direccion_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_telefono_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_telefono_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_rep_legal_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_rep_legal_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_personeria_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_personeria_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_icono_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_icono_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_vision_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_vision_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_mision_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_mision_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_politica_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_politica_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_objetivo_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_objetivo_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_valores_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_valores_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_icono_archivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_icono_archivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_politica_general)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_politica_general)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_politica_calidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_politica_calidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_estrategia_general)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_estrategia_general)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_razon_social)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_razon_social)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_numero_patronal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_numero_patronal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_actividad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_actividad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_numero_trab_administrativos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_numero_trab_administrativos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iem_numero_trab_planta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iem_numero_trab_planta)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

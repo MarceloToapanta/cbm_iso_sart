@@ -1,0 +1,67 @@
+﻿@model CBM_SART.Models.iso_departamento
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>iso_departamento</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ide_nombre_departamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ide_nombre_departamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ide_descripcion_departamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ide_descripcion_departamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ide_id_departamento_padre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ide_id_departamento_padre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ide_deshabilitar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ide_deshabilitar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ide_cod_documento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ide_cod_documento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_empresa.iem_nombre_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_empresa.iem_nombre_empresa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ide_id_departamento }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

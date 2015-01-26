@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c24bdaa27d44a698f6e4eadf9b2c5d5" Name="Diagram1">
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_cargo" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_consulta_medica" Width="1.5" PointX="5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_departamento" Width="1.5" PointX="10" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_empresa" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_historia_clinica" Width="1.5" PointX="2.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_puesto_trabajo" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_consulta_medica_iso_historia_clinica" ManuallyRouted="false" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_departamento_iso_empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="cbm_iso_sart.iso_cargo_puesto_t" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

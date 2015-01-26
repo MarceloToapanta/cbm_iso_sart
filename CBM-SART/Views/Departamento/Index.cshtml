@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_departamento>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ide_nombre_departamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ide_descripcion_departamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ide_id_departamento_padre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ide_deshabilitar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ide_cod_documento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_empresa.iem_nombre_empresa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ide_nombre_departamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ide_descripcion_departamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ide_id_departamento_padre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ide_deshabilitar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ide_cod_documento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_empresa.iem_nombre_empresa)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ide_id_departamento }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ide_id_departamento }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ide_id_departamento })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBM-SART", "CBM-SART\CBM-SART.csproj", "{5B20C453-A981-44E0-A5AC-2748C130B86B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBM-SART.Tests", "CBM-SART.Tests\CBM-SART.Tests.csproj", "{CED5788A-475F-46EC-8ADC-2A622F964555}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B20C453-A981-44E0-A5AC-2748C130B86B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B20C453-A981-44E0-A5AC-2748C130B86B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B20C453-A981-44E0-A5AC-2748C130B86B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B20C453-A981-44E0-A5AC-2748C130B86B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED5788A-475F-46EC-8ADC-2A622F964555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED5788A-475F-46EC-8ADC-2A622F964555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED5788A-475F-46EC-8ADC-2A622F964555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED5788A-475F-46EC-8ADC-2A622F964555}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

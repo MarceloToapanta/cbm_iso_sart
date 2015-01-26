@@ -1,0 +1,83 @@
+﻿@model CBM_SART.Models.iso_departamento
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>iso_departamento</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ide_id_departamento)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ide_nombre_departamento, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ide_nombre_departamento)
+                @Html.ValidationMessageFor(model => model.ide_nombre_departamento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ide_descripcion_departamento, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ide_descripcion_departamento)
+                @Html.ValidationMessageFor(model => model.ide_descripcion_departamento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ide_id_empresa, "ide_id_empresa", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ide_id_empresa", String.Empty)
+                @Html.ValidationMessageFor(model => model.ide_id_empresa)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ide_id_departamento_padre, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ide_id_departamento_padre)
+                @Html.ValidationMessageFor(model => model.ide_id_departamento_padre)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ide_deshabilitar, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ide_deshabilitar)
+                @Html.ValidationMessageFor(model => model.ide_deshabilitar)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ide_cod_documento, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ide_cod_documento)
+                @Html.ValidationMessageFor(model => model.ide_cod_documento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
