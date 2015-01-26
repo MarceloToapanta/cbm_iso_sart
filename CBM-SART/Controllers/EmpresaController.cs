@@ -15,6 +15,7 @@ namespace CBM_SART.Controllers
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
         // GET: /Empresa/
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.iso_empresa.ToList());
@@ -46,7 +47,7 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="iem_cod_empresa,iem_nombre_empresa,iem_nemonico_empresa,iem_ruc_empresa,iem_direccion_empresa,iem_telefono_empresa,iem_rep_legal_empresa,iem_personeria_empresa,iem_icono_empresa,iem_vision_empresa,iem_mision_empresa,iem_politica_empresa,iem_objetivo_empresa,iem_valores_empresa,iem_icono_archivo,iem_politica_general,iem_politica_calidad,iem_estrategia_general,iem_razon_social,iem_numero_patronal,iem_actividad,iem_numero_trab_administrativos,iem_numero_trab_planta")] iso_empresa iso_empresa)
+        public ActionResult Create([Bind(Include = "iem_cod_empresa,iem_nombre_empresa,iem_nemonico_empresa,iem_ruc_empresa,iem_direccion_empresa,iem_telefono_empresa,iem_rep_legal_empresa,iem_personeria_empresa,iem_icono_empresa,iem_vision_empresa,iem_mision_empresa,iem_politica_empresa,iem_objetivo_empresa,iem_valores_empresa,iem_icono_archivo,iem_politica_general,iem_politica_calidad,iem_estrategia_general,iem_razon_social,iem_numero_patronal,iem_actividad,iem_numero_trab_administrativos,iem_numero_trab_planta")] iso_empresa iso_empresa)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +79,7 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="iem_cod_empresa,iem_nombre_empresa,iem_nemonico_empresa,iem_ruc_empresa,iem_direccion_empresa,iem_telefono_empresa,iem_rep_legal_empresa,iem_personeria_empresa,iem_icono_empresa,iem_vision_empresa,iem_mision_empresa,iem_politica_empresa,iem_objetivo_empresa,iem_valores_empresa,iem_icono_archivo,iem_politica_general,iem_politica_calidad,iem_estrategia_general,iem_razon_social,iem_numero_patronal,iem_actividad,iem_numero_trab_administrativos,iem_numero_trab_planta")] iso_empresa iso_empresa)
+        public ActionResult Edit([Bind(Include = "iem_cod_empresa,iem_nombre_empresa,iem_nemonico_empresa,iem_ruc_empresa,iem_direccion_empresa,iem_telefono_empresa,iem_rep_legal_empresa,iem_personeria_empresa,iem_icono_empresa,iem_vision_empresa,iem_mision_empresa,iem_politica_empresa,iem_objetivo_empresa,iem_valores_empresa,iem_icono_archivo,iem_politica_general,iem_politica_calidad,iem_estrategia_general,iem_razon_social,iem_numero_patronal,iem_actividad,iem_numero_trab_administrativos,iem_numero_trab_planta")] iso_empresa iso_empresa)
         {
             if (ModelState.IsValid)
             {
@@ -115,6 +116,10 @@ namespace CBM_SART.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+
+        /// 
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

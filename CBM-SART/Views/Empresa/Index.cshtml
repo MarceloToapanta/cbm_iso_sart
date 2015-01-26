@@ -5,25 +5,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2>Index</h2>
+
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-condensed table-responsive">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.iem_ruc_empresa)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.iem_nombre_empresa)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.iem_nemonico_empresa)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_ruc_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_direccion_empresa)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.iem_telefono_empresa)
         </th>
@@ -33,128 +34,61 @@
         <th>
             @Html.DisplayNameFor(model => model.iem_personeria_empresa)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_icono_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_vision_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_mision_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_politica_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_objetivo_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_valores_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_icono_archivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_politica_general)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_politica_calidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_estrategia_general)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_razon_social)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_numero_patronal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_actividad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_numero_trab_administrativos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_numero_trab_planta)
-        </th>
+        
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_nombre_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_nemonico_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_ruc_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_direccion_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_telefono_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_rep_legal_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_personeria_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_icono_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_vision_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_mision_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_politica_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_objetivo_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_valores_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_icono_archivo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_politica_general)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_politica_calidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_estrategia_general)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_razon_social)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_numero_patronal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_actividad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_numero_trab_administrativos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iem_numero_trab_planta)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.iem_cod_empresa }) |
-            @Html.ActionLink("Details", "Details", new { id=item.iem_cod_empresa }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.iem_cod_empresa })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.iem_ruc_empresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.iem_nombre_empresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.iem_nemonico_empresa)
+            </td>
+            
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.iem_telefono_empresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.iem_rep_legal_empresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.iem_personeria_empresa)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.iem_cod_empresa }) |
+                @Html.ActionLink("Details", "Details", new { id = item.iem_cod_empresa }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.iem_cod_empresa })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@section SideBar{
+    <ul>
+        <li>
+            Uno
+        </li>
+        <li>
+            Dos
+        </li>
+        <li>
+            Tres
+        </li>
+    </ul>
+    }
+
+
+
+@section Scripts {
+
+
+}

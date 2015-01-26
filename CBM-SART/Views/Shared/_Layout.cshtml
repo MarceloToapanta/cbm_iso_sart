@@ -1,16 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse-blanco navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,25 +18,101 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("SART", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                <ul class="navbar-nav-blanco navbar-right" style="margin-top:6px">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle boton-barra" data-toggle="dropdown"><img class="boton-barra-imagen" src="~/images/admin.png" />Administración<b class="caret"></b></a>
+
+                        <ul class="dropdown-menu">
+
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/user.png")" />Administración de Usuarios</a></li>
+
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Dar Permisos sobre menús de Módulo Control de Vigilancia</a></li>
+
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/pemisolista.png")" />Dar Permisos a usuarios sobre Listas de Verificación</a></li>
+
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="boton-barra"><a href="#"> <img class="boton-barra-imagen" src="~/images/gestion.png" /> Sistema de Gestión</a></li>
+                    <li class="dropdown boton-barra">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img class="boton-barra-imagen" src="~/images/vigilacia.png" /> Vigilancia de la Salud <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index", "Personal")"><img class="boton-barra-imagen" src="@Url.Content("~/images/personal.png")" />Personal</a></li>
+                            <li><a href="@Url.Action("Index", "Empresa")"><img class="boton-barra-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
+                            <li><a href="@Url.Action("Index", "Departamento")"><img class="boton-barra-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
+                            <li><a href="@Url.Action("Index", "Cargo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
+                            <li><a href="@Url.Action("Index", "PuestoTrabajo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/puestot.png")" />Puesto de Trabajo</a></li>
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/incidente.png")" />Incidentes</a></li>
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/accidentes.png")" />Accidentes</a></li>
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/indicesr.png")" />Indices de Riesgo</a></li>
+                            <li><a href="@Url.Action("Index", "EquipoTrabajo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/equipot.png")" />Equipos de Trabajo</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle boton-barra" data-toggle="dropdown"><img class="boton-barra-imagen" src="~/images/auditoria.png" />Auditoria <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Auditorias SART</li>
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/lvejecucion.png")" />Ejecución de Listas de Verificación</a></li>
+                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/lvnueva.png")" />Creación/Modificación de Listas de Verificación</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">No Conformidad</li>
+                            <li><a href="#">Acciones Correctivas</a></li>
+                            <li><a href="#">Acciones Preventivas</a></li>
+                            <li><a href="#">Poyectos de Mejora</a></li>
+                        </ul>
+                    </li>
+
+                    @*<li>@Html.ActionLink("Inicio", "Index", "Home")</li>*@
+                    @*<li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+            <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
+                    @*<li>@Html.ActionLink("Empresa", "Index", "Empresa")</li>*@
+                    <li><a href="#" class="boton-barra"><img class="boton-barra-imagen" src="~/images/planes.png" />Planes y Programas</a></li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @*@Html.Partial("_LoginPartial")*@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
+    <div class="body-content">
+
+        <div  class="col-md-2">
+            <div id="sidebar">
+                @if (IsSectionDefined("SideBar"))
+                {
+                    
+                    @Html.Partial("_LoginPartial")
+                    <p>Usuario</p>
+                    @RenderSection("SideBar")
+                }
+                else
+                {
+                    
+                    @Html.Partial("_LoginPartial")
+                    <p>Usuario</p>
+                    
+                }
+            </div>
+        </div>
+
+        <div class="col-md-10"  >
+            <div id="content"  class="well well-sm">
+                @RenderBody()
+            </div>
+        </div>
     </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

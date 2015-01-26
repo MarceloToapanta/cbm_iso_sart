@@ -4,12 +4,15 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
+    
+    <ul class="">
+        
         <li>
-            @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Administrar" })
+            <p>Usuario Resgistrado</p>         
+            @Html.ActionLink(User.Identity.GetUserName() + "...", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Administrar" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Salir</a></li>
+
     </ul>
     }
 }
