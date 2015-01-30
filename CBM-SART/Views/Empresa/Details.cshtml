@@ -1,13 +1,17 @@
 ﻿@model CBM_SART.Models.iso_empresa
 
-@{
+@*@{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+}*@
 
-<h2>Details</h2>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="modal-title">Empresa Detail</h3>
+</div>
 
-<div>
+
+<div class="modal-body">
     <h4>iso_empresa</h4>
 	<hr />
     <dl class="dl-horizontal">
@@ -71,9 +75,9 @@
             @Html.DisplayNameFor(model => model.iem_icono_empresa)
         </dt>
 
-        <dd>
+        @*<dd>
             @Html.DisplayFor(model => model.iem_icono_empresa)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.iem_vision_empresa)
@@ -119,9 +123,9 @@
             @Html.DisplayNameFor(model => model.iem_icono_archivo)
         </dt>
 
-        <dd>
+        @*<dd>
             @Html.DisplayFor(model => model.iem_icono_archivo)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.iem_politica_general)
@@ -189,7 +193,10 @@
 
     </dl>
 </div>
-<p>
+@*<p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.iem_cod_empresa }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@
+<div class="modal-footer">
+    <button class="btn btn-warning" data-dismiss="modal">Close</button>
+</div>

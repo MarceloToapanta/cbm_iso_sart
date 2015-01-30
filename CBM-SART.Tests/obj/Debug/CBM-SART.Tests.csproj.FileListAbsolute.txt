@@ -56,3 +56,7 @@ c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART
 c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART.Tests\obj\Debug\CBM-SART.Tests.csprojResolveAssemblyReference.cache
 c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART.Tests\obj\Debug\CBM-SART.Tests.dll
 c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART.Tests\obj\Debug\CBM-SART.Tests.pdb
+C:\Users\Mxdj In The Mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART.Tests\bin\Debug\System.Linq.Dynamic.dll
+C:\Users\Mxdj In The Mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART.Tests\bin\Debug\FluentValidationNA.dll
+C:\Users\Mxdj In The Mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART.Tests\bin\Debug\System.Linq.Dynamic.xml
+C:\Users\Mxdj In The Mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART.Tests\bin\Debug\FluentValidationNA.xml

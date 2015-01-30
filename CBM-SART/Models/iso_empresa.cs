@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+
 namespace CBM_SART.Models
-{
-    using System;
-    using System.Collections.Generic;
-    
+{      
     public partial class iso_empresa
     {
         public iso_empresa()

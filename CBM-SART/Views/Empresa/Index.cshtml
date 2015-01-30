@@ -1,4 +1,6 @@
-﻿@model IEnumerable<CBM_SART.Models.iso_empresa>
+﻿@*@model IEnumerable<CBM_SART.Models.iso_empresa>*@
+@*@model MvcBootstrapCrud.Models.PagedList<MvcBootstrapCrud.Models.Phone>*@
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_empresa>
 
 @{
     ViewBag.Title = "Index";
@@ -8,69 +10,139 @@
 
 <h2>Index</h2>
 
+<div class="well">
+    @using (Html.BeginForm("index", null, FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="input-group">
 
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline"
+                           placeholder="Buscar por Nombre y Siglas" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="pull-right col-lg-1">
+                <a class="btn btn-success" data-modal="" href="/Empresa/Create" id="btnCreate">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+        </div>
+
+        <div style="margin-top:17px;">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+            tableStyle: "table table-bordered table-hover",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column("iem_ruc_empresa", "RUC"),
+              grid.Column("iem_nombre_empresa", "Nombre", style: "col-lg-4"),
+              grid.Column("iem_nemonico_empresa", "Siglas", style: "col-lg-2"),
+              grid.Column("iem_personeria_empresa", "Personería", style: "col-lg-2"),
+              grid.Column("iem_telefono_empresa", "Teléfono", style: "col-lg-2"),
+                   grid.Column(header: "Action", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a data-modal='' href='/Empresa/details/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Empresa/edit/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Empresa/delete/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+
+                                               ));
+            }
+
+
+        </div>
+    }
+</div>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-condensed table-responsive">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_ruc_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_nombre_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_nemonico_empresa)
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.iem_telefono_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_rep_legal_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iem_personeria_empresa)
-        </th>
-        
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
+@*<table class="table table-condensed table-responsive">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.iem_ruc_empresa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.iem_nombre_empresa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.iem_nemonico_empresa)
-            </td>
-            
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.iem_telefono_empresa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.iem_rep_legal_empresa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.iem_personeria_empresa)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.iem_ruc_empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iem_nombre_empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iem_nemonico_empresa)
+            </th>
 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.iem_cod_empresa }) |
-                @Html.ActionLink("Details", "Details", new { id = item.iem_cod_empresa }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.iem_cod_empresa })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.iem_telefono_empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iem_rep_legal_empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iem_personeria_empresa)
+            </th>
+
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iem_ruc_empresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iem_nombre_empresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iem_nemonico_empresa)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.iem_telefono_empresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iem_rep_legal_empresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iem_personeria_empresa)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.iem_cod_empresa }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.iem_cod_empresa }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.iem_cod_empresa })
+                </td>
+            </tr>
+        }
+
+    </table>*@
 
 @section SideBar{
     <ul>
@@ -84,11 +156,9 @@
             Tres
         </li>
     </ul>
-    }
+}
 
 
-
-@section Scripts {
-
-
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
 }
