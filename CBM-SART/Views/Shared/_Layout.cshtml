@@ -10,7 +10,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse-blanco navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top ">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -20,10 +20,10 @@
                 </button>
                 @Html.ActionLink("SART", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav-blanco navbar-right" style="margin-top:6px">
+            <div class="navbar-collapse collapse navbar-right ">
+                <ul class="nav navbar-nav">
 
-                    @*<li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle boton-barra" data-toggle="dropdown"><img class="boton-barra-imagen" src="~/images/admin.png" />Administración<b class="caret"></b></a>
 
                         <ul class="dropdown-menu    ">
@@ -37,7 +37,7 @@
                             <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
 
                         </ul>
-                    </li>*@
+                    </li>
 
                     <li class="boton-barra"><a href="#"> <img class="boton-barra-imagen" src="~/images/gestion.png" /> Sistema de Gestión</a></li>
                     <li class="dropdown boton-barra">
@@ -75,7 +75,7 @@
 
                     @*<li>@Html.ActionLink("Inicio", "Index", "Home")</li>*@
                     @*<li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
+                <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
                     @*<li>@Html.ActionLink("Empresa", "Index", "Empresa")</li>*@
                     <li><a href="#" class="boton-barra"><img class="boton-barra-imagen" src="~/images/planes.png" />Planes y Programas</a></li>
                 </ul>
@@ -89,18 +89,21 @@
             <div id="sidebar">
                 @if (IsSectionDefined("SideBar"))
                 {
-                    
-                        @Html.Partial("_LoginPartial")
-                    
-                    @RenderSection("SideBar")
+
+                    @Html.Partial("_LoginPartial")
+                    <div class="sidebar-custom">
+                        @RenderSection("SideBar")
+                    </div>
                 }
                 else
                 {
-                    
-                        @Html.Partial("_LoginPartial")
-                    
-                    
+
+                    @Html.Partial("_LoginPartial")
+
+
                 }
+                <div class="seccion-barra-black">&copy; @DateTime.Now.Year - SART ASP.NET</div>
+                @*<p>&copy; @DateTime.Now.Year - SART ASP.NET</p>*@
             </div>
         </div>
 
@@ -110,8 +113,8 @@
             </div>
         </div>
     </div>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+    <footer style="clear:both">
+        @*<p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>*@
     </footer>
 
     @Scripts.Render("~/bundles/jquery")

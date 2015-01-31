@@ -17,7 +17,7 @@ namespace CBM_SART.Controllers
 
         // GET: /Empresa/
         [Authorize]
-        public ActionResult Index(string filter = null, int page = 1, int pageSize = 5, string sort = "iem_cod_empresa", string sortdir = "DESC")
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 10, string sort = "iem_cod_empresa", string sortdir = "ASC")
         {
             var records = new PagedList<iso_empresa>();
             ViewBag.filter = filter;
@@ -38,6 +38,7 @@ namespace CBM_SART.Controllers
 
             records.CurrentPage = page;
             records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
 
             return View(records);
             
@@ -179,7 +180,29 @@ namespace CBM_SART.Controllers
         }
 
         /// <summary>
+        public FileContentResult GetImage(int ID)
+        {
+            iso_empresa cat = db.iso_empresa.FirstOrDefault(c => c.iem_cod_empresa == ID);
+            if (cat != null)
+            {
 
+                string type = string.Empty;
+                if (!string.IsNullOrEmpty(cat.iem_icono_empresa))
+                {
+                    type = cat.iem_icono_empresa;
+                }
+                else
+                {
+                    type = "image/jpeg";
+                }
+
+                return File(cat.iem_icono_archivo, type);
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// 
         
         protected override void Dispose(bool disposing)

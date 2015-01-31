@@ -8,7 +8,10 @@
 }
 
 
-<h2>Index</h2>
+<div class=" seccion-barra">
+    Informacion de la Oraganizaciones Registradas
+    <span class="badge">Nro. de  Empresas : @ViewBag.total</span>
+</div>
 
 <div class="well">
     @using (Html.BeginForm("index", null, FormMethod.Get))
@@ -49,19 +52,24 @@
 
         @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
             fillEmptyRows: false,
-            tableStyle: "table table-bordered table-hover",
+                      tableStyle: "table table-bordered table-hover table-striped table-responsive table-condensed",
             mode: WebGridPagerModes.All,
             columns: grid.Columns(
               grid.Column("iem_ruc_empresa", "RUC"),
               grid.Column("iem_nombre_empresa", "Nombre", style: "col-lg-4"),
-              grid.Column("iem_nemonico_empresa", "Siglas", style: "col-lg-2"),
+              grid.Column("iem_nemonico_empresa", "Siglas", style: "col-lg-1"),
               grid.Column("iem_personeria_empresa", "Personería", style: "col-lg-2"),
               grid.Column("iem_telefono_empresa", "Teléfono", style: "col-lg-2"),
-                   grid.Column(header: "Action", canSort: false, style: "action",
+              grid.Column(header: "Logo Empresa",canSort: false,style: "col-lg-2",
+              format: @<text>                
+                @Html.Raw("<img style='max-width: 200px; max-height: 150px' src="+ @Url.Action("GetImage" , "Empresa", new { ID = item.iem_cod_empresa }) + " />")
+            
+            </text>),
+              grid.Column(header: "Action", canSort: false, style: "action col-lg-1",
                      format: @<text>
-                @Html.Raw("<a data-modal='' href='/Empresa/details/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
-                @Html.Raw("<a data-modal='' href='/Empresa/edit/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
-                @Html.Raw("<a data-modal='' href='/Empresa/delete/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    @Html.Raw("<a data-modal='' href='/Empresa/details/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                    @Html.Raw("<a data-modal='' href='/Empresa/edit/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                    @Html.Raw("<a data-modal='' href='/Empresa/delete/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                     </text>)
 
                                                ));
@@ -81,9 +89,9 @@
     </div>
 </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
 
 @*<table class="table table-condensed table-responsive">
         <tr>
@@ -145,16 +153,21 @@
     </table>*@
 
 @section SideBar{
-    <ul>
-        <li>
-            Uno
-        </li>
-        <li>
-            Dos
-        </li>
-        <li>
-            Tres
-        </li>
+    <div class="seccion-barra-black">Vigilancia de Salud</div>
+
+    <ul class="list-panel-moulos">
+        <li><a href="@Url.Action("Index", "Personal")"><img class="boton-panel-imagen " src="@Url.Content("~/images/personal.png")" />Personal</a></li>
+        <li><a class="select" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
+        <li><a href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
+        <li><a href="@Url.Action("Index", "Cargo")"><img class="boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
+        <li><a href="@Url.Action("Index", "PuestoTrabajo")"><img class="boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Puesto de Trabajo</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/incidente.png")" />Incidentes</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/accidentes.png")" />Accidentes</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/indicesr.png")" />Indices de Riesgo</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/equipot.png")" />Equipos de Trabajo</a></li>
     </ul>
 }
 

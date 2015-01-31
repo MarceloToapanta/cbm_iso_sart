@@ -1,19 +1,19 @@
 ﻿@model CBM_SART.Models.iso_empresa
 
-@*@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}*@
+@{
+    //ViewBag.Title = "Details";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 class="modal-title">Empresa Detail</h3>
+    <h3 class="modal-title">Detalle Empresa</h3>
 </div>
 
 
 <div class="modal-body">
-    <h4>iso_empresa</h4>
-	<hr />
+    
+	
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.iem_nombre_empresa)
@@ -198,5 +198,5 @@
     @Html.ActionLink("Back to List", "Index")
 </p>*@
 <div class="modal-footer">
-    <button class="btn btn-warning" data-dismiss="modal">Close</button>
+    <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
 </div>

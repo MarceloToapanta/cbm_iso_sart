@@ -1,11 +1,14 @@
 ﻿@model CBM_SART.Models.iso_empresa
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //ViewBag.Title = "Edit";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="modal-title">Editar Empresa</h3>
+</div>
 
 
 @using (Html.BeginForm())
@@ -125,7 +128,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.iem_icono_archivo, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.iem_icono_archivo)
+                @*@Html.EditorFor(model => model.iem_icono_archivo)*@
                 @Html.ValidationMessageFor(model => model.iem_icono_archivo)
             </div>
         </div>
@@ -200,11 +203,28 @@
             </div>
         </div>
     </div>
+    <div class="modal-footer">
+            <span id="progress" class="text-center" style="display: none;">
+                <img src="/images/wait.gif" alt="wiat" />
+                Wait..
+            </span>
+
+            <input class="btn btn-primary" type="submit" value="Guardar" />
+            <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+        </div>
 }
 
-<div>
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+
+
+
+@*<div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
