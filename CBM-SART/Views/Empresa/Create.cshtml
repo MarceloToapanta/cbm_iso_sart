@@ -4,228 +4,218 @@
     //ViewBag.Title = "Create";
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="modal-header">
+<div class=" seccion-barra" style="height:32px">
+    Permite registrar una Nueva Empresa.
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 class="modal-title">Crear nueva Empresa</h3>
+</div>
+<div class="modal-header">
+    
+    <h4 class="modal-title">Crear nueva Empresa</h4>
 </div>
 
 
-@using (Html.BeginForm()) 
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm("Create", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true)*@
     <div class="modal-body">
-        <div class="form-horizontal">
-
-            @Html.ValidationSummary(true)
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_nombre_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_nombre_empresa)
-                    @*@Html.TextBoxFor(model => model.iem_nombre_empresa, new { @class = "form-control required" })*@
-                    @Html.ValidationMessageFor(model => model.iem_nombre_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_nemonico_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_nemonico_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_nemonico_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_ruc_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_ruc_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_ruc_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_direccion_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_direccion_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_direccion_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_telefono_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_telefono_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_telefono_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_rep_legal_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_rep_legal_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_rep_legal_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_personeria_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_personeria_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_personeria_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_icono_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_icono_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_icono_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_vision_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_vision_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_vision_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_mision_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_mision_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_mision_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_politica_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_politica_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_politica_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_objetivo_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_objetivo_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_objetivo_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_valores_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_valores_empresa)
-                    @Html.ValidationMessageFor(model => model.iem_valores_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_icono_archivo, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_icono_archivo)
-                    @Html.ValidationMessageFor(model => model.iem_icono_archivo)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_politica_general, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_politica_general)
-                    @Html.ValidationMessageFor(model => model.iem_politica_general)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_politica_calidad, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_politica_calidad)
-                    @Html.ValidationMessageFor(model => model.iem_politica_calidad)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_estrategia_general, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_estrategia_general)
-                    @Html.ValidationMessageFor(model => model.iem_estrategia_general)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_razon_social, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_razon_social)
-                    @Html.ValidationMessageFor(model => model.iem_razon_social)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_numero_patronal, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_numero_patronal)
-                    @Html.ValidationMessageFor(model => model.iem_numero_patronal)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_actividad, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_actividad)
-                    @Html.ValidationMessageFor(model => model.iem_actividad)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_numero_trab_administrativos, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_numero_trab_administrativos)
-                    @Html.ValidationMessageFor(model => model.iem_numero_trab_administrativos)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.iem_numero_trab_planta, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.iem_numero_trab_planta)
-                    @Html.ValidationMessageFor(model => model.iem_numero_trab_planta)
-                </div>
-            </div>
-
-            @*<div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+        @*Campos formulario*@
+        <div class="col-md-7">
+            <div class="form-horizontal">
+                @*Fila con 1 campo*@
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.iem_nombre_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.iem_nombre_empresa, new { @class = "form-control required" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_nombre_empresa)
+                        </div>
                     </div>
-                </div>*@
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.iem_direccion_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.iem_direccion_empresa, new { @class = "form-control required" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_direccion_empresa)
+                        </div>
+                    </div>
+                </div>
+                @*Fila con 2 campo*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_ruc_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.iem_ruc_empresa, new { @class = "form-control required" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_ruc_empresa)
+                        </div>
+                    </div>
+
+                    @Html.LabelFor(m => Model.iem_nemonico_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.iem_nemonico_empresa, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_nemonico_empresa)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_telefono_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.iem_telefono_empresa, new { @class = "form-control " })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_telefono_empresa)
+                        </div>
+                    </div>
+
+                    @Html.LabelFor(m => Model.iem_personeria_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.iem_personeria_empresa, new { @class = "form-control required" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_personeria_empresa)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.iem_rep_legal_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.iem_rep_legal_empresa, new { @class = "form-control required" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_rep_legal_empresa)
+                        </div>
+                    </div>
+                </div>
+                @*fffffffffffffff*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_vision_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_vision_empresa, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_vision_empresa)
+                        </div>
+                    </div>
+
+                    @Html.LabelFor(m => Model.iem_mision_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_mision_empresa, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_mision_empresa)
+                        </div>
+                    </div>
+                </div>
+                @*fffffffffffffff*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_politica_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_politica_empresa, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_politica_empresa)
+                        </div>
+                    </div>
+
+                    @Html.LabelFor(m => Model.iem_objetivo_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_objetivo_empresa, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_objetivo_empresa)
+                        </div>
+                    </div>
+                </div>
+                @*fffffffffffffff*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_valores_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_valores_empresa, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_valores_empresa)
+                        </div>
+                    </div>
+
+                    @Html.LabelFor(m => Model.iem_politica_general, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_politica_general, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_politica_general)
+                        </div>
+                    </div>
+                </div>
+                @*fffffffffffffff*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_politica_calidad, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_politica_calidad, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_politica_calidad)
+                        </div>
+                    </div>
+
+                    @Html.LabelFor(m => Model.iem_estrategia_general, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_estrategia_general, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_estrategia_general)
+                        </div>
+                    </div>
+                </div>
+                @*dsfsdfsdf*@
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.iem_icono_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.iem_icono_empresa, new { @class = "form-control" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_icono_empresa)
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
-    </div>
-    <div class="modal-footer">
+        @*Espacio*@
+        <div class="col-md-1"></div>
+        @*Foto*@
+        <div class="col-md-3">
+
+            <div class="row">                
+                <label for="file1">
+                    Imagen
+                </label>
+                <div class="editor-field">
+                    <input type='file' id="file1" name="file1" value="" multiple accept="image/*" />
+                    <p class="help-block">Seleciona logo de la Empresa</p>
+                    <br />
+                    <div class="inline-image-preivew">
+                        <img id="blah" src="~/images/no_logo.png" alt="Logo de la Empresa" style="border: 1px solid #29ABE2; max-width: 100%; height: auto" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Espacio*@
+        <div class="col-md-1"></div>
+        <div style="clear:both"></div>
+        <div class="modal-footer">
             <span id="progress" class="text-center" style="display: none;">
                 <img src="/images/wait.gif" alt="wiat" />
-                Wait..
+                Espere...
             </span>
-
-            <input class="btn btn-primary" type="submit" value="Guardar" />
+            @*<input class="btn btn-primary" type="submit" value="Save" />*@
+            <button class="btn btn-primary" type="submit" name="Guardar"> Guardar </button>
             <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
         </div>
-}
+    </div>
+ }
+    <script>
+        $("form").removeData("validator");
+        $("form").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("form");
+    </script>
 
-@*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
-
-<script>
-    $("form").removeData("validator");
-    $("form").removeData("unobtrusiveValidation");
-    $.validator.unobtrusive.parse("form");
-</script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
 
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

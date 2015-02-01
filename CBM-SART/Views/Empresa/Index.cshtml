@@ -13,6 +13,7 @@
     <span class="badge">Nro. de  Empresas : @ViewBag.total</span>
 </div>
 
+
 <div class="well">
     @using (Html.BeginForm("index", null, FormMethod.Get))
     {
@@ -24,10 +25,10 @@
                            name="filter"
                            value="@ViewBag.filter"
                            class="form-control"
-                           style="display: inline"
+                           style="display: inline; height:30px"
                            placeholder="Buscar por Nombre y Siglas" />
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">Buscar</button>
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
                     </span>
 
                 </div>
@@ -174,4 +175,25 @@
 
 @section scripts{
     @Scripts.Render("~/scripts/appjs/phones.js")
+@*Cargar Imagen en Create*@
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#blah').fadeIn("slow").attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    //$("#file1").change(function () {
+    $(document).delegate("#file1", "change", function (e) {
+        readURL(this);
+        //alert($("#file1").val());
+        var fic = $("#file1").val().split('\\');
+        $("#iem_icono_empresa").val("[Base de Datos] " + fic[fic.length - 1]);
+
+    });
+</script>
+
 }

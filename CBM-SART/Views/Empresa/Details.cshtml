@@ -5,198 +5,223 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="modal-header">
+<div class=" seccion-barra" style="height:32px">
+    Permite visualizar e imprimir los datos relacionados a la Empresa.
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 class="modal-title">Detalle Empresa</h3>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Información de la Empresa</h4>
 </div>
 
 
-<div class="modal-body">
-    
-	
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_nombre_empresa)
-        </dt>
+   <div class="modal-body">
+        @*Campos formulario*@
+        <div class="col-md-7">
+            <div class="form-horizontal">
+                @*Fila con 1 campo*@
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.iem_nombre_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.iem_nombre_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_nombre_empresa)
+                        </div>
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_nombre_empresa)
-        </dd>
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.iem_direccion_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.iem_direccion_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_direccion_empresa)
+                        </div>
+                    </div>
+                </div>
+                @*Fila con 2 campo*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_ruc_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.iem_ruc_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_ruc_empresa)
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_nemonico_empresa)
-        </dt>
+                    @Html.LabelFor(m => Model.iem_nemonico_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.iem_nemonico_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_nemonico_empresa)
+                        </div>
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_nemonico_empresa)
-        </dd>
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_telefono_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.iem_telefono_empresa, new { @class = "form-control ", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_telefono_empresa)
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_ruc_empresa)
-        </dt>
+                    @Html.LabelFor(m => Model.iem_personeria_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.iem_personeria_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_personeria_empresa)
+                        </div>
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_ruc_empresa)
-        </dd>
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.iem_rep_legal_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.iem_rep_legal_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_rep_legal_empresa)
+                        </div>
+                    </div>
+                </div>
+                @*fffffffffffffff*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_vision_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_vision_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_vision_empresa)
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_direccion_empresa)
-        </dt>
+                    @Html.LabelFor(m => Model.iem_mision_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_mision_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_mision_empresa)
+                        </div>
+                    </div>
+                </div>
+                @*fffffffffffffff*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_politica_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_politica_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_politica_empresa)
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_direccion_empresa)
-        </dd>
+                    @Html.LabelFor(m => Model.iem_objetivo_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_objetivo_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_objetivo_empresa)
+                        </div>
+                    </div>
+                </div>
+                @*fffffffffffffff*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_valores_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_valores_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_valores_empresa)
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_telefono_empresa)
-        </dt>
+                    @Html.LabelFor(m => Model.iem_politica_general, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_politica_general, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_politica_general)
+                        </div>
+                    </div>
+                </div>
+                @*fffffffffffffff*@
+                <div class="form-group ">
+                    @Html.LabelFor(m => Model.iem_politica_calidad, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_politica_calidad, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_politica_calidad)
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_telefono_empresa)
-        </dd>
+                    @Html.LabelFor(m => Model.iem_estrategia_general, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.iem_estrategia_general, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_estrategia_general)
+                        </div>
+                    </div>
+                </div>
+                @*dsfsdfsdf*@
+                <div class="form-group">
+                    @Html.LabelFor(m => Model.iem_icono_empresa, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.iem_icono_empresa, new { @class = "form-control", @disabled = "disabled" })
+                        <div>
+                            @Html.ValidationMessageFor(m => m.iem_icono_empresa)
+                        </div>
+                    </div>
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_rep_legal_empresa)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_rep_legal_empresa)
-        </dd>
+            </div>
+        </div>
+        @*Espacio*@
+        <div class="col-md-1"></div>
+        @*Foto*@
+        <div class="col-md-3">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_personeria_empresa)
-        </dt>
+            <div class="row">
+                <label for="file1">
+                    Imagen
+                </label>
+                <div class="editor-field">
+                    @if (Model.iem_icono_empresa != null)
+                    {
+                        @*<input type='file' id="file1" name="file1" multiple accept="image/*" value="" src="@Url.Action("GetImage", "Empresa", new { ID = Model.iem_cod_empresa })" />*@
+                        <br />
+                        <div class="inline-image-preivew">
+                            <div style="float:left;margin-right:20px">
+                                <img id="blah" alt="Logo de la Empresa" style="border: groove 0px; max-width: 100%; height:auto" src="@Url.Action("GetImage", "Empresa", new { ID = Model.iem_cod_empresa })" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        @*<input type='file' id="file1" name="file1" value="" multiple accept="image/*" />*@
+                        <br />
+                        <div class="inline-image-preivew">
+                            <img id="blah" src="~/images/blanco.png" alt="Logo de la Empresa" style="border: groove 0px; max-width: 100%; height:auto" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        @*Espacio*@
+        <div class="col-md-1"></div>
+        <div style="clear:both"></div>
+        <div class="modal-footer">
+            <span id="progress" class="text-center" style="display: none;">
+                <img src="/images/wait.gif" alt="wiat" />
+                Espere...
+            </span>
+            @*<input class="btn btn-primary" type="submit" value="Save" />*@
+            @*<button class="btn btn-primary" type="submit" name="Guardar"> Guardar </button>*@
+            <button class="btn btn-primary" data-dismiss="modal">Imprimir</button>
+            <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_personeria_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_icono_empresa)
-        </dt>
-
-        @*<dd>
-            @Html.DisplayFor(model => model.iem_icono_empresa)
-        </dd>*@
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_vision_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_vision_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_mision_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_mision_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_politica_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_politica_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_objetivo_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_objetivo_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_valores_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_valores_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_icono_archivo)
-        </dt>
-
-        @*<dd>
-            @Html.DisplayFor(model => model.iem_icono_archivo)
-        </dd>*@
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_politica_general)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_politica_general)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_politica_calidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_politica_calidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_estrategia_general)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_estrategia_general)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_razon_social)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_razon_social)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_numero_patronal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_numero_patronal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_actividad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_actividad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_numero_trab_administrativos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_numero_trab_administrativos)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_numero_trab_planta)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_numero_trab_planta)
-        </dd>
-
-    </dl>
-</div>
-@*<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.iem_cod_empresa }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
-<div class="modal-footer">
-    <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

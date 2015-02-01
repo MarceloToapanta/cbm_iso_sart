@@ -5,213 +5,145 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="modal-header">
+<div class=" seccion-barra" style="height:32px">
+    Permite eliminar la empresa selecionada.
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 class="modal-title">Eliminar Empresa</h3>
 </div>
+<div class="modal-header">
 
-<div class="form-group">
-    <div class="col-sm-9 col-sm-offset-3">
-        <h3>
-            <span class="label label-danger">
-                Estas seguro de eliminar esta Empresa?
-            </span>
-        </h3>
+    <div class="form-group">
+        
+            <h4>
+                <span class="label label-danger">
+                    Estas seguro de eliminar esta Empresa?
+                </span>
+            </h4>
+        
     </div>
 </div>
 
-<div>
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_nombre_empresa)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_nombre_empresa)
-        </dd>
+<div class="modal-body">
+    @*Campos formulario*@
+    <div class="col-md-7">
+        <div class="form-horizontal">
+            @*Fila con 1 campo*@
+            <div class="form-group">
+                @Html.LabelFor(m => Model.iem_nombre_empresa, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.iem_nombre_empresa, new { @class = "form-control ", @disabled = "disabled" })
+                    <div>
+                        @Html.ValidationMessageFor(m => m.iem_nombre_empresa)
+                    </div>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_nemonico_empresa)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(m => Model.iem_direccion_empresa, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.iem_direccion_empresa, new { @class = "form-control ", @disabled = "disabled" })
+                    <div>
+                        @Html.ValidationMessageFor(m => m.iem_direccion_empresa)
+                    </div>
+                </div>
+            </div>
+            @*Fila con 2 campo*@
+            <div class="form-group ">
+                @Html.LabelFor(m => Model.iem_ruc_empresa, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.iem_ruc_empresa, new { @class = "form-control  ", @disabled = "disabled" })
+                    <div>
+                        @Html.ValidationMessageFor(m => m.iem_ruc_empresa)
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_nemonico_empresa)
-        </dd>
+                @Html.LabelFor(m => Model.iem_nemonico_empresa, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.iem_nemonico_empresa, new { @class = "form-control", @disabled = "disabled" })
+                    <div>
+                        @Html.ValidationMessageFor(m => m.iem_nemonico_empresa)
+                    </div>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_ruc_empresa)
-        </dt>
+            <div class="form-group ">
+                @Html.LabelFor(m => Model.iem_telefono_empresa, new { @class = "control-label col-sm-2"})
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.iem_telefono_empresa, new { @class = "form-control ",@disabled = "disabled"})
+                    <div>
+                        @Html.ValidationMessageFor(m => m.iem_telefono_empresa)
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_ruc_empresa)
-        </dd>
+                @Html.LabelFor(m => Model.iem_personeria_empresa, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.iem_personeria_empresa, new { @class = "form-control ", @disabled = "disabled" })
+                    <div>
+                        @Html.ValidationMessageFor(m => m.iem_personeria_empresa)
+                    </div>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_direccion_empresa)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(m => Model.iem_rep_legal_empresa, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.iem_rep_legal_empresa, new { @class = "form-control ", @disabled = "disabled" })
+                    <div>
+                        @Html.ValidationMessageFor(m => m.iem_rep_legal_empresa)
+                    </div>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_direccion_empresa)
-        </dd>
+        </div>
+    </div>
+    @*Espacio*@
+    <div class="col-md-1"></div>
+    @*Foto*@
+    <div class="col-md-3">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_telefono_empresa)
-        </dt>
+        <div class="row">
+            <label for="file1">
+                Imagen
+            </label>
+            <div class="editor-field">
+                @if (Model.iem_icono_empresa != null)
+                {
+                    @*<input type='file' id="file1" name="file1" multiple accept="image/*" value="" src="@Url.Action("GetImage", "Empresa", new { ID = Model.iem_cod_empresa })" />*@
+                    <br />
+                    <div class="inline-image-preivew">
+                        <div style="float:left;margin-right:20px">
+                            <img id="blah" alt="Logo de la Empresa" style="border: groove 0px; max-width: 100%; height:auto" src="@Url.Action("GetImage", "Empresa", new { ID = Model.iem_cod_empresa })" />
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <input type='file' id="file1" name="file1" value="" multiple accept="image/*" />
+                    <br />
+                    <div class="inline-image-preivew">
+                        <img id="blah" src="~/images/blanco.png" alt="Logo de la Empresa" style="border: groove 0px; max-width: 100%; height:auto" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    @*Espacio*@
+    <div class="col-md-1"></div>
+</div>
+<div style="clear:both"></div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.iem_telefono_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_rep_legal_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_rep_legal_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_personeria_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_personeria_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_icono_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_icono_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_vision_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_vision_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_mision_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_mision_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_politica_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_politica_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_objetivo_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_objetivo_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_valores_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_valores_empresa)
-        </dd>
-
-        @*<dt>
-            @Html.DisplayNameFor(model => model.iem_icono_archivo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_icono_archivo)
-        </dd>*@
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_politica_general)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_politica_general)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_politica_calidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_politica_calidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_estrategia_general)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_estrategia_general)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_razon_social)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_razon_social)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_numero_patronal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_numero_patronal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_actividad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_actividad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_numero_trab_administrativos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_numero_trab_administrativos)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iem_numero_trab_planta)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iem_numero_trab_planta)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        @*<div class="form-actions no-color">
+    @*<div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>*@
-        
-                <div class="modal-footer">
-            <button class="btn btn-primary" data-dismiss="modal">No</button>
-            <input class="btn btn-danger" type="submit" value="Si" />
-        </div>
-    }
-</div>
+    
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal">No</button>
+        <input class="btn btn-danger" type="submit" value="Si" />
+    </div>
+}
+
+

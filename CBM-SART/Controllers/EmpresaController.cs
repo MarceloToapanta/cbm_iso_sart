@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using CBM_SART.Models;
 using System.Linq.Dynamic;
+using System.IO;
 
 namespace CBM_SART.Controllers
 {
@@ -16,8 +17,8 @@ namespace CBM_SART.Controllers
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
         // GET: /Empresa/
-        [Authorize]
-        public ActionResult Index(string filter = null, int page = 1, int pageSize = 10, string sort = "iem_cod_empresa", string sortdir = "ASC")
+        //[Authorize]
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 6, string sort = "iem_cod_empresa", string sortdir = "ASC")
         {
             var records = new PagedList<iso_empresa>();
             ViewBag.filter = filter;
@@ -72,14 +73,32 @@ namespace CBM_SART.Controllers
         // POST: /Phone/Create
         [HttpPost]
         public JsonResult Create(iso_empresa iso_empresa)
+        //public ActionResult Create([Bind(Include = "iem_cod_empresa,iem_nombre_empresa,iem_nemonico_empresa,iem_ruc_empresa,iem_direccion_empresa,iem_telefono_empresa,iem_rep_legal_empresa,iem_personeria_empresa,iem_icono_empresa,iem_vision_empresa,iem_mision_empresa,iem_politica_empresa,iem_objetivo_empresa,iem_valores_empresa,iem_icono_archivo,iem_politica_general,iem_politica_calidad,iem_estrategia_general,iem_razon_social,iem_numero_patronal,iem_actividad,iem_numero_trab_administrativos,iem_numero_trab_planta")] iso_empresa iso_empresa)
         {
             if (ModelState.IsValid)
             {
+                ///////imagen/////////
+                //HttpPostedFileBase file = Request.Files["file1"];
+                //if (file.FileName != "")
+                //{
+                //    iso_empresa.iem_icono_archivo = ConvertToBytes(file);
+                //}
+                //////////////////
                 db.iso_empresa.Add(iso_empresa);
                 db.SaveChanges();
                 return Json(new { success = true });
+                //return RedirectToAction("Index");
             }
             return Json(iso_empresa, JsonRequestBehavior.AllowGet);
+            //return PartialView("Create", iso_empresa);
+        }
+
+        public byte[] ConvertToBytes(HttpPostedFileBase image)
+        {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(image.InputStream);
+            imageBytes = reader.ReadBytes((int)image.ContentLength);
+            return imageBytes;
         }
 
         // POST: /Empresa/Create
@@ -132,10 +151,18 @@ namespace CBM_SART.Controllers
         //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(iso_empresa iso_empresa)
+        //public ActionResult Edit(iso_empresa iso_empresa)
+        public ActionResult Edit([Bind(Include = "iem_cod_empresa,iem_nombre_empresa,iem_nemonico_empresa,iem_ruc_empresa,iem_direccion_empresa,iem_telefono_empresa,iem_rep_legal_empresa,iem_personeria_empresa,iem_icono_empresa,iem_vision_empresa,iem_mision_empresa,iem_politica_empresa,iem_objetivo_empresa,iem_valores_empresa,iem_icono_archivo,iem_politica_general,iem_politica_calidad,iem_estrategia_general,iem_razon_social,iem_numero_patronal,iem_actividad,iem_numero_trab_administrativos,iem_numero_trab_planta")] iso_empresa iso_empresa)
         {
             if (ModelState.IsValid)
             {
+                /////////imagen/////////
+                //HttpPostedFileBase file = Request.Files["file1"];
+                //if (file.FileName != "")
+                //{
+                //    iso_empresa.iem_icono_archivo = ConvertToBytes(file);
+                //}
+                ////////////////////
                 db.Entry(iso_empresa).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { success = true });
