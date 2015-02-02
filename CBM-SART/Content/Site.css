@@ -222,7 +222,8 @@ form label {
 }
 .modal-dialog {
     margin-top:60px;
-    width:70%;
+    /*width:70%;*/
+    
     max-width:80%
 }
 .modal-body{

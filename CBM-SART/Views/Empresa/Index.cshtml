@@ -83,75 +83,12 @@
 
 <!-- modal placeholder-->
 <div id='myModal' class='modal fade in'>
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:70%;">
         <div class="modal-content">
             <div id='myModalContent'></div>
         </div>
     </div>
 </div>
-
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
-
-@*<table class="table table-condensed table-responsive">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.iem_ruc_empresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.iem_nombre_empresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.iem_nemonico_empresa)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.iem_telefono_empresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.iem_rep_legal_empresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.iem_personeria_empresa)
-            </th>
-
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.iem_ruc_empresa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.iem_nombre_empresa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.iem_nemonico_empresa)
-                </td>
-
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.iem_telefono_empresa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.iem_rep_legal_empresa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.iem_personeria_empresa)
-                </td>
-
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.iem_cod_empresa }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.iem_cod_empresa }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.iem_cod_empresa })
-                </td>
-            </tr>
-        }
-
-    </table>*@
 
 @section SideBar{
     <div class="seccion-barra-black">Vigilancia de Salud</div>

@@ -1,64 +1,108 @@
-﻿@model IEnumerable<CBM_SART.Models.iso_departamento>
+﻿@*@model IEnumerable<CBM_SART.Models.iso_departamento>*@
+
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_departamento>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class=" seccion-barra">
+    Informacion de los Departamentos registrados.
+    <span class="badge">Nro. de  Departamentos : @ViewBag.total</span>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ide_nombre_departamento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ide_descripcion_departamento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ide_id_departamento_padre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ide_deshabilitar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ide_cod_documento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iso_empresa.iem_nombre_empresa)
-        </th>
-        <th></th>
-    </tr>
+<div class="well">
+    @using (Html.BeginForm("index", null, FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="input-group">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ide_nombre_departamento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ide_descripcion_departamento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ide_id_departamento_padre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ide_deshabilitar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ide_cod_documento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iso_empresa.iem_nombre_empresa)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ide_id_departamento }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ide_id_departamento }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ide_id_departamento })
-        </td>
-    </tr>
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Nombre del Dapartamento" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="pull-right col-lg-1">
+                <a class="btn btn-success" data-modal="" href="/Departamento/Create" id="btnCreate">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+        </div>
+
+        <div style="margin-top:17px;">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-striped table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column("ide_nombre_departamento", "Nombre Departamento", style: "col-lg-3"),
+              grid.Column("ide_descripcion_departamento", "Descripción", style: "col-lg-4"),
+              grid.Column("ide_deshabilitar", "Habilitado", style: "col-lg-1"),
+              grid.Column("ide_cod_documento", "Código Doc.", style: "col-lg-1"),
+              grid.Column("iso_empresa.iem_nombre_empresa", "Empresa", style: "col-lg-2"),
+              grid.Column(header: "Action", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a data-modal='' href='/Departamento/details/" + item.ide_id_departamento + "' id='" + item.ide_id_departamento + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Departamento/edit/" + item.ide_id_departamento + "' id='" + item.ide_id_departamento + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Departamento/delete/" + item.ide_id_departamento + "' id='" + item.ide_id_departamento + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+
+                                                                ));
+            }
+
+
+        </div>
+    }
+</div>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section SideBar{
+    <div class="seccion-barra-black">Vigilancia de Salud</div>
+
+    <ul class="list-panel-moulos">
+        <li><a href="@Url.Action("Index", "Personal")"><img class="boton-panel-imagen " src="@Url.Content("~/images/personal.png")" />Personal</a></li>
+        <li><a href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
+        <li><a class="select" href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
+        <li><a href="@Url.Action("Index", "Cargo")"><img class="boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
+        <li><a href="@Url.Action("Index", "PuestoTrabajo")"><img class="boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Puesto de Trabajo</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/incidente.png")" />Incidentes</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/accidentes.png")" />Accidentes</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/indicesr.png")" />Indices de Riesgo</a></li>
+        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/equipot.png")" />Equipos de Trabajo</a></li>
+    </ul>
 }
 
-</table>
+
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
+    
+}

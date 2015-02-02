@@ -20,12 +20,13 @@ namespace CBM_SART.Controllers
         //[Authorize]
         public ActionResult Index(string filter = null, int page = 1, int pageSize = 6, string sort = "iem_cod_empresa", string sortdir = "ASC")
         {
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
             var records = new PagedList<iso_empresa>();
             ViewBag.filter = filter;
             records.Content = db.iso_empresa
                         .Where(x => filter == null ||
-                                (x.iem_nombre_empresa.Contains(filter))
-                                   || x.iem_nemonico_empresa.Contains(filter)
+                                (x.iem_nombre_empresa.ToLower().Contains(filter.ToLower().Trim()))
+                                   || x.iem_nemonico_empresa.ToLower().Contains(filter.ToLower().Trim())
                               )
                         .OrderBy(sort + " " + sortdir)
                         .Skip((page - 1) * pageSize)
@@ -151,8 +152,8 @@ namespace CBM_SART.Controllers
         //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Edit(iso_empresa iso_empresa)
-        public ActionResult Edit([Bind(Include = "iem_cod_empresa,iem_nombre_empresa,iem_nemonico_empresa,iem_ruc_empresa,iem_direccion_empresa,iem_telefono_empresa,iem_rep_legal_empresa,iem_personeria_empresa,iem_icono_empresa,iem_vision_empresa,iem_mision_empresa,iem_politica_empresa,iem_objetivo_empresa,iem_valores_empresa,iem_icono_archivo,iem_politica_general,iem_politica_calidad,iem_estrategia_general,iem_razon_social,iem_numero_patronal,iem_actividad,iem_numero_trab_administrativos,iem_numero_trab_planta")] iso_empresa iso_empresa)
+        public ActionResult Edit(iso_empresa iso_empresa)
+        //public ActionResult Edit([Bind(Include = "iem_cod_empresa,iem_nombre_empresa,iem_nemonico_empresa,iem_ruc_empresa,iem_direccion_empresa,iem_telefono_empresa,iem_rep_legal_empresa,iem_personeria_empresa,iem_icono_empresa,iem_vision_empresa,iem_mision_empresa,iem_politica_empresa,iem_objetivo_empresa,iem_valores_empresa,iem_icono_archivo,iem_politica_general,iem_politica_calidad,iem_estrategia_general,iem_razon_social,iem_numero_patronal,iem_actividad,iem_numero_trab_administrativos,iem_numero_trab_planta")] iso_empresa iso_empresa)
         {
             if (ModelState.IsValid)
             {
