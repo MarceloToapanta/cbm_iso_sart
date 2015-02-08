@@ -58,6 +58,7 @@ namespace CBM_SART.Controllers
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
+            ViewBag.ide_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa");
             iso_departamento iso_departamento = await db.iso_departamento.FindAsync(id);
             if (iso_departamento == null)
             {
@@ -129,6 +130,7 @@ namespace CBM_SART.Controllers
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
+            ViewBag.ide_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa");
             iso_departamento iso_departamento = db.iso_departamento.Find(id);
             if (iso_departamento == null)
             {
@@ -159,13 +161,6 @@ namespace CBM_SART.Controllers
         {
             if (ModelState.IsValid)
             {
-                /////////imagen/////////
-                //HttpPostedFileBase file = Request.Files["file1"];
-                //if (file.FileName != "")
-                //{
-                //    iso_empresa.iem_icono_archivo = ConvertToBytes(file);
-                //}
-                ////////////////////
                 db.Entry(iso_departamento).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { success = true });
@@ -193,6 +188,7 @@ namespace CBM_SART.Controllers
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
+            ViewBag.ide_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa");
             iso_departamento iso_departamento = db.iso_departamento.Find(id);
             if (iso_departamento == null)
             {
@@ -214,6 +210,7 @@ namespace CBM_SART.Controllers
         //}
         public ActionResult DeleteConfirmed(int id)
         {
+            
             var phone = db.iso_departamento.Find(id);
             db.iso_departamento.Remove(phone);
             db.SaveChanges();
