@@ -14,11 +14,11 @@
 </div>
 
 
-<div class="well">
+<div class="content">
     @using (Html.BeginForm("index", null, FormMethod.Get))
     {
-        <div class="row">
-            <div class="col-sm-8">
+        <div class="search">
+            <div class="col-md-10">
                 <div class="input-group">
 
                     <input type="text"
@@ -33,14 +33,17 @@
 
                 </div>
             </div>
-            <div class="pull-right col-lg-1">
-                <a class="btn btn-success" data-modal="" href="/Empresa/Create" id="btnCreate">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
+            <div class="col-md-2">
+                <div class="pull-right ">
+                    <a class="btn btn-success" data-modal="" href="/Empresa/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
             </div>
+            <div class="clear"></div>
         </div>
 
-        <div style="margin-top:17px;">
+        <div class="col-md-12">
             @{
         var grid = new WebGrid(
                         canPage: true,
@@ -61,23 +64,24 @@
               grid.Column("iem_nemonico_empresa", "Siglas", style: "col-lg-1"),
               grid.Column("iem_personeria_empresa", "Personería", style: "col-lg-2"),
               grid.Column("iem_telefono_empresa", "Teléfono", style: "col-lg-2"),
-              grid.Column(header: "Logo Empresa",canSort: false,style: "col-lg-2",
-              format: @<text>                
-                @Html.Raw("<img style='max-width: 200px; max-height: 150px' src="+ @Url.Action("GetImage" , "Empresa", new { ID = item.iem_cod_empresa }) + " />")
-            
+              grid.Column(header: "Logo Empresa", canSort: false, style: "col-lg-2",
+              format: @<text>
+                @Html.Raw("<img style='max-width: 200px; max-height: 150px' src=" + @Url.Action("GetImage", "Empresa", new { ID = item.iem_cod_empresa }) + " />")
+
             </text>),
               grid.Column(header: "Action", canSort: false, style: "action col-lg-1",
                      format: @<text>
-                    @Html.Raw("<a data-modal='' href='/Empresa/details/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
-                    @Html.Raw("<a data-modal='' href='/Empresa/edit/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
-                    @Html.Raw("<a data-modal='' href='/Empresa/delete/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Empresa/details/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Empresa/edit/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Empresa/delete/" + item.iem_cod_empresa + "' id='" + item.iem_cod_empresa + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                     </text>)
 
-                                               ));
+                                                                                 ));
             }
 
 
         </div>
+        <div class="clear"></div>
     }
 </div>
 
@@ -112,25 +116,24 @@
 
 @section scripts{
     @Scripts.Render("~/scripts/appjs/phones.js")
-@*Cargar Imagen en Create*@
-<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#blah').fadeIn("slow").attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
+    @*Cargar Imagen en Create*@
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').fadeIn("slow").attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-    }
-    //$("#file1").change(function () {
-    $(document).delegate("#file1", "change", function (e) {
-        readURL(this);
-        //alert($("#file1").val());
-        var fic = $("#file1").val().split('\\');
-        $("#iem_icono_empresa").val("[Base de Datos] " + fic[fic.length - 1]);
+        //$("#file1").change(function () {
+        $(document).delegate("#file1", "change", function (e) {
+            readURL(this);
+            //alert($("#file1").val());
+            var fic = $("#file1").val().split('\\');
+            $("#iem_icono_empresa").val("[Base de Datos] " + fic[fic.length - 1]);
 
-    });
-</script>
-
+        });
+    </script>
 }
