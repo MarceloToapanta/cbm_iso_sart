@@ -89,20 +89,16 @@
             <div id="sidebar">
                 @if (IsSectionDefined("SideBar"))
                 {
-
                     @Html.Partial("_LoginPartial")
-                    <div class="sidebar-custom">
+                    <div class="sidebar-menus">
                         @RenderSection("SideBar")
                     </div>
                 }
                 else
                 {
-
                     @Html.Partial("_LoginPartial")
-
-
                 }
-                <div class="seccion-barra-black">&copy; @DateTime.Now.Year - SART ASP.NET</div>
+                
                 @*<p>&copy; @DateTime.Now.Year - SART ASP.NET</p>*@
             </div>
         </div>
@@ -113,8 +109,8 @@
         </div>
         <div class="clear"></div>
     </div>
-    <footer style="clear:both">
-        @*<p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>*@
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")

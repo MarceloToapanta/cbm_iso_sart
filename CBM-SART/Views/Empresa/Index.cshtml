@@ -9,8 +9,11 @@
 
 
 <div class=" seccion-barra">
+
+    <img src="~/images/seo-icons/seo-goals-icon.png" height="24" width="24" />
     Informacion de la Oraganizaciones Registradas
-    <span class="badge">Nro. de  Empresas : @ViewBag.total</span>
+    |
+    <span class="text-count">Nro. de  Empresas : @ViewBag.total</span>
 </div>
 
 
@@ -37,13 +40,14 @@
                 <div class="pull-right ">
                     <a class="btn btn-success" data-modal="" href="/Empresa/Create" id="btnCreate">
                         <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
                     </a>
                 </div>
             </div>
             <div class="clear"></div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12 grid-content">
             @{
         var grid = new WebGrid(
                         canPage: true,
@@ -56,7 +60,7 @@
 
         @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
             fillEmptyRows: false,
-                      tableStyle: "table table-bordered table-hover table-striped table-responsive table-condensed",
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
             mode: WebGridPagerModes.All,
             columns: grid.Columns(
               grid.Column("iem_ruc_empresa", "RUC"),
@@ -95,9 +99,7 @@
 </div>
 
 @section SideBar{
-    <div class="seccion-barra-black">Vigilancia de Salud</div>
-
-    <ul class="list-panel-moulos">
+    <ul class="list-panel-modulos">
         <li><a href="@Url.Action("Index", "Personal")"><img class="boton-panel-imagen " src="@Url.Content("~/images/personal.png")" />Personal</a></li>
         <li><a class="select" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
         <li><a href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>

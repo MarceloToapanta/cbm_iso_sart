@@ -1,18 +1,22 @@
 ﻿@using Microsoft.AspNet.Identity
-<div class="seccion-barra-black">Usuario Conectado</div>
 <div class="login-sidebar">
-    
+      
     @if (Request.IsAuthenticated)
     {
         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
         {
             @Html.AntiForgeryToken()
-
-    <img class="img-login" height="50" width="50" src="~/images/user.gif" />
+    <div class="login-name">@Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Administrar" })</div>  
+    
     <ul class="txt-login">
         <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Administrar" })
+            <div class="img-login">
+                <img height="100" width="100" src="~/images/user.gif" />
+            </div>
         </li>
+        @*<li>
+            @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Administrar" })
+        </li>*@
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Salir</a></li>
 
     </ul>
@@ -20,11 +24,15 @@
     }
     else
     {
-        
+    <div class="login-name">Nombre Usuario</div>  
         <ul class="txt-login">
-
-            <li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>
+                <div class="img-login">
+                    <img height="100" width="100" src="~/images/user.gif" />
+                </div>
+            </li>
             <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            <li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         </ul>
     }
 </div>
