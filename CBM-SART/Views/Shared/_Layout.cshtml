@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - SART</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -84,29 +84,40 @@
         </div>
     </div>
     <div class="body-content">
-
-        <div class="col-md-2">
-            <div id="sidebar">
-                @if (IsSectionDefined("SideBar"))
-                {
-                    @Html.Partial("_LoginPartial")
-                    <div class="sidebar-menus">
-                        @RenderSection("SideBar")
-                    </div>
-                }
-                else
-                {
-                    @Html.Partial("_LoginPartial")
-                }
+        @if (IsSectionDefined("SideBar")) { 
+            <div class="col-md-2">
+                <div id="sidebar">
+                    @if (IsSectionDefined("SideBar"))
+                    {
+                        @Html.Partial("_LoginPartial")
+                        <div class="sidebar-menus">
+                            @RenderSection("SideBar")
+                        </div>
+                    }
+                    else
+                    {
+                        @Html.Partial("_LoginPartial")   
+                    }
                 
-                @*<p>&copy; @DateTime.Now.Year - SART ASP.NET</p>*@
+                    @*<p>&copy; @DateTime.Now.Year - SART ASP.NET</p>*@
+                </div>
             </div>
-        </div>
+        
         <div class="col-md-10">
             <div id="content" class="well-sm">
                 @RenderBody()
             </div>
         </div>
+        }
+        else
+        {
+        <div class="col-md-12">
+            <div id="content" class="well-sm">
+                @RenderBody()
+            </div>
+        </div>
+        }
+        
         <div class="clear"></div>
     </div>
     <footer>

@@ -79,11 +79,11 @@ namespace CBM_SART.Controllers
             if (ModelState.IsValid)
             {
                 ///////imagen/////////
-                //HttpPostedFileBase file = Request.Files["file1"];
-                //if (file.FileName != "")
-                //{
-                //    iso_empresa.iem_icono_archivo = ConvertToBytes(file);
-                //}
+                HttpPostedFileBase file = Request.Files["file1"];
+                if (file.FileName != "")
+                {
+                    iso_empresa.iem_icono_archivo = ConvertToBytes(file);
+                }
                 //////////////////
                 db.iso_empresa.Add(iso_empresa);
                 db.SaveChanges();

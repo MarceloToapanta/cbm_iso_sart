@@ -15,7 +15,7 @@
 
 
 @*@using (Html.BeginForm())*@
-@using (Html.BeginForm("Create", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Ajax.BeginForm("Create", "Empresa", new AjaxOptions() { OnSuccess = "getresult", HttpMethod = "post" }, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @*@Html.ValidationSummary(true)*@

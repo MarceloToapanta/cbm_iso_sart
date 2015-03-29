@@ -1,82 +1,94 @@
 ﻿@model CBM_SART.Models.iso_departamento
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Editar Departamento";
 }
 
-<h2>Edit</h2>
+<div class="title-window" style="height:32px">
+    Permite Editar los datos relacionados al Departamento.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Información del Departamento</h4>
+</div>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>iso_departamento</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.ide_id_departamento)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ide_nombre_departamento, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ide_nombre_departamento)
-                @Html.ValidationMessageFor(model => model.ide_nombre_departamento)
+    <div class="modal-body">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ide_id_departamento)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ide_id_empresa, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.iso_empresa.iem_nombre_empresa, new { @class = "form-control required " })*@
+                    @*@Html.DropDownListFor(x => x.iso_empresa.iem_nombre_empresa, (IEnumerable<SelectListItem>)ViewBag.ide_id_empresa, new { @class = "control-label required" })*@
+                    @Html.DropDownListFor(model => model.ide_id_empresa, (SelectList) ViewBag.ide_id_empresa, "Selecionar", new { @class = "control-label required", id = "ide_id_empresa", name = "ide_id_empresa" })
+                    @Html.ValidationMessageFor(model => model.ide_id_empresa)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ide_descripcion_departamento, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ide_descripcion_departamento)
-                @Html.ValidationMessageFor(model => model.ide_descripcion_departamento)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ide_nombre_departamento, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.ide_nombre_departamento)*@
+                    @Html.TextBoxFor(m => m.ide_nombre_departamento, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.ide_nombre_departamento)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ide_id_empresa, "ide_id_empresa", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ide_id_empresa", String.Empty)
-                @Html.ValidationMessageFor(model => model.ide_id_empresa)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ide_descripcion_departamento, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ide_descripcion_departamento, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ide_descripcion_departamento)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ide_id_departamento_padre, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ide_id_departamento_padre)
-                @Html.ValidationMessageFor(model => model.ide_id_departamento_padre)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ide_cod_documento, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ide_cod_documento, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ide_cod_documento)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ide_deshabilitar, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ide_deshabilitar)
-                @Html.ValidationMessageFor(model => model.ide_deshabilitar)
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.ide_id_departamento_padre, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ide_id_departamento_padre)
+                        @Html.ValidationMessageFor(model => model.ide_id_departamento_padre)
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ide_deshabilitar, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ide_deshabilitar, new { @class = "form-control " })
+                    @Html.ValidationMessageFor(model => model.ide_deshabilitar)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ide_cod_documento, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ide_cod_documento)
-                @Html.ValidationMessageFor(model => model.ide_cod_documento)
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                <button class="btn btn-primary" type="submit" name="Guardar"> Guardar </button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

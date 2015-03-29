@@ -1,11 +1,11 @@
 ﻿@model CBM_SART.Models.iso_departamento
 
 @{
-    //ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle Departamento";
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class=" seccion-barra" style="height:32px">
+<div class="title-window" style="height:32px">
     Permite visualizar e imprimir los datos relacionados al Departamento.
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
@@ -21,7 +21,7 @@
             @Html.ValidationSummary(true)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ide_id_empresa, "ide_id_empresa", new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ide_id_empresa, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @*@Html.DropDownList("ide_id_empresa", String.Empty)*@
                     @Html.DropDownListFor(x => x.ide_id_empresa, (IEnumerable<SelectListItem>)ViewBag.ide_id_empresa, new { @class = "control-label", @disabled = "disabled" })
