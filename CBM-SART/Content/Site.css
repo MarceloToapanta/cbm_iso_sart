@@ -89,6 +89,7 @@ form label {
     color: #fff;
     background-color: transparent;
     opacity: 0.7;
+    max-height: 32px;
 }
 
 .navbar-default ul.navbar-nav {
@@ -188,7 +189,7 @@ border-left:0px;
     color: #555 !important;
     margin: 0;
     border:0;
-    padding: 0 !important;
+    padding: 0 10px 0 5px;
     height: 30px !important;
 }
 .navbar-default .dropdown-menu li a:hover{
@@ -206,7 +207,16 @@ border-left:0px;
     margin-top: 2px;
     border-radius: 0px;
     height: 100%;
-    
+    border-radius: 3px 3px 0px 0px;
+    border: 1px solid #d5d5d5;
+    padding: 10px;
+    min-height: 610px;
+    background: #f7f7f7;
+    background: -moz-linear-gradient(top, #ffffff, #f7f7f7);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f7f7f7));
+    background: -webkit-linear-gradient(top, #ffffff, #f7f7f7);
+    background: -o-linear-gradient(top, #ffffff, #f7f7f7);
+    background: linear-gradient(to bottom, #ffffff, #f7f7f7);
 }
 .well-sm {
     padding: 0px;
@@ -235,9 +245,21 @@ border-left:0px;
     background: -o-linear-gradient(top, #ffffff, #f7f7f7);
     background: linear-gradient(to bottom, #ffffff, #f7f7f7);
     margin-bottom:8px;
+    border-radius: 3px 3px 0px 0px;
 }
 .login-name {
     padding: 5px 12px;
+    border-bottom: 2px solid rgb(241, 100, 72);
+    background: url("/images/nav-dark.png");
+    border-radius: 3px 3px 0px 0px;
+    color: #fff;
+}
+.login-name a{
+    color: #eee;
+}
+.login-name a:hover{
+    color: #fff;
+    text-decoration: none;
 }
 .img-login {
     text-align:center;
@@ -396,28 +418,28 @@ tfoot {
     background:#fff;
 }
 .search{
-    padding-top:8px;
-    padding-bottom:3px;
-    padding-left:5px;
-    padding-right:5px;
+    padding: 0;
     margin-top:5px;
-    border: 1px solid #D5D5D5;
-    margin-bottom: 1px;
+    margin-bottom: 5px;
 }
 .search  .input-group input{
     height:28px !important;
+}
+.search .col-md-10{
+    padding-left:0px;
 }
 .clear{
     clear:both;
 }.seccion-barra {
     font-weight: normal;
-    /* display: block; */
-    /* background: #355681; */
+    background: #fff;
     color: rgb(64, 64, 64);
     padding: 4px 5px 5px 5px;
     font-size: 14px;
     border-bottom: 1px solid #555;
-    margin-bottom:5px;
+    margin-bottom:10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
  .seccion-barra-black {
     font-weight:bold;
@@ -471,7 +493,21 @@ tfoot {
     font-size: 11px;
 }
 
-.table thead th a{
+.table .action{
+    width: 4%;
+}
+.table-condensed > thead > tr > th, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td{
+    padding: 3px 5px;
+}
+tfoot > tr > td {
+    padding: 8px 5px;
+}
+tfoot > tr > td a{
+    color: #eee;
+}
+tfoot > tr > td a:hover{
+    color: #fff;
+    text-decoration:none;
 }
  /*////////////////////////Fin Table//////////////////////*/
  /*////////////////////////Ventanas Emergentes//////////////////////*/

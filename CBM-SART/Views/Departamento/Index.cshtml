@@ -64,7 +64,7 @@
               grid.Column("ide_deshabilitar", "Habilitado", style: "col-lg-1"),
               grid.Column("ide_cod_documento", "Código Doc.", style: "col-lg-1"),
               grid.Column("iso_empresa.iem_nombre_empresa", "Empresa", style: "col-lg-2"),
-              grid.Column(header: "Action", canSort: false, style: "action",
+              grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
                 @Html.Raw("<a data-modal='' href='/Departamento/details/" + item.ide_id_departamento + "' id='" + item.ide_id_departamento + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
                 @Html.Raw("<a data-modal='' href='/Departamento/edit/" + item.ide_id_departamento + "' id='" + item.ide_id_departamento + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
@@ -80,8 +80,8 @@
 }
 </div>
 
-<div id='myModal' class='modal fade in'>
-    <div class="modal-dialog" >
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog">
         <div class="modal-content">
             <div id='myModalContent'></div>
         </div>
