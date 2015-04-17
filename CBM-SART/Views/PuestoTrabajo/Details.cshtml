@@ -1,0 +1,43 @@
+﻿@model CBM_SART.Models.iso_puesto_trabajo
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>iso_puesto_trabajo</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ipt_nombre_puesto_t)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipt_nombre_puesto_t)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipt_descrip_puesto_t)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipt_descrip_puesto_t)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipt_nro_trbajadores)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipt_nro_trbajadores)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ipt_id_puesto_t }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

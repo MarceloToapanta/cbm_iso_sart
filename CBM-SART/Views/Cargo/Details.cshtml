@@ -1,0 +1,107 @@
+﻿@model CBM_SART.Models.iso_cargo
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>iso_cargo</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_cod_clase_cargo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_cod_clase_cargo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_num_trabajadores)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_num_trabajadores)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_jefe_inmediato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_jefe_inmediato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_edad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_edad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_genero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_genero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_instruccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_instruccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_experiencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_experiencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.icg_conocimiento_adicional)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.icg_conocimiento_adicional)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.icg_id_cargo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

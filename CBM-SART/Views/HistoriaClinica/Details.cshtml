@@ -1,0 +1,51 @@
+﻿@model CBM_SART.Models.iso_historia_clinica
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>iso_historia_clinica</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ihc_id_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ihc_id_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ihc_lugar_historia_clinica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ihc_lugar_historia_clinica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ihc_fecha_historia_clinica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ihc_fecha_historia_clinica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_personal.ipe_ced_ruc_personal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_personal.ipe_ced_ruc_personal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

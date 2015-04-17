@@ -5,6 +5,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "Admin";
+    Session["SidebarSelect"] = "Empresa";
 }
 
 
@@ -96,22 +98,8 @@
     </div>
 </div>
 
-@section SideBar{
-    <ul class="list-panel-modulos">
-        <li><a href="@Url.Action("Index", "Personal")"><img class="boton-panel-imagen " src="@Url.Content("~/images/personal.png")" />Personal</a></li>
-        <li><a class="select" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
-        <li><a href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
-        <li><a href="@Url.Action("Index", "Cargo")"><img class="boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
-        <li><a href="@Url.Action("Index", "PuestoTrabajo")"><img class="boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Puesto de Trabajo</a></li>
-        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
-        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
-        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>
-        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/incidente.png")" />Incidentes</a></li>
-        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/accidentes.png")" />Accidentes</a></li>
-        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/indicesr.png")" />Indices de Riesgo</a></li>
-        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/equipot.png")" />Equipos de Trabajo</a></li>
-    </ul>
-}
+
+
 
 
 @section scripts{

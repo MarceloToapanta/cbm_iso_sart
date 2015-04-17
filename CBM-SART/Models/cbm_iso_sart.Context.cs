@@ -31,5 +31,6 @@ namespace CBM_SART.Models
         public virtual DbSet<iso_empresa> iso_empresa { get; set; }
         public virtual DbSet<iso_historia_clinica> iso_historia_clinica { get; set; }
         public virtual DbSet<iso_puesto_trabajo> iso_puesto_trabajo { get; set; }
+        public virtual DbSet<iso_personal> iso_personal { get; set; }
     }
 }

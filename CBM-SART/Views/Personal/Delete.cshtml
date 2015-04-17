@@ -1,0 +1,441 @@
+﻿@model CBM_SART.Models.iso_personal
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>iso_personal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_ced_ruc_personal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_ced_ruc_personal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_nombre_personal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_nombre_personal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_fecha_nacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_fecha_nacimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_dir_domicilio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_dir_domicilio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_telf_1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_telf_1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_telf_2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_telf_2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_fecha_ingreso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_fecha_ingreso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_curriculum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_curriculum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_empresa_anterior)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_empresa_anterior)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_descripcion_estudios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_descripcion_estudios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_descripcion_experiencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_descripcion_experiencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_archivo_curriculum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_archivo_curriculum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_estado_personal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_estado_personal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_id_jefe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_id_jefe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_nro_afiliacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_nro_afiliacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_genero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_genero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_profesion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_profesion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_trab_habitual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_trab_habitual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_horario_reg_ini)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_horario_reg_ini)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_horario_reg_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_horario_reg_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_salario_diario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_salario_diario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_salario_mensual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_salario_mensual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_tiempo_servicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_tiempo_servicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_estado_civil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_estado_civil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_lugar_nacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_lugar_nacimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_nivel_educativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_nivel_educativo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_apellido_paterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_apellido_paterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_edad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_edad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_tipo_sangre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_tipo_sangre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_factor_rh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_factor_rh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_tiempo_per_a)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_tiempo_per_a)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_tiempo_per_m)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_tiempo_per_m)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_descrip_cargo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_descrip_cargo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_cambio_area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_cambio_area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_id_centro_costo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_id_centro_costo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_apellido_materno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_apellido_materno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_etnia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_etnia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_cedula_militar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_cedula_militar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_ocupacion_anteriro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_ocupacion_anteriro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_familiares_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_familiares_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_tiene_experiencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_tiene_experiencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_nacionalidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_nacionalidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_vulnerabilidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_vulnerabilidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_codigo_personal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_codigo_personal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipe_foto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipe_foto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_cargo.icg_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_cargo.icg_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_departamento.ide_nombre_departamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_departamento.ide_nombre_departamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_empresa.iem_nombre_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_empresa.iem_nombre_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_puesto_trabajo.ipt_nombre_puesto_t)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_puesto_trabajo.ipt_nombre_puesto_t)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_puesto_trabajo1.ipt_nombre_puesto_t)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_puesto_trabajo1.ipt_nombre_puesto_t)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

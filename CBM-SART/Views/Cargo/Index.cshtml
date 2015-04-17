@@ -1,0 +1,95 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_cargo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["SidebarSelect"] = "Cargo";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_cod_clase_cargo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_num_trabajadores)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_jefe_inmediato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_edad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_genero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_instruccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_experiencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.icg_conocimiento_adicional)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_cod_clase_cargo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_num_trabajadores)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_area)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_jefe_inmediato)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_edad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_genero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_instruccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_experiencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.icg_conocimiento_adicional)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.icg_id_cargo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.icg_id_cargo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.icg_id_cargo })
+        </td>
+    </tr>
+}
+
+</table>

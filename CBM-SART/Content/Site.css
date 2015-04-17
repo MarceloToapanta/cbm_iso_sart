@@ -124,12 +124,15 @@ form label {
     background: rgba(4,4,4, 0.75);
     border-left: 1px solid rgba(4,4,4, 0.75);
     border-right: 1px solid rgba(4,4,4, 0.75);
+    /*color:rgb(241, 100, 72);*/
 }
 
 .navbar-default .navbar-nav li a:hover .boton-barra-imagen{
     opacity:1;
 }
-
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background: rgba(4,4,4, 0.75);
+}
 .dropdown {
     color: #fff;
 }

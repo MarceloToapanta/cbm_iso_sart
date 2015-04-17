@@ -167,9 +167,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\HistoriaClinicaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonalController.cs" />
+    <Compile Include="Controllers\PuestoTrabajoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,6 +207,9 @@
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iso_historia_clinica.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_personal.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iso_puesto_trabajo.cs">
@@ -360,6 +367,26 @@
     <Content Include="Views\Departamento\Details.cshtml" />
     <Content Include="Views\Departamento\Edit.cshtml" />
     <Content Include="Views\Departamento\Index.cshtml" />
+    <Content Include="Views\Personal\Create.cshtml" />
+    <Content Include="Views\Personal\Delete.cshtml" />
+    <Content Include="Views\Personal\Details.cshtml" />
+    <Content Include="Views\Personal\Edit.cshtml" />
+    <Content Include="Views\Personal\Index.cshtml" />
+    <Content Include="Views\Cargo\Create.cshtml" />
+    <Content Include="Views\Cargo\Delete.cshtml" />
+    <Content Include="Views\Cargo\Details.cshtml" />
+    <Content Include="Views\Cargo\Edit.cshtml" />
+    <Content Include="Views\Cargo\Index.cshtml" />
+    <Content Include="Views\PuestoTrabajo\Create.cshtml" />
+    <Content Include="Views\PuestoTrabajo\Delete.cshtml" />
+    <Content Include="Views\PuestoTrabajo\Details.cshtml" />
+    <Content Include="Views\PuestoTrabajo\Edit.cshtml" />
+    <Content Include="Views\PuestoTrabajo\Index.cshtml" />
+    <Content Include="Views\HistoriaClinica\Create.cshtml" />
+    <Content Include="Views\HistoriaClinica\Delete.cshtml" />
+    <Content Include="Views\HistoriaClinica\Details.cshtml" />
+    <Content Include="Views\HistoriaClinica\Edit.cshtml" />
+    <Content Include="Views\HistoriaClinica\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,11 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Inicio";
+    Session["Sidebar"] = "Inicio";
 }
 
 <div class="jumbotron">
     <h1>SART</h1>
     <p class="lead">Sistema de Gestión de Control de Riesgos Laborales según Normas SART.</p>
-    <p><a href="/Documentos/RES.C.D.390Reglamento del Seguro General de Riesgos del Trabajo.pdf" class="btn btn-primary btn-large">RESOLUCIÓN No. C.D.390 &raquo;</a></p>
+    <p><a href="/Documentos/RES.C.D.390Reglamento del Seguro General de Riesgos del Trabajo.pdf" target="new" class="btn btn-primary btn-large">RESOLUCIÓN No. C.D.390 &raquo;</a></p>
 </div>
 
 <div class="row">
@@ -29,5 +30,3 @@
         <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
     </div>
 </div>
-
-@section SideBar{}

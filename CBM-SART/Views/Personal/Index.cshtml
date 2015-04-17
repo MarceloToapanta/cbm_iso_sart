@@ -1,0 +1,342 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_personal>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "VigilaciaSalud";
+    Session["SidebarSelect"] = "Personal";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_ced_ruc_personal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_nombre_personal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_fecha_nacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_dir_domicilio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_telf_1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_telf_2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_celular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_fecha_ingreso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_curriculum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_empresa_anterior)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_descripcion_estudios)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_descripcion_experiencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_archivo_curriculum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_estado_personal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_id_jefe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_nro_afiliacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_genero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_profesion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_trab_habitual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_horario_reg_ini)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_horario_reg_fin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_salario_diario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_salario_mensual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_tiempo_servicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_estado_civil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_lugar_nacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_nivel_educativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_apellido_paterno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_edad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_tipo_sangre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_factor_rh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_tiempo_per_a)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_tiempo_per_m)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_descrip_cargo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_cambio_area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_id_centro_costo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_apellido_materno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_etnia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_cedula_militar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_ocupacion_anteriro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_familiares_empresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_tiene_experiencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_nacionalidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_vulnerabilidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_codigo_personal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipe_foto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_cargo.icg_nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_departamento.ide_nombre_departamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_empresa.iem_nombre_empresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_puesto_trabajo.ipt_nombre_puesto_t)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_puesto_trabajo1.ipt_nombre_puesto_t)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_ced_ruc_personal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_nombre_personal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_fecha_nacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_dir_domicilio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_telf_1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_telf_2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_celular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_fecha_ingreso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_curriculum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_empresa_anterior)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_descripcion_estudios)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_descripcion_experiencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_archivo_curriculum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_estado_personal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_id_jefe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_nro_afiliacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_genero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_profesion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_trab_habitual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_horario_reg_ini)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_horario_reg_fin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_salario_diario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_salario_mensual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_tiempo_servicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_estado_civil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_lugar_nacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_nivel_educativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_apellido_paterno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_edad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_tipo_sangre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_factor_rh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_tiempo_per_a)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_tiempo_per_m)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_descrip_cargo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_cambio_area)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_id_centro_costo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_apellido_materno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_etnia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_cedula_militar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_ocupacion_anteriro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_familiares_empresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_tiene_experiencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_nacionalidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_vulnerabilidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_codigo_personal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipe_foto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_cargo.icg_nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_departamento.ide_nombre_departamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_empresa.iem_nombre_empresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_puesto_trabajo.ipt_nombre_puesto_t)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_puesto_trabajo1.ipt_nombre_puesto_t)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ipe_id_personal }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ipe_id_personal }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ipe_id_personal })
+        </td>
+    </tr>
+}
+
+</table>

@@ -14,6 +14,13 @@
         <AssociationConnector Association="cbm_iso_sart.FK_iso_consulta_medica_iso_historia_clinica" ManuallyRouted="false" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_departamento_iso_empresa" ManuallyRouted="false" />
         <AssociationConnector Association="cbm_iso_sart.iso_cargo_puesto_t" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_personal" Width="1.5" PointX="12.25" PointY="0.75" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_personal_iso_cargo" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_personal_iso_departamento" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_personal_iso_empresa" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_historia_clinica_iso_personal" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

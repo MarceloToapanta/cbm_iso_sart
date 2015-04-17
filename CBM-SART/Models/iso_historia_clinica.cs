@@ -26,5 +26,6 @@ namespace CBM_SART.Models
         public Nullable<System.DateTime> ihc_fecha_historia_clinica { get; set; }
     
         public virtual ICollection<iso_consulta_medica> iso_consulta_medica { get; set; }
+        public virtual iso_personal iso_personal { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="cbm_iso_sart.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="cbm_iso_sart.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="iso_cargo">
           <Key>
             <PropertyRef Name="icg_id_cargo" />
@@ -119,6 +119,63 @@
           <Property Name="ihc_lugar_historia_clinica" Type="varchar" MaxLength="80" />
           <Property Name="ihc_fecha_historia_clinica" Type="datetime" />
         </EntityType>
+        <EntityType Name="iso_personal">
+          <Key>
+            <PropertyRef Name="ipe_id_personal" />
+          </Key>
+          <Property Name="ipe_id_personal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ipe_ced_ruc_personal" Type="varchar" MaxLength="15" />
+          <Property Name="ipe_nombre_personal" Type="varchar" MaxLength="255" />
+          <Property Name="ipe_fecha_nacimiento" Type="datetime" />
+          <Property Name="ipe_dir_domicilio" Type="varchar" MaxLength="255" />
+          <Property Name="ipe_telf_1" Type="varchar" MaxLength="25" />
+          <Property Name="ipe_telf_2" Type="varchar" MaxLength="25" />
+          <Property Name="ipe_celular" Type="varchar" MaxLength="25" />
+          <Property Name="ipe_fecha_ingreso" Type="datetime" />
+          <Property Name="ipe_id_cargo" Type="int" />
+          <Property Name="ipe_id_empresa" Type="int" Nullable="false" />
+          <Property Name="ipe_id_departamento" Type="int" Nullable="false" />
+          <Property Name="ipe_curriculum" Type="varchar" MaxLength="255" />
+          <Property Name="ipe_empresa_anterior" Type="varchar" MaxLength="255" />
+          <Property Name="ipe_descripcion_estudios" Type="varchar" MaxLength="1100" />
+          <Property Name="ipe_descripcion_experiencia" Type="varchar" MaxLength="1100" />
+          <Property Name="ipe_archivo_curriculum" Type="image" />
+          <Property Name="ipe_estado_personal" Type="char" MaxLength="1" />
+          <Property Name="ipe_id_jefe" Type="int" />
+          <Property Name="ipe_nro_afiliacion" Type="varchar" MaxLength="20" />
+          <Property Name="ipe_genero" Type="varchar" MaxLength="10" />
+          <Property Name="ipe_profesion" Type="varchar" MaxLength="50" />
+          <Property Name="ipe_trab_habitual" Type="varchar" MaxLength="50" />
+          <Property Name="ipe_horario_reg_ini" Type="datetime" />
+          <Property Name="ipe_horario_reg_fin" Type="datetime" />
+          <Property Name="ipe_salario_diario" Type="varchar" MaxLength="50" />
+          <Property Name="ipe_salario_mensual" Type="varchar" MaxLength="50" />
+          <Property Name="ipe_tiempo_servicio" Type="varchar" MaxLength="10" />
+          <Property Name="ipe_estado_civil" Type="varchar" MaxLength="50" />
+          <Property Name="ipe_lugar_nacimiento" Type="varchar" MaxLength="100" />
+          <Property Name="ipe_email" Type="varchar" MaxLength="50" />
+          <Property Name="ipe_nivel_educativo" Type="varchar" MaxLength="80" />
+          <Property Name="ipe_apellido_paterno" Type="varchar" MaxLength="100" />
+          <Property Name="ipe_edad" Type="int" />
+          <Property Name="ipe_tipo_sangre" Type="varchar" MaxLength="10" />
+          <Property Name="ipe_factor_rh" Type="varchar" MaxLength="50" />
+          <Property Name="ipe_tiempo_per_a" Type="varchar" MaxLength="20" />
+          <Property Name="ipe_tiempo_per_m" Type="varchar" MaxLength="20" />
+          <Property Name="ipe_descrip_cargo" Type="varchar" MaxLength="100" />
+          <Property Name="ipe_id_puesto_trabajo" Type="int" />
+          <Property Name="ipe_cambio_area" Type="bit" />
+          <Property Name="ipe_id_centro_costo" Type="int" />
+          <Property Name="ipe_apellido_materno" Type="varchar" MaxLength="60" />
+          <Property Name="ipe_etnia" Type="varchar" MaxLength="50" />
+          <Property Name="ipe_cedula_militar" Type="varchar" MaxLength="15" />
+          <Property Name="ipe_ocupacion_anteriro" Type="varchar" MaxLength="80" />
+          <Property Name="ipe_familiares_empresa" Type="bit" />
+          <Property Name="ipe_tiene_experiencia" Type="varchar" MaxLength="2" />
+          <Property Name="ipe_nacionalidad" Type="varchar" MaxLength="100" />
+          <Property Name="ipe_vulnerabilidad" Type="bit" />
+          <Property Name="ipe_codigo_personal" Type="varchar" MaxLength="50" />
+          <Property Name="ipe_foto" Type="image" />
+        </EntityType>
         <EntityType Name="iso_puesto_trabajo">
           <Key>
             <PropertyRef Name="ipt_id_puesto_t" />
@@ -186,6 +243,86 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_iso_historia_clinica_iso_personal">
+          <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_historia_clinica" Type="Self.iso_historia_clinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_personal">
+              <PropertyRef Name="ipe_id_personal" />
+            </Principal>
+            <Dependent Role="iso_historia_clinica">
+              <PropertyRef Name="ihc_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_personal_iso_cargo">
+          <End Role="iso_cargo" Type="Self.iso_cargo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_cargo">
+              <PropertyRef Name="icg_id_cargo" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_personal_iso_departamento">
+          <End Role="iso_departamento" Type="Self.iso_departamento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_departamento">
+              <PropertyRef Name="ide_id_departamento" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_personal_iso_empresa">
+          <End Role="iso_empresa" Type="Self.iso_empresa" Multiplicity="1" />
+          <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_empresa">
+              <PropertyRef Name="iem_cod_empresa" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_personal_iso_puesto_trabajo">
+          <End Role="iso_puesto_trabajo" Type="Self.iso_puesto_trabajo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_puesto_trabajo">
+              <PropertyRef Name="ipt_id_puesto_t" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_puesto_trabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_personal_iso_puesto_trabajo1">
+          <End Role="iso_puesto_trabajo" Type="Self.iso_puesto_trabajo" Multiplicity="0..1" />
+          <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_puesto_trabajo">
+              <PropertyRef Name="ipt_id_puesto_t" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_puesto_trabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="cbm_iso_sartStoreContainer">
           <EntitySet Name="iso_cargo" EntityType="Self.iso_cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_cargo_puesto_t" EntityType="Self.iso_cargo_puesto_t" Schema="dbo" store:Type="Tables" />
@@ -193,6 +330,7 @@
           <EntitySet Name="iso_departamento" EntityType="Self.iso_departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_empresa" EntityType="Self.iso_empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_historia_clinica" EntityType="Self.iso_historia_clinica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_personal" EntityType="Self.iso_personal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_puesto_trabajo" EntityType="Self.iso_puesto_trabajo" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_iso_cargo_puesto_t_iso_cargo" Association="Self.FK_iso_cargo_puesto_t_iso_cargo">
             <End Role="iso_cargo" EntitySet="iso_cargo" />
@@ -210,9 +348,32 @@
             <End Role="iso_empresa" EntitySet="iso_empresa" />
             <End Role="iso_departamento" EntitySet="iso_departamento" />
           </AssociationSet>
+          <AssociationSet Name="FK_iso_historia_clinica_iso_personal" Association="Self.FK_iso_historia_clinica_iso_personal">
+            <End Role="iso_personal" EntitySet="iso_personal" />
+            <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_personal_iso_cargo" Association="Self.FK_iso_personal_iso_cargo">
+            <End Role="iso_cargo" EntitySet="iso_cargo" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_personal_iso_departamento" Association="Self.FK_iso_personal_iso_departamento">
+            <End Role="iso_departamento" EntitySet="iso_departamento" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_personal_iso_empresa" Association="Self.FK_iso_personal_iso_empresa">
+            <End Role="iso_empresa" EntitySet="iso_empresa" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_personal_iso_puesto_trabajo" Association="Self.FK_iso_personal_iso_puesto_trabajo">
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_personal_iso_puesto_trabajo1" Association="Self.FK_iso_personal_iso_puesto_trabajo1">
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="cbm_iso_sart" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -233,6 +394,7 @@
           <Property Name="icg_experiencia" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="icg_conocimiento_adicional" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="iso_puesto_trabajo" Relationship="Self.iso_cargo_puesto_t" FromRole="iso_cargo" ToRole="iso_puesto_trabajo" />
+          <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_personal_iso_cargo" FromRole="iso_cargo" ToRole="iso_personal" />
         </EntityType>
         <EntityType Name="iso_consulta_medica">
           <Key>
@@ -285,6 +447,7 @@
           <Property Name="ide_deshabilitar" Type="Boolean" />
           <Property Name="ide_cod_documento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="iso_empresa" Relationship="Self.FK_iso_departamento_iso_empresa" FromRole="iso_departamento" ToRole="iso_empresa" />
+          <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_personal_iso_departamento" FromRole="iso_departamento" ToRole="iso_personal" />
         </EntityType>
         <EntityType Name="iso_empresa">
           <Key>
@@ -314,6 +477,7 @@
           <Property Name="iem_numero_trab_administrativos" Type="Int32" />
           <Property Name="iem_numero_trab_planta" Type="Int32" />
           <NavigationProperty Name="iso_departamento" Relationship="Self.FK_iso_departamento_iso_empresa" FromRole="iso_empresa" ToRole="iso_departamento" />
+          <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_personal_iso_empresa" FromRole="iso_empresa" ToRole="iso_personal" />
         </EntityType>
         <EntityType Name="iso_historia_clinica">
           <Key>
@@ -326,6 +490,7 @@
           <Property Name="ihc_lugar_historia_clinica" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="ihc_fecha_historia_clinica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="iso_consulta_medica" Relationship="Self.FK_iso_consulta_medica_iso_historia_clinica" FromRole="iso_historia_clinica" ToRole="iso_consulta_medica" />
+          <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_historia_clinica_iso_personal" FromRole="iso_historia_clinica" ToRole="iso_personal" />
         </EntityType>
         <EntityType Name="iso_puesto_trabajo">
           <Key>
@@ -336,6 +501,8 @@
           <Property Name="ipt_descrip_puesto_t" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ipt_nro_trbajadores" Type="Int32" />
           <NavigationProperty Name="iso_cargo" Relationship="Self.iso_cargo_puesto_t" FromRole="iso_puesto_trabajo" ToRole="iso_cargo" />
+          <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo" FromRole="iso_puesto_trabajo" ToRole="iso_personal" />
+          <NavigationProperty Name="iso_personal1" Relationship="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo1" FromRole="iso_puesto_trabajo" ToRole="iso_personal" />
         </EntityType>
         <Association Name="FK_iso_consulta_medica_iso_historia_clinica">
           <End Role="iso_historia_clinica" Type="Self.iso_historia_clinica" Multiplicity="1">
@@ -390,7 +557,175 @@
             <End Role="iso_cargo" EntitySet="iso_cargo" />
             <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
           </AssociationSet>
+          <EntitySet Name="iso_personal" EntityType="cbm_iso_sart.iso_personal" />
+          <AssociationSet Name="FK_iso_personal_iso_cargo" Association="cbm_iso_sart.FK_iso_personal_iso_cargo">
+            <End Role="iso_cargo" EntitySet="iso_cargo" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_personal_iso_departamento" Association="cbm_iso_sart.FK_iso_personal_iso_departamento">
+            <End Role="iso_departamento" EntitySet="iso_departamento" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_personal_iso_empresa" Association="cbm_iso_sart.FK_iso_personal_iso_empresa">
+            <End Role="iso_empresa" EntitySet="iso_empresa" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_historia_clinica_iso_personal" Association="cbm_iso_sart.FK_iso_historia_clinica_iso_personal">
+            <End Role="iso_personal" EntitySet="iso_personal" />
+            <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_personal_iso_puesto_trabajo" Association="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo">
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_personal_iso_puesto_trabajo1" Association="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo1">
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+            <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="iso_personal">
+          <Key>
+            <PropertyRef Name="ipe_id_personal" />
+          </Key>
+          <Property Name="ipe_id_personal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ipe_ced_ruc_personal" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_nombre_personal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_fecha_nacimiento" Type="DateTime" Precision="3" />
+          <Property Name="ipe_dir_domicilio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_telf_1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_telf_2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_celular" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_fecha_ingreso" Type="DateTime" Precision="3" />
+          <Property Name="ipe_id_cargo" Type="Int32" />
+          <Property Name="ipe_id_empresa" Type="Int32" Nullable="false" />
+          <Property Name="ipe_id_departamento" Type="Int32" Nullable="false" />
+          <Property Name="ipe_curriculum" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_empresa_anterior" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_descripcion_estudios" Type="String" MaxLength="1100" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_descripcion_experiencia" Type="String" MaxLength="1100" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_archivo_curriculum" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ipe_estado_personal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ipe_id_jefe" Type="Int32" />
+          <Property Name="ipe_nro_afiliacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_genero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_profesion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_trab_habitual" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_horario_reg_ini" Type="DateTime" Precision="3" />
+          <Property Name="ipe_horario_reg_fin" Type="DateTime" Precision="3" />
+          <Property Name="ipe_salario_diario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_salario_mensual" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_tiempo_servicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_estado_civil" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_lugar_nacimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_nivel_educativo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_apellido_paterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_edad" Type="Int32" />
+          <Property Name="ipe_tipo_sangre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_factor_rh" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_tiempo_per_a" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_tiempo_per_m" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_descrip_cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_id_puesto_trabajo" Type="Int32" />
+          <Property Name="ipe_cambio_area" Type="Boolean" />
+          <Property Name="ipe_id_centro_costo" Type="Int32" />
+          <Property Name="ipe_apellido_materno" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_etnia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_cedula_militar" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_ocupacion_anteriro" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_familiares_empresa" Type="Boolean" />
+          <Property Name="ipe_tiene_experiencia" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_nacionalidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_vulnerabilidad" Type="Boolean" />
+          <Property Name="ipe_codigo_personal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipe_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="iso_cargo" Relationship="cbm_iso_sart.FK_iso_personal_iso_cargo" FromRole="iso_personal" ToRole="iso_cargo" />
+          <NavigationProperty Name="iso_departamento" Relationship="cbm_iso_sart.FK_iso_personal_iso_departamento" FromRole="iso_personal" ToRole="iso_departamento" />
+          <NavigationProperty Name="iso_empresa" Relationship="cbm_iso_sart.FK_iso_personal_iso_empresa" FromRole="iso_personal" ToRole="iso_empresa" />
+          <NavigationProperty Name="iso_historia_clinica" Relationship="cbm_iso_sart.FK_iso_historia_clinica_iso_personal" FromRole="iso_personal" ToRole="iso_historia_clinica" />
+          <NavigationProperty Name="iso_puesto_trabajo" Relationship="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo" FromRole="iso_personal" ToRole="iso_puesto_trabajo" />
+          <NavigationProperty Name="iso_puesto_trabajo1" Relationship="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo1" FromRole="iso_personal" ToRole="iso_puesto_trabajo" />
+        </EntityType>
+        <Association Name="FK_iso_personal_iso_cargo">
+          <End Type="cbm_iso_sart.iso_cargo" Role="iso_cargo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_personal" Role="iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_cargo">
+              <PropertyRef Name="icg_id_cargo" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_personal_iso_departamento">
+          <End Type="cbm_iso_sart.iso_departamento" Role="iso_departamento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_personal" Role="iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_departamento">
+              <PropertyRef Name="ide_id_departamento" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_personal_iso_empresa">
+          <End Type="cbm_iso_sart.iso_empresa" Role="iso_empresa" Multiplicity="1" />
+          <End Type="cbm_iso_sart.iso_personal" Role="iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_empresa">
+              <PropertyRef Name="iem_cod_empresa" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_historia_clinica_iso_personal">
+          <End Type="cbm_iso_sart.iso_personal" Role="iso_personal" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_historia_clinica" Role="iso_historia_clinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_personal">
+              <PropertyRef Name="ipe_id_personal" />
+            </Principal>
+            <Dependent Role="iso_historia_clinica">
+              <PropertyRef Name="ihc_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_personal_iso_puesto_trabajo">
+          <End Type="cbm_iso_sart.iso_puesto_trabajo" Role="iso_puesto_trabajo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_personal" Role="iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_puesto_trabajo">
+              <PropertyRef Name="ipt_id_puesto_t" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_puesto_trabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_personal_iso_puesto_trabajo1">
+          <End Type="cbm_iso_sart.iso_puesto_trabajo" Role="iso_puesto_trabajo" Multiplicity="0..1" />
+          <End Type="cbm_iso_sart.iso_personal" Role="iso_personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_puesto_trabajo">
+              <PropertyRef Name="ipt_id_puesto_t" />
+            </Principal>
+            <Dependent Role="iso_personal">
+              <PropertyRef Name="ipe_id_puesto_trabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -523,6 +858,64 @@
               <ScalarProperty Name="ipt_id_puesto_t" ColumnName="icp_id_puesto_t" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="iso_personal">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_personal">
+              <MappingFragment StoreEntitySet="iso_personal">
+                <ScalarProperty Name="ipe_foto" ColumnName="ipe_foto" />
+                <ScalarProperty Name="ipe_codigo_personal" ColumnName="ipe_codigo_personal" />
+                <ScalarProperty Name="ipe_vulnerabilidad" ColumnName="ipe_vulnerabilidad" />
+                <ScalarProperty Name="ipe_nacionalidad" ColumnName="ipe_nacionalidad" />
+                <ScalarProperty Name="ipe_tiene_experiencia" ColumnName="ipe_tiene_experiencia" />
+                <ScalarProperty Name="ipe_familiares_empresa" ColumnName="ipe_familiares_empresa" />
+                <ScalarProperty Name="ipe_ocupacion_anteriro" ColumnName="ipe_ocupacion_anteriro" />
+                <ScalarProperty Name="ipe_cedula_militar" ColumnName="ipe_cedula_militar" />
+                <ScalarProperty Name="ipe_etnia" ColumnName="ipe_etnia" />
+                <ScalarProperty Name="ipe_apellido_materno" ColumnName="ipe_apellido_materno" />
+                <ScalarProperty Name="ipe_id_centro_costo" ColumnName="ipe_id_centro_costo" />
+                <ScalarProperty Name="ipe_cambio_area" ColumnName="ipe_cambio_area" />
+                <ScalarProperty Name="ipe_id_puesto_trabajo" ColumnName="ipe_id_puesto_trabajo" />
+                <ScalarProperty Name="ipe_descrip_cargo" ColumnName="ipe_descrip_cargo" />
+                <ScalarProperty Name="ipe_tiempo_per_m" ColumnName="ipe_tiempo_per_m" />
+                <ScalarProperty Name="ipe_tiempo_per_a" ColumnName="ipe_tiempo_per_a" />
+                <ScalarProperty Name="ipe_factor_rh" ColumnName="ipe_factor_rh" />
+                <ScalarProperty Name="ipe_tipo_sangre" ColumnName="ipe_tipo_sangre" />
+                <ScalarProperty Name="ipe_edad" ColumnName="ipe_edad" />
+                <ScalarProperty Name="ipe_apellido_paterno" ColumnName="ipe_apellido_paterno" />
+                <ScalarProperty Name="ipe_nivel_educativo" ColumnName="ipe_nivel_educativo" />
+                <ScalarProperty Name="ipe_email" ColumnName="ipe_email" />
+                <ScalarProperty Name="ipe_lugar_nacimiento" ColumnName="ipe_lugar_nacimiento" />
+                <ScalarProperty Name="ipe_estado_civil" ColumnName="ipe_estado_civil" />
+                <ScalarProperty Name="ipe_tiempo_servicio" ColumnName="ipe_tiempo_servicio" />
+                <ScalarProperty Name="ipe_salario_mensual" ColumnName="ipe_salario_mensual" />
+                <ScalarProperty Name="ipe_salario_diario" ColumnName="ipe_salario_diario" />
+                <ScalarProperty Name="ipe_horario_reg_fin" ColumnName="ipe_horario_reg_fin" />
+                <ScalarProperty Name="ipe_horario_reg_ini" ColumnName="ipe_horario_reg_ini" />
+                <ScalarProperty Name="ipe_trab_habitual" ColumnName="ipe_trab_habitual" />
+                <ScalarProperty Name="ipe_profesion" ColumnName="ipe_profesion" />
+                <ScalarProperty Name="ipe_genero" ColumnName="ipe_genero" />
+                <ScalarProperty Name="ipe_nro_afiliacion" ColumnName="ipe_nro_afiliacion" />
+                <ScalarProperty Name="ipe_id_jefe" ColumnName="ipe_id_jefe" />
+                <ScalarProperty Name="ipe_estado_personal" ColumnName="ipe_estado_personal" />
+                <ScalarProperty Name="ipe_archivo_curriculum" ColumnName="ipe_archivo_curriculum" />
+                <ScalarProperty Name="ipe_descripcion_experiencia" ColumnName="ipe_descripcion_experiencia" />
+                <ScalarProperty Name="ipe_descripcion_estudios" ColumnName="ipe_descripcion_estudios" />
+                <ScalarProperty Name="ipe_empresa_anterior" ColumnName="ipe_empresa_anterior" />
+                <ScalarProperty Name="ipe_curriculum" ColumnName="ipe_curriculum" />
+                <ScalarProperty Name="ipe_id_departamento" ColumnName="ipe_id_departamento" />
+                <ScalarProperty Name="ipe_id_empresa" ColumnName="ipe_id_empresa" />
+                <ScalarProperty Name="ipe_id_cargo" ColumnName="ipe_id_cargo" />
+                <ScalarProperty Name="ipe_fecha_ingreso" ColumnName="ipe_fecha_ingreso" />
+                <ScalarProperty Name="ipe_celular" ColumnName="ipe_celular" />
+                <ScalarProperty Name="ipe_telf_2" ColumnName="ipe_telf_2" />
+                <ScalarProperty Name="ipe_telf_1" ColumnName="ipe_telf_1" />
+                <ScalarProperty Name="ipe_dir_domicilio" ColumnName="ipe_dir_domicilio" />
+                <ScalarProperty Name="ipe_fecha_nacimiento" ColumnName="ipe_fecha_nacimiento" />
+                <ScalarProperty Name="ipe_nombre_personal" ColumnName="ipe_nombre_personal" />
+                <ScalarProperty Name="ipe_ced_ruc_personal" ColumnName="ipe_ced_ruc_personal" />
+                <ScalarProperty Name="ipe_id_personal" ColumnName="ipe_id_personal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

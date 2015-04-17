@@ -127,5 +127,63 @@
         <ScalarProperty Name="ipt_id_puesto_t" ColumnName="icp_id_puesto_t" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="iso_personal">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_personal">
+        <MappingFragment StoreEntitySet="iso_personal">
+          <ScalarProperty Name="ipe_foto" ColumnName="ipe_foto" />
+          <ScalarProperty Name="ipe_codigo_personal" ColumnName="ipe_codigo_personal" />
+          <ScalarProperty Name="ipe_vulnerabilidad" ColumnName="ipe_vulnerabilidad" />
+          <ScalarProperty Name="ipe_nacionalidad" ColumnName="ipe_nacionalidad" />
+          <ScalarProperty Name="ipe_tiene_experiencia" ColumnName="ipe_tiene_experiencia" />
+          <ScalarProperty Name="ipe_familiares_empresa" ColumnName="ipe_familiares_empresa" />
+          <ScalarProperty Name="ipe_ocupacion_anteriro" ColumnName="ipe_ocupacion_anteriro" />
+          <ScalarProperty Name="ipe_cedula_militar" ColumnName="ipe_cedula_militar" />
+          <ScalarProperty Name="ipe_etnia" ColumnName="ipe_etnia" />
+          <ScalarProperty Name="ipe_apellido_materno" ColumnName="ipe_apellido_materno" />
+          <ScalarProperty Name="ipe_id_centro_costo" ColumnName="ipe_id_centro_costo" />
+          <ScalarProperty Name="ipe_cambio_area" ColumnName="ipe_cambio_area" />
+          <ScalarProperty Name="ipe_id_puesto_trabajo" ColumnName="ipe_id_puesto_trabajo" />
+          <ScalarProperty Name="ipe_descrip_cargo" ColumnName="ipe_descrip_cargo" />
+          <ScalarProperty Name="ipe_tiempo_per_m" ColumnName="ipe_tiempo_per_m" />
+          <ScalarProperty Name="ipe_tiempo_per_a" ColumnName="ipe_tiempo_per_a" />
+          <ScalarProperty Name="ipe_factor_rh" ColumnName="ipe_factor_rh" />
+          <ScalarProperty Name="ipe_tipo_sangre" ColumnName="ipe_tipo_sangre" />
+          <ScalarProperty Name="ipe_edad" ColumnName="ipe_edad" />
+          <ScalarProperty Name="ipe_apellido_paterno" ColumnName="ipe_apellido_paterno" />
+          <ScalarProperty Name="ipe_nivel_educativo" ColumnName="ipe_nivel_educativo" />
+          <ScalarProperty Name="ipe_email" ColumnName="ipe_email" />
+          <ScalarProperty Name="ipe_lugar_nacimiento" ColumnName="ipe_lugar_nacimiento" />
+          <ScalarProperty Name="ipe_estado_civil" ColumnName="ipe_estado_civil" />
+          <ScalarProperty Name="ipe_tiempo_servicio" ColumnName="ipe_tiempo_servicio" />
+          <ScalarProperty Name="ipe_salario_mensual" ColumnName="ipe_salario_mensual" />
+          <ScalarProperty Name="ipe_salario_diario" ColumnName="ipe_salario_diario" />
+          <ScalarProperty Name="ipe_horario_reg_fin" ColumnName="ipe_horario_reg_fin" />
+          <ScalarProperty Name="ipe_horario_reg_ini" ColumnName="ipe_horario_reg_ini" />
+          <ScalarProperty Name="ipe_trab_habitual" ColumnName="ipe_trab_habitual" />
+          <ScalarProperty Name="ipe_profesion" ColumnName="ipe_profesion" />
+          <ScalarProperty Name="ipe_genero" ColumnName="ipe_genero" />
+          <ScalarProperty Name="ipe_nro_afiliacion" ColumnName="ipe_nro_afiliacion" />
+          <ScalarProperty Name="ipe_id_jefe" ColumnName="ipe_id_jefe" />
+          <ScalarProperty Name="ipe_estado_personal" ColumnName="ipe_estado_personal" />
+          <ScalarProperty Name="ipe_archivo_curriculum" ColumnName="ipe_archivo_curriculum" />
+          <ScalarProperty Name="ipe_descripcion_experiencia" ColumnName="ipe_descripcion_experiencia" />
+          <ScalarProperty Name="ipe_descripcion_estudios" ColumnName="ipe_descripcion_estudios" />
+          <ScalarProperty Name="ipe_empresa_anterior" ColumnName="ipe_empresa_anterior" />
+          <ScalarProperty Name="ipe_curriculum" ColumnName="ipe_curriculum" />
+          <ScalarProperty Name="ipe_id_departamento" ColumnName="ipe_id_departamento" />
+          <ScalarProperty Name="ipe_id_empresa" ColumnName="ipe_id_empresa" />
+          <ScalarProperty Name="ipe_id_cargo" ColumnName="ipe_id_cargo" />
+          <ScalarProperty Name="ipe_fecha_ingreso" ColumnName="ipe_fecha_ingreso" />
+          <ScalarProperty Name="ipe_celular" ColumnName="ipe_celular" />
+          <ScalarProperty Name="ipe_telf_2" ColumnName="ipe_telf_2" />
+          <ScalarProperty Name="ipe_telf_1" ColumnName="ipe_telf_1" />
+          <ScalarProperty Name="ipe_dir_domicilio" ColumnName="ipe_dir_domicilio" />
+          <ScalarProperty Name="ipe_fecha_nacimiento" ColumnName="ipe_fecha_nacimiento" />
+          <ScalarProperty Name="ipe_nombre_personal" ColumnName="ipe_nombre_personal" />
+          <ScalarProperty Name="ipe_ced_ruc_personal" ColumnName="ipe_ced_ruc_personal" />
+          <ScalarProperty Name="ipe_id_personal" ColumnName="ipe_id_personal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

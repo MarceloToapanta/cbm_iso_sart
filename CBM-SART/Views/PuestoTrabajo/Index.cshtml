@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_puesto_trabajo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["SidebarSelect"] = "Puesto";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ipt_nombre_puesto_t)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipt_descrip_puesto_t)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipt_nro_trbajadores)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipt_nombre_puesto_t)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipt_descrip_puesto_t)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipt_nro_trbajadores)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ipt_id_puesto_t }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ipt_id_puesto_t }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ipt_id_puesto_t })
+        </td>
+    </tr>
+}
+
+</table>

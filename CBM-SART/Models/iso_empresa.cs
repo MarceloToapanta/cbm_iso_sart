@@ -7,71 +7,44 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 namespace CBM_SART.Models
-{      
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class iso_empresa
     {
         public iso_empresa()
         {
             this.iso_departamento = new HashSet<iso_departamento>();
+            this.iso_personal = new HashSet<iso_personal>();
         }
     
         public int iem_cod_empresa { get; set; }
-        [Display(Name = "Nombre")]
-        [Required]
         public string iem_nombre_empresa { get; set; }
-        [Display(Name = "Siglas")]
         public string iem_nemonico_empresa { get; set; }
-        [Display(Name = "RUC")]
-        [Required]
         public string iem_ruc_empresa { get; set; }
-        [Display(Name = "Dirección")]
-        [Required]
         public string iem_direccion_empresa { get; set; }
-        [Display(Name = "Teléfono")]
         public string iem_telefono_empresa { get; set; }
-        [Display(Name = "Representante Legal")]
-        [Required]
         public string iem_rep_legal_empresa { get; set; }
-        [Required]
-        [Display(Name = "Personeria")]
         public string iem_personeria_empresa { get; set; }
-        [Display(Name = "Logo de la Empresa")]
         public string iem_icono_empresa { get; set; }
-        [Display(Name = "Visión")]
         public string iem_vision_empresa { get; set; }
-        [Display(Name = "Misión")]
         public string iem_mision_empresa { get; set; }
-        [Display(Name = "Politica")]
         public string iem_politica_empresa { get; set; }
-        [Display(Name = "Objetivo")]
         public string iem_objetivo_empresa { get; set; }
-        [Display(Name = "Valores")]
         public string iem_valores_empresa { get; set; }
         public byte[] iem_icono_archivo { get; set; }
-        [Display(Name = "Politica General")]
         public string iem_politica_general { get; set; }
-        [Display(Name = "Politica de Calidad")]
         public string iem_politica_calidad { get; set; }
-        [Display(Name = "Estrategia General")]
         public string iem_estrategia_general { get; set; }
-        [Display(Name = "Razon Social")]
         public string iem_razon_social { get; set; }
-        [Display(Name = "Número Patronal")]
         public string iem_numero_patronal { get; set; }
-        [Display(Name = "Actividad")]
         public string iem_actividad { get; set; }
-        [Display(Name = "Nro. Trabajadores Administrativos")]
         public Nullable<int> iem_numero_trab_administrativos { get; set; }
-        [Display(Name = "Nro. Trabajadores Planta")]
         public Nullable<int> iem_numero_trab_planta { get; set; }
     
         public virtual ICollection<iso_departamento> iso_departamento { get; set; }
+        public virtual ICollection<iso_personal> iso_personal { get; set; }
     }
 }

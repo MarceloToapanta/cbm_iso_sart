@@ -17,6 +17,7 @@ namespace CBM_SART.Models
         public iso_cargo()
         {
             this.iso_puesto_trabajo = new HashSet<iso_puesto_trabajo>();
+            this.iso_personal = new HashSet<iso_personal>();
         }
     
         public int icg_id_cargo { get; set; }
@@ -33,5 +34,6 @@ namespace CBM_SART.Models
         public string icg_conocimiento_adicional { get; set; }
     
         public virtual ICollection<iso_puesto_trabajo> iso_puesto_trabajo { get; set; }
+        public virtual ICollection<iso_personal> iso_personal { get; set; }
     }
 }
