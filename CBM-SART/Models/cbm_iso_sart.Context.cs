@@ -32,5 +32,20 @@ namespace CBM_SART.Models
         public virtual DbSet<iso_historia_clinica> iso_historia_clinica { get; set; }
         public virtual DbSet<iso_puesto_trabajo> iso_puesto_trabajo { get; set; }
         public virtual DbSet<iso_personal> iso_personal { get; set; }
+        public virtual DbSet<iso_accidente> iso_accidente { get; set; }
+        public virtual DbSet<iso_avance_plan> iso_avance_plan { get; set; }
+        public virtual DbSet<iso_detalle_matriz_mrl> iso_detalle_matriz_mrl { get; set; }
+        public virtual DbSet<iso_detalle_matriz_ocupacional> iso_detalle_matriz_ocupacional { get; set; }
+        public virtual DbSet<iso_detalle_plan> iso_detalle_plan { get; set; }
+        public virtual DbSet<iso_equipo_caracteristica> iso_equipo_caracteristica { get; set; }
+        public virtual DbSet<iso_equipo_proteccion> iso_equipo_proteccion { get; set; }
+        public virtual DbSet<iso_incidente_trabajo> iso_incidente_trabajo { get; set; }
+        public virtual DbSet<iso_matriz_mrl> iso_matriz_mrl { get; set; }
+        public virtual DbSet<iso_matriz_profesiograma> iso_matriz_profesiograma { get; set; }
+        public virtual DbSet<iso_matriz_riesgo_ocupacional> iso_matriz_riesgo_ocupacional { get; set; }
+        public virtual DbSet<iso_plan> iso_plan { get; set; }
+        public virtual DbSet<iso_riesgo_mrl> iso_riesgo_mrl { get; set; }
+        public virtual DbSet<iso_riesgo_ocupacional> iso_riesgo_ocupacional { get; set; }
+        public virtual DbSet<iso_tipo_riesgo_ocupacional> iso_tipo_riesgo_ocupacional { get; set; }
     }
 }

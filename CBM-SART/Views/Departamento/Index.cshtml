@@ -17,46 +17,46 @@
 
 <div class="content">
     @using (Html.BeginForm("index", null, FormMethod.Get))
-{
-    <div class="search">
-        <div class="col-md-10">
-            <div class="input-group">
+    {
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
 
-                <input type="text"
-                       name="filter"
-                       value="@ViewBag.filter"
-                       class="form-control"
-                       style="display: inline; height:30px"
-                       placeholder="Buscar por Nombre del Dapartamento" />
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-sm" type="submit">Buscar</button>
-                </span>
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Nombre del Dapartamento" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    </span>
 
+                </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="pull-right">
-                <a class="btn btn-success" data-modal="" href="/Departamento/Create" id="btnCreate">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    Nuevo
-                </a>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="btn btn-success" data-modal="" href="/Departamento/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
             </div>
+            <div class="clear"></div>
         </div>
-        <div class="clear"></div>
-    </div>
 
-    <div class="col-md-12 grid-content">
-        @{
-    var grid = new WebGrid(
+        <div class="col-md-12 grid-content">
+            @{
+        var grid = new WebGrid(
                         canPage: true,
                         rowsPerPage: Model.PageSize,
                         canSort: true,
                         ajaxUpdateContainerId: "grid");
 
-    grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
-    grid.Pager(WebGridPagerModes.All);
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
 
-    @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
             fillEmptyRows: false,
                       tableStyle: "table table-bordered table-hover table-responsive table-condensed",
             mode: WebGridPagerModes.All,
@@ -73,13 +73,13 @@
                 @Html.Raw("<a data-modal='' href='/Departamento/delete/" + item.ide_id_departamento + "' id='" + item.ide_id_departamento + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                     </text>)
 
-                                                                                                  ));
-        }
+                                                                                                                      ));
+            }
 
 
-    </div>
+        </div>
         <div class="clear"></div>
-}
+    }
 </div>
 
 <div id='myModal' class='modal fade in' tabindex='-1'>
@@ -93,5 +93,5 @@
 
 @section scripts{
     @Scripts.Render("~/scripts/appjs/phones.js")
-    
+
 }

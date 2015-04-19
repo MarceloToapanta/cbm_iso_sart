@@ -1,0 +1,145 @@
+﻿@model CBM_SART.Models.iso_accidente
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>iso_accidente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_cod_empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_cod_empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_dia_accidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_dia_accidente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_fecha_accidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_fecha_accidente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_hora_accidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_hora_accidente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_sitio_accidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_sitio_accidente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_descrip_accidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_descrip_accidente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_lesiones_accidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_lesiones_accidente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_experiencia_trab)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_experiencia_trab)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_entrenamiento_trab)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_entrenamiento_trab)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_produjo_lesion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_produjo_lesion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_falla_accidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_falla_accidente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_nombres_testigos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_nombres_testigos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_persona_atendio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_persona_atendio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iac_traslado_accidentado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iac_traslado_accidentado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_personal.ipe_ced_ruc_personal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_personal.ipe_ced_ruc_personal)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

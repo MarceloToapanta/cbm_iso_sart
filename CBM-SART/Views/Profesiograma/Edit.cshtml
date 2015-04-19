@@ -1,0 +1,212 @@
+﻿@model CBM_SART.Models.iso_matriz_profesiograma
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>iso_matriz_profesiograma</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.imp_id_matrizp)
+
+        @Html.HiddenFor(model => model.imp_id_cargo)
+
+        @Html.HiddenFor(model => model.imp_id_area)
+
+        @Html.HiddenFor(model => model.imp_id_puesto_trabajo)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_formacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_formacion)
+                @Html.ValidationMessageFor(model => model.imp_formacion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_experiencia, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_experiencia)
+                @Html.ValidationMessageFor(model => model.imp_experiencia)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_aptitudes, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_aptitudes)
+                @Html.ValidationMessageFor(model => model.imp_aptitudes)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_actitudes, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_actitudes)
+                @Html.ValidationMessageFor(model => model.imp_actitudes)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_tareas_funciones, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_tareas_funciones)
+                @Html.ValidationMessageFor(model => model.imp_tareas_funciones)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_herramientas, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_herramientas)
+                @Html.ValidationMessageFor(model => model.imp_herramientas)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_exigencias, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_exigencias)
+                @Html.ValidationMessageFor(model => model.imp_exigencias)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_competencias, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_competencias)
+                @Html.ValidationMessageFor(model => model.imp_competencias)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_capacitacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_capacitacion)
+                @Html.ValidationMessageFor(model => model.imp_capacitacion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_horario_trabajo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_horario_trabajo)
+                @Html.ValidationMessageFor(model => model.imp_horario_trabajo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_fecha_creacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_fecha_creacion)
+                @Html.ValidationMessageFor(model => model.imp_fecha_creacion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_preocupacional, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_preocupacional)
+                @Html.ValidationMessageFor(model => model.imp_preocupacional)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_per_reintegro, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_per_reintegro)
+                @Html.ValidationMessageFor(model => model.imp_per_reintegro)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_reintegro, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_reintegro)
+                @Html.ValidationMessageFor(model => model.imp_reintegro)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_especial, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_especial)
+                @Html.ValidationMessageFor(model => model.imp_especial)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_salida, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_salida)
+                @Html.ValidationMessageFor(model => model.imp_salida)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_absoluta, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_absoluta)
+                @Html.ValidationMessageFor(model => model.imp_absoluta)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_relativa, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_relativa)
+                @Html.ValidationMessageFor(model => model.imp_relativa)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_edad, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_edad)
+                @Html.ValidationMessageFor(model => model.imp_edad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_genero, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_genero)
+                @Html.ValidationMessageFor(model => model.imp_genero)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_criterios_exclusion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_criterios_exclusion)
+                @Html.ValidationMessageFor(model => model.imp_criterios_exclusion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imp_conocimientos_ad, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imp_conocimientos_ad)
+                @Html.ValidationMessageFor(model => model.imp_conocimientos_ad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

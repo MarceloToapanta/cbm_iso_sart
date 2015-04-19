@@ -19,6 +19,8 @@ namespace CBM_SART.Models
             this.iso_cargo = new HashSet<iso_cargo>();
             this.iso_personal = new HashSet<iso_personal>();
             this.iso_personal1 = new HashSet<iso_personal>();
+            this.iso_matriz_profesiograma = new HashSet<iso_matriz_profesiograma>();
+            this.iso_equipo_proteccion = new HashSet<iso_equipo_proteccion>();
         }
     
         public int ipt_id_puesto_t { get; set; }
@@ -29,5 +31,7 @@ namespace CBM_SART.Models
         public virtual ICollection<iso_cargo> iso_cargo { get; set; }
         public virtual ICollection<iso_personal> iso_personal { get; set; }
         public virtual ICollection<iso_personal> iso_personal1 { get; set; }
+        public virtual ICollection<iso_matriz_profesiograma> iso_matriz_profesiograma { get; set; }
+        public virtual ICollection<iso_equipo_proteccion> iso_equipo_proteccion { get; set; }
     }
 }

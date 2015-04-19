@@ -17,6 +17,8 @@ namespace CBM_SART.Models
         public iso_personal()
         {
             this.iso_historia_clinica = new HashSet<iso_historia_clinica>();
+            this.iso_accidente = new HashSet<iso_accidente>();
+            this.iso_incidente_trabajo = new HashSet<iso_incidente_trabajo>();
         }
     
         public int ipe_id_personal { get; set; }
@@ -78,5 +80,7 @@ namespace CBM_SART.Models
         public virtual ICollection<iso_historia_clinica> iso_historia_clinica { get; set; }
         public virtual iso_puesto_trabajo iso_puesto_trabajo { get; set; }
         public virtual iso_puesto_trabajo iso_puesto_trabajo1 { get; set; }
+        public virtual ICollection<iso_accidente> iso_accidente { get; set; }
+        public virtual ICollection<iso_incidente_trabajo> iso_incidente_trabajo { get; set; }
     }
 }

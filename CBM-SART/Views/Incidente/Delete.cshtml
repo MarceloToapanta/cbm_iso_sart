@@ -1,0 +1,81 @@
+﻿@model CBM_SART.Models.iso_incidente_trabajo
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>iso_incidente_trabajo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.iit_fecha_incidente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iit_fecha_incidente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iit_descripcion_incid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iit_descripcion_incid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iit_tratamiento_rec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iit_tratamiento_rec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iit_tiempo_reposo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iit_tiempo_reposo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iit_lugar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iit_lugar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iit_hora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iit_hora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_personal.ipe_ced_ruc_personal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_personal.ipe_ced_ruc_personal)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

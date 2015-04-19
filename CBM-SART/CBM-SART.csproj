@@ -166,14 +166,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccidenteController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\EquipoTrabajoController.cs" />
     <Compile Include="Controllers\HistoriaClinicaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidenteController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
+    <Compile Include="Controllers\PlanesController.cs" />
+    <Compile Include="Controllers\ProfesiogramaController.cs" />
     <Compile Include="Controllers\PuestoTrabajoController.cs" />
+    <Compile Include="Controllers\SistemaGestionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,6 +200,12 @@
       <DependentUpon>cbm_iso_sart.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\iso_accidente.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_avance_plan.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_cargo.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
@@ -203,16 +215,55 @@
     <Compile Include="Models\iso_departamento.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_detalle_matriz_mrl.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_detalle_matriz_ocupacional.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_detalle_plan.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_empresa.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_equipo_caracteristica.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_equipo_proteccion.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iso_historia_clinica.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_incidente_trabajo.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_matriz_mrl.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_matriz_profesiograma.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_matriz_riesgo_ocupacional.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_personal.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_plan.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_puesto_trabajo.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_riesgo_mrl.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_riesgo_ocupacional.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_tipo_riesgo_ocupacional.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PagedList.cs" />
@@ -387,6 +438,30 @@
     <Content Include="Views\HistoriaClinica\Details.cshtml" />
     <Content Include="Views\HistoriaClinica\Edit.cshtml" />
     <Content Include="Views\HistoriaClinica\Index.cshtml" />
+    <Content Include="Views\SistemaGestion\Index.cshtml" />
+    <Content Include="Views\Planes\Index.cshtml" />
+    <Content Include="Views\EquipoTrabajo\Create.cshtml" />
+    <Content Include="Views\EquipoTrabajo\Delete.cshtml" />
+    <Content Include="Views\EquipoTrabajo\Details.cshtml" />
+    <Content Include="Views\EquipoTrabajo\Edit.cshtml" />
+    <Content Include="Views\EquipoTrabajo\Index.cshtml" />
+    <Content Include="Views\Accidente\Create.cshtml" />
+    <Content Include="Views\Accidente\Delete.cshtml" />
+    <Content Include="Views\Accidente\Details.cshtml" />
+    <Content Include="Views\Accidente\Edit.cshtml" />
+    <Content Include="Views\Accidente\Index.cshtml" />
+    <Content Include="Views\Incidente\Create.cshtml" />
+    <Content Include="Views\Incidente\Delete.cshtml" />
+    <Content Include="Views\Incidente\Details.cshtml" />
+    <Content Include="Views\Incidente\Edit.cshtml" />
+    <Content Include="Views\Incidente\Index.cshtml" />
+    <Content Include="Views\Profesiograma\Create.cshtml" />
+    <Content Include="Views\Profesiograma\Delete.cshtml" />
+    <Content Include="Views\Profesiograma\Details.cshtml" />
+    <Content Include="Views\Profesiograma\Edit.cshtml" />
+    <Content Include="Views\Profesiograma\Index.cshtml" />
+    <Content Include="Views\HistoriaClinica\Panel.cshtml" />
+    <Content Include="Views\HistoriaClinica\ListaPersonal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

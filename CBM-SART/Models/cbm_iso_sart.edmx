@@ -5,6 +5,44 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="cbm_iso_sart.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="iso_accidente">
+          <Key>
+            <PropertyRef Name="iac_id_accidente" />
+          </Key>
+          <Property Name="iac_id_accidente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iac_id_personal" Type="int" />
+          <Property Name="iac_cod_empresa" Type="smallint" />
+          <Property Name="iac_dia_accidente" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="iac_fecha_accidente" Type="datetime" />
+          <Property Name="iac_hora_accidente" Type="varchar" MaxLength="8" />
+          <Property Name="iac_sitio_accidente" Type="nvarchar" MaxLength="500" />
+          <Property Name="iac_descrip_accidente" Type="nvarchar" MaxLength="1500" />
+          <Property Name="iac_lesiones_accidente" Type="nvarchar" MaxLength="500" />
+          <Property Name="iac_experiencia_trab" Type="varchar" MaxLength="1" />
+          <Property Name="iac_entrenamiento_trab" Type="varchar" MaxLength="1" />
+          <Property Name="iac_produjo_lesion" Type="nvarchar" MaxLength="255" />
+          <Property Name="iac_falla_accidente" Type="nvarchar" MaxLength="500" />
+          <Property Name="iac_nombres_testigos" Type="nvarchar" MaxLength="255" />
+          <Property Name="iac_persona_atendio" Type="nvarchar" MaxLength="255" />
+          <Property Name="iac_traslado_accidentado" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="iso_avance_plan">
+          <Key>
+            <PropertyRef Name="iap_id_avance_plan" />
+            <PropertyRef Name="iap_id_detalle_plan" />
+            <PropertyRef Name="iap_id_plan" />
+          </Key>
+          <Property Name="iap_id_avance_plan" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iap_fecha_avance" Type="datetime" Nullable="false" />
+          <Property Name="iap_id_detalle_plan" Type="int" Nullable="false" />
+          <Property Name="iap_id_plan" Type="int" Nullable="false" />
+          <Property Name="iap_detalle_avance" Type="varchar" MaxLength="500" />
+          <Property Name="iap_usuario_avance" Type="varchar" MaxLength="50" />
+          <Property Name="iap_porcetanje_avance" Type="nvarchar" MaxLength="50" />
+          <Property Name="iap_cantidad_avance" Type="float" />
+          <Property Name="iap_horas_avance" Type="float" />
+          <Property Name="iap_motivo_atraso" Type="varchar" MaxLength="256" />
+        </EntityType>
         <EntityType Name="iso_cargo">
           <Key>
             <PropertyRef Name="icg_id_cargo" />
@@ -80,6 +118,68 @@
           <Property Name="ide_deshabilitar" Type="bit" />
           <Property Name="ide_cod_documento" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="iso_detalle_matriz_mrl">
+          <Key>
+            <PropertyRef Name="idm_id_matriz_mrl" />
+            <PropertyRef Name="idm_id_riesgo_mrl" />
+            <PropertyRef Name="idm_id_tipo_riesgo_mrl" />
+          </Key>
+          <Property Name="idm_id_matriz_mrl" Type="int" Nullable="false" />
+          <Property Name="idm_id_riesgo_mrl" Type="int" Nullable="false" />
+          <Property Name="idm_id_tipo_riesgo_mrl" Type="int" Nullable="false" />
+          <Property Name="idm_probabilidad" Type="varchar" MaxLength="50" />
+          <Property Name="idm_consecuencia" Type="varchar" MaxLength="50" />
+          <Property Name="idm_exposicion" Type="varchar" MaxLength="50" />
+          <Property Name="idm_resultado" Type="varchar" MaxLength="50" />
+          <Property Name="idm_valoracion_gp" Type="varchar" MaxLength="50" />
+          <Property Name="idm_descripcion" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="iso_detalle_matriz_ocupacional">
+          <Key>
+            <PropertyRef Name="idm_id_matriz_ocupacional" />
+            <PropertyRef Name="idm_id_riesgo_ocupacional" />
+            <PropertyRef Name="idm_tipo_riesgo_ocupacional" />
+          </Key>
+          <Property Name="idm_id_matriz_ocupacional" Type="int" Nullable="false" />
+          <Property Name="idm_id_riesgo_ocupacional" Type="int" Nullable="false" />
+          <Property Name="idm_tipo_riesgo_ocupacional" Type="int" Nullable="false" />
+          <Property Name="idm_probabilidad" Type="varchar" MaxLength="5" />
+          <Property Name="idm_consecuencia" Type="varchar" MaxLength="5" />
+          <Property Name="idm_estimacion" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="iso_detalle_plan">
+          <Key>
+            <PropertyRef Name="idp_id_detalle_plan" />
+            <PropertyRef Name="idp_id_plan" />
+          </Key>
+          <Property Name="idp_id_detalle_plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idp_id_plan" Type="int" Nullable="false" />
+          <Property Name="idp_numero_plan" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_tarea" Type="nvarchar" MaxLength="255" />
+          <Property Name="idp_observacion" Type="nvarchar" MaxLength="255" />
+          <Property Name="idp_fecha_comienzo" Type="datetime" />
+          <Property Name="idp_fecha_fin" Type="datetime" />
+          <Property Name="idp_duracion" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_costo" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_porcentaje" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_estado" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_id_plan_padre" Type="int" />
+          <Property Name="idp_descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="idp_fecha_creacion" Type="datetime" />
+          <Property Name="idp_fecha_modificacion" Type="datetime" />
+          <Property Name="idp_verificar_accion" Type="varchar" MaxLength="2" />
+          <Property Name="idp_unidad" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_cantidad" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_tiempoded" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_tiemponeto" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_avancep" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_objetivo_estrategico" Type="varchar" MaxLength="255" />
+          <Property Name="idp_entregable" Type="varchar" MaxLength="255" />
+          <Property Name="idp_id_departamento" Type="int" />
+          <Property Name="idp_costo_ejecutado" Type="varchar" MaxLength="50" />
+          <Property Name="idp_id_proceso" Type="int" />
+          <Property Name="idp_peso" Type="char" MaxLength="6" />
+        </EntityType>
         <EntityType Name="iso_empresa">
           <Key>
             <PropertyRef Name="iem_cod_empresa" />
@@ -108,6 +208,32 @@
           <Property Name="iem_numero_trab_administrativos" Type="int" />
           <Property Name="iem_numero_trab_planta" Type="int" />
         </EntityType>
+        <EntityType Name="iso_equipo_caracteristica">
+          <Key>
+            <PropertyRef Name="iec_id_equipo" />
+            <PropertyRef Name="iec_id_caracteristica" />
+          </Key>
+          <Property Name="iec_id_equipo" Type="int" Nullable="false" />
+          <Property Name="iec_id_caracteristica" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="iso_equipo_proteccion">
+          <Key>
+            <PropertyRef Name="iep_id_equipo_p" />
+          </Key>
+          <Property Name="iep_id_equipo_p" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iep_nombre_equipo_p" Type="varchar" MaxLength="200" />
+          <Property Name="iep_ubic_imagen_equipo_p" Type="varchar" MaxLength="200" />
+          <Property Name="iep_imagen_equipo_p" Type="image" />
+          <Property Name="iep_stock" Type="int" />
+        </EntityType>
+        <EntityType Name="iso_equipo_puesto_trabajo">
+          <Key>
+            <PropertyRef Name="iep_id_equipo" />
+            <PropertyRef Name="iep_id_puesto_trabajo" />
+          </Key>
+          <Property Name="iep_id_equipo" Type="int" Nullable="false" />
+          <Property Name="iep_id_puesto_trabajo" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="iso_historia_clinica">
           <Key>
             <PropertyRef Name="ihc_id_historia" />
@@ -118,6 +244,89 @@
           <Property Name="ihc_id_empresa" Type="varchar" MaxLength="80" />
           <Property Name="ihc_lugar_historia_clinica" Type="varchar" MaxLength="80" />
           <Property Name="ihc_fecha_historia_clinica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="iso_incidente_trabajo">
+          <Key>
+            <PropertyRef Name="iit_id_incidente" />
+          </Key>
+          <Property Name="iit_id_personal" Type="int" Nullable="false" />
+          <Property Name="iit_id_incidente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iit_fecha_incidente" Type="datetime" />
+          <Property Name="iit_descripcion_incid" Type="varchar" MaxLength="500" />
+          <Property Name="iit_tratamiento_rec" Type="varchar" MaxLength="255" />
+          <Property Name="iit_tiempo_reposo" Type="varchar" MaxLength="255" />
+          <Property Name="iit_lugar" Type="varchar" MaxLength="255" />
+          <Property Name="iit_hora" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="iso_matriz_mrl">
+          <Key>
+            <PropertyRef Name="imr_id_matriz_mrl" />
+          </Key>
+          <Property Name="imr_id_matriz_mrl" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imr_localizacion_mrl" Type="varchar" MaxLength="255" />
+          <Property Name="imr_proceso_mrl" Type="varchar" MaxLength="255" />
+          <Property Name="imr_sub_proceso_mrl" Type="varchar" MaxLength="255" />
+          <Property Name="imr_cargo_mrl" Type="varchar" MaxLength="200" />
+          <Property Name="imr_puesto_trabajo_mrl" Type="varchar" MaxLength="200" />
+          <Property Name="imr_nro_tabajadores_mrl" Type="bigint" />
+          <Property Name="imr_jefe_area_mrl" Type="varchar" MaxLength="255" />
+          <Property Name="imr_fecha_evaluacion_mrl" Type="varchar" MaxLength="12" />
+          <Property Name="imr_descripcion_mrl" Type="varchar" MaxLength="500" />
+          <Property Name="imr_id_puesto_t_mrl" Type="bigint" />
+          <Property Name="imr_ubicacion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="iso_matriz_profesiograma">
+          <Key>
+            <PropertyRef Name="imp_id_matrizp" />
+            <PropertyRef Name="imp_id_cargo" />
+            <PropertyRef Name="imp_id_area" />
+            <PropertyRef Name="imp_id_puesto_trabajo" />
+          </Key>
+          <Property Name="imp_id_matrizp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imp_id_cargo" Type="int" Nullable="false" />
+          <Property Name="imp_id_area" Type="int" Nullable="false" />
+          <Property Name="imp_id_puesto_trabajo" Type="int" Nullable="false" />
+          <Property Name="imp_formacion" Type="varchar" MaxLength="150" />
+          <Property Name="imp_experiencia" Type="varchar" MaxLength="150" />
+          <Property Name="imp_aptitudes" Type="varchar" MaxLength="150" />
+          <Property Name="imp_actitudes" Type="varchar" MaxLength="150" />
+          <Property Name="imp_tareas_funciones" Type="varchar" MaxLength="500" />
+          <Property Name="imp_herramientas" Type="varchar" MaxLength="250" />
+          <Property Name="imp_exigencias" Type="varchar" MaxLength="150" />
+          <Property Name="imp_competencias" Type="varchar" MaxLength="200" />
+          <Property Name="imp_capacitacion" Type="varchar" MaxLength="200" />
+          <Property Name="imp_horario_trabajo" Type="varchar" MaxLength="200" />
+          <Property Name="imp_fecha_creacion" Type="datetime" />
+          <Property Name="imp_preocupacional" Type="char" MaxLength="2" />
+          <Property Name="imp_per_reintegro" Type="char" MaxLength="2" />
+          <Property Name="imp_reintegro" Type="char" MaxLength="2" />
+          <Property Name="imp_especial" Type="char" MaxLength="2" />
+          <Property Name="imp_salida" Type="char" MaxLength="2" />
+          <Property Name="imp_absoluta" Type="char" MaxLength="2" />
+          <Property Name="imp_relativa" Type="char" MaxLength="2" />
+          <Property Name="imp_edad" Type="varchar" MaxLength="15" />
+          <Property Name="imp_genero" Type="varchar" MaxLength="10" />
+          <Property Name="imp_criterios_exclusion" Type="varchar" MaxLength="500" />
+          <Property Name="imp_conocimientos_ad" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="iso_matriz_riesgo_ocupacional">
+          <Key>
+            <PropertyRef Name="imo_id_matriz" />
+          </Key>
+          <Property Name="imo_id_matriz" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imo_nombre_matriz" Type="varchar" MaxLength="150" />
+          <Property Name="imo_descrip_matriz" Type="varchar" MaxLength="250" />
+          <Property Name="imo_fecha_creacion" Type="datetime" />
+          <Property Name="imo_elaborado_por" Type="varchar" MaxLength="50" />
+          <Property Name="imo_id_personal" Type="int" />
+          <Property Name="imo_area_matriz" Type="varchar" MaxLength="250" />
+          <Property Name="imo_proceso_matriz" Type="varchar" MaxLength="250" />
+          <Property Name="imo_actividad_matriz" Type="varchar" MaxLength="250" />
+          <Property Name="imo_cargo_personal" Type="varchar" MaxLength="250" />
+          <Property Name="imo_puesto_trabajo" Type="varchar" MaxLength="250" />
+          <Property Name="imo_subproceso_matriz" Type="varchar" MaxLength="250" />
+          <Property Name="imo_tiempo_exposicion" Type="varchar" MaxLength="50" />
+          <Property Name="imo_numero_trabajadores" Type="int" />
         </EntityType>
         <EntityType Name="iso_personal">
           <Key>
@@ -176,6 +385,24 @@
           <Property Name="ipe_codigo_personal" Type="varchar" MaxLength="50" />
           <Property Name="ipe_foto" Type="image" />
         </EntityType>
+        <EntityType Name="iso_plan">
+          <Key>
+            <PropertyRef Name="ipl_id_plan" />
+          </Key>
+          <Property Name="ipl_id_plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ipl_tipo_plan" Type="varchar" MaxLength="50" />
+          <Property Name="ipl_nombre_plan" Type="varchar" MaxLength="255" />
+          <Property Name="ipl_descripcion_plan" Type="varchar" MaxLength="255" />
+          <Property Name="ipl_fecha_creacion_plan" Type="datetime" />
+          <Property Name="ipl_creador_plan" Type="varchar" MaxLength="250" />
+          <Property Name="ipl_tolerancia" Type="varchar" MaxLength="50" />
+          <Property Name="ipl_responsable" Type="int" />
+          <Property Name="ipl_codigo_plan" Type="varchar" MaxLength="50" />
+          <Property Name="ipl_id_plan_padre" Type="int" />
+          <Property Name="ipl_tipo_proyecto" Type="varchar" MaxLength="15" />
+          <Property Name="ipl_objetivo_estrategico" Type="varchar" MaxLength="255" />
+          <Property Name="ipl_id_area" Type="int" />
+        </EntityType>
         <EntityType Name="iso_puesto_trabajo">
           <Key>
             <PropertyRef Name="ipt_id_puesto_t" />
@@ -185,6 +412,63 @@
           <Property Name="ipt_descrip_puesto_t" Type="varchar" MaxLength="500" />
           <Property Name="ipt_nro_trbajadores" Type="int" />
         </EntityType>
+        <EntityType Name="iso_riesgo_mrl">
+          <Key>
+            <PropertyRef Name="irm_id_riesgo" />
+            <PropertyRef Name="irm_tipo_riesgo" />
+          </Key>
+          <Property Name="irm_id_riesgo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="irm_tipo_riesgo" Type="int" Nullable="false" />
+          <Property Name="irm_nombre_riesgo" Type="varchar" MaxLength="250" />
+          <Property Name="irm_descripcion_riesgo" Type="varchar" MaxLength="1000" />
+          <Property Name="irm_codigo_riesgo" Type="varchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="iso_riesgo_ocupacional">
+          <Key>
+            <PropertyRef Name="irg_id_riesgo" />
+            <PropertyRef Name="irg_tipo_riesgo" />
+          </Key>
+          <Property Name="irg_id_riesgo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="irg_tipo_riesgo" Type="int" Nullable="false" />
+          <Property Name="irg_nombre_riesgo" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="iso_tipo_riesgo_ocupacional">
+          <Key>
+            <PropertyRef Name="ito_id_tipo_riesgo" />
+          </Key>
+          <Property Name="ito_id_tipo_riesgo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ito_nombre_tipo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_iso_accidente_iso_personal">
+          <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_accidente" Type="Self.iso_accidente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_personal">
+              <PropertyRef Name="ipe_id_personal" />
+            </Principal>
+            <Dependent Role="iso_accidente">
+              <PropertyRef Name="iac_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_avance_plan_iso_detalle_plan">
+          <End Role="iso_detalle_plan" Type="Self.iso_detalle_plan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_avance_plan" Type="Self.iso_avance_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_detalle_plan">
+              <PropertyRef Name="idp_id_detalle_plan" />
+              <PropertyRef Name="idp_id_plan" />
+            </Principal>
+            <Dependent Role="iso_avance_plan">
+              <PropertyRef Name="iap_id_detalle_plan" />
+              <PropertyRef Name="iap_id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_iso_cargo_puesto_t_iso_cargo">
           <End Role="iso_cargo" Type="Self.iso_cargo" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -243,6 +527,120 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_iso_detalle_matriz_mrl_iso_matriz_mrl">
+          <End Role="iso_matriz_mrl" Type="Self.iso_matriz_mrl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_detalle_matriz_mrl" Type="Self.iso_detalle_matriz_mrl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_matriz_mrl">
+              <PropertyRef Name="imr_id_matriz_mrl" />
+            </Principal>
+            <Dependent Role="iso_detalle_matriz_mrl">
+              <PropertyRef Name="idm_id_matriz_mrl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_detalle_matriz_mrl_iso_riesgo_mrl">
+          <End Role="iso_riesgo_mrl" Type="Self.iso_riesgo_mrl" Multiplicity="1" />
+          <End Role="iso_detalle_matriz_mrl" Type="Self.iso_detalle_matriz_mrl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_riesgo_mrl">
+              <PropertyRef Name="irm_id_riesgo" />
+              <PropertyRef Name="irm_tipo_riesgo" />
+            </Principal>
+            <Dependent Role="iso_detalle_matriz_mrl">
+              <PropertyRef Name="idm_id_riesgo_mrl" />
+              <PropertyRef Name="idm_id_tipo_riesgo_mrl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_detalle_matriz_ocupacional_iso_matriz_riesgo_ocupacional">
+          <End Role="iso_matriz_riesgo_ocupacional" Type="Self.iso_matriz_riesgo_ocupacional" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_detalle_matriz_ocupacional" Type="Self.iso_detalle_matriz_ocupacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_matriz_riesgo_ocupacional">
+              <PropertyRef Name="imo_id_matriz" />
+            </Principal>
+            <Dependent Role="iso_detalle_matriz_ocupacional">
+              <PropertyRef Name="idm_id_matriz_ocupacional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_detalle_matriz_ocupacional_iso_riesgo_ocupacional">
+          <End Role="iso_riesgo_ocupacional" Type="Self.iso_riesgo_ocupacional" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_detalle_matriz_ocupacional" Type="Self.iso_detalle_matriz_ocupacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_riesgo_ocupacional">
+              <PropertyRef Name="irg_id_riesgo" />
+              <PropertyRef Name="irg_tipo_riesgo" />
+            </Principal>
+            <Dependent Role="iso_detalle_matriz_ocupacional">
+              <PropertyRef Name="idm_id_riesgo_ocupacional" />
+              <PropertyRef Name="idm_tipo_riesgo_ocupacional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_detalle_plan_iso_plan">
+          <End Role="iso_plan" Type="Self.iso_plan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_detalle_plan" Type="Self.iso_detalle_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_plan">
+              <PropertyRef Name="ipl_id_plan" />
+            </Principal>
+            <Dependent Role="iso_detalle_plan">
+              <PropertyRef Name="idp_id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_equipo_caracteristica_iso_equipo_proteccion">
+          <End Role="iso_equipo_proteccion" Type="Self.iso_equipo_proteccion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_equipo_caracteristica" Type="Self.iso_equipo_caracteristica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_equipo_proteccion">
+              <PropertyRef Name="iep_id_equipo_p" />
+            </Principal>
+            <Dependent Role="iso_equipo_caracteristica">
+              <PropertyRef Name="iec_id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_equipo_puesto_trabajo_iso_equipo_proteccion">
+          <End Role="iso_equipo_proteccion" Type="Self.iso_equipo_proteccion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_equipo_puesto_trabajo" Type="Self.iso_equipo_puesto_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_equipo_proteccion">
+              <PropertyRef Name="iep_id_equipo_p" />
+            </Principal>
+            <Dependent Role="iso_equipo_puesto_trabajo">
+              <PropertyRef Name="iep_id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_equipo_puesto_trabajo_iso_puesto_trabajo">
+          <End Role="iso_puesto_trabajo" Type="Self.iso_puesto_trabajo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_equipo_puesto_trabajo" Type="Self.iso_equipo_puesto_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_puesto_trabajo">
+              <PropertyRef Name="ipt_id_puesto_t" />
+            </Principal>
+            <Dependent Role="iso_equipo_puesto_trabajo">
+              <PropertyRef Name="iep_id_puesto_trabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_iso_historia_clinica_iso_personal">
           <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -254,6 +652,48 @@
             </Principal>
             <Dependent Role="iso_historia_clinica">
               <PropertyRef Name="ihc_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_incidente_trabajo_iso_personal">
+          <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_incidente_trabajo" Type="Self.iso_incidente_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_personal">
+              <PropertyRef Name="ipe_id_personal" />
+            </Principal>
+            <Dependent Role="iso_incidente_trabajo">
+              <PropertyRef Name="iit_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_matriz_profesiograma_iso_cargo">
+          <End Role="iso_cargo" Type="Self.iso_cargo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_matriz_profesiograma" Type="Self.iso_matriz_profesiograma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_cargo">
+              <PropertyRef Name="icg_id_cargo" />
+            </Principal>
+            <Dependent Role="iso_matriz_profesiograma">
+              <PropertyRef Name="imp_id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_matriz_profesiograma_iso_puesto_trabajo">
+          <End Role="iso_puesto_trabajo" Type="Self.iso_puesto_trabajo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_matriz_profesiograma" Type="Self.iso_matriz_profesiograma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_puesto_trabajo">
+              <PropertyRef Name="ipt_id_puesto_t" />
+            </Principal>
+            <Dependent Role="iso_matriz_profesiograma">
+              <PropertyRef Name="imp_id_puesto_trabajo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -323,15 +763,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional">
+          <End Role="iso_tipo_riesgo_ocupacional" Type="Self.iso_tipo_riesgo_ocupacional" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_riesgo_mrl" Type="Self.iso_riesgo_mrl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_tipo_riesgo_ocupacional">
+              <PropertyRef Name="ito_id_tipo_riesgo" />
+            </Principal>
+            <Dependent Role="iso_riesgo_mrl">
+              <PropertyRef Name="irm_tipo_riesgo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional">
+          <End Role="iso_tipo_riesgo_ocupacional" Type="Self.iso_tipo_riesgo_ocupacional" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_riesgo_ocupacional" Type="Self.iso_riesgo_ocupacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_tipo_riesgo_ocupacional">
+              <PropertyRef Name="ito_id_tipo_riesgo" />
+            </Principal>
+            <Dependent Role="iso_riesgo_ocupacional">
+              <PropertyRef Name="irg_tipo_riesgo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="cbm_iso_sartStoreContainer">
+          <EntitySet Name="iso_accidente" EntityType="Self.iso_accidente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_avance_plan" EntityType="Self.iso_avance_plan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_cargo" EntityType="Self.iso_cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_cargo_puesto_t" EntityType="Self.iso_cargo_puesto_t" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_consulta_medica" EntityType="Self.iso_consulta_medica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_departamento" EntityType="Self.iso_departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_detalle_matriz_mrl" EntityType="Self.iso_detalle_matriz_mrl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_detalle_matriz_ocupacional" EntityType="Self.iso_detalle_matriz_ocupacional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_detalle_plan" EntityType="Self.iso_detalle_plan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_empresa" EntityType="Self.iso_empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_equipo_caracteristica" EntityType="Self.iso_equipo_caracteristica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_equipo_proteccion" EntityType="Self.iso_equipo_proteccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_equipo_puesto_trabajo" EntityType="Self.iso_equipo_puesto_trabajo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_historia_clinica" EntityType="Self.iso_historia_clinica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_incidente_trabajo" EntityType="Self.iso_incidente_trabajo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_matriz_mrl" EntityType="Self.iso_matriz_mrl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_matriz_profesiograma" EntityType="Self.iso_matriz_profesiograma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_matriz_riesgo_ocupacional" EntityType="Self.iso_matriz_riesgo_ocupacional" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_personal" EntityType="Self.iso_personal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_plan" EntityType="Self.iso_plan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_puesto_trabajo" EntityType="Self.iso_puesto_trabajo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_riesgo_mrl" EntityType="Self.iso_riesgo_mrl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_riesgo_ocupacional" EntityType="Self.iso_riesgo_ocupacional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_tipo_riesgo_ocupacional" EntityType="Self.iso_tipo_riesgo_ocupacional" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_iso_accidente_iso_personal" Association="Self.FK_iso_accidente_iso_personal">
+            <End Role="iso_personal" EntitySet="iso_personal" />
+            <End Role="iso_accidente" EntitySet="iso_accidente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_avance_plan_iso_detalle_plan" Association="Self.FK_iso_avance_plan_iso_detalle_plan">
+            <End Role="iso_detalle_plan" EntitySet="iso_detalle_plan" />
+            <End Role="iso_avance_plan" EntitySet="iso_avance_plan" />
+          </AssociationSet>
           <AssociationSet Name="FK_iso_cargo_puesto_t_iso_cargo" Association="Self.FK_iso_cargo_puesto_t_iso_cargo">
             <End Role="iso_cargo" EntitySet="iso_cargo" />
             <End Role="iso_cargo_puesto_t" EntitySet="iso_cargo_puesto_t" />
@@ -348,9 +840,53 @@
             <End Role="iso_empresa" EntitySet="iso_empresa" />
             <End Role="iso_departamento" EntitySet="iso_departamento" />
           </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_matriz_mrl_iso_matriz_mrl" Association="Self.FK_iso_detalle_matriz_mrl_iso_matriz_mrl">
+            <End Role="iso_matriz_mrl" EntitySet="iso_matriz_mrl" />
+            <End Role="iso_detalle_matriz_mrl" EntitySet="iso_detalle_matriz_mrl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_matriz_mrl_iso_riesgo_mrl" Association="Self.FK_iso_detalle_matriz_mrl_iso_riesgo_mrl">
+            <End Role="iso_riesgo_mrl" EntitySet="iso_riesgo_mrl" />
+            <End Role="iso_detalle_matriz_mrl" EntitySet="iso_detalle_matriz_mrl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_matriz_ocupacional_iso_matriz_riesgo_ocupacional" Association="Self.FK_iso_detalle_matriz_ocupacional_iso_matriz_riesgo_ocupacional">
+            <End Role="iso_matriz_riesgo_ocupacional" EntitySet="iso_matriz_riesgo_ocupacional" />
+            <End Role="iso_detalle_matriz_ocupacional" EntitySet="iso_detalle_matriz_ocupacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_matriz_ocupacional_iso_riesgo_ocupacional" Association="Self.FK_iso_detalle_matriz_ocupacional_iso_riesgo_ocupacional">
+            <End Role="iso_riesgo_ocupacional" EntitySet="iso_riesgo_ocupacional" />
+            <End Role="iso_detalle_matriz_ocupacional" EntitySet="iso_detalle_matriz_ocupacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_plan_iso_plan" Association="Self.FK_iso_detalle_plan_iso_plan">
+            <End Role="iso_plan" EntitySet="iso_plan" />
+            <End Role="iso_detalle_plan" EntitySet="iso_detalle_plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_equipo_caracteristica_iso_equipo_proteccion" Association="Self.FK_iso_equipo_caracteristica_iso_equipo_proteccion">
+            <End Role="iso_equipo_proteccion" EntitySet="iso_equipo_proteccion" />
+            <End Role="iso_equipo_caracteristica" EntitySet="iso_equipo_caracteristica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_equipo_puesto_trabajo_iso_equipo_proteccion" Association="Self.FK_iso_equipo_puesto_trabajo_iso_equipo_proteccion">
+            <End Role="iso_equipo_proteccion" EntitySet="iso_equipo_proteccion" />
+            <End Role="iso_equipo_puesto_trabajo" EntitySet="iso_equipo_puesto_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_equipo_puesto_trabajo_iso_puesto_trabajo" Association="Self.FK_iso_equipo_puesto_trabajo_iso_puesto_trabajo">
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+            <End Role="iso_equipo_puesto_trabajo" EntitySet="iso_equipo_puesto_trabajo" />
+          </AssociationSet>
           <AssociationSet Name="FK_iso_historia_clinica_iso_personal" Association="Self.FK_iso_historia_clinica_iso_personal">
             <End Role="iso_personal" EntitySet="iso_personal" />
             <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_incidente_trabajo_iso_personal" Association="Self.FK_iso_incidente_trabajo_iso_personal">
+            <End Role="iso_personal" EntitySet="iso_personal" />
+            <End Role="iso_incidente_trabajo" EntitySet="iso_incidente_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_matriz_profesiograma_iso_cargo" Association="Self.FK_iso_matriz_profesiograma_iso_cargo">
+            <End Role="iso_cargo" EntitySet="iso_cargo" />
+            <End Role="iso_matriz_profesiograma" EntitySet="iso_matriz_profesiograma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_matriz_profesiograma_iso_puesto_trabajo" Association="Self.FK_iso_matriz_profesiograma_iso_puesto_trabajo">
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+            <End Role="iso_matriz_profesiograma" EntitySet="iso_matriz_profesiograma" />
           </AssociationSet>
           <AssociationSet Name="FK_iso_personal_iso_cargo" Association="Self.FK_iso_personal_iso_cargo">
             <End Role="iso_cargo" EntitySet="iso_cargo" />
@@ -371,6 +907,14 @@
           <AssociationSet Name="FK_iso_personal_iso_puesto_trabajo1" Association="Self.FK_iso_personal_iso_puesto_trabajo1">
             <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
             <End Role="iso_personal" EntitySet="iso_personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional" Association="Self.FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional">
+            <End Role="iso_tipo_riesgo_ocupacional" EntitySet="iso_tipo_riesgo_ocupacional" />
+            <End Role="iso_riesgo_mrl" EntitySet="iso_riesgo_mrl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional" Association="Self.FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional">
+            <End Role="iso_tipo_riesgo_ocupacional" EntitySet="iso_tipo_riesgo_ocupacional" />
+            <End Role="iso_riesgo_ocupacional" EntitySet="iso_riesgo_ocupacional" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -395,6 +939,7 @@
           <Property Name="icg_conocimiento_adicional" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="iso_puesto_trabajo" Relationship="Self.iso_cargo_puesto_t" FromRole="iso_cargo" ToRole="iso_puesto_trabajo" />
           <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_personal_iso_cargo" FromRole="iso_cargo" ToRole="iso_personal" />
+          <NavigationProperty Name="iso_matriz_profesiograma" Relationship="cbm_iso_sart.FK_iso_matriz_profesiograma_iso_cargo" FromRole="iso_cargo" ToRole="iso_matriz_profesiograma" />
         </EntityType>
         <EntityType Name="iso_consulta_medica">
           <Key>
@@ -503,6 +1048,8 @@
           <NavigationProperty Name="iso_cargo" Relationship="Self.iso_cargo_puesto_t" FromRole="iso_puesto_trabajo" ToRole="iso_cargo" />
           <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo" FromRole="iso_puesto_trabajo" ToRole="iso_personal" />
           <NavigationProperty Name="iso_personal1" Relationship="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo1" FromRole="iso_puesto_trabajo" ToRole="iso_personal" />
+          <NavigationProperty Name="iso_matriz_profesiograma" Relationship="cbm_iso_sart.FK_iso_matriz_profesiograma_iso_puesto_trabajo" FromRole="iso_puesto_trabajo" ToRole="iso_matriz_profesiograma" />
+          <NavigationProperty Name="iso_equipo_proteccion" Relationship="cbm_iso_sart.iso_equipo_puesto_trabajo" FromRole="iso_puesto_trabajo" ToRole="iso_equipo_proteccion" />
         </EntityType>
         <Association Name="FK_iso_consulta_medica_iso_historia_clinica">
           <End Role="iso_historia_clinica" Type="Self.iso_historia_clinica" Multiplicity="1">
@@ -582,6 +1129,77 @@
             <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
             <End Role="iso_personal" EntitySet="iso_personal" />
           </AssociationSet>
+          <EntitySet Name="iso_accidente" EntityType="cbm_iso_sart.iso_accidente" />
+          <EntitySet Name="iso_avance_plan" EntityType="cbm_iso_sart.iso_avance_plan" />
+          <EntitySet Name="iso_detalle_matriz_mrl" EntityType="cbm_iso_sart.iso_detalle_matriz_mrl" />
+          <EntitySet Name="iso_detalle_matriz_ocupacional" EntityType="cbm_iso_sart.iso_detalle_matriz_ocupacional" />
+          <EntitySet Name="iso_detalle_plan" EntityType="cbm_iso_sart.iso_detalle_plan" />
+          <EntitySet Name="iso_equipo_caracteristica" EntityType="cbm_iso_sart.iso_equipo_caracteristica" />
+          <EntitySet Name="iso_equipo_proteccion" EntityType="cbm_iso_sart.iso_equipo_proteccion" />
+          <EntitySet Name="iso_incidente_trabajo" EntityType="cbm_iso_sart.iso_incidente_trabajo" />
+          <EntitySet Name="iso_matriz_mrl" EntityType="cbm_iso_sart.iso_matriz_mrl" />
+          <EntitySet Name="iso_matriz_profesiograma" EntityType="cbm_iso_sart.iso_matriz_profesiograma" />
+          <EntitySet Name="iso_matriz_riesgo_ocupacional" EntityType="cbm_iso_sart.iso_matriz_riesgo_ocupacional" />
+          <EntitySet Name="iso_plan" EntityType="cbm_iso_sart.iso_plan" />
+          <EntitySet Name="iso_riesgo_mrl" EntityType="cbm_iso_sart.iso_riesgo_mrl" />
+          <EntitySet Name="iso_riesgo_ocupacional" EntityType="cbm_iso_sart.iso_riesgo_ocupacional" />
+          <EntitySet Name="iso_tipo_riesgo_ocupacional" EntityType="cbm_iso_sart.iso_tipo_riesgo_ocupacional" />
+          <AssociationSet Name="FK_iso_accidente_iso_personal" Association="cbm_iso_sart.FK_iso_accidente_iso_personal">
+            <End Role="iso_personal" EntitySet="iso_personal" />
+            <End Role="iso_accidente" EntitySet="iso_accidente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_avance_plan_iso_detalle_plan" Association="cbm_iso_sart.FK_iso_avance_plan_iso_detalle_plan">
+            <End Role="iso_detalle_plan" EntitySet="iso_detalle_plan" />
+            <End Role="iso_avance_plan" EntitySet="iso_avance_plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_matriz_profesiograma_iso_cargo" Association="cbm_iso_sart.FK_iso_matriz_profesiograma_iso_cargo">
+            <End Role="iso_cargo" EntitySet="iso_cargo" />
+            <End Role="iso_matriz_profesiograma" EntitySet="iso_matriz_profesiograma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_matriz_mrl_iso_matriz_mrl" Association="cbm_iso_sart.FK_iso_detalle_matriz_mrl_iso_matriz_mrl">
+            <End Role="iso_matriz_mrl" EntitySet="iso_matriz_mrl" />
+            <End Role="iso_detalle_matriz_mrl" EntitySet="iso_detalle_matriz_mrl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_matriz_mrl_iso_riesgo_mrl" Association="cbm_iso_sart.FK_iso_detalle_matriz_mrl_iso_riesgo_mrl">
+            <End Role="iso_riesgo_mrl" EntitySet="iso_riesgo_mrl" />
+            <End Role="iso_detalle_matriz_mrl" EntitySet="iso_detalle_matriz_mrl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_matriz_ocupacional_iso_matriz_riesgo_ocupacional" Association="cbm_iso_sart.FK_iso_detalle_matriz_ocupacional_iso_matriz_riesgo_ocupacional">
+            <End Role="iso_matriz_riesgo_ocupacional" EntitySet="iso_matriz_riesgo_ocupacional" />
+            <End Role="iso_detalle_matriz_ocupacional" EntitySet="iso_detalle_matriz_ocupacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_matriz_ocupacional_iso_riesgo_ocupacional" Association="cbm_iso_sart.FK_iso_detalle_matriz_ocupacional_iso_riesgo_ocupacional">
+            <End Role="iso_riesgo_ocupacional" EntitySet="iso_riesgo_ocupacional" />
+            <End Role="iso_detalle_matriz_ocupacional" EntitySet="iso_detalle_matriz_ocupacional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_detalle_plan_iso_plan" Association="cbm_iso_sart.FK_iso_detalle_plan_iso_plan">
+            <End Role="iso_plan" EntitySet="iso_plan" />
+            <End Role="iso_detalle_plan" EntitySet="iso_detalle_plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_equipo_caracteristica_iso_equipo_proteccion" Association="cbm_iso_sart.FK_iso_equipo_caracteristica_iso_equipo_proteccion">
+            <End Role="iso_equipo_proteccion" EntitySet="iso_equipo_proteccion" />
+            <End Role="iso_equipo_caracteristica" EntitySet="iso_equipo_caracteristica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_incidente_trabajo_iso_personal" Association="cbm_iso_sart.FK_iso_incidente_trabajo_iso_personal">
+            <End Role="iso_personal" EntitySet="iso_personal" />
+            <End Role="iso_incidente_trabajo" EntitySet="iso_incidente_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_matriz_profesiograma_iso_puesto_trabajo" Association="cbm_iso_sart.FK_iso_matriz_profesiograma_iso_puesto_trabajo">
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+            <End Role="iso_matriz_profesiograma" EntitySet="iso_matriz_profesiograma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional" Association="cbm_iso_sart.FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional">
+            <End Role="iso_tipo_riesgo_ocupacional" EntitySet="iso_tipo_riesgo_ocupacional" />
+            <End Role="iso_riesgo_mrl" EntitySet="iso_riesgo_mrl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional" Association="cbm_iso_sart.FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional">
+            <End Role="iso_tipo_riesgo_ocupacional" EntitySet="iso_tipo_riesgo_ocupacional" />
+            <End Role="iso_riesgo_ocupacional" EntitySet="iso_riesgo_ocupacional" />
+          </AssociationSet>
+          <AssociationSet Name="iso_equipo_puesto_trabajo" Association="cbm_iso_sart.iso_equipo_puesto_trabajo">
+            <End Role="iso_equipo_proteccion" EntitySet="iso_equipo_proteccion" />
+            <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="iso_personal">
           <Key>
@@ -645,6 +1263,8 @@
           <NavigationProperty Name="iso_historia_clinica" Relationship="cbm_iso_sart.FK_iso_historia_clinica_iso_personal" FromRole="iso_personal" ToRole="iso_historia_clinica" />
           <NavigationProperty Name="iso_puesto_trabajo" Relationship="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo" FromRole="iso_personal" ToRole="iso_puesto_trabajo" />
           <NavigationProperty Name="iso_puesto_trabajo1" Relationship="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo1" FromRole="iso_personal" ToRole="iso_puesto_trabajo" />
+          <NavigationProperty Name="iso_accidente" Relationship="cbm_iso_sart.FK_iso_accidente_iso_personal" FromRole="iso_personal" ToRole="iso_accidente" />
+          <NavigationProperty Name="iso_incidente_trabajo" Relationship="cbm_iso_sart.FK_iso_incidente_trabajo_iso_personal" FromRole="iso_personal" ToRole="iso_incidente_trabajo" />
         </EntityType>
         <Association Name="FK_iso_personal_iso_cargo">
           <End Type="cbm_iso_sart.iso_cargo" Role="iso_cargo" Multiplicity="0..1">
@@ -725,6 +1345,465 @@
               <PropertyRef Name="ipe_id_puesto_trabajo" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="iso_accidente">
+          <Key>
+            <PropertyRef Name="iac_id_accidente" />
+          </Key>
+          <Property Name="iac_id_accidente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iac_id_personal" Type="Int32" />
+          <Property Name="iac_cod_empresa" Type="Int16" />
+          <Property Name="iac_dia_accidente" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="iac_fecha_accidente" Type="DateTime" Precision="3" />
+          <Property Name="iac_hora_accidente" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="iac_sitio_accidente" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="iac_descrip_accidente" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="iac_lesiones_accidente" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="iac_experiencia_trab" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="iac_entrenamiento_trab" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="iac_produjo_lesion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="iac_falla_accidente" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="iac_nombres_testigos" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="iac_persona_atendio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="iac_traslado_accidentado" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_accidente_iso_personal" FromRole="iso_accidente" ToRole="iso_personal" />
+        </EntityType>
+        <EntityType Name="iso_avance_plan">
+          <Key>
+            <PropertyRef Name="iap_id_avance_plan" />
+            <PropertyRef Name="iap_id_detalle_plan" />
+            <PropertyRef Name="iap_id_plan" />
+          </Key>
+          <Property Name="iap_id_avance_plan" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iap_fecha_avance" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="iap_id_detalle_plan" Type="Int32" Nullable="false" />
+          <Property Name="iap_id_plan" Type="Int32" Nullable="false" />
+          <Property Name="iap_detalle_avance" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="iap_usuario_avance" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iap_porcetanje_avance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="iap_cantidad_avance" Type="Double" />
+          <Property Name="iap_horas_avance" Type="Double" />
+          <Property Name="iap_motivo_atraso" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_detalle_plan" Relationship="cbm_iso_sart.FK_iso_avance_plan_iso_detalle_plan" FromRole="iso_avance_plan" ToRole="iso_detalle_plan" />
+        </EntityType>
+        <EntityType Name="iso_detalle_matriz_mrl">
+          <Key>
+            <PropertyRef Name="idm_id_matriz_mrl" />
+            <PropertyRef Name="idm_id_riesgo_mrl" />
+            <PropertyRef Name="idm_id_tipo_riesgo_mrl" />
+          </Key>
+          <Property Name="idm_id_matriz_mrl" Type="Int32" Nullable="false" />
+          <Property Name="idm_id_riesgo_mrl" Type="Int32" Nullable="false" />
+          <Property Name="idm_id_tipo_riesgo_mrl" Type="Int32" Nullable="false" />
+          <Property Name="idm_probabilidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idm_consecuencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idm_exposicion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idm_resultado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idm_valoracion_gp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idm_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_matriz_mrl" Relationship="cbm_iso_sart.FK_iso_detalle_matriz_mrl_iso_matriz_mrl" FromRole="iso_detalle_matriz_mrl" ToRole="iso_matriz_mrl" />
+          <NavigationProperty Name="iso_riesgo_mrl" Relationship="cbm_iso_sart.FK_iso_detalle_matriz_mrl_iso_riesgo_mrl" FromRole="iso_detalle_matriz_mrl" ToRole="iso_riesgo_mrl" />
+        </EntityType>
+        <EntityType Name="iso_detalle_matriz_ocupacional">
+          <Key>
+            <PropertyRef Name="idm_id_matriz_ocupacional" />
+            <PropertyRef Name="idm_id_riesgo_ocupacional" />
+            <PropertyRef Name="idm_tipo_riesgo_ocupacional" />
+          </Key>
+          <Property Name="idm_id_matriz_ocupacional" Type="Int32" Nullable="false" />
+          <Property Name="idm_id_riesgo_ocupacional" Type="Int32" Nullable="false" />
+          <Property Name="idm_tipo_riesgo_ocupacional" Type="Int32" Nullable="false" />
+          <Property Name="idm_probabilidad" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="idm_consecuencia" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="idm_estimacion" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_matriz_riesgo_ocupacional" Relationship="cbm_iso_sart.FK_iso_detalle_matriz_ocupacional_iso_matriz_riesgo_ocupacional" FromRole="iso_detalle_matriz_ocupacional" ToRole="iso_matriz_riesgo_ocupacional" />
+          <NavigationProperty Name="iso_riesgo_ocupacional" Relationship="cbm_iso_sart.FK_iso_detalle_matriz_ocupacional_iso_riesgo_ocupacional" FromRole="iso_detalle_matriz_ocupacional" ToRole="iso_riesgo_ocupacional" />
+        </EntityType>
+        <EntityType Name="iso_detalle_plan">
+          <Key>
+            <PropertyRef Name="idp_id_detalle_plan" />
+            <PropertyRef Name="idp_id_plan" />
+          </Key>
+          <Property Name="idp_id_detalle_plan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idp_id_plan" Type="Int32" Nullable="false" />
+          <Property Name="idp_numero_plan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_tarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="idp_observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="idp_fecha_comienzo" Type="DateTime" Precision="3" />
+          <Property Name="idp_fecha_fin" Type="DateTime" Precision="3" />
+          <Property Name="idp_duracion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_costo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_porcentaje" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_id_plan_padre" Type="Int32" />
+          <Property Name="idp_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="idp_fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="idp_fecha_modificacion" Type="DateTime" Precision="3" />
+          <Property Name="idp_verificar_accion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="idp_unidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_cantidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_tiempoded" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_tiemponeto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_avancep" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_objetivo_estrategico" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="idp_entregable" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="idp_id_departamento" Type="Int32" />
+          <Property Name="idp_costo_ejecutado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idp_id_proceso" Type="Int32" />
+          <Property Name="idp_peso" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="iso_avance_plan" Relationship="cbm_iso_sart.FK_iso_avance_plan_iso_detalle_plan" FromRole="iso_detalle_plan" ToRole="iso_avance_plan" />
+          <NavigationProperty Name="iso_plan" Relationship="cbm_iso_sart.FK_iso_detalle_plan_iso_plan" FromRole="iso_detalle_plan" ToRole="iso_plan" />
+        </EntityType>
+        <EntityType Name="iso_equipo_caracteristica">
+          <Key>
+            <PropertyRef Name="iec_id_equipo" />
+            <PropertyRef Name="iec_id_caracteristica" />
+          </Key>
+          <Property Name="iec_id_equipo" Type="Int32" Nullable="false" />
+          <Property Name="iec_id_caracteristica" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="iso_equipo_proteccion" Relationship="cbm_iso_sart.FK_iso_equipo_caracteristica_iso_equipo_proteccion" FromRole="iso_equipo_caracteristica" ToRole="iso_equipo_proteccion" />
+        </EntityType>
+        <EntityType Name="iso_equipo_proteccion">
+          <Key>
+            <PropertyRef Name="iep_id_equipo_p" />
+          </Key>
+          <Property Name="iep_id_equipo_p" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iep_nombre_equipo_p" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="iep_ubic_imagen_equipo_p" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="iep_imagen_equipo_p" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="iep_stock" Type="Int32" />
+          <NavigationProperty Name="iso_equipo_caracteristica" Relationship="cbm_iso_sart.FK_iso_equipo_caracteristica_iso_equipo_proteccion" FromRole="iso_equipo_proteccion" ToRole="iso_equipo_caracteristica" />
+          <NavigationProperty Name="iso_puesto_trabajo" Relationship="cbm_iso_sart.iso_equipo_puesto_trabajo" FromRole="iso_equipo_proteccion" ToRole="iso_puesto_trabajo" />
+        </EntityType>
+        <EntityType Name="iso_incidente_trabajo">
+          <Key>
+            <PropertyRef Name="iit_id_incidente" />
+          </Key>
+          <Property Name="iit_id_personal" Type="Int32" Nullable="false" />
+          <Property Name="iit_id_incidente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iit_fecha_incidente" Type="DateTime" Precision="3" />
+          <Property Name="iit_descripcion_incid" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="iit_tratamiento_rec" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="iit_tiempo_reposo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="iit_lugar" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="iit_hora" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_incidente_trabajo_iso_personal" FromRole="iso_incidente_trabajo" ToRole="iso_personal" />
+        </EntityType>
+        <EntityType Name="iso_matriz_mrl">
+          <Key>
+            <PropertyRef Name="imr_id_matriz_mrl" />
+          </Key>
+          <Property Name="imr_id_matriz_mrl" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imr_localizacion_mrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="imr_proceso_mrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="imr_sub_proceso_mrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="imr_cargo_mrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="imr_puesto_trabajo_mrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="imr_nro_tabajadores_mrl" Type="Int64" />
+          <Property Name="imr_jefe_area_mrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="imr_fecha_evaluacion_mrl" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="imr_descripcion_mrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="imr_id_puesto_t_mrl" Type="Int64" />
+          <Property Name="imr_ubicacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_detalle_matriz_mrl" Relationship="cbm_iso_sart.FK_iso_detalle_matriz_mrl_iso_matriz_mrl" FromRole="iso_matriz_mrl" ToRole="iso_detalle_matriz_mrl" />
+        </EntityType>
+        <EntityType Name="iso_matriz_profesiograma">
+          <Key>
+            <PropertyRef Name="imp_id_matrizp" />
+            <PropertyRef Name="imp_id_cargo" />
+            <PropertyRef Name="imp_id_area" />
+            <PropertyRef Name="imp_id_puesto_trabajo" />
+          </Key>
+          <Property Name="imp_id_matrizp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imp_id_cargo" Type="Int32" Nullable="false" />
+          <Property Name="imp_id_area" Type="Int32" Nullable="false" />
+          <Property Name="imp_id_puesto_trabajo" Type="Int32" Nullable="false" />
+          <Property Name="imp_formacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="imp_experiencia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="imp_aptitudes" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="imp_actitudes" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="imp_tareas_funciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="imp_herramientas" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imp_exigencias" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="imp_competencias" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="imp_capacitacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="imp_horario_trabajo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="imp_fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="imp_preocupacional" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="imp_per_reintegro" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="imp_reintegro" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="imp_especial" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="imp_salida" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="imp_absoluta" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="imp_relativa" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="imp_edad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="imp_genero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="imp_criterios_exclusion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="imp_conocimientos_ad" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_cargo" Relationship="cbm_iso_sart.FK_iso_matriz_profesiograma_iso_cargo" FromRole="iso_matriz_profesiograma" ToRole="iso_cargo" />
+          <NavigationProperty Name="iso_puesto_trabajo" Relationship="cbm_iso_sart.FK_iso_matriz_profesiograma_iso_puesto_trabajo" FromRole="iso_matriz_profesiograma" ToRole="iso_puesto_trabajo" />
+        </EntityType>
+        <EntityType Name="iso_matriz_riesgo_ocupacional">
+          <Key>
+            <PropertyRef Name="imo_id_matriz" />
+          </Key>
+          <Property Name="imo_id_matriz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imo_nombre_matriz" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="imo_descrip_matriz" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imo_fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="imo_elaborado_por" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="imo_id_personal" Type="Int32" />
+          <Property Name="imo_area_matriz" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imo_proceso_matriz" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imo_actividad_matriz" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imo_cargo_personal" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imo_puesto_trabajo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imo_subproceso_matriz" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imo_tiempo_exposicion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="imo_numero_trabajadores" Type="Int32" />
+          <NavigationProperty Name="iso_detalle_matriz_ocupacional" Relationship="cbm_iso_sart.FK_iso_detalle_matriz_ocupacional_iso_matriz_riesgo_ocupacional" FromRole="iso_matriz_riesgo_ocupacional" ToRole="iso_detalle_matriz_ocupacional" />
+        </EntityType>
+        <EntityType Name="iso_plan">
+          <Key>
+            <PropertyRef Name="ipl_id_plan" />
+          </Key>
+          <Property Name="ipl_id_plan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ipl_tipo_plan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipl_nombre_plan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ipl_descripcion_plan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ipl_fecha_creacion_plan" Type="DateTime" Precision="3" />
+          <Property Name="ipl_creador_plan" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ipl_tolerancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipl_responsable" Type="Int32" />
+          <Property Name="ipl_codigo_plan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipl_id_plan_padre" Type="Int32" />
+          <Property Name="ipl_tipo_proyecto" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ipl_objetivo_estrategico" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ipl_id_area" Type="Int32" />
+          <NavigationProperty Name="iso_detalle_plan" Relationship="cbm_iso_sart.FK_iso_detalle_plan_iso_plan" FromRole="iso_plan" ToRole="iso_detalle_plan" />
+        </EntityType>
+        <EntityType Name="iso_riesgo_mrl">
+          <Key>
+            <PropertyRef Name="irm_id_riesgo" />
+            <PropertyRef Name="irm_tipo_riesgo" />
+          </Key>
+          <Property Name="irm_id_riesgo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="irm_tipo_riesgo" Type="Int32" Nullable="false" />
+          <Property Name="irm_nombre_riesgo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="irm_descripcion_riesgo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="irm_codigo_riesgo" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_detalle_matriz_mrl" Relationship="cbm_iso_sart.FK_iso_detalle_matriz_mrl_iso_riesgo_mrl" FromRole="iso_riesgo_mrl" ToRole="iso_detalle_matriz_mrl" />
+          <NavigationProperty Name="iso_tipo_riesgo_ocupacional" Relationship="cbm_iso_sart.FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional" FromRole="iso_riesgo_mrl" ToRole="iso_tipo_riesgo_ocupacional" />
+        </EntityType>
+        <EntityType Name="iso_riesgo_ocupacional">
+          <Key>
+            <PropertyRef Name="irg_id_riesgo" />
+            <PropertyRef Name="irg_tipo_riesgo" />
+          </Key>
+          <Property Name="irg_id_riesgo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="irg_tipo_riesgo" Type="Int32" Nullable="false" />
+          <Property Name="irg_nombre_riesgo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_detalle_matriz_ocupacional" Relationship="cbm_iso_sart.FK_iso_detalle_matriz_ocupacional_iso_riesgo_ocupacional" FromRole="iso_riesgo_ocupacional" ToRole="iso_detalle_matriz_ocupacional" />
+          <NavigationProperty Name="iso_tipo_riesgo_ocupacional" Relationship="cbm_iso_sart.FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional" FromRole="iso_riesgo_ocupacional" ToRole="iso_tipo_riesgo_ocupacional" />
+        </EntityType>
+        <EntityType Name="iso_tipo_riesgo_ocupacional">
+          <Key>
+            <PropertyRef Name="ito_id_tipo_riesgo" />
+          </Key>
+          <Property Name="ito_id_tipo_riesgo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ito_nombre_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_riesgo_mrl" Relationship="cbm_iso_sart.FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional" FromRole="iso_tipo_riesgo_ocupacional" ToRole="iso_riesgo_mrl" />
+          <NavigationProperty Name="iso_riesgo_ocupacional" Relationship="cbm_iso_sart.FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional" FromRole="iso_tipo_riesgo_ocupacional" ToRole="iso_riesgo_ocupacional" />
+        </EntityType>
+        <Association Name="FK_iso_accidente_iso_personal">
+          <End Type="cbm_iso_sart.iso_personal" Role="iso_personal" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_accidente" Role="iso_accidente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_personal">
+              <PropertyRef Name="ipe_id_personal" />
+            </Principal>
+            <Dependent Role="iso_accidente">
+              <PropertyRef Name="iac_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_avance_plan_iso_detalle_plan">
+          <End Type="cbm_iso_sart.iso_detalle_plan" Role="iso_detalle_plan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_avance_plan" Role="iso_avance_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_detalle_plan">
+              <PropertyRef Name="idp_id_detalle_plan" />
+              <PropertyRef Name="idp_id_plan" />
+            </Principal>
+            <Dependent Role="iso_avance_plan">
+              <PropertyRef Name="iap_id_detalle_plan" />
+              <PropertyRef Name="iap_id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_matriz_profesiograma_iso_cargo">
+          <End Type="cbm_iso_sart.iso_cargo" Role="iso_cargo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_matriz_profesiograma" Role="iso_matriz_profesiograma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_cargo">
+              <PropertyRef Name="icg_id_cargo" />
+            </Principal>
+            <Dependent Role="iso_matriz_profesiograma">
+              <PropertyRef Name="imp_id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_detalle_matriz_mrl_iso_matriz_mrl">
+          <End Type="cbm_iso_sart.iso_matriz_mrl" Role="iso_matriz_mrl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_detalle_matriz_mrl" Role="iso_detalle_matriz_mrl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_matriz_mrl">
+              <PropertyRef Name="imr_id_matriz_mrl" />
+            </Principal>
+            <Dependent Role="iso_detalle_matriz_mrl">
+              <PropertyRef Name="idm_id_matriz_mrl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_detalle_matriz_mrl_iso_riesgo_mrl">
+          <End Type="cbm_iso_sart.iso_riesgo_mrl" Role="iso_riesgo_mrl" Multiplicity="1" />
+          <End Type="cbm_iso_sart.iso_detalle_matriz_mrl" Role="iso_detalle_matriz_mrl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_riesgo_mrl">
+              <PropertyRef Name="irm_id_riesgo" />
+              <PropertyRef Name="irm_tipo_riesgo" />
+            </Principal>
+            <Dependent Role="iso_detalle_matriz_mrl">
+              <PropertyRef Name="idm_id_riesgo_mrl" />
+              <PropertyRef Name="idm_id_tipo_riesgo_mrl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_detalle_matriz_ocupacional_iso_matriz_riesgo_ocupacional">
+          <End Type="cbm_iso_sart.iso_matriz_riesgo_ocupacional" Role="iso_matriz_riesgo_ocupacional" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_detalle_matriz_ocupacional" Role="iso_detalle_matriz_ocupacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_matriz_riesgo_ocupacional">
+              <PropertyRef Name="imo_id_matriz" />
+            </Principal>
+            <Dependent Role="iso_detalle_matriz_ocupacional">
+              <PropertyRef Name="idm_id_matriz_ocupacional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_detalle_matriz_ocupacional_iso_riesgo_ocupacional">
+          <End Type="cbm_iso_sart.iso_riesgo_ocupacional" Role="iso_riesgo_ocupacional" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_detalle_matriz_ocupacional" Role="iso_detalle_matriz_ocupacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_riesgo_ocupacional">
+              <PropertyRef Name="irg_id_riesgo" />
+              <PropertyRef Name="irg_tipo_riesgo" />
+            </Principal>
+            <Dependent Role="iso_detalle_matriz_ocupacional">
+              <PropertyRef Name="idm_id_riesgo_ocupacional" />
+              <PropertyRef Name="idm_tipo_riesgo_ocupacional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_detalle_plan_iso_plan">
+          <End Type="cbm_iso_sart.iso_plan" Role="iso_plan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_detalle_plan" Role="iso_detalle_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_plan">
+              <PropertyRef Name="ipl_id_plan" />
+            </Principal>
+            <Dependent Role="iso_detalle_plan">
+              <PropertyRef Name="idp_id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_equipo_caracteristica_iso_equipo_proteccion">
+          <End Type="cbm_iso_sart.iso_equipo_proteccion" Role="iso_equipo_proteccion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_equipo_caracteristica" Role="iso_equipo_caracteristica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_equipo_proteccion">
+              <PropertyRef Name="iep_id_equipo_p" />
+            </Principal>
+            <Dependent Role="iso_equipo_caracteristica">
+              <PropertyRef Name="iec_id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_incidente_trabajo_iso_personal">
+          <End Type="cbm_iso_sart.iso_personal" Role="iso_personal" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_incidente_trabajo" Role="iso_incidente_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_personal">
+              <PropertyRef Name="ipe_id_personal" />
+            </Principal>
+            <Dependent Role="iso_incidente_trabajo">
+              <PropertyRef Name="iit_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_matriz_profesiograma_iso_puesto_trabajo">
+          <End Type="cbm_iso_sart.iso_puesto_trabajo" Role="iso_puesto_trabajo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_matriz_profesiograma" Role="iso_matriz_profesiograma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_puesto_trabajo">
+              <PropertyRef Name="ipt_id_puesto_t" />
+            </Principal>
+            <Dependent Role="iso_matriz_profesiograma">
+              <PropertyRef Name="imp_id_puesto_trabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional">
+          <End Type="cbm_iso_sart.iso_tipo_riesgo_ocupacional" Role="iso_tipo_riesgo_ocupacional" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_riesgo_mrl" Role="iso_riesgo_mrl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_tipo_riesgo_ocupacional">
+              <PropertyRef Name="ito_id_tipo_riesgo" />
+            </Principal>
+            <Dependent Role="iso_riesgo_mrl">
+              <PropertyRef Name="irm_tipo_riesgo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional">
+          <End Type="cbm_iso_sart.iso_tipo_riesgo_ocupacional" Role="iso_tipo_riesgo_ocupacional" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_riesgo_ocupacional" Role="iso_riesgo_ocupacional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_tipo_riesgo_ocupacional">
+              <PropertyRef Name="ito_id_tipo_riesgo" />
+            </Principal>
+            <Dependent Role="iso_riesgo_ocupacional">
+              <PropertyRef Name="irg_tipo_riesgo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="iso_equipo_puesto_trabajo">
+          <End Type="cbm_iso_sart.iso_equipo_proteccion" Role="iso_equipo_proteccion" Multiplicity="*" />
+          <End Type="cbm_iso_sart.iso_puesto_trabajo" Role="iso_puesto_trabajo" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -916,6 +1995,262 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="iso_accidente">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_accidente">
+              <MappingFragment StoreEntitySet="iso_accidente">
+                <ScalarProperty Name="iac_traslado_accidentado" ColumnName="iac_traslado_accidentado" />
+                <ScalarProperty Name="iac_persona_atendio" ColumnName="iac_persona_atendio" />
+                <ScalarProperty Name="iac_nombres_testigos" ColumnName="iac_nombres_testigos" />
+                <ScalarProperty Name="iac_falla_accidente" ColumnName="iac_falla_accidente" />
+                <ScalarProperty Name="iac_produjo_lesion" ColumnName="iac_produjo_lesion" />
+                <ScalarProperty Name="iac_entrenamiento_trab" ColumnName="iac_entrenamiento_trab" />
+                <ScalarProperty Name="iac_experiencia_trab" ColumnName="iac_experiencia_trab" />
+                <ScalarProperty Name="iac_lesiones_accidente" ColumnName="iac_lesiones_accidente" />
+                <ScalarProperty Name="iac_descrip_accidente" ColumnName="iac_descrip_accidente" />
+                <ScalarProperty Name="iac_sitio_accidente" ColumnName="iac_sitio_accidente" />
+                <ScalarProperty Name="iac_hora_accidente" ColumnName="iac_hora_accidente" />
+                <ScalarProperty Name="iac_fecha_accidente" ColumnName="iac_fecha_accidente" />
+                <ScalarProperty Name="iac_dia_accidente" ColumnName="iac_dia_accidente" />
+                <ScalarProperty Name="iac_cod_empresa" ColumnName="iac_cod_empresa" />
+                <ScalarProperty Name="iac_id_personal" ColumnName="iac_id_personal" />
+                <ScalarProperty Name="iac_id_accidente" ColumnName="iac_id_accidente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_avance_plan">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_avance_plan">
+              <MappingFragment StoreEntitySet="iso_avance_plan">
+                <ScalarProperty Name="iap_motivo_atraso" ColumnName="iap_motivo_atraso" />
+                <ScalarProperty Name="iap_horas_avance" ColumnName="iap_horas_avance" />
+                <ScalarProperty Name="iap_cantidad_avance" ColumnName="iap_cantidad_avance" />
+                <ScalarProperty Name="iap_porcetanje_avance" ColumnName="iap_porcetanje_avance" />
+                <ScalarProperty Name="iap_usuario_avance" ColumnName="iap_usuario_avance" />
+                <ScalarProperty Name="iap_detalle_avance" ColumnName="iap_detalle_avance" />
+                <ScalarProperty Name="iap_id_plan" ColumnName="iap_id_plan" />
+                <ScalarProperty Name="iap_id_detalle_plan" ColumnName="iap_id_detalle_plan" />
+                <ScalarProperty Name="iap_fecha_avance" ColumnName="iap_fecha_avance" />
+                <ScalarProperty Name="iap_id_avance_plan" ColumnName="iap_id_avance_plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_detalle_matriz_mrl">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_detalle_matriz_mrl">
+              <MappingFragment StoreEntitySet="iso_detalle_matriz_mrl">
+                <ScalarProperty Name="idm_descripcion" ColumnName="idm_descripcion" />
+                <ScalarProperty Name="idm_valoracion_gp" ColumnName="idm_valoracion_gp" />
+                <ScalarProperty Name="idm_resultado" ColumnName="idm_resultado" />
+                <ScalarProperty Name="idm_exposicion" ColumnName="idm_exposicion" />
+                <ScalarProperty Name="idm_consecuencia" ColumnName="idm_consecuencia" />
+                <ScalarProperty Name="idm_probabilidad" ColumnName="idm_probabilidad" />
+                <ScalarProperty Name="idm_id_tipo_riesgo_mrl" ColumnName="idm_id_tipo_riesgo_mrl" />
+                <ScalarProperty Name="idm_id_riesgo_mrl" ColumnName="idm_id_riesgo_mrl" />
+                <ScalarProperty Name="idm_id_matriz_mrl" ColumnName="idm_id_matriz_mrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_detalle_matriz_ocupacional">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_detalle_matriz_ocupacional">
+              <MappingFragment StoreEntitySet="iso_detalle_matriz_ocupacional">
+                <ScalarProperty Name="idm_estimacion" ColumnName="idm_estimacion" />
+                <ScalarProperty Name="idm_consecuencia" ColumnName="idm_consecuencia" />
+                <ScalarProperty Name="idm_probabilidad" ColumnName="idm_probabilidad" />
+                <ScalarProperty Name="idm_tipo_riesgo_ocupacional" ColumnName="idm_tipo_riesgo_ocupacional" />
+                <ScalarProperty Name="idm_id_riesgo_ocupacional" ColumnName="idm_id_riesgo_ocupacional" />
+                <ScalarProperty Name="idm_id_matriz_ocupacional" ColumnName="idm_id_matriz_ocupacional" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_detalle_plan">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_detalle_plan">
+              <MappingFragment StoreEntitySet="iso_detalle_plan">
+                <ScalarProperty Name="idp_peso" ColumnName="idp_peso" />
+                <ScalarProperty Name="idp_id_proceso" ColumnName="idp_id_proceso" />
+                <ScalarProperty Name="idp_costo_ejecutado" ColumnName="idp_costo_ejecutado" />
+                <ScalarProperty Name="idp_id_departamento" ColumnName="idp_id_departamento" />
+                <ScalarProperty Name="idp_entregable" ColumnName="idp_entregable" />
+                <ScalarProperty Name="idp_objetivo_estrategico" ColumnName="idp_objetivo_estrategico" />
+                <ScalarProperty Name="idp_avancep" ColumnName="idp_avancep" />
+                <ScalarProperty Name="idp_tiemponeto" ColumnName="idp_tiemponeto" />
+                <ScalarProperty Name="idp_tiempoded" ColumnName="idp_tiempoded" />
+                <ScalarProperty Name="idp_cantidad" ColumnName="idp_cantidad" />
+                <ScalarProperty Name="idp_unidad" ColumnName="idp_unidad" />
+                <ScalarProperty Name="idp_verificar_accion" ColumnName="idp_verificar_accion" />
+                <ScalarProperty Name="idp_fecha_modificacion" ColumnName="idp_fecha_modificacion" />
+                <ScalarProperty Name="idp_fecha_creacion" ColumnName="idp_fecha_creacion" />
+                <ScalarProperty Name="idp_descripcion" ColumnName="idp_descripcion" />
+                <ScalarProperty Name="idp_id_plan_padre" ColumnName="idp_id_plan_padre" />
+                <ScalarProperty Name="idp_estado" ColumnName="idp_estado" />
+                <ScalarProperty Name="idp_porcentaje" ColumnName="idp_porcentaje" />
+                <ScalarProperty Name="idp_costo" ColumnName="idp_costo" />
+                <ScalarProperty Name="idp_duracion" ColumnName="idp_duracion" />
+                <ScalarProperty Name="idp_fecha_fin" ColumnName="idp_fecha_fin" />
+                <ScalarProperty Name="idp_fecha_comienzo" ColumnName="idp_fecha_comienzo" />
+                <ScalarProperty Name="idp_observacion" ColumnName="idp_observacion" />
+                <ScalarProperty Name="idp_tarea" ColumnName="idp_tarea" />
+                <ScalarProperty Name="idp_numero_plan" ColumnName="idp_numero_plan" />
+                <ScalarProperty Name="idp_id_plan" ColumnName="idp_id_plan" />
+                <ScalarProperty Name="idp_id_detalle_plan" ColumnName="idp_id_detalle_plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_equipo_caracteristica">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_equipo_caracteristica">
+              <MappingFragment StoreEntitySet="iso_equipo_caracteristica">
+                <ScalarProperty Name="iec_id_caracteristica" ColumnName="iec_id_caracteristica" />
+                <ScalarProperty Name="iec_id_equipo" ColumnName="iec_id_equipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_equipo_proteccion">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_equipo_proteccion">
+              <MappingFragment StoreEntitySet="iso_equipo_proteccion">
+                <ScalarProperty Name="iep_stock" ColumnName="iep_stock" />
+                <ScalarProperty Name="iep_imagen_equipo_p" ColumnName="iep_imagen_equipo_p" />
+                <ScalarProperty Name="iep_ubic_imagen_equipo_p" ColumnName="iep_ubic_imagen_equipo_p" />
+                <ScalarProperty Name="iep_nombre_equipo_p" ColumnName="iep_nombre_equipo_p" />
+                <ScalarProperty Name="iep_id_equipo_p" ColumnName="iep_id_equipo_p" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_incidente_trabajo">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_incidente_trabajo">
+              <MappingFragment StoreEntitySet="iso_incidente_trabajo">
+                <ScalarProperty Name="iit_hora" ColumnName="iit_hora" />
+                <ScalarProperty Name="iit_lugar" ColumnName="iit_lugar" />
+                <ScalarProperty Name="iit_tiempo_reposo" ColumnName="iit_tiempo_reposo" />
+                <ScalarProperty Name="iit_tratamiento_rec" ColumnName="iit_tratamiento_rec" />
+                <ScalarProperty Name="iit_descripcion_incid" ColumnName="iit_descripcion_incid" />
+                <ScalarProperty Name="iit_fecha_incidente" ColumnName="iit_fecha_incidente" />
+                <ScalarProperty Name="iit_id_incidente" ColumnName="iit_id_incidente" />
+                <ScalarProperty Name="iit_id_personal" ColumnName="iit_id_personal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_matriz_mrl">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_matriz_mrl">
+              <MappingFragment StoreEntitySet="iso_matriz_mrl">
+                <ScalarProperty Name="imr_ubicacion" ColumnName="imr_ubicacion" />
+                <ScalarProperty Name="imr_id_puesto_t_mrl" ColumnName="imr_id_puesto_t_mrl" />
+                <ScalarProperty Name="imr_descripcion_mrl" ColumnName="imr_descripcion_mrl" />
+                <ScalarProperty Name="imr_fecha_evaluacion_mrl" ColumnName="imr_fecha_evaluacion_mrl" />
+                <ScalarProperty Name="imr_jefe_area_mrl" ColumnName="imr_jefe_area_mrl" />
+                <ScalarProperty Name="imr_nro_tabajadores_mrl" ColumnName="imr_nro_tabajadores_mrl" />
+                <ScalarProperty Name="imr_puesto_trabajo_mrl" ColumnName="imr_puesto_trabajo_mrl" />
+                <ScalarProperty Name="imr_cargo_mrl" ColumnName="imr_cargo_mrl" />
+                <ScalarProperty Name="imr_sub_proceso_mrl" ColumnName="imr_sub_proceso_mrl" />
+                <ScalarProperty Name="imr_proceso_mrl" ColumnName="imr_proceso_mrl" />
+                <ScalarProperty Name="imr_localizacion_mrl" ColumnName="imr_localizacion_mrl" />
+                <ScalarProperty Name="imr_id_matriz_mrl" ColumnName="imr_id_matriz_mrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_matriz_profesiograma">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_matriz_profesiograma">
+              <MappingFragment StoreEntitySet="iso_matriz_profesiograma">
+                <ScalarProperty Name="imp_conocimientos_ad" ColumnName="imp_conocimientos_ad" />
+                <ScalarProperty Name="imp_criterios_exclusion" ColumnName="imp_criterios_exclusion" />
+                <ScalarProperty Name="imp_genero" ColumnName="imp_genero" />
+                <ScalarProperty Name="imp_edad" ColumnName="imp_edad" />
+                <ScalarProperty Name="imp_relativa" ColumnName="imp_relativa" />
+                <ScalarProperty Name="imp_absoluta" ColumnName="imp_absoluta" />
+                <ScalarProperty Name="imp_salida" ColumnName="imp_salida" />
+                <ScalarProperty Name="imp_especial" ColumnName="imp_especial" />
+                <ScalarProperty Name="imp_reintegro" ColumnName="imp_reintegro" />
+                <ScalarProperty Name="imp_per_reintegro" ColumnName="imp_per_reintegro" />
+                <ScalarProperty Name="imp_preocupacional" ColumnName="imp_preocupacional" />
+                <ScalarProperty Name="imp_fecha_creacion" ColumnName="imp_fecha_creacion" />
+                <ScalarProperty Name="imp_horario_trabajo" ColumnName="imp_horario_trabajo" />
+                <ScalarProperty Name="imp_capacitacion" ColumnName="imp_capacitacion" />
+                <ScalarProperty Name="imp_competencias" ColumnName="imp_competencias" />
+                <ScalarProperty Name="imp_exigencias" ColumnName="imp_exigencias" />
+                <ScalarProperty Name="imp_herramientas" ColumnName="imp_herramientas" />
+                <ScalarProperty Name="imp_tareas_funciones" ColumnName="imp_tareas_funciones" />
+                <ScalarProperty Name="imp_actitudes" ColumnName="imp_actitudes" />
+                <ScalarProperty Name="imp_aptitudes" ColumnName="imp_aptitudes" />
+                <ScalarProperty Name="imp_experiencia" ColumnName="imp_experiencia" />
+                <ScalarProperty Name="imp_formacion" ColumnName="imp_formacion" />
+                <ScalarProperty Name="imp_id_puesto_trabajo" ColumnName="imp_id_puesto_trabajo" />
+                <ScalarProperty Name="imp_id_area" ColumnName="imp_id_area" />
+                <ScalarProperty Name="imp_id_cargo" ColumnName="imp_id_cargo" />
+                <ScalarProperty Name="imp_id_matrizp" ColumnName="imp_id_matrizp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_matriz_riesgo_ocupacional">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_matriz_riesgo_ocupacional">
+              <MappingFragment StoreEntitySet="iso_matriz_riesgo_ocupacional">
+                <ScalarProperty Name="imo_numero_trabajadores" ColumnName="imo_numero_trabajadores" />
+                <ScalarProperty Name="imo_tiempo_exposicion" ColumnName="imo_tiempo_exposicion" />
+                <ScalarProperty Name="imo_subproceso_matriz" ColumnName="imo_subproceso_matriz" />
+                <ScalarProperty Name="imo_puesto_trabajo" ColumnName="imo_puesto_trabajo" />
+                <ScalarProperty Name="imo_cargo_personal" ColumnName="imo_cargo_personal" />
+                <ScalarProperty Name="imo_actividad_matriz" ColumnName="imo_actividad_matriz" />
+                <ScalarProperty Name="imo_proceso_matriz" ColumnName="imo_proceso_matriz" />
+                <ScalarProperty Name="imo_area_matriz" ColumnName="imo_area_matriz" />
+                <ScalarProperty Name="imo_id_personal" ColumnName="imo_id_personal" />
+                <ScalarProperty Name="imo_elaborado_por" ColumnName="imo_elaborado_por" />
+                <ScalarProperty Name="imo_fecha_creacion" ColumnName="imo_fecha_creacion" />
+                <ScalarProperty Name="imo_descrip_matriz" ColumnName="imo_descrip_matriz" />
+                <ScalarProperty Name="imo_nombre_matriz" ColumnName="imo_nombre_matriz" />
+                <ScalarProperty Name="imo_id_matriz" ColumnName="imo_id_matriz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_plan">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_plan">
+              <MappingFragment StoreEntitySet="iso_plan">
+                <ScalarProperty Name="ipl_id_area" ColumnName="ipl_id_area" />
+                <ScalarProperty Name="ipl_objetivo_estrategico" ColumnName="ipl_objetivo_estrategico" />
+                <ScalarProperty Name="ipl_tipo_proyecto" ColumnName="ipl_tipo_proyecto" />
+                <ScalarProperty Name="ipl_id_plan_padre" ColumnName="ipl_id_plan_padre" />
+                <ScalarProperty Name="ipl_codigo_plan" ColumnName="ipl_codigo_plan" />
+                <ScalarProperty Name="ipl_responsable" ColumnName="ipl_responsable" />
+                <ScalarProperty Name="ipl_tolerancia" ColumnName="ipl_tolerancia" />
+                <ScalarProperty Name="ipl_creador_plan" ColumnName="ipl_creador_plan" />
+                <ScalarProperty Name="ipl_fecha_creacion_plan" ColumnName="ipl_fecha_creacion_plan" />
+                <ScalarProperty Name="ipl_descripcion_plan" ColumnName="ipl_descripcion_plan" />
+                <ScalarProperty Name="ipl_nombre_plan" ColumnName="ipl_nombre_plan" />
+                <ScalarProperty Name="ipl_tipo_plan" ColumnName="ipl_tipo_plan" />
+                <ScalarProperty Name="ipl_id_plan" ColumnName="ipl_id_plan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_riesgo_mrl">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_riesgo_mrl">
+              <MappingFragment StoreEntitySet="iso_riesgo_mrl">
+                <ScalarProperty Name="irm_codigo_riesgo" ColumnName="irm_codigo_riesgo" />
+                <ScalarProperty Name="irm_descripcion_riesgo" ColumnName="irm_descripcion_riesgo" />
+                <ScalarProperty Name="irm_nombre_riesgo" ColumnName="irm_nombre_riesgo" />
+                <ScalarProperty Name="irm_tipo_riesgo" ColumnName="irm_tipo_riesgo" />
+                <ScalarProperty Name="irm_id_riesgo" ColumnName="irm_id_riesgo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_riesgo_ocupacional">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_riesgo_ocupacional">
+              <MappingFragment StoreEntitySet="iso_riesgo_ocupacional">
+                <ScalarProperty Name="irg_nombre_riesgo" ColumnName="irg_nombre_riesgo" />
+                <ScalarProperty Name="irg_tipo_riesgo" ColumnName="irg_tipo_riesgo" />
+                <ScalarProperty Name="irg_id_riesgo" ColumnName="irg_id_riesgo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iso_tipo_riesgo_ocupacional">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_tipo_riesgo_ocupacional">
+              <MappingFragment StoreEntitySet="iso_tipo_riesgo_ocupacional">
+                <ScalarProperty Name="ito_nombre_tipo" ColumnName="ito_nombre_tipo" />
+                <ScalarProperty Name="ito_id_tipo_riesgo" ColumnName="ito_id_tipo_riesgo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="iso_equipo_puesto_trabajo" TypeName="cbm_iso_sart.iso_equipo_puesto_trabajo" StoreEntitySet="iso_equipo_puesto_trabajo">
+            <EndProperty Name="iso_puesto_trabajo">
+              <ScalarProperty Name="ipt_id_puesto_t" ColumnName="iep_id_puesto_trabajo" />
+            </EndProperty>
+            <EndProperty Name="iso_equipo_proteccion">
+              <ScalarProperty Name="iep_id_equipo_p" ColumnName="iep_id_equipo" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

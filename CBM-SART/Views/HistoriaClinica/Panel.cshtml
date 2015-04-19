@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Panel Historias Clinicas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "VigilaciaSalud";
+    Session["SidebarSelect"] = "Historia";
+}
+
+
+<div class="hc-container">
+    <div class="hc-vertical">
+        <ul>
+            <li>
+                <a href="#"><img src="/images/hc/hc.jpg" /></a>
+                <p>Histórias Clinicas</p>
+            </li>
+            <li>
+                <a href="#"><img src="/images/hc/med.jpg" /></a>
+                <p>Médicos</p>
+            </li>
+            <li>
+                <a href="#"><img src="/images/hc/permiso.png" /></a>
+                <p>Permisos Médicos</p>
+            </li>
+        </ul>
+    </div>
+    <div class="hc-horizontal">
+        <ul>
+            <li>
+                <a href="#"><img src="/images/hc/cm.jpg" /></a>
+                <p>Consultas Medicas</p>
+            </li>
+            <li>
+                <a href="#"><img src="/images/hc/estad.jpg" /></a>
+                <p>Estadisticas</p>
+            </li>
+        </ul>
+    </div>
+    <div class="hc-horizontal">
+        <div class="hc-logo">
+            <h3 class="h">Gestión Historias Clinicas</h3>
+            <img src="/images/hc/panel.png" />
+            <a class="btn btn-success" href="">Administracion de Historias Clinicas</a>
+        </div>
+    </div>
+    <p class="text-warning" style="margin-left:25px;">Click en imagen, para ingresar a módulo</p>
+</div>
+@Html.Raw("<a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Ver'> <span class='glyphicon glyphicon-search'> </span> </a>")
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
+}

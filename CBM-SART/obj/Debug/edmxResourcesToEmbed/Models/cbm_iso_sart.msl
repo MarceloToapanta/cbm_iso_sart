@@ -185,5 +185,261 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="iso_accidente">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_accidente">
+        <MappingFragment StoreEntitySet="iso_accidente">
+          <ScalarProperty Name="iac_traslado_accidentado" ColumnName="iac_traslado_accidentado" />
+          <ScalarProperty Name="iac_persona_atendio" ColumnName="iac_persona_atendio" />
+          <ScalarProperty Name="iac_nombres_testigos" ColumnName="iac_nombres_testigos" />
+          <ScalarProperty Name="iac_falla_accidente" ColumnName="iac_falla_accidente" />
+          <ScalarProperty Name="iac_produjo_lesion" ColumnName="iac_produjo_lesion" />
+          <ScalarProperty Name="iac_entrenamiento_trab" ColumnName="iac_entrenamiento_trab" />
+          <ScalarProperty Name="iac_experiencia_trab" ColumnName="iac_experiencia_trab" />
+          <ScalarProperty Name="iac_lesiones_accidente" ColumnName="iac_lesiones_accidente" />
+          <ScalarProperty Name="iac_descrip_accidente" ColumnName="iac_descrip_accidente" />
+          <ScalarProperty Name="iac_sitio_accidente" ColumnName="iac_sitio_accidente" />
+          <ScalarProperty Name="iac_hora_accidente" ColumnName="iac_hora_accidente" />
+          <ScalarProperty Name="iac_fecha_accidente" ColumnName="iac_fecha_accidente" />
+          <ScalarProperty Name="iac_dia_accidente" ColumnName="iac_dia_accidente" />
+          <ScalarProperty Name="iac_cod_empresa" ColumnName="iac_cod_empresa" />
+          <ScalarProperty Name="iac_id_personal" ColumnName="iac_id_personal" />
+          <ScalarProperty Name="iac_id_accidente" ColumnName="iac_id_accidente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_avance_plan">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_avance_plan">
+        <MappingFragment StoreEntitySet="iso_avance_plan">
+          <ScalarProperty Name="iap_motivo_atraso" ColumnName="iap_motivo_atraso" />
+          <ScalarProperty Name="iap_horas_avance" ColumnName="iap_horas_avance" />
+          <ScalarProperty Name="iap_cantidad_avance" ColumnName="iap_cantidad_avance" />
+          <ScalarProperty Name="iap_porcetanje_avance" ColumnName="iap_porcetanje_avance" />
+          <ScalarProperty Name="iap_usuario_avance" ColumnName="iap_usuario_avance" />
+          <ScalarProperty Name="iap_detalle_avance" ColumnName="iap_detalle_avance" />
+          <ScalarProperty Name="iap_id_plan" ColumnName="iap_id_plan" />
+          <ScalarProperty Name="iap_id_detalle_plan" ColumnName="iap_id_detalle_plan" />
+          <ScalarProperty Name="iap_fecha_avance" ColumnName="iap_fecha_avance" />
+          <ScalarProperty Name="iap_id_avance_plan" ColumnName="iap_id_avance_plan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_detalle_matriz_mrl">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_detalle_matriz_mrl">
+        <MappingFragment StoreEntitySet="iso_detalle_matriz_mrl">
+          <ScalarProperty Name="idm_descripcion" ColumnName="idm_descripcion" />
+          <ScalarProperty Name="idm_valoracion_gp" ColumnName="idm_valoracion_gp" />
+          <ScalarProperty Name="idm_resultado" ColumnName="idm_resultado" />
+          <ScalarProperty Name="idm_exposicion" ColumnName="idm_exposicion" />
+          <ScalarProperty Name="idm_consecuencia" ColumnName="idm_consecuencia" />
+          <ScalarProperty Name="idm_probabilidad" ColumnName="idm_probabilidad" />
+          <ScalarProperty Name="idm_id_tipo_riesgo_mrl" ColumnName="idm_id_tipo_riesgo_mrl" />
+          <ScalarProperty Name="idm_id_riesgo_mrl" ColumnName="idm_id_riesgo_mrl" />
+          <ScalarProperty Name="idm_id_matriz_mrl" ColumnName="idm_id_matriz_mrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_detalle_matriz_ocupacional">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_detalle_matriz_ocupacional">
+        <MappingFragment StoreEntitySet="iso_detalle_matriz_ocupacional">
+          <ScalarProperty Name="idm_estimacion" ColumnName="idm_estimacion" />
+          <ScalarProperty Name="idm_consecuencia" ColumnName="idm_consecuencia" />
+          <ScalarProperty Name="idm_probabilidad" ColumnName="idm_probabilidad" />
+          <ScalarProperty Name="idm_tipo_riesgo_ocupacional" ColumnName="idm_tipo_riesgo_ocupacional" />
+          <ScalarProperty Name="idm_id_riesgo_ocupacional" ColumnName="idm_id_riesgo_ocupacional" />
+          <ScalarProperty Name="idm_id_matriz_ocupacional" ColumnName="idm_id_matriz_ocupacional" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_detalle_plan">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_detalle_plan">
+        <MappingFragment StoreEntitySet="iso_detalle_plan">
+          <ScalarProperty Name="idp_peso" ColumnName="idp_peso" />
+          <ScalarProperty Name="idp_id_proceso" ColumnName="idp_id_proceso" />
+          <ScalarProperty Name="idp_costo_ejecutado" ColumnName="idp_costo_ejecutado" />
+          <ScalarProperty Name="idp_id_departamento" ColumnName="idp_id_departamento" />
+          <ScalarProperty Name="idp_entregable" ColumnName="idp_entregable" />
+          <ScalarProperty Name="idp_objetivo_estrategico" ColumnName="idp_objetivo_estrategico" />
+          <ScalarProperty Name="idp_avancep" ColumnName="idp_avancep" />
+          <ScalarProperty Name="idp_tiemponeto" ColumnName="idp_tiemponeto" />
+          <ScalarProperty Name="idp_tiempoded" ColumnName="idp_tiempoded" />
+          <ScalarProperty Name="idp_cantidad" ColumnName="idp_cantidad" />
+          <ScalarProperty Name="idp_unidad" ColumnName="idp_unidad" />
+          <ScalarProperty Name="idp_verificar_accion" ColumnName="idp_verificar_accion" />
+          <ScalarProperty Name="idp_fecha_modificacion" ColumnName="idp_fecha_modificacion" />
+          <ScalarProperty Name="idp_fecha_creacion" ColumnName="idp_fecha_creacion" />
+          <ScalarProperty Name="idp_descripcion" ColumnName="idp_descripcion" />
+          <ScalarProperty Name="idp_id_plan_padre" ColumnName="idp_id_plan_padre" />
+          <ScalarProperty Name="idp_estado" ColumnName="idp_estado" />
+          <ScalarProperty Name="idp_porcentaje" ColumnName="idp_porcentaje" />
+          <ScalarProperty Name="idp_costo" ColumnName="idp_costo" />
+          <ScalarProperty Name="idp_duracion" ColumnName="idp_duracion" />
+          <ScalarProperty Name="idp_fecha_fin" ColumnName="idp_fecha_fin" />
+          <ScalarProperty Name="idp_fecha_comienzo" ColumnName="idp_fecha_comienzo" />
+          <ScalarProperty Name="idp_observacion" ColumnName="idp_observacion" />
+          <ScalarProperty Name="idp_tarea" ColumnName="idp_tarea" />
+          <ScalarProperty Name="idp_numero_plan" ColumnName="idp_numero_plan" />
+          <ScalarProperty Name="idp_id_plan" ColumnName="idp_id_plan" />
+          <ScalarProperty Name="idp_id_detalle_plan" ColumnName="idp_id_detalle_plan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_equipo_caracteristica">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_equipo_caracteristica">
+        <MappingFragment StoreEntitySet="iso_equipo_caracteristica">
+          <ScalarProperty Name="iec_id_caracteristica" ColumnName="iec_id_caracteristica" />
+          <ScalarProperty Name="iec_id_equipo" ColumnName="iec_id_equipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_equipo_proteccion">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_equipo_proteccion">
+        <MappingFragment StoreEntitySet="iso_equipo_proteccion">
+          <ScalarProperty Name="iep_stock" ColumnName="iep_stock" />
+          <ScalarProperty Name="iep_imagen_equipo_p" ColumnName="iep_imagen_equipo_p" />
+          <ScalarProperty Name="iep_ubic_imagen_equipo_p" ColumnName="iep_ubic_imagen_equipo_p" />
+          <ScalarProperty Name="iep_nombre_equipo_p" ColumnName="iep_nombre_equipo_p" />
+          <ScalarProperty Name="iep_id_equipo_p" ColumnName="iep_id_equipo_p" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_incidente_trabajo">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_incidente_trabajo">
+        <MappingFragment StoreEntitySet="iso_incidente_trabajo">
+          <ScalarProperty Name="iit_hora" ColumnName="iit_hora" />
+          <ScalarProperty Name="iit_lugar" ColumnName="iit_lugar" />
+          <ScalarProperty Name="iit_tiempo_reposo" ColumnName="iit_tiempo_reposo" />
+          <ScalarProperty Name="iit_tratamiento_rec" ColumnName="iit_tratamiento_rec" />
+          <ScalarProperty Name="iit_descripcion_incid" ColumnName="iit_descripcion_incid" />
+          <ScalarProperty Name="iit_fecha_incidente" ColumnName="iit_fecha_incidente" />
+          <ScalarProperty Name="iit_id_incidente" ColumnName="iit_id_incidente" />
+          <ScalarProperty Name="iit_id_personal" ColumnName="iit_id_personal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_matriz_mrl">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_matriz_mrl">
+        <MappingFragment StoreEntitySet="iso_matriz_mrl">
+          <ScalarProperty Name="imr_ubicacion" ColumnName="imr_ubicacion" />
+          <ScalarProperty Name="imr_id_puesto_t_mrl" ColumnName="imr_id_puesto_t_mrl" />
+          <ScalarProperty Name="imr_descripcion_mrl" ColumnName="imr_descripcion_mrl" />
+          <ScalarProperty Name="imr_fecha_evaluacion_mrl" ColumnName="imr_fecha_evaluacion_mrl" />
+          <ScalarProperty Name="imr_jefe_area_mrl" ColumnName="imr_jefe_area_mrl" />
+          <ScalarProperty Name="imr_nro_tabajadores_mrl" ColumnName="imr_nro_tabajadores_mrl" />
+          <ScalarProperty Name="imr_puesto_trabajo_mrl" ColumnName="imr_puesto_trabajo_mrl" />
+          <ScalarProperty Name="imr_cargo_mrl" ColumnName="imr_cargo_mrl" />
+          <ScalarProperty Name="imr_sub_proceso_mrl" ColumnName="imr_sub_proceso_mrl" />
+          <ScalarProperty Name="imr_proceso_mrl" ColumnName="imr_proceso_mrl" />
+          <ScalarProperty Name="imr_localizacion_mrl" ColumnName="imr_localizacion_mrl" />
+          <ScalarProperty Name="imr_id_matriz_mrl" ColumnName="imr_id_matriz_mrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_matriz_profesiograma">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_matriz_profesiograma">
+        <MappingFragment StoreEntitySet="iso_matriz_profesiograma">
+          <ScalarProperty Name="imp_conocimientos_ad" ColumnName="imp_conocimientos_ad" />
+          <ScalarProperty Name="imp_criterios_exclusion" ColumnName="imp_criterios_exclusion" />
+          <ScalarProperty Name="imp_genero" ColumnName="imp_genero" />
+          <ScalarProperty Name="imp_edad" ColumnName="imp_edad" />
+          <ScalarProperty Name="imp_relativa" ColumnName="imp_relativa" />
+          <ScalarProperty Name="imp_absoluta" ColumnName="imp_absoluta" />
+          <ScalarProperty Name="imp_salida" ColumnName="imp_salida" />
+          <ScalarProperty Name="imp_especial" ColumnName="imp_especial" />
+          <ScalarProperty Name="imp_reintegro" ColumnName="imp_reintegro" />
+          <ScalarProperty Name="imp_per_reintegro" ColumnName="imp_per_reintegro" />
+          <ScalarProperty Name="imp_preocupacional" ColumnName="imp_preocupacional" />
+          <ScalarProperty Name="imp_fecha_creacion" ColumnName="imp_fecha_creacion" />
+          <ScalarProperty Name="imp_horario_trabajo" ColumnName="imp_horario_trabajo" />
+          <ScalarProperty Name="imp_capacitacion" ColumnName="imp_capacitacion" />
+          <ScalarProperty Name="imp_competencias" ColumnName="imp_competencias" />
+          <ScalarProperty Name="imp_exigencias" ColumnName="imp_exigencias" />
+          <ScalarProperty Name="imp_herramientas" ColumnName="imp_herramientas" />
+          <ScalarProperty Name="imp_tareas_funciones" ColumnName="imp_tareas_funciones" />
+          <ScalarProperty Name="imp_actitudes" ColumnName="imp_actitudes" />
+          <ScalarProperty Name="imp_aptitudes" ColumnName="imp_aptitudes" />
+          <ScalarProperty Name="imp_experiencia" ColumnName="imp_experiencia" />
+          <ScalarProperty Name="imp_formacion" ColumnName="imp_formacion" />
+          <ScalarProperty Name="imp_id_puesto_trabajo" ColumnName="imp_id_puesto_trabajo" />
+          <ScalarProperty Name="imp_id_area" ColumnName="imp_id_area" />
+          <ScalarProperty Name="imp_id_cargo" ColumnName="imp_id_cargo" />
+          <ScalarProperty Name="imp_id_matrizp" ColumnName="imp_id_matrizp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_matriz_riesgo_ocupacional">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_matriz_riesgo_ocupacional">
+        <MappingFragment StoreEntitySet="iso_matriz_riesgo_ocupacional">
+          <ScalarProperty Name="imo_numero_trabajadores" ColumnName="imo_numero_trabajadores" />
+          <ScalarProperty Name="imo_tiempo_exposicion" ColumnName="imo_tiempo_exposicion" />
+          <ScalarProperty Name="imo_subproceso_matriz" ColumnName="imo_subproceso_matriz" />
+          <ScalarProperty Name="imo_puesto_trabajo" ColumnName="imo_puesto_trabajo" />
+          <ScalarProperty Name="imo_cargo_personal" ColumnName="imo_cargo_personal" />
+          <ScalarProperty Name="imo_actividad_matriz" ColumnName="imo_actividad_matriz" />
+          <ScalarProperty Name="imo_proceso_matriz" ColumnName="imo_proceso_matriz" />
+          <ScalarProperty Name="imo_area_matriz" ColumnName="imo_area_matriz" />
+          <ScalarProperty Name="imo_id_personal" ColumnName="imo_id_personal" />
+          <ScalarProperty Name="imo_elaborado_por" ColumnName="imo_elaborado_por" />
+          <ScalarProperty Name="imo_fecha_creacion" ColumnName="imo_fecha_creacion" />
+          <ScalarProperty Name="imo_descrip_matriz" ColumnName="imo_descrip_matriz" />
+          <ScalarProperty Name="imo_nombre_matriz" ColumnName="imo_nombre_matriz" />
+          <ScalarProperty Name="imo_id_matriz" ColumnName="imo_id_matriz" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_plan">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_plan">
+        <MappingFragment StoreEntitySet="iso_plan">
+          <ScalarProperty Name="ipl_id_area" ColumnName="ipl_id_area" />
+          <ScalarProperty Name="ipl_objetivo_estrategico" ColumnName="ipl_objetivo_estrategico" />
+          <ScalarProperty Name="ipl_tipo_proyecto" ColumnName="ipl_tipo_proyecto" />
+          <ScalarProperty Name="ipl_id_plan_padre" ColumnName="ipl_id_plan_padre" />
+          <ScalarProperty Name="ipl_codigo_plan" ColumnName="ipl_codigo_plan" />
+          <ScalarProperty Name="ipl_responsable" ColumnName="ipl_responsable" />
+          <ScalarProperty Name="ipl_tolerancia" ColumnName="ipl_tolerancia" />
+          <ScalarProperty Name="ipl_creador_plan" ColumnName="ipl_creador_plan" />
+          <ScalarProperty Name="ipl_fecha_creacion_plan" ColumnName="ipl_fecha_creacion_plan" />
+          <ScalarProperty Name="ipl_descripcion_plan" ColumnName="ipl_descripcion_plan" />
+          <ScalarProperty Name="ipl_nombre_plan" ColumnName="ipl_nombre_plan" />
+          <ScalarProperty Name="ipl_tipo_plan" ColumnName="ipl_tipo_plan" />
+          <ScalarProperty Name="ipl_id_plan" ColumnName="ipl_id_plan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_riesgo_mrl">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_riesgo_mrl">
+        <MappingFragment StoreEntitySet="iso_riesgo_mrl">
+          <ScalarProperty Name="irm_codigo_riesgo" ColumnName="irm_codigo_riesgo" />
+          <ScalarProperty Name="irm_descripcion_riesgo" ColumnName="irm_descripcion_riesgo" />
+          <ScalarProperty Name="irm_nombre_riesgo" ColumnName="irm_nombre_riesgo" />
+          <ScalarProperty Name="irm_tipo_riesgo" ColumnName="irm_tipo_riesgo" />
+          <ScalarProperty Name="irm_id_riesgo" ColumnName="irm_id_riesgo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_riesgo_ocupacional">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_riesgo_ocupacional">
+        <MappingFragment StoreEntitySet="iso_riesgo_ocupacional">
+          <ScalarProperty Name="irg_nombre_riesgo" ColumnName="irg_nombre_riesgo" />
+          <ScalarProperty Name="irg_tipo_riesgo" ColumnName="irg_tipo_riesgo" />
+          <ScalarProperty Name="irg_id_riesgo" ColumnName="irg_id_riesgo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_tipo_riesgo_ocupacional">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_tipo_riesgo_ocupacional">
+        <MappingFragment StoreEntitySet="iso_tipo_riesgo_ocupacional">
+          <ScalarProperty Name="ito_nombre_tipo" ColumnName="ito_nombre_tipo" />
+          <ScalarProperty Name="ito_id_tipo_riesgo" ColumnName="ito_id_tipo_riesgo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="iso_equipo_puesto_trabajo" TypeName="cbm_iso_sart.iso_equipo_puesto_trabajo" StoreEntitySet="iso_equipo_puesto_trabajo">
+      <EndProperty Name="iso_puesto_trabajo">
+        <ScalarProperty Name="ipt_id_puesto_t" ColumnName="iep_id_puesto_trabajo" />
+      </EndProperty>
+      <EndProperty Name="iso_equipo_proteccion">
+        <ScalarProperty Name="iep_id_equipo_p" ColumnName="iep_id_equipo" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

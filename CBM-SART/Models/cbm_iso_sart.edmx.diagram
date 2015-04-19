@@ -21,6 +21,35 @@
         <AssociationConnector Association="cbm_iso_sart.FK_iso_historia_clinica_iso_personal" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_personal_iso_puesto_trabajo1" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_accidente" Width="1.5" PointX="14.875" PointY="6.125" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_avance_plan" Width="1.5" PointX="12.25" PointY="19.875" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_detalle_matriz_mrl" Width="1.5" PointX="5.25" PointY="17.375" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_detalle_matriz_ocupacional" Width="1.5" PointX="5.25" PointY="21.625" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_detalle_plan" Width="1.5" PointX="10" PointY="18.125" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_equipo_caracteristica" Width="1.5" PointX="3.375" PointY="2.375" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_equipo_proteccion" Width="1.5" PointX="1.125" PointY="14" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_incidente_trabajo" Width="1.5" PointX="14.875" PointY="11.125" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_matriz_mrl" Width="1.5" PointX="3" PointY="24.25" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_matriz_profesiograma" Width="1.5" PointX="5.625" PointY="0.75" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_matriz_riesgo_ocupacional" Width="1.5" PointX="3" PointY="29" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_plan" Width="1.5" PointX="7.75" PointY="19.625" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_riesgo_mrl" Width="1.5" PointX="3" PointY="17.875" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_riesgo_ocupacional" Width="1.5" PointX="3" PointY="20.875" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_tipo_riesgo_ocupacional" Width="1.5" PointX="0.75" PointY="19.5" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_accidente_iso_personal" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_avance_plan_iso_detalle_plan" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_matriz_profesiograma_iso_cargo" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_detalle_matriz_mrl_iso_matriz_mrl" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_detalle_matriz_mrl_iso_riesgo_mrl" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_detalle_matriz_ocupacional_iso_matriz_riesgo_ocupacional" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_detalle_matriz_ocupacional_iso_riesgo_ocupacional" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_detalle_plan_iso_plan" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_equipo_caracteristica_iso_equipo_proteccion" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_incidente_trabajo_iso_personal" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_matriz_profesiograma_iso_puesto_trabajo" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional" />
+        <AssociationConnector Association="cbm_iso_sart.iso_equipo_puesto_trabajo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

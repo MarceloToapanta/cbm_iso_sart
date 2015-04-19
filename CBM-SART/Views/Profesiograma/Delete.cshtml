@@ -1,0 +1,217 @@
+﻿@model CBM_SART.Models.iso_matriz_profesiograma
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>iso_matriz_profesiograma</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_formacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_formacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_experiencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_experiencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_aptitudes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_aptitudes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_actitudes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_actitudes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_tareas_funciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_tareas_funciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_herramientas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_herramientas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_exigencias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_exigencias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_competencias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_competencias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_capacitacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_capacitacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_horario_trabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_horario_trabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_fecha_creacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_fecha_creacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_preocupacional)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_preocupacional)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_per_reintegro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_per_reintegro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_reintegro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_reintegro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_especial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_especial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_salida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_salida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_absoluta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_absoluta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_relativa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_relativa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_edad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_edad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_genero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_genero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_criterios_exclusion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_criterios_exclusion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imp_conocimientos_ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imp_conocimientos_ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_cargo.icg_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_cargo.icg_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_puesto_trabajo.ipt_nombre_puesto_t)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_puesto_trabajo.ipt_nombre_puesto_t)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

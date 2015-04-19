@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_incidente_trabajo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "VigilaciaSalud";
+    Session["SidebarSelect"] = "incidente";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.iit_fecha_incidente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iit_descripcion_incid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iit_tratamiento_rec)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iit_tiempo_reposo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iit_lugar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iit_hora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_personal.ipe_ced_ruc_personal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.iit_fecha_incidente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iit_descripcion_incid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iit_tratamiento_rec)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iit_tiempo_reposo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iit_lugar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iit_hora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_personal.ipe_ced_ruc_personal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.iit_id_incidente }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iit_id_incidente }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iit_id_incidente })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,175 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_matriz_profesiograma>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "VigilaciaSalud";
+    Session["SidebarSelect"] = "profesiograma";
+}
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_formacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_experiencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_aptitudes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_actitudes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_tareas_funciones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_herramientas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_exigencias)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_competencias)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_capacitacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_horario_trabajo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_fecha_creacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_preocupacional)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_per_reintegro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_reintegro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_especial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_salida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_absoluta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_relativa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_edad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_genero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_criterios_exclusion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_conocimientos_ad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_cargo.icg_nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_puesto_trabajo.ipt_nombre_puesto_t)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_formacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_experiencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_aptitudes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_actitudes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_tareas_funciones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_herramientas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_exigencias)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_competencias)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_capacitacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_horario_trabajo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_fecha_creacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_preocupacional)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_per_reintegro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_reintegro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_especial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_salida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_absoluta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_relativa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_edad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_genero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_criterios_exclusion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_conocimientos_ad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_cargo.icg_nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_puesto_trabajo.ipt_nombre_puesto_t)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

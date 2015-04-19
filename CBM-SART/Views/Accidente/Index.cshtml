@@ -1,0 +1,120 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_accidente>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "VigilaciaSalud";
+    Session["SidebarSelect"] = "accidente";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_cod_empresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_dia_accidente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_fecha_accidente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_hora_accidente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_sitio_accidente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_descrip_accidente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_lesiones_accidente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_experiencia_trab)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_entrenamiento_trab)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_produjo_lesion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_falla_accidente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_nombres_testigos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_persona_atendio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iac_traslado_accidentado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_personal.ipe_ced_ruc_personal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_cod_empresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_dia_accidente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_fecha_accidente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_hora_accidente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_sitio_accidente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_descrip_accidente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_lesiones_accidente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_experiencia_trab)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_entrenamiento_trab)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_produjo_lesion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_falla_accidente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_nombres_testigos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_persona_atendio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iac_traslado_accidentado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_personal.ipe_ced_ruc_personal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.iac_id_accidente }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iac_id_accidente }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iac_id_accidente })
+        </td>
+    </tr>
+}
+
+</table>

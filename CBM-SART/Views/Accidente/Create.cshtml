@@ -1,0 +1,149 @@
+﻿@model CBM_SART.Models.iso_accidente
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>iso_accidente</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_id_personal, "iac_id_personal", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("iac_id_personal", String.Empty)
+                @Html.ValidationMessageFor(model => model.iac_id_personal)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_cod_empresa, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_cod_empresa)
+                @Html.ValidationMessageFor(model => model.iac_cod_empresa)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_dia_accidente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_dia_accidente)
+                @Html.ValidationMessageFor(model => model.iac_dia_accidente)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_fecha_accidente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_fecha_accidente)
+                @Html.ValidationMessageFor(model => model.iac_fecha_accidente)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_hora_accidente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_hora_accidente)
+                @Html.ValidationMessageFor(model => model.iac_hora_accidente)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_sitio_accidente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_sitio_accidente)
+                @Html.ValidationMessageFor(model => model.iac_sitio_accidente)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_descrip_accidente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_descrip_accidente)
+                @Html.ValidationMessageFor(model => model.iac_descrip_accidente)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_lesiones_accidente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_lesiones_accidente)
+                @Html.ValidationMessageFor(model => model.iac_lesiones_accidente)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_experiencia_trab, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_experiencia_trab)
+                @Html.ValidationMessageFor(model => model.iac_experiencia_trab)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_entrenamiento_trab, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_entrenamiento_trab)
+                @Html.ValidationMessageFor(model => model.iac_entrenamiento_trab)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_produjo_lesion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_produjo_lesion)
+                @Html.ValidationMessageFor(model => model.iac_produjo_lesion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_falla_accidente, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_falla_accidente)
+                @Html.ValidationMessageFor(model => model.iac_falla_accidente)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_nombres_testigos, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_nombres_testigos)
+                @Html.ValidationMessageFor(model => model.iac_nombres_testigos)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_persona_atendio, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_persona_atendio)
+                @Html.ValidationMessageFor(model => model.iac_persona_atendio)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iac_traslado_accidentado, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.iac_traslado_accidentado)
+                @Html.ValidationMessageFor(model => model.iac_traslado_accidentado)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CBM_SART.Models;
+using System.Linq.Dynamic;
+using System.IO;
 
 namespace CBM_SART.Controllers
 {
@@ -120,7 +122,38 @@ namespace CBM_SART.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public ActionResult Panel()
+        {
+            return View();
+        }
+        public ActionResult ListaPersonal(string filter = null, int page = 1, int pageSize = 20, string sort = "ipe_apellido_paterno", string sortdir = "ASC")
+        {
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_personal>();
+            ViewBag.filter = filter;
+            records.Content = db.iso_personal
+                        .Where(x => filter == null ||
+                                (x.ipe_nombre_personal.ToLower().Contains(filter.ToLower().Trim()))
+                                   || x.ipe_apellido_paterno.ToLower().Contains(filter.ToLower().Trim())
+                              )
+                        .OrderBy(sort + " " + sortdir)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
 
+            // Count
+            records.TotalRecords = db.iso_personal
+                         .Where(x => filter == null ||
+                               (x.ipe_nombre_personal.Contains(filter)) || x.ipe_apellido_paterno.Contains(filter)).Count();
+
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+
+
+            //var Personal = db.iso_personal.ToList();
+            return PartialView("ListaPersonal", records);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

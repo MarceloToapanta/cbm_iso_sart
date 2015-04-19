@@ -1,0 +1,126 @@
+﻿@*@model IEnumerable<CBM_SART.Models.iso_personal>*@
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_personal>
+
+
+<div class="title-window" style="height:32px">
+    Lista de Trabajadores
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Selecione un Trabajador para ver História Clinica/Consulta Médica</h4>
+</div>
+
+@*<div class="modal-body">
+    <table class="table">
+        <tr>
+            <th></th>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.ipe_ced_ruc_personal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ipe_nombre_personal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ipe_fecha_nacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ipe_apellido_paterno)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>Ver</td>
+                <td></td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ipe_ced_ruc_personal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ipe_nombre_personal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ipe_fecha_nacimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ipe_apellido_paterno)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>*@
+
+<div class="content">
+    @using (Html.BeginForm("ListaPersonal", null, FormMethod.Get))
+    {
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Nombre del Personal" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="btn btn-success" data-modal="" href="/Personal/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="col-md-12 grid-content">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column("ipe_ced_ruc_personal", "CI/RUC", style: "col-lg-1"),
+              grid.Column("ipe_nombre_personal", "Nombre", style: "col-lg-4"),
+              grid.Column("ipe_apellido_paterno", "Apellido", style: "col-lg-4"),
+              grid.Column("ipe_fecha_nacimiento", "Fecha Nacimiento", style: "col-lg-3"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a data-modal='' href='/HistoriaClinica' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                    </text>)
+
+                                                                                                                                       ));
+            }
+
+
+        </div>
+        <div class="clear"></div>
+    }
+</div>
+
+
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>

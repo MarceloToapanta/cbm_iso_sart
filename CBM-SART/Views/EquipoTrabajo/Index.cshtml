@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_equipo_proteccion>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "VigilaciaSalud";
+    Session["SidebarSelect"] = "equipop";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.iep_nombre_equipo_p)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iep_ubic_imagen_equipo_p)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iep_imagen_equipo_p)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iep_stock)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.iep_nombre_equipo_p)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iep_ubic_imagen_equipo_p)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iep_imagen_equipo_p)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iep_stock)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.iep_id_equipo_p }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iep_id_equipo_p }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iep_id_equipo_p })
+        </td>
+    </tr>
+}
+
+</table>
