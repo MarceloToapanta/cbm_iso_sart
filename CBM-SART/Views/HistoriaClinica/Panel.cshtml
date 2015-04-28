@@ -11,7 +11,7 @@
     <div class="hc-vertical">
         <ul>
             <li>
-                <a href="#"><img src="/images/hc/hc.jpg" /></a>
+                <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Historia Clinica'><img src="/images/hc/hc.jpg" /></a>
                 <p>Histórias Clinicas</p>
             </li>
             <li>
@@ -27,7 +27,7 @@
     <div class="hc-horizontal">
         <ul>
             <li>
-                <a href="#"><img src="/images/hc/cm.jpg" /></a>
+                <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Consulta Medica'><img src="/images/hc/cm.jpg" /></a>
                 <p>Consultas Medicas</p>
             </li>
             <li>
@@ -39,13 +39,13 @@
     <div class="hc-horizontal">
         <div class="hc-logo">
             <h3 class="h">Gestión Historias Clinicas</h3>
-            <img src="/images/hc/panel.png" />
-            <a class="btn btn-success" href="">Administracion de Historias Clinicas</a>
+            <img style="opacity:1;" src="/images/hc/panel.png" />
+            <a class="btn btn-success" href="/HistoriaClinica">Administracion de Historias Clinicas</a>
         </div>
     </div>
     <p class="text-warning" style="margin-left:25px;">Click en imagen, para ingresar a módulo</p>
 </div>
-@Html.Raw("<a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Ver'> <span class='glyphicon glyphicon-search'> </span> </a>")
+
 <!-- modal placeholder-->
 <div id='myModal' class='modal fade in' tabindex='-1'>
     <div class="modal-dialog">
@@ -57,4 +57,15 @@
 
 @section scripts{
     @Scripts.Render("~/scripts/appjs/phones.js")
+
+    <script type="text/javascript">
+        $(function () {
+            $(document).delegate(".webgrid-row-style", "click", function (e) {
+                var link = $(this).find('td:first #ipe_id_personal').attr('href');
+                var id = $(this).find('td:first #ipe_id_personal').val();
+                location.href = link;
+            });
+        });
+    </script>
+
 }

@@ -42,7 +42,7 @@ namespace CBM_SART.Controllers
         // GET: /HistoriaClinica/Create
         public ActionResult Create()
         {
-            ViewBag.ihc_id_personal = new SelectList(db.iso_personal, "ipe_id_personal", "ipe_ced_ruc_personal");
+            ViewBag.ihc_id_personal = new SelectList(db.iso_personal, "ipe_id_personal", "ipe_nombre_personal");
             return View();
         }
 
@@ -71,7 +71,7 @@ namespace CBM_SART.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iso_historia_clinica iso_historia_clinica = await db.iso_historia_clinica.FindAsync(id);
+            iso_historia_clinica iso_historia_clinica = db.iso_historia_clinica.Where(x => x.ihc_id_personal == id).First();
             if (iso_historia_clinica == null)
             {
                 return HttpNotFound();
@@ -126,7 +126,7 @@ namespace CBM_SART.Controllers
         {
             return View();
         }
-        public ActionResult ListaPersonal(string filter = null, int page = 1, int pageSize = 20, string sort = "ipe_apellido_paterno", string sortdir = "ASC")
+        public ActionResult ListaPersonal(string filter = null, int page = 1, int pageSize = 18, string sort = "ipe_apellido_paterno", string sortdir = "ASC")
         {
             if (String.IsNullOrEmpty(filter)) { filter = null; }
             var records = new PagedList<iso_personal>();

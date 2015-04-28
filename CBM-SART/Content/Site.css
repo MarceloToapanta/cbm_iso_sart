@@ -410,15 +410,29 @@ tfoot {
     text-align: right;
 }
 
-    tfoot > tr > td a:link {
-        color: #fff;
-        background-color: #333;
-        padding: 5px 10px;
-        border-radius: 7px;
-        
-    }
+tfoot > tr > td a:link {
+    color: #fff;
+    background-color: #333;
+    padding: 3px 0;
+    border-radius: 7px;
+    padding-left: 8px;
+    padding-right: 5px;
+}
+tfoot > tr > td {
+    height: 32px;
+    padding-top:8px !important;
+    letter-spacing: 3px;
+}
 .content{
     background:#fff;
+}
+.content-modal{
+    background:#fff;
+    background: url("/images/cream_pixels.png");
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 11px;
+    min-height: 507px;
 }
 .search{
     padding: 0;
@@ -512,6 +526,9 @@ tfoot > tr > td a:hover{
     color: #fff;
     text-decoration:none;
 }
+.action-hc img{
+    height:16px;
+}
  /*////////////////////////Fin Table//////////////////////*/
  /*////////////////////////Ventanas Emergentes//////////////////////*/
  .title-window{
@@ -593,6 +610,13 @@ tfoot > tr > td a:hover{
  .hc-horizontal ul li:hover {
     border: 1px solid #888;
 }
+.hc-container-personal{
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    color: #777;
+    display: block;
+}
  /*////////////////////////Fin Panel Historias Clinicas//////////////////////*/
  /*//////////////////////////Custom Bootstrap ///////////////////////*/
  .row{
@@ -606,3 +630,6 @@ tfoot > tr > td a:hover{
   margin: 5px 0px ;
 }
  /*//////////////////////////Fin Custom Bootstrap ///////////////////////*/
+ .webgrid-row-style{
+    cursor: pointer;
+}
