@@ -40,7 +40,7 @@ namespace CBM_SART.Controllers
             // Count
             records.TotalRecords = db.iso_departamento
                          .Where(x => filter == null ||
-                               (x.ide_nombre_departamento.Contains(filter))).Count();
+                                (x.ide_nombre_departamento.ToLower().Contains(filter.ToLower().Trim()))).Count();
 
             records.CurrentPage = page;
             records.PageSize = pageSize;

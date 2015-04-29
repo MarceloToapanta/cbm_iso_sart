@@ -212,7 +212,7 @@ border-left:0px;
     height: 100%;
     border-radius: 3px 3px 0px 0px;
     border: 1px solid #d5d5d5;
-    padding: 10px;
+    padding: 5px 10px 10px 10px;
     min-height: 610px;
     background: #f7f7f7;
     background: -moz-linear-gradient(top, #ffffff, #f7f7f7);
@@ -220,6 +220,7 @@ border-left:0px;
     background: -webkit-linear-gradient(top, #ffffff, #f7f7f7);
     background: -o-linear-gradient(top, #ffffff, #f7f7f7);
     background: linear-gradient(to bottom, #ffffff, #f7f7f7);
+    border-top: 3px solid #3c8dbc;
 }
 .well-sm {
     padding: 0px;
@@ -231,11 +232,12 @@ border-left:0px;
 /*//////////////Sidebar////////////////////*/
 #sidebar {
     padding: 0;
-    border-right: 1px solid transparent;
+    
     border-color: rgb(169, 169, 169);
     width:100%;
     padding: 1% 4%;
     min-height: 610px;
+    padding: 1% 0% 1% 2%;
 }
 
 
@@ -448,15 +450,13 @@ tfoot > tr > td {
 .clear{
     clear:both;
 }.seccion-barra {
-    font-weight: normal;
+    font-weight: 400;
     background: #fff;
-    color: rgb(64, 64, 64);
+    color:rgb(51, 51, 51);
     padding: 4px 5px 5px 5px;
-    font-size: 14px;
-    border-bottom: 1px solid #555;
+    font-size: 15px;
+    border-bottom: 1px solid #ccc;
     margin-bottom:10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
  .seccion-barra-black {
     font-weight:bold;
@@ -476,9 +476,12 @@ tfoot > tr > td {
  }
  .col-md-12.grid-content{
      padding:0px;
+     
  }
  .text-count{
-     color:rgb(211, 96, 77);
+     color:#777;
+     font-weight:normal;
+     font-size: 12px;
  }
 .btn {
     font-size:11px;
@@ -511,7 +514,8 @@ tfoot > tr > td {
 }
 
 .table .action{
-    width: 4%;
+    width: 5%;
+    min-width:54px;
 }
 .table-condensed > thead > tr > th, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td{
     padding: 3px 5px;

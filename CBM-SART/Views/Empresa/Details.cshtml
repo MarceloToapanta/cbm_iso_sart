@@ -5,7 +5,7 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class=" seccion-barra" style="height:32px">
+<div class="title-window" style="height:32px">
     Permite visualizar e imprimir los datos relacionados a la Empresa.
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
@@ -16,10 +16,8 @@
 
 <form>
     <div class="modal-body">
-        @*Campos formulario*@
         <div class="col-md-7">
             <div class="form-horizontal">
-                @*Fila con 1 campo*@
                 <div class="form-group">
                     @Html.LabelFor(m => Model.iem_nombre_empresa, new { @class = "control-label col-sm-2" })
                     <div class="col-sm-10">
@@ -39,7 +37,6 @@
                         </div>
                     </div>
                 </div>
-                @*Fila con 2 campo*@
                 <div class="form-group ">
                     @Html.LabelFor(m => Model.iem_ruc_empresa, new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
@@ -85,7 +82,6 @@
                         </div>
                     </div>
                 </div>
-                @*fffffffffffffff*@
                 <div class="form-group ">
                     @Html.LabelFor(m => Model.iem_vision_empresa, new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
@@ -103,7 +99,6 @@
                         </div>
                     </div>
                 </div>
-                @*fffffffffffffff*@
                 <div class="form-group ">
                     @Html.LabelFor(m => Model.iem_politica_empresa, new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
@@ -121,7 +116,6 @@
                         </div>
                     </div>
                 </div>
-                @*fffffffffffffff*@
                 <div class="form-group ">
                     @Html.LabelFor(m => Model.iem_valores_empresa, new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
@@ -139,7 +133,6 @@
                         </div>
                     </div>
                 </div>
-                @*fffffffffffffff*@
                 <div class="form-group ">
                     @Html.LabelFor(m => Model.iem_politica_calidad, new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
@@ -157,7 +150,6 @@
                         </div>
                     </div>
                 </div>
-                @*dsfsdfsdf*@
                 <div class="form-group">
                     @Html.LabelFor(m => Model.iem_icono_empresa, new { @class = "control-label col-sm-2" })
                     <div class="col-sm-10">
@@ -183,20 +175,18 @@
                 <div class="editor-field">
                     @if (Model.iem_icono_empresa != null)
                     {
-                        @*<input type='file' id="file1" name="file1" multiple accept="image/*" value="" src="@Url.Action("GetImage", "Empresa", new { ID = Model.iem_cod_empresa })" />*@
                         <br />
                         <div class="inline-image-preivew">
                             <div style="float:left;margin-right:20px">
-                                <img id="blah" alt="Logo de la Empresa" style="border: groove 0px; max-width: 100%; height:auto" src="@Url.Action("GetImage", "Empresa", new { ID = Model.iem_cod_empresa })" />
+                                <img id="blah" alt="Logo de la Empresa" style="border: groove 0px; width: 100%; height: auto; max-width: 250px;" src="@Url.Action("GetImage", "Empresa", new { ID = Model.iem_cod_empresa })" />
                             </div>
                         </div>
                     }
                     else
                     {
-                        @*<input type='file' id="file1" name="file1" value="" multiple accept="image/*" />*@
                         <br />
                         <div class="inline-image-preivew">
-                            <img id="blah" src="~/images/blanco.png" alt="Logo de la Empresa" style="border: groove 0px; max-width: 100%; height:auto" />
+                            <img id="blah" src="~/images/blanco.png" alt="Logo de la Empresa" style="border: groove 0px; width: 100%; height: auto; max-width: 250px;" />
                         </div>
                     }
                 </div>
@@ -210,8 +200,6 @@
                 <img src="/images/wait.gif" alt="wiat" />
                 Espere...
             </span>
-            @*<input class="btn btn-primary" type="submit" value="Save" />*@
-            @*<button class="btn btn-primary" type="submit" name="Guardar"> Guardar </button>*@
             <button class="btn btn-primary" data-dismiss="modal">Imprimir</button>
             <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
         </div>

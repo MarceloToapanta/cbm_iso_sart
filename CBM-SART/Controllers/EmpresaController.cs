@@ -36,7 +36,8 @@ namespace CBM_SART.Controllers
             // Count
             records.TotalRecords = db.iso_empresa
                          .Where(x => filter == null ||
-                               (x.iem_nombre_empresa.Contains(filter)) || x.iem_nemonico_empresa.Contains(filter)).Count();
+                                (x.iem_nombre_empresa.ToLower().Contains(filter.ToLower().Trim()))
+                                   || x.iem_nemonico_empresa.ToLower().Contains(filter.ToLower().Trim())).Count();
 
             records.CurrentPage = page;
             records.PageSize = pageSize;
