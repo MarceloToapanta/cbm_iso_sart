@@ -71,8 +71,9 @@ namespace CBM_SART.Controllers
         // GET: /Departamento/Create
         public ActionResult Create()
         {
-            ViewBag.ide_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa");
+            
             var iso_departamento = new iso_departamento();
+            ViewBag.ide_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa", iso_departamento.ide_id_empresa);
             return PartialView("Create", iso_departamento);
             //return View();
 
@@ -95,18 +96,18 @@ namespace CBM_SART.Controllers
         //    ViewBag.ide_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa", iso_departamento.ide_id_empresa);
         //    return View(iso_departamento);
         //}
-        public JsonResult Create(iso_departamento iso_departamento)
+        public ActionResult Create(iso_departamento iso_departamento)
         //public ActionResult Create([Bind(Include = "iem_cod_empresa,iem_nombre_empresa,iem_nemonico_empresa,iem_ruc_empresa,iem_direccion_empresa,iem_telefono_empresa,iem_rep_legal_empresa,iem_personeria_empresa,iem_icono_empresa,iem_vision_empresa,iem_mision_empresa,iem_politica_empresa,iem_objetivo_empresa,iem_valores_empresa,iem_icono_archivo,iem_politica_general,iem_politica_calidad,iem_estrategia_general,iem_razon_social,iem_numero_patronal,iem_actividad,iem_numero_trab_administrativos,iem_numero_trab_planta")] iso_empresa iso_empresa)
         {
             if (ModelState.IsValid)
             {
                 db.iso_departamento.Add(iso_departamento);
                 db.SaveChanges();
-                return Json(new { success = true });
+                return RedirectToAction("Index");
                 //return RedirectToAction("Index");
             }
-            return Json(iso_departamento, JsonRequestBehavior.AllowGet);
-            //return PartialView("Create", iso_empresa);
+            //return Json(iso_departamento, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index");
         }
 
         // GET: /Departamento/Edit/5
@@ -130,11 +131,12 @@ namespace CBM_SART.Controllers
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
-            ViewBag.ide_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa");
+            
             iso_departamento iso_departamento = db.iso_departamento.Find(id);
+            ViewBag.ide_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa", iso_departamento.ide_id_empresa);
             if (iso_departamento == null)
             {
-                return HttpNotFound();
+             
             }
             //return View(iso_empresa);
             return PartialView("Edit", iso_departamento);
@@ -163,7 +165,7 @@ namespace CBM_SART.Controllers
             {
                 db.Entry(iso_departamento).State = EntityState.Modified;
                 db.SaveChanges();
-                return Json(new { success = true });
+                return RedirectToAction("Index");
             }
             return PartialView("Edit", iso_departamento);
         }
@@ -214,7 +216,7 @@ namespace CBM_SART.Controllers
             var phone = db.iso_departamento.Find(id);
             db.iso_departamento.Remove(phone);
             db.SaveChanges();
-            return Json(new { success = true });
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

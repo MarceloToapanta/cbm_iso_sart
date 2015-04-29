@@ -468,6 +468,9 @@ tfoot > tr > td {
  .form-control{
      font-size:12px;
  }
+ select.form-control{
+    padding: 2px;
+ }
  .grid-content{
      
  }

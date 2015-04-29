@@ -28,7 +28,7 @@
                 @Html.LabelFor(model => model.ide_id_empresa, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @*@Html.DropDownList("ide_id_empresa", String.Empty)*@
-                    @Html.DropDownListFor(x => x.iso_empresa.iem_cod_empresa, (IEnumerable<SelectListItem>)ViewBag.ide_id_empresa, new { @class = "control-label required" })
+                    @Html.DropDownListFor(model => model.ide_id_empresa, (IEnumerable<SelectListItem>)ViewBag.ide_id_empresa, "", new { @class = "form-control required " })
                     @Html.ValidationMessageFor(model => model.ide_id_empresa)
                 </div>
             </div>

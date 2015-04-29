@@ -11,7 +11,7 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class iso_departamento
     {
         public iso_departamento()
@@ -20,12 +20,21 @@ namespace CBM_SART.Models
         }
     
         public int ide_id_departamento { get; set; }
+        [Required]
+        [Display(Name = "Nombre")]
         public string ide_nombre_departamento { get; set; }
+        [Display(Name = "Descripción")]
         public string ide_descripcion_departamento { get; set; }
+        [Required]
+        [Display(Name = "Empresa")]
         public Nullable<int> ide_id_empresa { get; set; }
+        [Display(Name = "Departamento Padre")]
         public Nullable<int> ide_id_departamento_padre { get; set; }
+        [Display(Name = "Deshabilitado")]
         public Nullable<bool> ide_deshabilitar { get; set; }
+        [Display(Name = "Codigo Doc.")]
         public string ide_cod_documento { get; set; }
+        [Display(Name = "Empresa")]
     
         public virtual iso_empresa iso_empresa { get; set; }
         public virtual ICollection<iso_personal> iso_personal { get; set; }
