@@ -17,10 +17,11 @@
     function bindForm(dialog) {
         $('form', dialog).submit(function () {
             $('#progress').show();
+            var formData = new FormData($("#f")[0]);
             $.ajax({
                 url: this.action,
                 type: this.method,
-                data: $(this).serialize(),
+                data: formData,
                 success: function (result) {
                     if (result.success) {
                         $('#myModal').modal('hide');

@@ -15,7 +15,7 @@
 
 <div id="form-empresa-modal">
     @*@using (Html.BeginForm())*@
-    @using (Ajax.BeginForm("Create", "Empresa", new AjaxOptions() { OnSuccess = "getresult", HttpMethod = "post" }, new { enctype = "multipart/form-data", id= "f" }))
+    @using (Html.BeginForm("Create", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data", id = "f" }))
     {
         @Html.AntiForgeryToken()
         @*@Html.ValidationSummary(true)*@
@@ -204,7 +204,7 @@
                 </span>
                 @*<input class="btn btn-primary" type="submit" value="Save" />*@
                 <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
-                
+                @*<input type="button" id="btnEmpresa" value="Upload" />*@
                 <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
