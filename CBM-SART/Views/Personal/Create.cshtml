@@ -1,22 +1,451 @@
 ﻿@model CBM_SART.Models.iso_personal
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 }
 
-<h2>Create</h2>
+<div class="title-window" style="height:32px">
+    Permite registrar un Empleado Nuevo.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+@*<div class="modal-header">
+
+    <h4 class="modal-title">Registrar nuevo Empleado</h4>
+</div>*@
 
 
-@using (Html.BeginForm()) 
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm("Create", "Personal", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>iso_personal</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+    @Html.ValidationSummary(true)
+    <div class="form-personal">
+        @*<div class="col-md-2">
+            <img src="/images/form-personal.png" style="width: 100%" />
+        </div>*@
+        <div class="col-md-6">
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.ipe_id_empresa , new { @class = "control-label col-md-3" })*@
+                <label class="control-label col-md-3" for="cboEmpresa">Empresa</label>
+                <div class="col-md-9">
+                    @*@Html.ListBoxFor(model => model.ipe_id_empresa)*@
+                    @Html.DropDownListFor(model => model.ipe_id_empresa, (IEnumerable<SelectListItem>)ViewBag.ipe_id_empresa, "", new { @class = "form-control required col-md-3" })
+                    <div class="clear"></div>
+                    @Html.ValidationMessageFor(model => model.ipe_id_empresa)
+                </div>
+            </div>
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.ipe_id_departamento, new { @class = "control-label col-md-3" })*@
+                <label class="control-label col-md-3">Departamento</label>
+                <div class="col-md-9">
+                    @*@Html.EditorFor(model => model.ipe_id_departamento)*@
+                    @*@Html.DropDownList("cboDepartamento", (IEnumerable<SelectListItem>)ViewBag.Departamento, "-Todos-", new { @id = "cboDepartamento" })*@
+                    @Html.DropDownListFor(model => model.ipe_id_departamento, (IEnumerable<SelectListItem>)ViewBag.ipe_id_departamento, "", new { @class = "form-control required col-md-3" })
+                    @*@Html.DropDownList("ipe_id_departamento", String.Empty)*@
+                    <div class="clear"></div>
+                    @Html.ValidationMessageFor(model => model.ipe_id_departamento)
+                </div>
+            </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipe_id_cargo, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @*@Html.EditorFor(model => model.ipe_id_cargo)*@
+                    @*@Html.DropDownListFor(model => model.ipe_id_cargo, ViewBag.Departamento as IEnumerable<SelectListItem>, "<Selecionar>")*@
+                    @*@Html.DropDownListFor(model => model.ipe_id_cargo, (IEnumerable<SelectListItem>)ViewBag.Cargo, "-Todos-", new { id = "cboCargo" })*@
+                    @*@Html.DropDownList("ipe_id_cargo", String.Empty)*@
+                    @Html.DropDownListFor(model => model.ipe_id_cargo, (IEnumerable<SelectListItem>)ViewBag.ipe_id_cargo, "", new { @class = "form-control required col-md-3" })
+                    <div class="clear"></div>
+                    @Html.ValidationMessageFor(model => model.ipe_id_cargo)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipe_id_puesto_trabajo, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @*@Html.EditorFor(model => model.ipe_id_puesto_trabajo)*@
+                    @*@Html.DropDownListFor(model => model.ipe_id_puesto_trabajo, ViewBag.Departamento as IEnumerable<SelectListItem>, "<Selecionar>")*@
+                    @*@Html.DropDownListFor(model => model.ipe_id_puesto_trabajo, (IEnumerable<SelectListItem>)ViewBag.PuestoTrabajo, "-Todos-", new { id = "cboPuestoTrabajo" })*@
+                    @Html.DropDownListFor(model => model.ipe_id_puesto_trabajo, (IEnumerable<SelectListItem>)ViewBag.ipe_id_puesto_trabajo, "", new { @class = "form-control required col-md-3" })
+                    @*@Html.DropDownList("ipe_id_puesto_trabajo", String.Empty)*@
+                    <div class="clear"></div>
+                    @Html.ValidationMessageFor(model => model.ipe_id_puesto_trabajo)
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        <div class="col-md-2 ">
+            
+            <div class="inline-image-preivew">
+                <img id="blah" src="~/images/foto_personal.png" width="100" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; margin: 0 15%; max-width: 100%; height: auto" />
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <label class="col-md-12" for="cboEmpresa">Imagen</label>
+            <input type='file' id="file1" name="file1" multiple accept="image/*" />
+            <p class="help-block">Seleciona imagen de Trabajador (120 x 120)</p>
+
+            
+                @*@Html.LabelFor(model => model.ipe_estado_personal, new { @class = "control-label col-md-4" })*@
+                <label class="col-" for="cboEmpresa">Estado</label>
+                <div class="col-md-8">
+                    @*@Html.EditorFor(model => model.ipe_estado_personal)*@
+                    @*@Html.DropDownListFor(model => model.ipe_estado_personal, ViewBag.Departamento as IEnumerable<SelectListItem>, "<Todos>")*@
+                    @Html.DropDownListFor(model => model.ipe_estado_personal, new SelectList(
+                                new List<Object>{
+                                new { value = "A" , text = "Activo"  },
+                                new { value = "I" , text = "Inactivo" }
+                                },
+                                "value",
+                                "text",
+                                0), new { @class = "form-control required valid col-md-3" })
+                    @Html.ValidationMessageFor(model => model.ipe_estado_personal)
+                </div>
+            
+
+
+        </div>
+
+        <div class="clear"></div>
+        <hr />
+
+        <div class=" seccion-barra">
+            Datos Personales
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipe_ced_ruc_personal, new { @class = "control-label col-md-2" })
+                @*<label class="control-label col-md-2" for="ipe_ced_ruc_personal">Cédula/RUC *</label>*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ipe_ced_ruc_personal)
+                    @Html.ValidationMessageFor(model => model.ipe_ced_ruc_personal)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipe_nombre_personal, new { @class = "control-label col-md-2" })
+                @*<label class="control-label col-md-2" for="ipe_nombre_personal">Nombre *</label>*@
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipe_nombre_personal, new { style = "width:100%", required = "required" })
+                    @Html.ValidationMessageFor(model => model.ipe_nombre_personal)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipe_apellido_paterno, new { @class = "control-label col-md-2" })
+                @*<label class="control-label col-md-2" for="ipe_apellido_paterno">Apellido *</label>*@
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipe_apellido_paterno, new { style = "width:100%" })
+                    @Html.ValidationMessageFor(model => model.ipe_apellido_paterno)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipe_lugar_nacimiento, new { @class = "control-label col-md-2" })
+                @Html.ValidationMessageFor(model => model.ipe_lugar_nacimiento)
+
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipe_lugar_nacimiento, new { style = "width:100%" })
+                </div>
+            </div>
+
+            <div class="row">
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_fecha_nacimiento, new { @class = "control-label col-md-2" })
+                @*<label class="control-label col-md-2" for="ipe_fecha_nacimiento">Fecha Nacimiento *</label>*@
+                <div class="col-md-4">
+
+
+                    @*@Html.TextBoxFor(model => model.ipe_fecha_nacimiento, new { data_beatpicker = "true", data_beatpicker_extra = "customOptions" })*@
+
+                    @Html.EditorFor(model => model.ipe_fecha_nacimiento)
+
+                    @*@Html.ValidationMessageFor(model => model.ipe_fecha_nacimiento)*@
+
+
+                </div>
+
+
+                @*</div>*@
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_edad, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ipe_edad)
+                    @Html.ValidationMessageFor(model => model.ipe_edad)
+                </div>
+                @*</div>*@
+            </div>
+            <div class="row">
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_estado_civil, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.ipe_estado_civil)*@
+                    @Html.DropDownListFor(model => model.ipe_estado_civil, new SelectList(
+                                new List<Object>{
+                                new { value = "Soltero" , text = "Soltero"  },
+                                new { value = "Casado" , text = "Casado" },
+                                new { value = "Divorciado" , text = "Divorciado" },
+                                new { value = "Viudo" , text = "Viudo" },
+                                new { value = "Unión libre" , text = "Unión libre" }
+                                },
+                                "value",
+                                "text",
+                                0), "<Selecionar>")
+                    @Html.ValidationMessageFor(model => model.ipe_estado_civil)
+                </div>
+                @*</div>*@
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_genero, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.ipe_genero)*@
+                    @Html.DropDownListFor(model => model.ipe_genero, new SelectList(
+                                new List<Object>{
+                                new { value = "Masculino" , text = "Masculino"  },
+                                new { value = "Femenino" , text = "Femenino" }
+                                },
+                                "value",
+                                "text",
+                                0), "<Selecionar>")
+                    @Html.ValidationMessageFor(model => model.ipe_genero)
+                </div>
+                @*</div>*@
+            </div>
+            <div class="row">
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_fecha_ingreso, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.TextBoxFor(model => model.ipe_fecha_ingreso, new { data_beatpicker = "true", data_beatpicker_extra = "customOptions" })*@
+                    @*<div id='fechaIngreso' name="ipe_fecha_ingreso">*@
+                    @*@Html.TextBoxFor(model => model.ipe_fecha_nacimiento, "{0:d}")*@
+                    @*</div>*@
+
+                    @Html.EditorFor(model => model.ipe_fecha_ingreso)
+                    @Html.ValidationMessageFor(model => model.ipe_fecha_ingreso)
+                    @*</div>*@
+                </div>
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_nro_afiliacion, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ipe_nro_afiliacion)
+                    @Html.ValidationMessageFor(model => model.ipe_nro_afiliacion)
+                </div>
+                @*</div>*@
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipe_dir_domicilio, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ipe_dir_domicilio, new { style = "width:100%" })
+                    @Html.ValidationMessageFor(model => model.ipe_dir_domicilio)
+                </div>
+            </div>
+
+            <div class="row">
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_telf_1, new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.ipe_telf_1)
+                    @Html.ValidationMessageFor(model => model.ipe_telf_1)
+                </div>
+                @*</div>*@
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_telf_2, new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.ipe_telf_2)
+                    @Html.ValidationMessageFor(model => model.ipe_telf_2)
+                </div>
+                @*</div>*@
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_celular, new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.ipe_celular)
+                    @Html.ValidationMessageFor(model => model.ipe_celular)
+                </div>
+                @*</div>*@
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipe_email, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ipe_email)
+                    @Html.ValidationMessageFor(model => model.ipe_email)
+                </div>
+            </div>
+            <div class="row">
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_tipo_sangre, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.ipe_tipo_sangre)*@
+                    @Html.DropDownListFor(model => model.ipe_tipo_sangre, new SelectList(
+                                new List<Object>{
+                                new { value = "O" , text = "O"  },
+                                new { value = "A" , text = "A" },
+                                new { value = "B" , text = "B" },
+                                new { value = "AB" , text = "AB" }
+                                },
+                                "value",
+                                "text",
+                                0), "<Selecionar>")
+                    @Html.ValidationMessageFor(model => model.ipe_tipo_sangre)
+                </div>
+                @*</div>*@
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_factor_rh, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.ipe_factor_rh)*@
+                    @Html.DropDownListFor(model => model.ipe_factor_rh, new SelectList(
+                                new List<Object>{
+                                new { value = "Positivo" , text = "Positivo"  },
+                                new { value = "Negativo" , text = "Negativo" },
+                                },
+                                "value",
+                                "text",
+                                0), "<Selecionar>")
+                    @Html.ValidationMessageFor(model => model.ipe_tipo_sangre)
+                    @Html.ValidationMessageFor(model => model.ipe_factor_rh)
+                </div>
+                @*</div>*@
+            </div>
+            <div class="row">
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_etnia, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.ipe_etnia)*@
+                    @Html.DropDownListFor(model => model.ipe_factor_rh, new SelectList(
+                                new List<Object>{
+                                new { value = "No determinada" , text = "No determinada"  },
+                                new { value = "Mestizo" , text = "Mestizo" },
+                                new { value = "Blanco" , text = "Blanco" },
+                                new { value = "Indígena Amazónico" , text = "Indígena Amazónico" },
+                                new { value = "Indígena Quichua Sierra" , text = "Indígena Quichua Sierra" },
+                                new { value = "Afroecuatoriano" , text = "Afroecuatoriano" },
+                                new { value = "Huancavilca" , text = "Huancavilca" },
+                                new { value = "Tsáchila" , text = "Tsáchila" },
+                                new { value = "Extranjero" , text = "Extranjero" },
+                                new { value = "Otro" , text = "Otro" }
+                                },
+                                "value",
+                                "text",
+                                0), "<Selecionar>")
+                    @Html.ValidationMessageFor(model => model.ipe_etnia)
+                </div>
+                @*</div>*@
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_nacionalidad, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ipe_nacionalidad)
+                    @Html.ValidationMessageFor(model => model.ipe_nacionalidad)
+                </div>
+                @*</div>*@
+            </div>
+            <div class="row">
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_nivel_educativo, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.ipe_nivel_educativo)*@
+                    @Html.DropDownListFor(model => model.ipe_nivel_educativo, new SelectList(
+                                new List<Object>{
+                                new { value = "Primaria" , text = "Primaria"},
+                                new { value = "Secundario" , text = "Secundario"},
+                                new { value = "Técnico" , text = "Técnico"},
+                                new { value = "Tecnólogo" , text = "Tecnólogico"},
+                                new { value = "Superior" , text = "Superior"},
+                                new { value = "Posgrado" , text = "Posgrado"}
+                                },
+                                "value",
+                                "text",
+                                0), "<Selecionar>")
+                    @Html.ValidationMessageFor(model => model.ipe_nivel_educativo)
+                </div>
+                @*</div>*@
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_profesion, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ipe_profesion)
+                    @Html.ValidationMessageFor(model => model.ipe_profesion)
+                </div>
+                @*</div>*@
+
+            </div>
+
+        </div>
+
+        <div class="col-xs-12">
+            <div class="row">
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_vulnerabilidad, new { @class = "control-label col-md-1" })
+                <div class="col-md-1">
+                    @Html.EditorFor(model => model.ipe_vulnerabilidad)
+                    @*@Html.CheckBoxFor(model => model.ipe_vulnerabilidad)*@
+
+                    @Html.ValidationMessageFor(model => model.ipe_vulnerabilidad)
+                </div>
+                @*</div>*@
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_familiares_empresa, new { @class = "control-label col-md-2" })
+                <div class="col-md-1">
+                    @Html.EditorFor(model => model.ipe_familiares_empresa)
+                    @*@Html.CheckBoxFor(model => model.ipe_familiares_empresa.AsBool())*@
+                    @Html.ValidationMessageFor(model => model.ipe_familiares_empresa)
+                </div>
+                @*</div>*@
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_cambio_area, new { @class = "control-label col-md-1" })
+                <div class="col-md-1">
+                    @Html.EditorFor(model => model.ipe_cambio_area)
+                    @*@Html.CheckBoxFor(model => model.ipe_cambio_area.AsBool())*@
+                    @*@Html.CheckBoxFor(model => Convert.ToBoolean(model.ipe_cambio_area))*@
+
+                    @Html.ValidationMessageFor(model => model.ipe_cambio_area)
+                </div>
+                @*</div>*@
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_tiempo_per_a, new { @class = "control-label col-md-1" })
+                <div class="col-md-1">
+                    @Html.EditorFor(model => model.ipe_tiempo_per_a)
+                    @Html.ValidationMessageFor(model => model.ipe_tiempo_per_a)
+                </div>
+                @*</div>*@
+
+                @*<div class="form-group">*@
+                @Html.LabelFor(model => model.ipe_tiempo_per_m, new { @class = "control-label col-md-1" })
+                <div class="col-md-1">
+                    @Html.EditorFor(model => model.ipe_tiempo_per_m)
+                    @Html.ValidationMessageFor(model => model.ipe_tiempo_per_m)
+                </div>
+                @*</div>*@
+
+            </div>
+        </div>
+
+
+
+
+        
+    </div>
+    
+    
+
+    
+
+
+    <div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(model => model.ipe_ced_ruc_personal, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -432,11 +861,16 @@
         </div>
     </div>
 }
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    
+
 }

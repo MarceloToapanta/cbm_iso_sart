@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CBM_SART.Models;
+using System.Linq.Dynamic;
 
 namespace CBM_SART.Controllers
 {
@@ -16,10 +17,40 @@ namespace CBM_SART.Controllers
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
         // GET: /Personal/
-        public async Task<ActionResult> Index()
+        //public async Task<ActionResult> Index()
+        //{
+        //    var iso_personal = db.iso_personal.Include(i => i.iso_cargo).Include(i => i.iso_departamento).Include(i => i.iso_empresa).Include(i => i.iso_puesto_trabajo).Include(i => i.iso_puesto_trabajo1);
+        //    return View(await iso_personal.ToListAsync());
+        //}
+
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ipe_id_personal", string sortdir = "ASC")
         {
-            var iso_personal = db.iso_personal.Include(i => i.iso_cargo).Include(i => i.iso_departamento).Include(i => i.iso_empresa).Include(i => i.iso_puesto_trabajo).Include(i => i.iso_puesto_trabajo1);
-            return View(await iso_personal.ToListAsync());
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_personal>();
+            ViewBag.filter = filter;
+            records.Content = db.iso_personal
+                        .Where(x => filter == null ||
+                                (x.ipe_nombre_personal.ToLower().Contains(filter.ToLower().Trim()))
+                                || x.ipe_apellido_paterno.ToLower().Contains(filter.ToLower().Trim())
+                              )
+                        .OrderBy(sort + " " + sortdir)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+
+            // Count
+            records.TotalRecords = db.iso_personal
+                         .Where(x => filter == null ||
+                                (x.ipe_nombre_personal.ToLower().Contains(filter.ToLower().Trim()))
+                                || x.ipe_apellido_paterno.ToLower().Contains(filter.ToLower().Trim())).Count();
+
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+
+            return View(records);
+
+            //return View(db.iso_empresa.ToList());
         }
 
         // GET: /Personal/Details/5
@@ -45,7 +76,9 @@ namespace CBM_SART.Controllers
             ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa");
             ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t");
             ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t");
-            return View();
+            var iso_personal = new iso_personal();
+            return PartialView("Create", iso_personal);
+            //return View();
         }
 
         // POST: /Personal/Create

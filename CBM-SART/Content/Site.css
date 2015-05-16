@@ -640,3 +640,12 @@ tfoot > tr > td a:hover{
  .webgrid-row-style{
     cursor: pointer;
 }
+ /*///////////////////////////Form Personal/////////////////////////////*/
+ .form-personal .form-control{
+     width:95%;
+     height:20px;
+ }
+ .form-personal {
+     padding-top:10px;
+ }
+ 
