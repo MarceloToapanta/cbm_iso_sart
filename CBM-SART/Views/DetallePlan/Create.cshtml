@@ -1,0 +1,237 @@
+﻿@model CBM_SART.Models.iso_detalle_plan
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>iso_detalle_plan</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_id_plan, "idp_id_plan", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idp_id_plan", String.Empty)
+                @Html.ValidationMessageFor(model => model.idp_id_plan)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_numero_plan, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_numero_plan)
+                @Html.ValidationMessageFor(model => model.idp_numero_plan)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_tarea, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_tarea)
+                @Html.ValidationMessageFor(model => model.idp_tarea)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_observacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_observacion)
+                @Html.ValidationMessageFor(model => model.idp_observacion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_fecha_comienzo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_fecha_comienzo)
+                @Html.ValidationMessageFor(model => model.idp_fecha_comienzo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_fecha_fin, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_fecha_fin)
+                @Html.ValidationMessageFor(model => model.idp_fecha_fin)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_duracion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_duracion)
+                @Html.ValidationMessageFor(model => model.idp_duracion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_costo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_costo)
+                @Html.ValidationMessageFor(model => model.idp_costo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_porcentaje, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_porcentaje)
+                @Html.ValidationMessageFor(model => model.idp_porcentaje)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_estado, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_estado)
+                @Html.ValidationMessageFor(model => model.idp_estado)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_id_plan_padre, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_id_plan_padre)
+                @Html.ValidationMessageFor(model => model.idp_id_plan_padre)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_descripcion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_descripcion)
+                @Html.ValidationMessageFor(model => model.idp_descripcion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_fecha_creacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_fecha_creacion)
+                @Html.ValidationMessageFor(model => model.idp_fecha_creacion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_fecha_modificacion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_fecha_modificacion)
+                @Html.ValidationMessageFor(model => model.idp_fecha_modificacion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_verificar_accion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_verificar_accion)
+                @Html.ValidationMessageFor(model => model.idp_verificar_accion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_unidad, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_unidad)
+                @Html.ValidationMessageFor(model => model.idp_unidad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_cantidad, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_cantidad)
+                @Html.ValidationMessageFor(model => model.idp_cantidad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_tiempoded, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_tiempoded)
+                @Html.ValidationMessageFor(model => model.idp_tiempoded)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_tiemponeto, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_tiemponeto)
+                @Html.ValidationMessageFor(model => model.idp_tiemponeto)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_avancep, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_avancep)
+                @Html.ValidationMessageFor(model => model.idp_avancep)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_objetivo_estrategico, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_objetivo_estrategico)
+                @Html.ValidationMessageFor(model => model.idp_objetivo_estrategico)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_entregable, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_entregable)
+                @Html.ValidationMessageFor(model => model.idp_entregable)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_id_departamento, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_id_departamento)
+                @Html.ValidationMessageFor(model => model.idp_id_departamento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_costo_ejecutado, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_costo_ejecutado)
+                @Html.ValidationMessageFor(model => model.idp_costo_ejecutado)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_id_proceso, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_id_proceso)
+                @Html.ValidationMessageFor(model => model.idp_id_proceso)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idp_peso, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idp_peso)
+                @Html.ValidationMessageFor(model => model.idp_peso)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

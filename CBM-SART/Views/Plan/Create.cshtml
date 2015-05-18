@@ -1,0 +1,154 @@
+﻿@model CBM_SART.Models.iso_plan
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+<div class="title-window" style="height:32px">
+    Permite registrar una Nuevo Plan.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Crear nuevo Plan</h4>
+</div>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_codigo_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ipl_codigo_plan, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.ipl_codigo_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_nombre_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.ipl_nombre_plan)*@
+                    @Html.TextBoxFor(m => m.ipl_nombre_plan, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.ipl_nombre_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_descripcion_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ipl_descripcion_plan, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.ipl_descripcion_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_tipo_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.ipl_tipo_plan)*@
+                    @*@Html.TextBoxFor(m => m.ipl_tipo_plan, new { @class = "form-control required" })*@
+                    @Html.DropDownListFor(model => model.ipl_tipo_plan, new SelectList(
+                                new List<Object>{
+                                new { value = "SART" , text = "SART"  },
+                                new { value = "Operativo" , text = "Operativo" },
+                                new { value = "Estraegico" , text = "Estratégico" }
+                                },
+                                "value",
+                                "text",
+                                0), new { @class = "form-control required valid" })
+                    @Html.ValidationMessageFor(model => model.ipl_tipo_plan)
+                </div>
+                @Html.LabelFor(model => model.ipl_fecha_creacion_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ipl_fecha_creacion_plan, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipl_fecha_creacion_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+                
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_creador_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ipl_creador_plan, new { @class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.ipl_creador_plan)
+                </div>
+                @Html.LabelFor(model => model.ipl_tolerancia, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ipl_tolerancia, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipl_tolerancia)
+                </div>
+            </div>
+
+            
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.ipl_responsable, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ipl_responsable)
+                    @Html.ValidationMessageFor(model => model.ipl_responsable)
+                </div>
+            </div>*@
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.ipl_id_plan_padre, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ipl_id_plan_padre)
+                    @Html.ValidationMessageFor(model => model.ipl_id_plan_padre)
+                </div>
+            </div>*@
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.ipl_tipo_proyecto, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ipl_tipo_proyecto)
+                    @Html.ValidationMessageFor(model => model.ipl_tipo_proyecto)
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_objetivo_estrategico, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ipl_objetivo_estrategico, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipl_objetivo_estrategico)
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.ipl_id_area, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ipl_id_area)
+                    @Html.ValidationMessageFor(model => model.ipl_id_area)
+                </div>
+            </div>*@
+
+            <div class="col-md-1"></div>
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
+                @*<input type="button" id="btnEmpresa" value="Upload" />*@
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

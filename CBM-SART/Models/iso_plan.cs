@@ -11,6 +11,7 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_plan
     {
@@ -20,16 +21,28 @@ namespace CBM_SART.Models
         }
     
         public int ipl_id_plan { get; set; }
+        [Display(Name = "Tipo Plan")]
+        [Required]
         public string ipl_tipo_plan { get; set; }
+        [Display(Name = "Nombre")]
+        [Required]
         public string ipl_nombre_plan { get; set; }
+        [Display(Name = "Descripción")]
         public string ipl_descripcion_plan { get; set; }
+        [Display(Name = "Fecha Creación")]
+        [Required]
         public Nullable<System.DateTime> ipl_fecha_creacion_plan { get; set; }
+        [Display(Name = "Creado Por")]
         public string ipl_creador_plan { get; set; }
+        [Display(Name = "Tolerancia")]
         public string ipl_tolerancia { get; set; }
         public Nullable<int> ipl_responsable { get; set; }
+        [Display(Name = "Código")]
         public string ipl_codigo_plan { get; set; }
         public Nullable<int> ipl_id_plan_padre { get; set; }
+        [Display(Name = "Tipo Proyecto")]
         public string ipl_tipo_proyecto { get; set; }
+        [Display(Name = "Objetivo")]
         public string ipl_objetivo_estrategico { get; set; }
         public Nullable<int> ipl_id_area { get; set; }
     

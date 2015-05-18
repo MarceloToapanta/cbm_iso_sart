@@ -1,0 +1,184 @@
+﻿@*@model IEnumerable<CBM_SART.Models.iso_plan>*@
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_plan>
+@{
+    ViewBag.Title = "Lista Planes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "Planes";
+    Session["SidebarSelect"] = "Lista";
+}
+
+<div class="seccion-barra">
+    <img src="~/images/label-plain-black.png" height="24" width="24" />
+    Informacion de los Planes registrados.
+    <span class="text-count">Nro. de  Planes : @ViewBag.total</span>
+</div>
+
+<div class="content">
+    @using (Html.BeginForm("index", null, FormMethod.Get))
+    {
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Nombre del Plan" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="btn btn-success" data-modal="" href="/Plan/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="col-md-12 grid-content">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column(header: "Tareas", canSort: false, style: "tareas",
+                     format: @<text>
+                @Html.Raw("<a href='/Plan/Tareas/" + item.ipl_id_plan + "' id='" + item.ipl_id_plan + "' title='Tareas'> <img width=16 src='/images/detalles1.png'> </a>")
+                </text>),
+              grid.Column("ipl_codigo_plan", "Código", style: "col-lg-1"),
+              grid.Column("ipl_tipo_plan", "Tipo", style: "col-lg-1"),
+              grid.Column("ipl_nombre_plan", "Nombre", style: "col-lg-4"),
+                   grid.Column("ipl_fecha_creacion_plan", "F. Creación", style: "col-lg-1", format: (item) => string.Format("{0:dd/MM/yyyy}", item.ipl_fecha_creacion_plan)),
+              grid.Column("ipl_creador_plan", "Creado Por", style: "col-lg-2"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a data-modal='' href='/Plan/details/" + item.ipl_id_plan + "' id='" + item.ipl_id_plan + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Plan/edit/" + item.ipl_id_plan + "' id='" + item.ipl_id_plan + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Plan/delete/" + item.ipl_id_plan + "' id='" + item.ipl_id_plan + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                </text>)                                                                                                                                ));
+            }
+        </div>
+        <div class="clear"></div>
+    }
+</div>
+
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_tipo_plan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_nombre_plan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_descripcion_plan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_fecha_creacion_plan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_creador_plan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_tolerancia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_responsable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_codigo_plan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_id_plan_padre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_tipo_proyecto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_objetivo_estrategico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipl_id_area)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_tipo_plan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_nombre_plan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_descripcion_plan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_fecha_creacion_plan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_creador_plan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_tolerancia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_responsable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_codigo_plan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_id_plan_padre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_tipo_proyecto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_objetivo_estrategico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipl_id_area)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ipl_id_plan }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ipl_id_plan }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ipl_id_plan })
+        </td>
+    </tr>
+}
+
+</table>*@
+
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog" style="width: 50%">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
+}

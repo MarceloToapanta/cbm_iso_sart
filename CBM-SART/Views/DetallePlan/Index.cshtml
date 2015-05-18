@@ -1,0 +1,184 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_detalle_plan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_numero_plan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_tarea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_observacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_fecha_comienzo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_fecha_fin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_duracion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_costo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_porcentaje)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_id_plan_padre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_fecha_creacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_fecha_modificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_verificar_accion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_unidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_tiempoded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_tiemponeto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_avancep)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_objetivo_estrategico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_entregable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_id_departamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_costo_ejecutado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_id_proceso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idp_peso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_plan.ipl_tipo_plan)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_numero_plan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_tarea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_observacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_fecha_comienzo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_fecha_fin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_duracion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_costo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_porcentaje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_id_plan_padre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_fecha_creacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_fecha_modificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_verificar_accion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_unidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_tiempoded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_tiemponeto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_avancep)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_objetivo_estrategico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_entregable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_id_departamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_costo_ejecutado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_id_proceso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idp_peso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_plan.ipl_tipo_plan)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

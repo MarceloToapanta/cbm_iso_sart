@@ -170,12 +170,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
+    <Compile Include="Controllers\DetallePlanController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EquipoTrabajoController.cs" />
     <Compile Include="Controllers\HistoriaClinicaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidenteController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\PlanesController.cs" />
     <Compile Include="Controllers\ProfesiogramaController.cs" />
     <Compile Include="Controllers\PuestoTrabajoController.cs" />
@@ -462,6 +464,18 @@
     <Content Include="Views\Profesiograma\Index.cshtml" />
     <Content Include="Views\HistoriaClinica\Panel.cshtml" />
     <Content Include="Views\HistoriaClinica\ListaPersonal.cshtml" />
+    <Content Include="Views\Plan\Create.cshtml" />
+    <Content Include="Views\Plan\Delete.cshtml" />
+    <Content Include="Views\Plan\Details.cshtml" />
+    <Content Include="Views\Plan\Edit.cshtml" />
+    <Content Include="Views\Plan\Index.cshtml" />
+    <Content Include="Views\DetallePlan\Create.cshtml" />
+    <Content Include="Views\DetallePlan\Delete.cshtml" />
+    <Content Include="Views\DetallePlan\Details.cshtml" />
+    <Content Include="Views\DetallePlan\Edit.cshtml" />
+    <Content Include="Views\DetallePlan\Index.cshtml" />
+    <Content Include="Views\Plan\Tareas.cshtml" />
+    <Content Include="Views\Plan\NuevaTarea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

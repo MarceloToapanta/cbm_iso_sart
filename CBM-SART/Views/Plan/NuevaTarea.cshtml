@@ -1,0 +1,279 @@
+﻿@model CBM_SART.Models.iso_detalle_plan
+
+<div class="title-window" style="height:32px">
+    Permite registrar una Nueva Tarea.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Crear nueva Tarea</h4>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_id_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.TextBoxFor(model => model.idp_id_plan, ViewBag.nombreplan[0].ipl_nombre_plan, new { @class = "form-control required valid", @disabled = "disabled" })*@
+                    <textarea rows="2" class="form-control required valid" disabled="disabled">@ViewBag.nombreplan[0].ipl_nombre_plan</textarea>
+                    @Html.ValidationMessageFor(model => model.idp_id_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_numero_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-1">
+                    @Html.TextBoxFor(model => model.idp_numero_plan, new { @class = "form-control required valid", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.idp_numero_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_tarea, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.idp_tarea, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.idp_tarea)
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.idp_observacion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_observacion)
+                    @Html.ValidationMessageFor(model => model.idp_observacion)
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_fecha_comienzo, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.idp_fecha_comienzo, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.idp_fecha_comienzo)
+                </div>
+                @Html.LabelFor(model => model.idp_fecha_fin, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.idp_fecha_fin, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.idp_fecha_fin)
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.idp_duracion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_duracion)
+                    @Html.ValidationMessageFor(model => model.idp_duracion)
+                </div>
+            </div>*@
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.idp_costo, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_costo)
+                    @Html.ValidationMessageFor(model => model.idp_costo)
+                </div>
+            </div>*@
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.idp_porcentaje, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_porcentaje)
+                    @Html.ValidationMessageFor(model => model.idp_porcentaje)
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_estado, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.TextBoxFor(model => model.idp_estado, new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.idp_estado, new SelectList(
+                                new List<Object>{
+                                new { value = "" , text = ""  },
+                                new { value = "Completo" , text = "Completo"  },
+                                new { value = "Pendiente" , text = "Pendiente" },
+                                new { value = "Atrasado" , text = "Atrasado" }
+                                },
+                                "value",
+                                "text",
+                                0), new { @class = "form-control required valid" })
+                    @Html.ValidationMessageFor(model => model.idp_estado)
+                </div>
+                @Html.LabelFor(model => model.idp_cantidad, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.TextBoxFor(model => model.idp_cantidad, new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.idp_estado, new SelectList(
+                                new List<Object>{
+                                new { value = "0" , text = "0"  },
+                                new { value = "10" , text = "10"  },
+                                new { value = "20" , text = "20"  },
+                                new { value = "30" , text = "30"  },
+                                new { value = "40" , text = "40"  },
+                                new { value = "50" , text = "50"  },
+                                new { value = "60" , text = "60"  },
+                                new { value = "70" , text = "70"  },
+                                new { value = "80" , text = "80"  },
+                                new { value = "90" , text = "90"  },
+                                new { value = "100" , text = "100"  },
+                                },
+                                "value",
+                                "text",
+                                0), new { @class = "form-control required valid" })
+                    @Html.ValidationMessageFor(model => model.idp_cantidad)
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.idp_id_plan_padre, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_id_plan_padre)
+                    @Html.ValidationMessageFor(model => model.idp_id_plan_padre)
+                </div>
+            </div>*@
+
+            
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_descripcion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.idp_descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idp_descripcion)
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.idp_fecha_creacion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_fecha_creacion)
+                    @Html.ValidationMessageFor(model => model.idp_fecha_creacion)
+                </div>
+            </div>*@
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.idp_fecha_modificacion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_fecha_modificacion)
+                    @Html.ValidationMessageFor(model => model.idp_fecha_modificacion)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_verificar_accion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_verificar_accion)
+                    @Html.ValidationMessageFor(model => model.idp_verificar_accion)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_unidad, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_unidad)
+                    @Html.ValidationMessageFor(model => model.idp_unidad)
+                </div>
+            </div>
+            *@
+
+            
+            @*
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_tiempoded, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_tiempoded)
+                    @Html.ValidationMessageFor(model => model.idp_tiempoded)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_tiemponeto, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_tiemponeto)
+                    @Html.ValidationMessageFor(model => model.idp_tiemponeto)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_avancep, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_avancep)
+                    @Html.ValidationMessageFor(model => model.idp_avancep)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_objetivo_estrategico, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_objetivo_estrategico)
+                    @Html.ValidationMessageFor(model => model.idp_objetivo_estrategico)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_entregable, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_entregable)
+                    @Html.ValidationMessageFor(model => model.idp_entregable)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_id_departamento, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_id_departamento)
+                    @Html.ValidationMessageFor(model => model.idp_id_departamento)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_costo_ejecutado, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_costo_ejecutado)
+                    @Html.ValidationMessageFor(model => model.idp_costo_ejecutado)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_id_proceso, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_id_proceso)
+                    @Html.ValidationMessageFor(model => model.idp_id_proceso)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idp_peso, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.idp_peso)
+                    @Html.ValidationMessageFor(model => model.idp_peso)
+                </div>
+            </div>*@
+
+            @*Espacio*@
+            <div class="col-md-1"></div>
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
+                @*<input type="button" id="btnEmpresa" value="Upload" />*@
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        
+        </div>
+    </div>
+}
+
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

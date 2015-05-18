@@ -1,0 +1,227 @@
+﻿@model CBM_SART.Models.iso_detalle_plan
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>iso_detalle_plan</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_numero_plan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_numero_plan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_tarea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_tarea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_observacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_observacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_fecha_comienzo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_fecha_comienzo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_fecha_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_fecha_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_duracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_costo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_costo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_porcentaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_porcentaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_id_plan_padre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_id_plan_padre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_fecha_creacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_fecha_creacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_fecha_modificacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_fecha_modificacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_verificar_accion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_verificar_accion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_unidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_unidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_tiempoded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_tiempoded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_tiemponeto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_tiemponeto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_avancep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_avancep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_objetivo_estrategico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_objetivo_estrategico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_entregable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_entregable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_id_departamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_id_departamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_costo_ejecutado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_costo_ejecutado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_id_proceso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_id_proceso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idp_peso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idp_peso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_plan.ipl_tipo_plan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_plan.ipl_tipo_plan)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

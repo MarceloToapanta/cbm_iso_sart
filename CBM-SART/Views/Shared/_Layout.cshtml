@@ -20,7 +20,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("SART", "Index", "Home", null, new { @class = "navbar-brand" })
-                
+
             </div>
             <div class="navbar-collapse collapse navbar-right ">
                 <ul class="nav navbar-nav">
@@ -73,9 +73,9 @@
 
                     @*<li>@Html.ActionLink("Inicio", "Index", "Home")</li>*@
                     @*<li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
+                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
                     @*<li>@Html.ActionLink("Empresa", "Index", "Empresa")</li>*@
-                    <li><a href="\Planes" class="boton-barra"><img class="boton-barra-imagen" src="~/images/planes.png" />Planes y Programas</a></li>
+                    <li><a href="\Plan" class="boton-barra"><img class="boton-barra-imagen" src="~/images/planes.png" />Planes y Programas</a></li>
                 </ul>
                 @*@Html.Partial("_LoginPartial")*@
             </div>
@@ -83,7 +83,7 @@
     </div>
     <div class="body-content">
         @if (Session["Sidebar"] != "")
-        { 
+        {
             <div class="col-md-2">
                 <div id="sidebar">
                     @Html.Partial("_LoginPartial")
@@ -104,39 +104,50 @@
                             </ul>
                         </div>
                     }
-                    
-                           @if (Session["Sidebar"] == "Admin") {
+                    @if (Session["Sidebar"] == "Admin")
+                    {
+                        <div class="sidebar-menus">
+                            <ul class="list-panel-modulos">
+                                <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
+                                <li><a class="@(Session["SidebarSelect"] == "Departamento" ? "select" : "")" href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
+                                <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/user.png")" />Administración de Usuarios</a></li>
+                                <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
+                                <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/pemisolista.png")" />Permisos Auditorias</a></li>
+                                <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
+                            </ul>
+                        </div>
+                    }
+                    @if (Session["Sidebar"] == "Planes")
+                    {
+                        if (Session["SidebarSelect"] == "Tareas")
+                        {
                             <div class="sidebar-menus">
-                                <ul class="list-panel-modulos">
-                                    <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
-                                    <li><a class="@(Session["SidebarSelect"] == "Departamento" ? "select" : "")" href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
-                                    <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/user.png")" />Administración de Usuarios</a></li>
-                                    <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
-                                    <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/pemisolista.png")" />Permisos Auditorias</a></li>
-                                    <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
-                                </ul>
-                            </div>
-}
+                            <ul class="list-panel-modulos">
+                                <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Plan")"><img class="boton-panel-imagen" src="@Url.Content("~/images/back.png")" />Regresar</a></li>                                
+                            </ul>
+                        </div>
+                        }
+                    }
+
+                </div>
 
             </div>
 
+            <div class="col-md-10">
+                <div id="content" class="well-sm">
+                    @RenderBody()
+                </div>
             </div>
-        
-        <div class="col-md-10">
-            <div id="content" class="well-sm">
-                @RenderBody()
-            </div>
-        </div>
         }
         else
         {
-        <div class="col-md-12">
-            <div id="content" class="well-sm">
-                @RenderBody()
+            <div class="col-md-12">
+                <div id="content" class="well-sm">
+                    @RenderBody()
+                </div>
             </div>
-        </div>
         }
-        
+
         <div class="clear"></div>
     </div>
     <footer>
