@@ -1,5 +1,7 @@
 ﻿@model CBM_SART.Models.iso_detalle_plan
-
+@{
+    string form = "GuardarTarea/" + ViewBag.nombreplan[0].ipl_id_plan;
+}
 <div class="title-window" style="height:32px">
     Permite registrar una Nueva Tarea.
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -8,13 +10,13 @@
 
     <h4 class="modal-title">Crear nueva Tarea</h4>
 </div>
-@using (Html.BeginForm())
+@using (Html.BeginForm(form, "Plan", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="modal-body">
         <div class="form-horizontal">
             @Html.ValidationSummary(true)
-
+            <input id="id" type="hidden" value="@ViewBag.nombreplan[0].ipl_id_plan" />
             <div class="form-group">
                 @Html.LabelFor(model => model.idp_id_plan, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -27,7 +29,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.idp_numero_plan, new { @class = "control-label col-md-2" })
                 <div class="col-md-1">
-                    @Html.TextBoxFor(model => model.idp_numero_plan, new { @class = "form-control required valid", @disabled = "disabled" })
+                    @Html.TextBoxFor(model => model.idp_numero_plan, new { @Value = ViewBag.nroTarea, @class = "form-control required valid", @readonly= "true" })
+                    
                     @Html.ValidationMessageFor(model => model.idp_numero_plan)
                 </div>
             </div>
@@ -35,7 +38,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.idp_tarea, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.idp_tarea, new { @class = "form-control required" })
+                    @Html.TextBoxFor(model => model.idp_tarea, new { @class = "form-control required", @autofocus= "true" })
                     @Html.ValidationMessageFor(model => model.idp_tarea)
                 </div>
             </div>
@@ -51,12 +54,12 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.idp_fecha_comienzo, new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.idp_fecha_comienzo, new { @class = "form-control required" })
+                    @Html.TextBoxFor(model => model.idp_fecha_comienzo, new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker required valid", @placeholder = "dd/mm/aaaa" })
                     @Html.ValidationMessageFor(model => model.idp_fecha_comienzo)
                 </div>
                 @Html.LabelFor(model => model.idp_fecha_fin, new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.idp_fecha_fin, new { @class = "form-control required" })
+                    @Html.TextBoxFor(model => model.idp_fecha_fin, new { @Value = @DateTime.Now.AddDays(1).ToShortDateString(), @class = "form-control datepicker required valid", @placeholder = "dd/mm/aaaa" })
                     @Html.ValidationMessageFor(model => model.idp_fecha_fin)
                 </div>
             </div>
@@ -98,13 +101,13 @@
                                 },
                                 "value",
                                 "text",
-                                0), new { @class = "form-control required valid" })
+                                0), new { @class = "form-control valid" })
                     @Html.ValidationMessageFor(model => model.idp_estado)
                 </div>
                 @Html.LabelFor(model => model.idp_cantidad, new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
                     @*@Html.TextBoxFor(model => model.idp_cantidad, new { @class = "form-control" })*@
-                    @Html.DropDownListFor(model => model.idp_estado, new SelectList(
+                    @Html.DropDownListFor(model => model.idp_cantidad, new SelectList(
                                 new List<Object>{
                                 new { value = "0" , text = "0"  },
                                 new { value = "10" , text = "10"  },
@@ -272,6 +275,20 @@
     $("form").removeData("validator");
     $("form").removeData("unobtrusiveValidation");
     $.validator.unobtrusive.parse("form");
+</script>
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            autoclose: true
+        }); //Initialise any date pickers
+        
+    });
+    $(document).ready(function () { //////// Inicio Cargado el Documento
+        $('#idp_tarea').focus();
+    });
+
 </script>
 
 @section Scripts {

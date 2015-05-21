@@ -656,4 +656,7 @@ tfoot > tr > td a:hover{
  .form-personal {
      padding-top:10px;
  }
- 
+ .plan-header{
+     font-size:12px;
+     color: #333;
+ }

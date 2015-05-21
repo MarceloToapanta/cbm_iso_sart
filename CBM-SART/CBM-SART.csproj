@@ -476,6 +476,8 @@
     <Content Include="Views\DetallePlan\Index.cshtml" />
     <Content Include="Views\Plan\Tareas.cshtml" />
     <Content Include="Views\Plan\NuevaTarea.cshtml" />
+    <Content Include="Views\Plan\EliminarTarea.cshtml" />
+    <Content Include="Views\Plan\EditarTarea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

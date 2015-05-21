@@ -32,8 +32,10 @@ namespace CBM_SART.Models
         public string idp_tarea { get; set; }
         public string idp_observacion { get; set; }
         [Display(Name = "Fecha Inicio")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Required]
         public Nullable<System.DateTime> idp_fecha_comienzo { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "Fecha Fin")]
         [Required]
         public Nullable<System.DateTime> idp_fecha_fin { get; set; }

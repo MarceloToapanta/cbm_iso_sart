@@ -80,7 +80,7 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="ipl_id_plan,ipl_tipo_plan,ipl_nombre_plan,ipl_descripcion_plan,ipl_fecha_creacion_plan,ipl_creador_plan,ipl_tolerancia,ipl_responsable,ipl_codigo_plan,ipl_id_plan_padre,ipl_tipo_proyecto,ipl_objetivo_estrategico,ipl_id_area")] iso_plan iso_plan)
+        public async Task<ActionResult> Create([Bind(Include = "ipl_id_plan,ipl_tipo_plan,ipl_nombre_plan,ipl_descripcion_plan,ipl_fecha_creacion_plan,ipl_creador_plan,ipl_tolerancia,ipl_responsable,ipl_codigo_plan,ipl_id_plan_padre,ipl_tipo_proyecto,ipl_objetivo_estrategico,ipl_id_area")] iso_plan iso_plan)
         {
             if (ModelState.IsValid)
             {
@@ -114,7 +114,7 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="ipl_id_plan,ipl_tipo_plan,ipl_nombre_plan,ipl_descripcion_plan,ipl_fecha_creacion_plan,ipl_creador_plan,ipl_tolerancia,ipl_responsable,ipl_codigo_plan,ipl_id_plan_padre,ipl_tipo_proyecto,ipl_objetivo_estrategico,ipl_id_area")] iso_plan iso_plan)
+        public async Task<ActionResult> Edit([Bind(Include = "ipl_id_plan,ipl_tipo_plan,ipl_nombre_plan,ipl_descripcion_plan,ipl_fecha_creacion_plan,ipl_creador_plan,ipl_tolerancia,ipl_responsable,ipl_codigo_plan,ipl_id_plan_padre,ipl_tipo_proyecto,ipl_objetivo_estrategico,ipl_id_area")] iso_plan iso_plan)
         {
             if (ModelState.IsValid)
             {
@@ -155,9 +155,95 @@ namespace CBM_SART.Controllers
         public ActionResult NuevaTarea(int id)
         {
             var nombreplan = db.iso_plan.Where(x => x.ipl_id_plan == id).ToArray();
+            int nroTarea = int.Parse(db.iso_detalle_plan.Where(x => x.idp_id_plan == id).Select(x => x.idp_numero_plan).Max());
+
             var iso_detalle_plan = new iso_detalle_plan();
             ViewBag.nombreplan = nombreplan;
+            ViewBag.nroTarea = nroTarea + 1;
             return PartialView("NuevaTarea", iso_detalle_plan);
+        }
+        public ActionResult GuardarTarea(int id, iso_detalle_plan iso_detalle_plan)
+        {
+            iso_detalle_plan.idp_id_plan = id;
+            if (ModelState.IsValid)
+            {
+                db.iso_detalle_plan.Add(iso_detalle_plan);
+                db.SaveChanges();
+                return RedirectToAction("Tareas/" + id);
+            }
+
+            //return View(iso_plan);
+            return RedirectToAction("Tareas/" + id);
+        }
+
+        public ActionResult EditarTarea(int? id)
+        {
+            
+            //int nroTarea = int.Parse(db.iso_detalle_plan.Where(x => x.idp_id_plan == id).Select(x => x.idp_numero_plan).Max());
+
+            //var iso_detalle_plan = new iso_detalle_plan();
+            
+            //ViewBag.nroTarea = nroTarea + 1;
+            //return PartialView("EditarTarea", iso_detalle_plan);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            iso_detalle_plan iso_detalle_plan = db.iso_detalle_plan.Where(x => x.idp_id_detalle_plan == id).First();
+            var idPlan = iso_detalle_plan.idp_id_plan;
+            var nombreplan = db.iso_plan.Where(x => x.ipl_id_plan == idPlan).ToArray();
+            ViewBag.nombreplan = nombreplan;
+            if (iso_detalle_plan == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.idTarea = iso_detalle_plan.idp_id_detalle_plan;
+            return PartialView("EditarTarea", iso_detalle_plan);
+        }
+        public ActionResult EditarTareaSI(int id, iso_detalle_plan iso_detalle_plan)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(iso_detalle_plan).State = EntityState.Modified;
+            //    
+            //    db.SaveChanges();
+            //    return RedirectToAction("Tareas/" + id);
+            //}
+
+            ////return View(iso_plan);
+            //return PartialView("GuardarTarea/" + id, iso_detalle_plan);
+            //iso_detalle_plan iso_detalle_plan_ed = db.iso_detalle_plan.Where(x => x.idp_id_detalle_plan == id).First();
+            var idPlan = iso_detalle_plan.idp_id_plan;
+            if (ModelState.IsValid) {
+                iso_detalle_plan.idp_id_detalle_plan = id;
+                db.Entry(iso_detalle_plan).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Tareas/" + idPlan);
+            }
+            return RedirectToAction("Tareas/" + idPlan);
+        }
+
+        public ActionResult EliminarTarea(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            iso_detalle_plan iso_detalle_plan = db.iso_detalle_plan.Where(x => x.idp_id_detalle_plan == id).First();
+            if (iso_detalle_plan == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.idTarea = iso_detalle_plan.idp_id_detalle_plan;
+            return PartialView("EliminarTarea", iso_detalle_plan);
+        }
+        public ActionResult EliminarTareaSI(int id)
+        {
+            iso_detalle_plan iso_detalle_plan = db.iso_detalle_plan.Where(x => x.idp_id_detalle_plan == id).First();
+            var idPlan = iso_detalle_plan.idp_id_plan;
+            db.iso_detalle_plan.Remove(iso_detalle_plan);
+            db.SaveChanges();
+            return RedirectToAction("Tareas/" + idPlan);
         }
 
         public ActionResult Tareas(int id, string filter = null, int page = 1, int pageSize = 15, string sort = "idp_numero_plan", string sortdir = "ASC")
