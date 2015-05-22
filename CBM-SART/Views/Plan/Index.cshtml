@@ -179,6 +179,14 @@
 </div>
 
 
+
+
 @section scripts{
     @Scripts.Render("~/scripts/appjs/phones.js")
+<script type="text/javascript">
+    $(document).ready(function () { //////// Inicio Cargado el Documento
+        //Date Piker
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+    });
+</script>
 }

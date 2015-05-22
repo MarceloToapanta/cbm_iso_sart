@@ -4,117 +4,162 @@
     ViewBag.Title = "Eliminar Plan";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>iso_plan</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_tipo_plan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_tipo_plan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_nombre_plan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_nombre_plan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_descripcion_plan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_descripcion_plan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_fecha_creacion_plan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_fecha_creacion_plan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_creador_plan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_creador_plan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_tolerancia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_tolerancia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_responsable)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_responsable)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_codigo_plan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_codigo_plan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_id_plan_padre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_id_plan_padre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_tipo_proyecto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_tipo_proyecto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_objetivo_estrategico)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_objetivo_estrategico)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipl_id_area)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipl_id_area)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+<div class="title-window" style="height:32px">
+    Permite eliminar el Plan selecionado.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
+<div class="modal-header">
+
+    <div class="form-group">
+
+        <h4>
+            <span class="label label-danger">
+                Estas seguro de eliminar este Plan?
+            </span>
+        </h4>
+
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_codigo_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ipl_codigo_plan, new { @class = "form-control", @disabled = "disabled"})
+                    @Html.ValidationMessageFor(model => model.ipl_codigo_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_nombre_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.ipl_nombre_plan)*@
+                    @Html.TextAreaFor(m => m.ipl_nombre_plan, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ipl_nombre_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_descripcion_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ipl_descripcion_plan, new { @class = "form-control ", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ipl_descripcion_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_tipo_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.ipl_tipo_plan)*@
+                    @*@Html.TextBoxFor(m => m.ipl_tipo_plan, new { @class = "form-control required" })*@
+                    @Html.DropDownListFor(model => model.ipl_tipo_plan, new SelectList(
+                                new List<Object>{
+                                new { value = "SART" , text = "SART"  },
+                                new { value = "Operativo" , text = "Operativo" },
+                                new { value = "Estraegico" , text = "Estratégico" }
+                                },
+                                "value",
+                                "text",
+                     0), new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ipl_tipo_plan)
+                </div>
+                @Html.LabelFor(model => model.ipl_fecha_creacion_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ipl_fecha_creacion_plan,"{0:dd/MM/yyyy}", new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ipl_fecha_creacion_plan)
+                </div>
+            </div>
+
+            <div class="form-group">
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_creador_plan, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ipl_creador_plan, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ipl_creador_plan)
+                </div>
+                @Html.LabelFor(model => model.ipl_tolerancia, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ipl_tolerancia, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ipl_tolerancia)
+                </div>
+            </div>
+
+
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.ipl_responsable, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ipl_responsable)
+                        @Html.ValidationMessageFor(model => model.ipl_responsable)
+                    </div>
+                </div>*@
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.ipl_id_plan_padre, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ipl_id_plan_padre)
+                        @Html.ValidationMessageFor(model => model.ipl_id_plan_padre)
+                    </div>
+                </div>*@
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.ipl_tipo_proyecto, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ipl_tipo_proyecto)
+                        @Html.ValidationMessageFor(model => model.ipl_tipo_proyecto)
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipl_objetivo_estrategico, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ipl_objetivo_estrategico, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ipl_objetivo_estrategico)
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.ipl_id_area, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ipl_id_area)
+                        @Html.ValidationMessageFor(model => model.ipl_id_area)
+                    </div>
+                </div>*@
+
+            <div class="col-md-1"></div>
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <button class="btn btn-primary" data-dismiss="modal">No</button>
+                <input class="btn btn-danger" type="submit" value="Si" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+

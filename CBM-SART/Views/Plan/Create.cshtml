@@ -32,7 +32,7 @@
                 @Html.LabelFor(model => model.ipl_nombre_plan, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @*@Html.EditorFor(model => model.ipl_nombre_plan)*@
-                    @Html.TextBoxFor(m => m.ipl_nombre_plan, new { @class = "form-control required" })
+                    @Html.TextAreaFor(m => m.ipl_nombre_plan, new { @class = "form-control required" })
                     @Html.ValidationMessageFor(model => model.ipl_nombre_plan)
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ipl_descripcion_plan, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.ipl_descripcion_plan, new { @class = "form-control required" })
+                    @Html.TextAreaFor(model => model.ipl_descripcion_plan, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ipl_descripcion_plan)
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 </div>
                 @Html.LabelFor(model => model.ipl_fecha_creacion_plan, new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.ipl_fecha_creacion_plan, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.ipl_fecha_creacion_plan, new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker valid" })
                     @Html.ValidationMessageFor(model => model.ipl_fecha_creacion_plan)
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 </div>
                 @Html.LabelFor(model => model.ipl_tolerancia, new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.ipl_tolerancia, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.ipl_tolerancia, new {@Value="0", @class = "form-control valid" })
                     @Html.ValidationMessageFor(model => model.ipl_tolerancia)
                 </div>
             </div>
@@ -148,7 +148,15 @@
     $("form").removeData("unobtrusiveValidation");
     $.validator.unobtrusive.parse("form");
 </script>
-
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            autoclose: true
+        }); //Initialise any date pickers
+    });
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

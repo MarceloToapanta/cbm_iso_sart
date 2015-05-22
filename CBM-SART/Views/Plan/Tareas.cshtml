@@ -50,6 +50,10 @@
                         <span class="glyphicon glyphicon-plus"></span>
                         Nuevo
                     </a>
+                    <a class="btn btn-success" data-modal="" href="/Plan/NuevaTarea?id=@ViewBag.id&Nro=6" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Insertar
+                    </a>
                 </div>
 
             </div>
@@ -73,16 +77,22 @@
                       tableStyle: "table table-bordered table-hover table-responsive table-condensed",
             mode: WebGridPagerModes.All,
             columns: grid.Columns(
-                   grid.Column("idp_numero_plan", "Nro", style: "action", canSort: false),
+                   //grid.Column("idp_numero_plan", "Nro", style: "action", canSort: false),
+                        grid.Column(header: "Nro", canSort: false, style: "action",
+                     format: @<text>
+                        @Html.Raw(item.idp_numero_plan)
+                        @Html.Raw("<a data-modal='' href='/Plan/NuevaTarea?id=" + item.idp_id_plan + "&Nro=" + item.idp_numero_plan + "'><img src='/images/login.png' width='15' class='insert-task'/></a>")
+                        @*@Html.Raw("<a data-modal='' href='/Plan/EliminarTarea/" + item.idp_id_detalle_plan + "' id='" + item.idp_id_detalle_plan + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")*@
+                    </text>),
                    grid.Column("idp_tarea", "Tarea", style: "col-lg-4", canSort: false),
                    grid.Column("idp_fecha_comienzo", "F. Comienzo", style: "col-lg-1", format: (item) => string.Format("{0:dd/MM/yyyy}", item.idp_fecha_comienzo), canSort: false),
                    grid.Column("idp_fecha_fin", "F. Fin", style: "col-lg-1", format: (item) => string.Format("{0:dd/MM/yyyy}", item.idp_fecha_fin), canSort: false),
                    grid.Column("idp_cantidad", "Cantidad", style: "col-lg-1", canSort: false),
                    grid.Column("idp_estado", "Estado", style: "col-lg-1", canSort: false),
-              grid.Column(header: "Acción", canSort: false, style: "action",
+                   grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
-                @Html.Raw("<a data-modal='' href='/Plan/EditarTarea/" + item.idp_id_detalle_plan + "' id='" + item.idp_id_detalle_plan + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
-                @Html.Raw("<a data-modal='' href='/Plan/EliminarTarea/" + item.idp_id_detalle_plan + "' id='" + item.idp_id_detalle_plan + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                        @Html.Raw("<a data-modal='' href='/Plan/EditarTarea/" + item.idp_id_detalle_plan + "' id='" + item.idp_id_detalle_plan + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                        @Html.Raw("<a data-modal='' href='/Plan/EliminarTarea/" + item.idp_id_detalle_plan + "' id='" + item.idp_id_detalle_plan + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                     </text>)));
             }
         </div>
@@ -282,8 +292,19 @@
         $(document).ready(function () { //////// Inicio Cargado el Documento
             //Date Piker
             jQuery.validator.methods["date"] = function (value, element) { return true; }
-            $('#idp_tarea').focus();
-            
+            $(".insert-task").hide();
+        });
+        $("#grid tbody tr").hover(function () {
+            //var img = $(this).find("img")[0];
+            //img.src = img.src.replace('-grey.png', '-blk.png');
+            //Obtiene el ID de la tarea desde el link para eliminar
+            var idTarea = $(this).find("a").last().attr('id');
+            $(".insert-task").hide();
+            $(this).find(".insert-task").show();
+            //console.log(idTarea);
+        }, function () {
+            //var img = $(this).find("img")[0];
+            //img.src = img.src.replace('-blk.png', '-grey.png');
         });
     </script>
 }

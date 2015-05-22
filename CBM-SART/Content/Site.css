@@ -660,3 +660,7 @@ tfoot > tr > td a:hover{
      font-size:12px;
      color: #333;
  }
+ .insert-task{
+    float: right;
+    margin-right: 2px;
+ }

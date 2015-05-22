@@ -18,7 +18,7 @@ namespace CBM_SART.Controllers
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
         // GET: /Plan/
-        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ipl_nombre_plan", string sortdir = "ASC")
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ipl_fecha_creacion_plan", string sortdir = "DESC")
         {
             if (String.IsNullOrEmpty(filter)) { filter = null; }
             var records = new PagedList<iso_plan>();
@@ -83,9 +83,25 @@ namespace CBM_SART.Controllers
         public async Task<ActionResult> Create([Bind(Include = "ipl_id_plan,ipl_tipo_plan,ipl_nombre_plan,ipl_descripcion_plan,ipl_fecha_creacion_plan,ipl_creador_plan,ipl_tolerancia,ipl_responsable,ipl_codigo_plan,ipl_id_plan_padre,ipl_tipo_proyecto,ipl_objetivo_estrategico,ipl_id_area")] iso_plan iso_plan)
         {
             if (ModelState.IsValid)
-            {
+            {   
+                
+                
+
                 db.iso_plan.Add(iso_plan);
                 await db.SaveChangesAsync();
+
+
+                //add first Task
+                iso_detalle_plan iso_detalle_plan = new iso_detalle_plan();
+                iso_detalle_plan.idp_id_plan = db.iso_plan.Select(x => x.ipl_id_plan).Max();
+                iso_detalle_plan.idp_numero_plan = "0";
+                iso_detalle_plan.idp_tarea = iso_plan.ipl_nombre_plan;
+                iso_detalle_plan.idp_fecha_comienzo = iso_plan.ipl_fecha_creacion_plan;
+                iso_detalle_plan.idp_fecha_fin = iso_plan.ipl_fecha_creacion_plan;
+                iso_detalle_plan.idp_cantidad = "0";
+                db.iso_detalle_plan.Add(iso_detalle_plan);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -152,21 +168,34 @@ namespace CBM_SART.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        public ActionResult NuevaTarea(int id)
+        public ActionResult NuevaTarea(int id, int? Nro)
         {
             var nombreplan = db.iso_plan.Where(x => x.ipl_id_plan == id).ToArray();
             int nroTarea = int.Parse(db.iso_detalle_plan.Where(x => x.idp_id_plan == id).Select(x => x.idp_numero_plan).Max());
 
             var iso_detalle_plan = new iso_detalle_plan();
             ViewBag.nombreplan = nombreplan;
-            ViewBag.nroTarea = nroTarea + 1;
+            if (Nro > 0)
+            {
+                ViewBag.nroTarea = Nro;
+            }
+            else
+            {
+                ViewBag.nroTarea = nroTarea + 1;
+            }
+            
             return PartialView("NuevaTarea", iso_detalle_plan);
         }
         public ActionResult GuardarTarea(int id, iso_detalle_plan iso_detalle_plan)
         {
+
             iso_detalle_plan.idp_id_plan = id;
             if (ModelState.IsValid)
             {
+                //Mueve uno mas arriba si es tarea insertada
+                int Nro = int.Parse(iso_detalle_plan.idp_numero_plan);
+                PonerTarea(Nro, id);
+
                 db.iso_detalle_plan.Add(iso_detalle_plan);
                 db.SaveChanges();
                 return RedirectToAction("Tareas/" + id);
@@ -241,11 +270,60 @@ namespace CBM_SART.Controllers
         {
             iso_detalle_plan iso_detalle_plan = db.iso_detalle_plan.Where(x => x.idp_id_detalle_plan == id).First();
             var idPlan = iso_detalle_plan.idp_id_plan;
+            //importante hacer esto antes de eliminar tarea
+            QuitarTarea(id);
             db.iso_detalle_plan.Remove(iso_detalle_plan);
             db.SaveChanges();
+            
             return RedirectToAction("Tareas/" + idPlan);
         }
-
+        public void QuitarTarea(int idTareaEliminada){
+            iso_detalle_plan iso_detalle_plan = db.iso_detalle_plan.Where(x => x.idp_id_detalle_plan == idTareaEliminada).First();
+            int Max = int.Parse(db.iso_detalle_plan.Where(x => x.idp_id_plan == iso_detalle_plan.idp_id_plan).Select(x => x.idp_numero_plan).Max());
+            int NroTarea = int.Parse(iso_detalle_plan.idp_numero_plan);
+            if (NroTarea < Max){
+                //Selecionar las tareas mayores a NroTarea
+                var TareasQuery = from d in db.iso_detalle_plan
+                                       orderby d.idp_numero_plan
+                                       where (d.idp_id_plan == iso_detalle_plan.idp_id_plan) 
+                                       select d;
+                //Actualizara en -1 cada tarea
+                foreach (iso_detalle_plan us in TareasQuery)
+                {
+                    int NroT = int.Parse(us.idp_numero_plan);
+                    if (NroT > NroTarea) { 
+                        us.idp_numero_plan = (int.Parse(us.idp_numero_plan) - 1).ToString() ;
+                        db.Entry(us).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+            }
+        }
+        public void PonerTarea(int NroTarea, int IdPlan)
+        {
+            //iso_detalle_plan iso_detalle_plan = db.iso_detalle_plan.Where(x => x.idp_id_detalle_plan == idTareaEliminada).First();
+            int Max = int.Parse(db.iso_detalle_plan.Where(x => x.idp_id_plan == IdPlan).Select(x => x.idp_numero_plan).Max());
+            //int NroTarea = int.Parse(iso_detalle_plan.idp_numero_plan);
+            if (NroTarea < Max)
+            {
+                //Selecionar las tareas mayores a NroTarea
+                var TareasQuery = from d in db.iso_detalle_plan
+                                  orderby d.idp_numero_plan
+                                  where (d.idp_id_plan == IdPlan)
+                                  select d;
+                //Actualizara en +1 cada tarea
+                foreach (iso_detalle_plan us in TareasQuery)
+                {
+                    int NroT = int.Parse(us.idp_numero_plan);
+                    if (NroT >= NroTarea)
+                    {
+                        us.idp_numero_plan = (int.Parse(us.idp_numero_plan) + 1).ToString();
+                        db.Entry(us).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+            }
+        }
         public ActionResult Tareas(int id, string filter = null, int page = 1, int pageSize = 15, string sort = "idp_numero_plan", string sortdir = "ASC")
         {
             if (String.IsNullOrEmpty(filter)) { filter = null; }
@@ -264,7 +342,7 @@ namespace CBM_SART.Controllers
 
             // Count
             records.TotalRecords = db.iso_detalle_plan
-                         .Where(x => x.idp_id_plan == id).Count();
+                         .Where(x => x.idp_id_plan == id).Count() -1;
 
             records.CurrentPage = page;
             records.PageSize = pageSize;
