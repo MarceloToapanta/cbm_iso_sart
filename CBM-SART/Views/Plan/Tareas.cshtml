@@ -93,8 +93,8 @@
                    grid.Column("idp_tarea", "Tarea", style: "col-lg-4", canSort: false),
                    grid.Column("idp_fecha_comienzo", "F. Comienzo", style: "col-lg-1", format: (item) => string.Format("{0:dd/MM/yyyy}", item.idp_fecha_comienzo), canSort: false),
                    grid.Column("idp_fecha_fin", "F. Fin", style: "col-lg-1", format: (item) => string.Format("{0:dd/MM/yyyy}", item.idp_fecha_fin), canSort: false),
-                   grid.Column("Cantidad", style: "col-lg-1", canSort: false,format: @<text>
-                    @Html.Raw("<div class='progress'><div class='progress-bar' style='width: " + item.idp_cantidad + "%;'></div></div>")
+                   grid.Column("Cantidad", style: "col-lg-1 colum-cantidad", canSort: false,format: @<text>
+                    @Html.Raw("<div class='progress'><div class='progress-bar' style='width: " + item.idp_cantidad + "%;'>" + item.idp_cantidad + "</div></div>")
                 </text>),
                    grid.Column("idp_estado", "Estado", style: "col-lg-1 estado-tarea", canSort: false),
                    grid.Column(header: "Acción", canSort: false, style: "action",

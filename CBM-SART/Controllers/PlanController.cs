@@ -401,8 +401,45 @@ namespace CBM_SART.Controllers
             {
                 TareaCero.idp_fecha_fin = MaxFecha;
             }
+            
+            //Ajustar Cantidad
+            //1.- Encontrar Suma de las Cantidades
+            var Suma = db.iso_detalle_plan
+                .Where(x => x.idp_id_plan == IdPlan)
+                .Where(x => x.idp_numero_plan > 0);
+            int SumaTotal = 0;
+            foreach (iso_detalle_plan us in Suma)
+            {
+                SumaTotal =SumaTotal + int.Parse(us.idp_cantidad);
+            }
+            //2.- Encontrar el numero de Tareas
+            int Total = db.iso_detalle_plan
+                .Where(x => x.idp_id_plan == IdPlan)
+                .Where(x => x.idp_numero_plan > 0).Count();
+            //3.- Dividir la suma para el numero de tareas
+            var Cantidad = SumaTotal / Total;
+            TareaCero.idp_cantidad = Cantidad.ToString();
+            //Actualizar Estado
+            //1.- Analizar Cantidad Total
+            if (Cantidad == 100)
+            {
+                TareaCero.idp_estado = "Completo";
+            }
+            if (Cantidad <= 100)
+            {
+                if (MaxFecha >= @DateTime.Now)
+                {
+                    TareaCero.idp_estado = "Pendiente";
+                }
+                else
+                {
+                    TareaCero.idp_estado = "Atrasado";
+                }
+                
+            }
             db.Entry(TareaCero).State = EntityState.Modified;
             db.SaveChanges();
+
         }
         protected override void Dispose(bool disposing)
         {
