@@ -17,7 +17,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="modal-body">
+    <div class="modal-body print-block">
         <div class="form-horizontal">
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.ipl_id_plan)
@@ -59,7 +59,7 @@
                                 },
                                 "value",
                                 "text",
-                     0), new { @class = "form-control", @disable = "true" })
+                        0), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(model => model.ipl_tipo_plan)
                 </div>
                 @Html.LabelFor(model => model.ipl_fecha_creacion_plan, new { @class = "control-label col-md-2" })
@@ -136,7 +136,7 @@
                     Espere...
                 </span>
                 @*<input class="btn btn-primary" type="submit" value="Save" />*@
-                <button class="btn btn-primary " type="submit" name="Guardar"> Imprimir </button>
+                <a href="#" class="btn btn-primary " name="Imprimir" onclick="window.print();"> Imprimir </a>
                 @*<input type="button" id="btnEmpresa" value="Upload" />*@
                 <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
             </div>

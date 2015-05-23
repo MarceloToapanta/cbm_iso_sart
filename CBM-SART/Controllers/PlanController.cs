@@ -70,6 +70,7 @@ namespace CBM_SART.Controllers
         // GET: /Plan/Create
         public ActionResult Create()
         {
+            //ViewBag.Ususarios = new SelectList(db., "iem_cod_empresa", "iem_nombre_empresa");
             var iso_plan = new iso_plan();
             return PartialView("Create", iso_plan);
             //return View();
@@ -84,13 +85,8 @@ namespace CBM_SART.Controllers
         {
             if (ModelState.IsValid)
             {   
-                
-                
-
                 db.iso_plan.Add(iso_plan);
                 await db.SaveChangesAsync();
-
-
                 //add first Task
                 iso_detalle_plan iso_detalle_plan = new iso_detalle_plan();
                 iso_detalle_plan.idp_id_plan = db.iso_plan.Select(x => x.ipl_id_plan).Max();
@@ -136,6 +132,14 @@ namespace CBM_SART.Controllers
             {
                 db.Entry(iso_plan).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                //Edit First task
+                iso_detalle_plan iso_detalle_plan = db.iso_detalle_plan
+                    .Where(x => x.idp_id_plan == iso_plan.ipl_id_plan)
+                    .Where(x => x.idp_numero_plan == 0).First();
+                iso_detalle_plan.idp_tarea = iso_plan.ipl_nombre_plan;
+                db.Entry(iso_detalle_plan).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                
                 return RedirectToAction("Index");
             }
             //return View(iso_plan);
@@ -330,6 +334,9 @@ namespace CBM_SART.Controllers
             var records = new PagedList<iso_detalle_plan>();
             ViewBag.filter = filter;
             ViewBag.id = id;
+            //Ajuste Fechas
+            AjustarFechas(id);
+            //
             var nombreplan = db.iso_plan.Where(x => x.ipl_id_plan == id).ToArray();
             ViewBag.nombreplan = nombreplan;
 
@@ -348,11 +355,55 @@ namespace CBM_SART.Controllers
             records.PageSize = pageSize;
             ViewBag.total = records.TotalRecords;
 
+            //Count Tareas
+            int t1 = db.iso_detalle_plan
+                         .Where(x => x.idp_id_plan == id).Where(x => x.idp_estado == "Completo").Where(x => x.idp_numero_plan > 0)
+                         .Count();
+            ViewBag.t1 = t1;
+            int t2 = db.iso_detalle_plan
+                         .Where(x => x.idp_id_plan == id).Where(x => x.idp_estado == "Pendiente").Where(x => x.idp_numero_plan > 0)
+                         .Count();
+            ViewBag.t2 = t2;
+            int t3 = db.iso_detalle_plan
+                         .Where(x => x.idp_id_plan == id).Where(x => x.idp_estado == "Atrasado").Where(x => x.idp_numero_plan > 0)
+                         .Count();
+            ViewBag.t3 = t3;
+            int t4 = db.iso_detalle_plan
+                         .Where(x => x.idp_id_plan == id).Where(x => x.idp_estado == null || (x.idp_estado == "")).Where(x => x.idp_numero_plan > 0)
+                         .Count();
+            ViewBag.t4 = t4;
+
             return View(records);
 
             //return View(db.iso_empresa.ToList());
         }
-
+        public void AjustarFechas(int IdPlan)
+        {
+            //Ajustar Fecha Proyecto
+            //1.-Selecionar Tarea 0
+            iso_detalle_plan TareaCero = db.iso_detalle_plan
+                .Where(x => x.idp_id_plan == IdPlan)
+                .Where(x => x.idp_numero_plan == 0).First();
+            //2.-Buscar Fecha Minima y Maxima
+            DateTime? MinFecha = db.iso_detalle_plan
+                .Where(x => x.idp_id_plan == IdPlan)
+                .Where(x => x.idp_numero_plan > 0)
+                .Select(x => x.idp_fecha_comienzo).Min();
+            DateTime? MaxFecha = db.iso_detalle_plan
+                .Where(x => x.idp_id_plan == IdPlan)
+                .Where(x => x.idp_numero_plan > 0)
+                .Select(x => x.idp_fecha_fin).Max();
+            //3.-Acutaliar Fechas encontradas a Tarea 0
+            if (MinFecha != null){
+                TareaCero.idp_fecha_comienzo = MinFecha;
+            }
+            if (MaxFecha != null)
+            {
+                TareaCero.idp_fecha_fin = MaxFecha;
+            }
+            db.Entry(TareaCero).State = EntityState.Modified;
+            db.SaveChanges();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

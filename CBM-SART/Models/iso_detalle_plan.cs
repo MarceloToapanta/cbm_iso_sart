@@ -24,7 +24,7 @@ namespace CBM_SART.Models
         [Display(Name = "Plan/Programa")]
         [Required]
         public int idp_id_plan { get; set; }
-        [Display(Name = "NÃºmero Tarea")]
+        [Display(Name = "Número Tarea")]
         [Required]
         public int idp_numero_plan { get; set; }
         [Display(Name = "Tarea")]
@@ -45,7 +45,7 @@ namespace CBM_SART.Models
         [Display(Name = "Estado")]
         public string idp_estado { get; set; }
         public Nullable<int> idp_id_plan_padre { get; set; }
-        [Display(Name = "DescripciÃ³n")]
+        [Display(Name = "Descripción")]
         public string idp_descripcion { get; set; }
         public Nullable<System.DateTime> idp_fecha_creacion { get; set; }
         public Nullable<System.DateTime> idp_fecha_modificacion { get; set; }

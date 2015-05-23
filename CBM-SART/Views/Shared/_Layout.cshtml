@@ -124,7 +124,19 @@
                             <div class="sidebar-menus">
                             <ul class="list-panel-modulos">
                                 <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Plan")"><img class="boton-panel-imagen" src="@Url.Content("~/images/back.png")" />Regresar</a></li>                                
-                            </ul>
+                                <li>
+                                    <div class="col-md-12 label label-success t-Completo">Tareas Completas: <span class="badge">@Session["nt1"]</span></div>
+                                </li>
+                                <li>
+                                    <div class="col-md-12 label label-warning t-Pendiente">Tareas Pendientes: <span class="badge">@Session["nt2"]</span></div>
+                                </li>
+                                <li>
+                                    <div class="col-md-12 label label-danger t-Atrasado">Tareas Atrasados: <span class="badge">@Session["nt3"]</span></div>
+                                </li>
+                                <li>
+                                    <div class="col-md-12 label label-default">Tareas Sin Estado: <span class="badge">@Session["nt4"]</span></div>
+                                </li>
+</ul>
                         </div>
                         }
                     }
