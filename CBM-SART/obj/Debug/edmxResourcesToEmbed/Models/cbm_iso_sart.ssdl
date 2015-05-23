@@ -149,7 +149,7 @@
     </Key>
     <Property Name="idp_id_detalle_plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idp_id_plan" Type="int" Nullable="false" />
-    <Property Name="idp_numero_plan" Type="nvarchar" MaxLength="50" />
+    <Property Name="idp_numero_plan" Type="int" Nullable="false" />
     <Property Name="idp_tarea" Type="nvarchar" MaxLength="255" />
     <Property Name="idp_observacion" Type="nvarchar" MaxLength="255" />
     <Property Name="idp_fecha_comienzo" Type="datetime" />
@@ -236,7 +236,7 @@
     </Key>
     <Property Name="ihc_id_historia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ihc_id_personal" Type="int" Nullable="false" />
-    <Property Name="ihc_id_empresa" Type="varchar" MaxLength="80" />
+    <Property Name="ihc_id_empresa" Type="int" />
     <Property Name="ihc_lugar_historia_clinica" Type="varchar" MaxLength="80" />
     <Property Name="ihc_fecha_historia_clinica" Type="datetime" />
   </EntityType>
@@ -636,6 +636,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_iso_historia_clinica_iso_historia_clinica">
+    <End Role="iso_historia_clinica" Type="Self.iso_historia_clinica" Multiplicity="1" />
+    <End Role="iso_historia_clinica1" Type="Self.iso_historia_clinica" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="iso_historia_clinica">
+        <PropertyRef Name="ihc_id_historia" />
+        <PropertyRef Name="ihc_id_personal" />
+      </Principal>
+      <Dependent Role="iso_historia_clinica1">
+        <PropertyRef Name="ihc_id_historia" />
+        <PropertyRef Name="ihc_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_iso_historia_clinica_iso_personal">
     <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -866,6 +880,10 @@
     <AssociationSet Name="FK_iso_equipo_puesto_trabajo_iso_puesto_trabajo" Association="Self.FK_iso_equipo_puesto_trabajo_iso_puesto_trabajo">
       <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
       <End Role="iso_equipo_puesto_trabajo" EntitySet="iso_equipo_puesto_trabajo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_historia_clinica_iso_historia_clinica" Association="Self.FK_iso_historia_clinica_iso_historia_clinica">
+      <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+      <End Role="iso_historia_clinica1" EntitySet="iso_historia_clinica" />
     </AssociationSet>
     <AssociationSet Name="FK_iso_historia_clinica_iso_personal" Association="Self.FK_iso_historia_clinica_iso_personal">
       <End Role="iso_personal" EntitySet="iso_personal" />

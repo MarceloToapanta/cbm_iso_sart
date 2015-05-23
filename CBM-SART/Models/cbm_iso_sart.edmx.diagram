@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="cbm_iso_sart.iso_consulta_medica" Width="1.5" PointX="5" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="cbm_iso_sart.iso_departamento" Width="1.5" PointX="10" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="cbm_iso_sart.iso_empresa" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="cbm_iso_sart.iso_historia_clinica" Width="1.5" PointX="2.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_historia_clinica" Width="2.75" PointX="1.375" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="cbm_iso_sart.iso_puesto_trabajo" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_consulta_medica_iso_historia_clinica" ManuallyRouted="false" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_departamento_iso_empresa" ManuallyRouted="false" />
@@ -50,6 +50,7 @@
         <AssociationConnector Association="cbm_iso_sart.FK_iso_riesgo_mrl_iso_tipo_riesgo_ocupacional" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional" />
         <AssociationConnector Association="cbm_iso_sart.iso_equipo_puesto_trabajo" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_historia_clinica_iso_historia_clinica" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

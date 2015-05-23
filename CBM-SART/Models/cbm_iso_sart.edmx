@@ -154,7 +154,7 @@
           </Key>
           <Property Name="idp_id_detalle_plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idp_id_plan" Type="int" Nullable="false" />
-          <Property Name="idp_numero_plan" Type="nvarchar" MaxLength="50" />
+          <Property Name="idp_numero_plan" Type="int" Nullable="false" />
           <Property Name="idp_tarea" Type="nvarchar" MaxLength="255" />
           <Property Name="idp_observacion" Type="nvarchar" MaxLength="255" />
           <Property Name="idp_fecha_comienzo" Type="datetime" />
@@ -241,7 +241,7 @@
           </Key>
           <Property Name="ihc_id_historia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ihc_id_personal" Type="int" Nullable="false" />
-          <Property Name="ihc_id_empresa" Type="varchar" MaxLength="80" />
+          <Property Name="ihc_id_empresa" Type="int" />
           <Property Name="ihc_lugar_historia_clinica" Type="varchar" MaxLength="80" />
           <Property Name="ihc_fecha_historia_clinica" Type="datetime" />
         </EntityType>
@@ -641,6 +641,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_iso_historia_clinica_iso_historia_clinica">
+          <End Role="iso_historia_clinica" Type="Self.iso_historia_clinica" Multiplicity="1" />
+          <End Role="iso_historia_clinica1" Type="Self.iso_historia_clinica" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="iso_historia_clinica">
+              <PropertyRef Name="ihc_id_historia" />
+              <PropertyRef Name="ihc_id_personal" />
+            </Principal>
+            <Dependent Role="iso_historia_clinica1">
+              <PropertyRef Name="ihc_id_historia" />
+              <PropertyRef Name="ihc_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_iso_historia_clinica_iso_personal">
           <End Role="iso_personal" Type="Self.iso_personal" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -872,6 +886,10 @@
             <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
             <End Role="iso_equipo_puesto_trabajo" EntitySet="iso_equipo_puesto_trabajo" />
           </AssociationSet>
+          <AssociationSet Name="FK_iso_historia_clinica_iso_historia_clinica" Association="Self.FK_iso_historia_clinica_iso_historia_clinica">
+            <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+            <End Role="iso_historia_clinica1" EntitySet="iso_historia_clinica" />
+          </AssociationSet>
           <AssociationSet Name="FK_iso_historia_clinica_iso_personal" Association="Self.FK_iso_historia_clinica_iso_personal">
             <End Role="iso_personal" EntitySet="iso_personal" />
             <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
@@ -1031,11 +1049,13 @@
           </Key>
           <Property Name="ihc_id_historia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ihc_id_personal" Type="Int32" Nullable="false" />
-          <Property Name="ihc_id_empresa" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ihc_id_empresa" Type="Int32" />
           <Property Name="ihc_lugar_historia_clinica" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="ihc_fecha_historia_clinica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="iso_consulta_medica" Relationship="Self.FK_iso_consulta_medica_iso_historia_clinica" FromRole="iso_historia_clinica" ToRole="iso_consulta_medica" />
           <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_historia_clinica_iso_personal" FromRole="iso_historia_clinica" ToRole="iso_personal" />
+          <NavigationProperty Name="iso_historia_clinica1" Relationship="cbm_iso_sart.FK_iso_historia_clinica_iso_historia_clinica" FromRole="iso_historia_clinica" ToRole="iso_historia_clinica1" />
+          <NavigationProperty Name="iso_historia_clinica2" Relationship="cbm_iso_sart.FK_iso_historia_clinica_iso_historia_clinica" FromRole="iso_historia_clinica1" ToRole="iso_historia_clinica" />
         </EntityType>
         <EntityType Name="iso_puesto_trabajo">
           <Key>
@@ -1199,6 +1219,10 @@
           <AssociationSet Name="iso_equipo_puesto_trabajo" Association="cbm_iso_sart.iso_equipo_puesto_trabajo">
             <End Role="iso_equipo_proteccion" EntitySet="iso_equipo_proteccion" />
             <End Role="iso_puesto_trabajo" EntitySet="iso_puesto_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_historia_clinica_iso_historia_clinica" Association="cbm_iso_sart.FK_iso_historia_clinica_iso_historia_clinica">
+            <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+            <End Role="iso_historia_clinica1" EntitySet="iso_historia_clinica" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="iso_personal">
@@ -1426,7 +1450,7 @@
           </Key>
           <Property Name="idp_id_detalle_plan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idp_id_plan" Type="Int32" Nullable="false" />
-          <Property Name="idp_numero_plan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idp_numero_plan" Type="Int32" Nullable="false" />
           <Property Name="idp_tarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="idp_observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="idp_fecha_comienzo" Type="DateTime" Precision="3" />
@@ -1804,6 +1828,20 @@
         <Association Name="iso_equipo_puesto_trabajo">
           <End Type="cbm_iso_sart.iso_equipo_proteccion" Role="iso_equipo_proteccion" Multiplicity="*" />
           <End Type="cbm_iso_sart.iso_puesto_trabajo" Role="iso_puesto_trabajo" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_iso_historia_clinica_iso_historia_clinica">
+          <End Type="cbm_iso_sart.iso_historia_clinica" Role="iso_historia_clinica" Multiplicity="1" />
+          <End Type="cbm_iso_sart.iso_historia_clinica" Role="iso_historia_clinica1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="iso_historia_clinica">
+              <PropertyRef Name="ihc_id_historia" />
+              <PropertyRef Name="ihc_id_personal" />
+            </Principal>
+            <Dependent Role="iso_historia_clinica1">
+              <PropertyRef Name="ihc_id_historia" />
+              <PropertyRef Name="ihc_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>

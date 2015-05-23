@@ -69,10 +69,10 @@ c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART
 c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\bin\es\Microsoft.Owin.Security.Google.resources.dll
 c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\obj\Debug\CBM-SART.csprojResolveAssemblyReference.cache
 c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\obj\Debug\CBM-SART.dll
 c:\users\mxdj in the mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\obj\Debug\CBM-SART.pdb
 C:\Users\Mxdj In The Mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\bin\FluentValidationNA.dll
 C:\Users\Mxdj In The Mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\bin\System.Linq.Dynamic.dll
 C:\Users\Mxdj In The Mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\bin\FluentValidationNA.xml
 C:\Users\Mxdj In The Mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\bin\System.Linq.Dynamic.xml
+C:\Users\Mxdj In The Mix\documents\visual studio 2013\Projects\CBM-SART\CBM-SART\obj\Debug\CBM-SART.csprojResolveAssemblyReference.cache

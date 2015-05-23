@@ -21,11 +21,13 @@ namespace CBM_SART.Models
     
         public int ihc_id_historia { get; set; }
         public int ihc_id_personal { get; set; }
-        public string ihc_id_empresa { get; set; }
+        public Nullable<int> ihc_id_empresa { get; set; }
         public string ihc_lugar_historia_clinica { get; set; }
         public Nullable<System.DateTime> ihc_fecha_historia_clinica { get; set; }
     
         public virtual ICollection<iso_consulta_medica> iso_consulta_medica { get; set; }
         public virtual iso_personal iso_personal { get; set; }
+        public virtual iso_historia_clinica iso_historia_clinica1 { get; set; }
+        public virtual iso_historia_clinica iso_historia_clinica2 { get; set; }
     }
 }

@@ -94,7 +94,7 @@ namespace CBM_SART.Controllers
                 //add first Task
                 iso_detalle_plan iso_detalle_plan = new iso_detalle_plan();
                 iso_detalle_plan.idp_id_plan = db.iso_plan.Select(x => x.ipl_id_plan).Max();
-                iso_detalle_plan.idp_numero_plan = "0";
+                iso_detalle_plan.idp_numero_plan = 0;
                 iso_detalle_plan.idp_tarea = iso_plan.ipl_nombre_plan;
                 iso_detalle_plan.idp_fecha_comienzo = iso_plan.ipl_fecha_creacion_plan;
                 iso_detalle_plan.idp_fecha_fin = iso_plan.ipl_fecha_creacion_plan;
@@ -171,7 +171,7 @@ namespace CBM_SART.Controllers
         public ActionResult NuevaTarea(int id, int? Nro)
         {
             var nombreplan = db.iso_plan.Where(x => x.ipl_id_plan == id).ToArray();
-            int nroTarea = int.Parse(db.iso_detalle_plan.Where(x => x.idp_id_plan == id).Select(x => x.idp_numero_plan).Max());
+            int nroTarea = db.iso_detalle_plan.Where(x => x.idp_id_plan == id).Select(x => x.idp_numero_plan).Max();
 
             var iso_detalle_plan = new iso_detalle_plan();
             ViewBag.nombreplan = nombreplan;
@@ -193,7 +193,7 @@ namespace CBM_SART.Controllers
             if (ModelState.IsValid)
             {
                 //Mueve uno mas arriba si es tarea insertada
-                int Nro = int.Parse(iso_detalle_plan.idp_numero_plan);
+                int Nro = iso_detalle_plan.idp_numero_plan;
                 PonerTarea(Nro, id);
 
                 db.iso_detalle_plan.Add(iso_detalle_plan);
@@ -279,8 +279,8 @@ namespace CBM_SART.Controllers
         }
         public void QuitarTarea(int idTareaEliminada){
             iso_detalle_plan iso_detalle_plan = db.iso_detalle_plan.Where(x => x.idp_id_detalle_plan == idTareaEliminada).First();
-            int Max = int.Parse(db.iso_detalle_plan.Where(x => x.idp_id_plan == iso_detalle_plan.idp_id_plan).Select(x => x.idp_numero_plan).Max());
-            int NroTarea = int.Parse(iso_detalle_plan.idp_numero_plan);
+            int Max = db.iso_detalle_plan.Where(x => x.idp_id_plan == iso_detalle_plan.idp_id_plan).Select(x => x.idp_numero_plan).Max();
+            int NroTarea = iso_detalle_plan.idp_numero_plan;
             if (NroTarea < Max){
                 //Selecionar las tareas mayores a NroTarea
                 var TareasQuery = from d in db.iso_detalle_plan
@@ -290,9 +290,9 @@ namespace CBM_SART.Controllers
                 //Actualizara en -1 cada tarea
                 foreach (iso_detalle_plan us in TareasQuery)
                 {
-                    int NroT = int.Parse(us.idp_numero_plan);
+                    int NroT = us.idp_numero_plan;
                     if (NroT > NroTarea) { 
-                        us.idp_numero_plan = (int.Parse(us.idp_numero_plan) - 1).ToString() ;
+                        us.idp_numero_plan = us.idp_numero_plan - 1 ;
                         db.Entry(us).State = EntityState.Modified;
                         db.SaveChanges();
                     }
@@ -302,9 +302,9 @@ namespace CBM_SART.Controllers
         public void PonerTarea(int NroTarea, int IdPlan)
         {
             //iso_detalle_plan iso_detalle_plan = db.iso_detalle_plan.Where(x => x.idp_id_detalle_plan == idTareaEliminada).First();
-            int Max = int.Parse(db.iso_detalle_plan.Where(x => x.idp_id_plan == IdPlan).Select(x => x.idp_numero_plan).Max());
+            int Max = db.iso_detalle_plan.Where(x => x.idp_id_plan == IdPlan).Select(x => x.idp_numero_plan).Max();
             //int NroTarea = int.Parse(iso_detalle_plan.idp_numero_plan);
-            if (NroTarea < Max)
+            if (NroTarea <= Max)
             {
                 //Selecionar las tareas mayores a NroTarea
                 var TareasQuery = from d in db.iso_detalle_plan
@@ -314,17 +314,17 @@ namespace CBM_SART.Controllers
                 //Actualizara en +1 cada tarea
                 foreach (iso_detalle_plan us in TareasQuery)
                 {
-                    int NroT = int.Parse(us.idp_numero_plan);
+                    int NroT = us.idp_numero_plan;
                     if (NroT >= NroTarea)
                     {
-                        us.idp_numero_plan = (int.Parse(us.idp_numero_plan) + 1).ToString();
+                        us.idp_numero_plan = us.idp_numero_plan + 1;
                         db.Entry(us).State = EntityState.Modified;
                         db.SaveChanges();
                     }
                 }
             }
         }
-        public ActionResult Tareas(int id, string filter = null, int page = 1, int pageSize = 15, string sort = "idp_numero_plan", string sortdir = "ASC")
+        public ActionResult Tareas(int id, string filter = null, int page = 1, int pageSize = 100, string sort = "idp_numero_plan", string sortdir = "ASC")
         {
             if (String.IsNullOrEmpty(filter)) { filter = null; }
             var records = new PagedList<iso_detalle_plan>();

@@ -50,10 +50,6 @@
                         <span class="glyphicon glyphicon-plus"></span>
                         Nuevo
                     </a>
-                    <a class="btn btn-success" data-modal="" href="/Plan/NuevaTarea?id=@ViewBag.id&Nro=6" id="btnCreate">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Insertar
-                    </a>
                 </div>
 
             </div>
@@ -87,8 +83,10 @@
                    grid.Column("idp_tarea", "Tarea", style: "col-lg-4", canSort: false),
                    grid.Column("idp_fecha_comienzo", "F. Comienzo", style: "col-lg-1", format: (item) => string.Format("{0:dd/MM/yyyy}", item.idp_fecha_comienzo), canSort: false),
                    grid.Column("idp_fecha_fin", "F. Fin", style: "col-lg-1", format: (item) => string.Format("{0:dd/MM/yyyy}", item.idp_fecha_fin), canSort: false),
-                   grid.Column("idp_cantidad", "Cantidad", style: "col-lg-1", canSort: false),
-                   grid.Column("idp_estado", "Estado", style: "col-lg-1", canSort: false),
+                   grid.Column("Cantidad", style: "col-lg-1", canSort: false,format: @<text>
+                        @Html.Raw("<div class='progress'><div class='progress-bar' style='width: " + item.idp_cantidad + "%;'></div></div>")                        
+                    </text>),
+                   grid.Column("idp_estado", "Estado", style: "col-lg-1 estado-tarea", canSort: false),
                    grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
                         @Html.Raw("<a data-modal='' href='/Plan/EditarTarea/" + item.idp_id_detalle_plan + "' id='" + item.idp_id_detalle_plan + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
@@ -293,6 +291,17 @@
             //Date Piker
             jQuery.validator.methods["date"] = function (value, element) { return true; }
             $(".insert-task").hide();
+            $("#grid tbody tr td.estado-tarea").each(function (index, element) {
+                if (($(element).text()) == "Atrasado") {
+                    $(element).addClass('t-Atrasado');
+                }
+                if (($(element).text()) == "Completo") {
+                    $(element).addClass('t-Completo');
+                }
+                if (($(element).text()) == "Pendiente") {
+                    $(element).addClass('t-Pendiente');
+                }
+            });
         });
         $("#grid tbody tr").hover(function () {
             //var img = $(this).find("img")[0];

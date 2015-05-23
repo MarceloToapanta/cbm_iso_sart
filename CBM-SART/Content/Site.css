@@ -664,3 +664,16 @@ tfoot > tr > td a:hover{
     float: right;
     margin-right: 2px;
  }
+ .t-Completo{
+    background-color: #dff0d8 !important;
+ }
+ .t-Atrasado{
+    background: #f2dede !important;
+ }
+ .t-Pendiente{
+      background-color: #faf2cc !important;
+ }
+.progress {
+    height: 16px;
+    margin-bottom: 0px;
+}
