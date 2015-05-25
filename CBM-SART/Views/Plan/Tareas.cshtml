@@ -10,6 +10,7 @@
     Session["nt2"] = ViewBag.t2;
     Session["nt3"] = ViewBag.t3;
     Session["nt4"] = ViewBag.t4;
+    
 }
 
 <div class="seccion-barra">
@@ -48,10 +49,11 @@
 
                     </div>
                 </div>*@
-            <div class="col-md-10">
-                
+            <div class="col-md-11">
+                <div id="Timeline">
+                </div>
             </div>
-            <div class="col-md-2" style="padding-left: 0px;">
+            <div class="col-md-1" style="padding-left: 0px;">
                 <div class="pull-right">
                     <a class="btn btn-success" data-modal="" href="/Plan/NuevaTarea/@ViewBag.id" id="btnCreate">
                         <span class="glyphicon glyphicon-plus"></span>
@@ -328,6 +330,29 @@
         }, function () {
             //var img = $(this).find("img")[0];
             //img.src = img.src.replace('-blk.png', '-grey.png');
+        });
+    </script>
+    @*//Time line*@
+    <script type="text/javascript" src="/Scripts/timeline/letItFlow.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Content/timeline/letItFlow.css">
+    <script type="text/javascript">
+        //Fecha inicio
+        var date = "@ViewBag.fechaini";
+        var diai = date.substring(0, 2);
+        var mesi = date.substring(3, 5) -1;
+        var anioi = date.substring(6, 10);
+        //Fecha fin
+        var datef = "@ViewBag.fechafin";
+        var diaf = datef.substring(0, 2);
+        var mesf = datef.substring(3, 5) - 1;
+        var aniof = datef.substring(6, 10);
+
+        $('#Timeline').letitflow({
+            themeColor: 'light',
+            colorBar: '#337ab7',
+            labelTooltip: 'false',
+            firstDay: new Date(anioi,mesi,diai),
+            lastDay: new Date(aniof, mesf, diaf),
         });
     </script>
 }

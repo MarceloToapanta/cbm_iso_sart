@@ -478,6 +478,7 @@
     <Content Include="Views\Plan\NuevaTarea.cshtml" />
     <Content Include="Views\Plan\EliminarTarea.cshtml" />
     <Content Include="Views\Plan\EditarTarea.cshtml" />
+    <Content Include="Views\SistemaGestion\Nivel_1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

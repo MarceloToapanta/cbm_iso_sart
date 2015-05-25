@@ -1,0 +1,343 @@
+.letItFlow {
+  margin: 10px auto;
+  padding: 30px 40px;
+  z-index: 0;
+  clear: both;
+  position: relative;
+}
+.letItFlow.no-labels {
+  padding-top: 40px;
+}
+.letItFlow .lif-steps,
+.letItFlow .lif-progress {
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.letItFlow .lif-steps {
+  position: relative;
+  z-index: 10;
+  width: 99%;
+  margin-top: -30px;
+}
+.letItFlow .lif-steps p {
+  display: block;
+  height: 30px;
+  float: left;
+  font-family: Arial, Helvetica, Sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 30px;
+  color: #cccccc;
+  text-transform: uppercase;
+  text-shadow: 0px 1px 0 black;
+  text-align: center;
+  opacity: 0.3;
+  padding: 0 0.5%;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.letItFlow .lif-steps a {
+  text-decoration: none;
+  color: #999999;
+  font-size: 1.2em;
+  line-height: 25px;
+  cursor: pointer;
+  vertical-align: top;
+}
+.letItFlow .stepTooltip {
+  text-align: center;
+  height: 25px;
+  padding-top: 5px;
+  margin-bottom: -30px;
+}
+.letItFlow .stepTooltip span {
+  background: #333333;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 2px;
+  color: #cccccc;
+  font-size: 0.857em;
+  font-weight: bold;
+  line-height: 2em;
+  padding: 0 10px;
+  display: inline-block;
+  width: auto;
+  text-transform: uppercase;
+}
+.letItFlow .lif-progress {
+  box-shadow: black 0px 0px 3px inset, rgba(255, 255, 255, 0.2) 0 0 2px;
+  background-color: #333;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 34px;
+  max-height: 34px;
+  min-height: 10px;
+  border-radius: 17px;
+  position: relative;
+  z-index: 10;
+}
+.letItFlow .lif-progress .cuts {
+  width: 99%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  z-index: 20;
+  opacity: 0.25;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+}
+.letItFlow .lif-progress .cuts span {
+  display: block;
+  height: 100%;
+  float: left;
+  position: relative;
+  border-left: 1px solid white;
+  border-right: 1px solid black;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.letItFlow .lif-progress .cuts span:first-child {
+  border-left: 0;
+}
+.letItFlow .lif-progress .cuts span:last-child {
+  border-right: 0;
+}
+.letItFlow .lif-progress .lif-bar {
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  top: 6%;
+  margin: 0 2px;
+  width: 0;
+  height: 88%;
+  border-radius: 15px;
+  border: 0px solid #333333;
+  box-shadow: rgba(255, 255, 255, 0.61) 0px 10px 10px 1px inset, rgba(0, 0, 0, 0.51) 0px -3px 10px 1px inset, rgba(255, 255, 255, 0.61) 2px 0px 4px 0px;
+  overflow: hidden;
+}
+.letItFlow .lif-progress .lif-bar span {
+  font-family: Arial, Helvetica, Sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 30px;
+  text-transform: uppercase;
+  float: right;
+  margin: 0 15px 0 0;
+}
+.letItFlow .lif-progress .hoverinfo {
+  display: none;
+  color: #999999;
+  font-family: Arial, Helvetica, Sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 34px;
+  margin: 0 auto;
+  text-align: center;
+  text-transform: uppercase;
+  width: 50px;
+}
+.letItFlow .lif-progress:hover .hoverinfo {
+  display: block;
+}
+
+/*********************************** */
+.endsDates {
+  height: 70px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  margin: -35px -40px 0;
+  z-index: 0;
+}
+.endsDates .start,
+.endsDates .end {
+  max-width: 30px;
+  padding: 2px 0;
+  text-align: center;
+  width: 30px;
+  z-index: 5;
+  position: absolute;
+}
+.endsDates .end {
+  right: 0;
+}
+.endsDates .start span,
+.endsDates .end span {
+  font-family: "Times New Roman", Georgia, Serif;
+  font-weight: bold;
+  display: block;
+  opacity: 0.5;
+}
+.endsDates .dateday,
+.endsDates .datemonth {
+  color: white;
+  font-size: 2em;
+  line-height: 0.85em;
+}
+.endsDates .datemonth {
+  color: #aaaaaa;
+}
+.endsDates .dateyear {
+  color: #cccccc;
+  font-size: 1em;
+  line-height: 1.2em;
+}
+
+/*** SMALL LAYOUT ** */
+.letItFlow.small {
+  font-size: 12px;
+}
+.letItFlow.small .lif-progress .lif-bar {
+  box-shadow: rgba(255, 255, 255, 0.61) 0px 3px 3px 1px inset, rgba(0, 0, 0, 0.51) 0px -1px 4px 1px inset, rgba(255, 255, 255, 0.61) 2px 0px 4px 0px;
+}
+.letItFlow.small .lif-progress .lif-bar span {
+  font-size: 10px;
+  margin-right: 10px;
+}
+.letItFlow.small .endsDates {
+  height: 60px;
+  margin-top: -30px;
+}
+.letItFlow.xsmall {
+  font-size: 10px;
+}
+.letItFlow.xsmall .lif-progress .lif-bar {
+  box-shadow: rgba(255, 255, 255, 0.61) 0px 2px 2px 1px inset, rgba(0, 0, 0, 0.51) 0px -1px 2px 1px inset, rgba(255, 255, 255, 0.61) 2px 0px 4px 0px;
+}
+.letItFlow.xsmall .lif-progress .lif-bar span {
+  font-size: 10px;
+  margin-right: 5px;
+}
+.letItFlow.xsmall .endsDates {
+  height: 50px;
+  margin-top: -25px;
+}
+
+/*** DATES "below" LAYOUT ** */
+.letItFlow.below {
+  padding: 30px 0;
+}
+.letItFlow.below .endsDates {
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+  top: 0;
+}
+.letItFlow.below .endsDates .start,
+.letItFlow.below .endsDates .end {
+  max-width: none;
+  width: auto;
+  text-align: left;
+}
+.letItFlow.below .endsDates .end {
+  text-align: right;
+}
+.letItFlow.below .endsDates .start span,
+.letItFlow.below .endsDates .end span {
+  font-family: Arial, Helvetica, Sans-serif;
+  display: inline-block;
+}
+.letItFlow.below .endsDates .dateday,
+.letItFlow.below .endsDates .datemonth,
+.letItFlow.below .endsDates .dateyear {
+  color: #aaaaaa;
+  font-size: 0.8em;
+  line-height: 1.2em;
+}
+.letItFlow.below .endsDates .datemonth:before,
+.letItFlow.below .endsDates .datemonth:after {
+  content: "/";
+  padding: 0 5px;
+  color: #777777;
+}
+
+/*** LIGHT LAYOUT ** */
+.letItFlow.light .stepTooltip span {
+  background: #dddddd;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 2px;
+  color: #444444;
+}
+.letItFlow.light .lif-progress {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 3px inset, rgba(255, 255, 255, 0.5) 0 0 2px;
+}
+.letItFlow.light .lif-steps p {
+  color: #444444;
+  text-shadow: 0 1px 0 white;
+}
+.letItFlow.light .endsDates .dateday,
+.letItFlow.light .endsDates .datemonth {
+  color: #222222;
+}
+.letItFlow.light .endsDates .datemonth {
+  color: #555555;
+}
+.letItFlow.light .endsDates .dateyear {
+  color: #3c3c3c;
+}
+
+/*** FLAT LAYOUT ** */
+.letItFlow.flat .lif-steps p {
+  text-shadow: none;
+}
+.letItFlow.flat .stepTooltip span {
+  box-shadow: none;
+}
+.letItFlow.flat .lif-progress {
+  box-shadow: none;
+}
+.letItFlow.flat .lif-progress .lif-bar {
+  box-shadow: none;
+}
+
+/*** MOBILE ** */
+@media screen and (max-width: 768px) {
+  .letItFlow .lif-steps,
+  .letItFlow .lif-progress {
+    width: 100%;
+  }
+
+  .endsDates {
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    top: 0;
+  }
+  .endsDates .start,
+  .endsDates .end {
+    max-width: none;
+    width: auto;
+    text-align: left;
+  }
+  .endsDates .end {
+    text-align: right;
+  }
+  .endsDates .start span,
+  .endsDates .end span {
+    font-family: Arial, Helvetica, Sans-serif;
+    display: inline-block;
+  }
+  .endsDates .dateday,
+  .endsDates .datemonth,
+  .endsDates .dateyear {
+    color: #aaaaaa;
+    font-size: 0.8em;
+    line-height: 1.2em;
+  }
+  .endsDates .datemonth:before,
+  .endsDates .datemonth:after {
+    content: "/";
+    padding: 0 5px;
+    color: #777777;
+  }
+}

@@ -117,6 +117,18 @@
                             </ul>
                         </div>
                     }
+                    @if (Session["Sidebar"] == "SistemaGestion")
+                    {
+                        <div class="sidebar-menus">
+                            <ul class="list-panel-sg">
+                                <li><a class="@(Session["SidebarSelect"] == "Inicio" ? "select" : "")" href="/SistemaGestion/"><img class="boton-panel-sg-p" src="@Url.Content("~/images/sg/inicio.png")" />PILARES DE LA GESTION SGP</a></li>
+                                <li><a class="@(Session["SidebarSelect"] == "pilar1" ? "select" : "")" href="/SistemaGestion/Nivel_1/1"><img class=" boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />GESTION ADMINISTRATIVA</a></li>
+                                <li><a class="@(Session["SidebarSelect"] == "pilar2" ? "select" : "")" href="/SistemaGestion/Nivel_1/2"><img class=" boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />GESTION TECNICA</a></li>
+                                <li><a class="@(Session["SidebarSelect"] == "pilar3" ? "select" : "")" href="/SistemaGestion/Nivel_1/3"><img class="boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />GESTION DEL TALENTO HUMANO</a></li>
+                                <li><a class="@(Session["SidebarSelect"] == "pilar4" ? "select" : "")" href="/SistemaGestion/Nivel_1/4"><img class="boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />PROCEDIMIENTOS OPERATIVOS BASICO Y/O RELEVANTES</a></li>
+                            </ul>
+                        </div>
+                    }
                     @if (Session["Sidebar"] == "Planes")
                     {
                         if (Session["SidebarSelect"] == "Tareas")

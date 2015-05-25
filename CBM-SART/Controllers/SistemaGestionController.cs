@@ -14,5 +14,10 @@ namespace CBM_SART.Controllers
         {
             return View();
         }
+        public ActionResult Nivel_1(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
 	}
 }

@@ -372,7 +372,15 @@ namespace CBM_SART.Controllers
                          .Where(x => x.idp_id_plan == id).Where(x => x.idp_estado == null || (x.idp_estado == "")).Where(x => x.idp_numero_plan > 0)
                          .Count();
             ViewBag.t4 = t4;
-
+            //FechaTarea 0
+            DateTime? fechaini = db.iso_detalle_plan
+                         .Where(x => x.idp_id_plan == id).Where(x => x.idp_numero_plan == 0)
+                         .Select(x => x.idp_fecha_comienzo).First();
+            ViewBag.fechaini = fechaini;
+            DateTime? fechafin = db.iso_detalle_plan
+                         .Where(x => x.idp_id_plan == id).Where(x => x.idp_numero_plan == 0)
+                         .Select(x => x.idp_fecha_fin).First();
+            ViewBag.fechafin = fechafin;
             return View(records);
 
             //return View(db.iso_empresa.ToList());
@@ -417,7 +425,11 @@ namespace CBM_SART.Controllers
                 .Where(x => x.idp_id_plan == IdPlan)
                 .Where(x => x.idp_numero_plan > 0).Count();
             //3.- Dividir la suma para el numero de tareas
-            var Cantidad = SumaTotal / Total;
+
+            var Cantidad = 0;
+            if (Total > 0) {
+                Cantidad = SumaTotal / Total;
+            }
             TareaCero.idp_cantidad = Cantidad.ToString();
             //Actualizar Estado
             //1.- Analizar Cantidad Total

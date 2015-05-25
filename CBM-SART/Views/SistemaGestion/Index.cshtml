@@ -1,10 +1,76 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Sistema de Gestión";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Session["Sidebar"] = "SistemaGestion";
+    Session["SidebarSelect"] = "Inicio";
 }
 
-<h2>Sistema de Gestion</h2>
+<div class="col-md-1">
+</div>
+<div id="inicio" class="contenedor-sistema col-md-10">
+    <h3 class="titulo-principal">SISTEMA NACIONAL DE PREVENCION DE RIESGOS</h3>
+    <h3 class="titulo-principal">SGP - 2015</h3>
+    <h4 class="titulo-secundario">PILARES DE LA GESTION SGP</h4>
+    <a href="/SistemaGestion/Nivel_1/1">
+        <div id="pilar-1" class="bloque-pilar col-md-3">
+            <div class="figura-pilar">
+                <div class="img-pilar">
+                    <img src="/images/sg/gesion-administrativa.png" />
+                </div>
+                <div class="text-pilar">
+                    GESTION ADMINISTRATIVA
+                </div>
+                <div class="base-pilar"></div>
+            </div>
+        </div>
+    </a>
+    <a href="/SistemaGestion/Nivel_1/2">
+        <div id="pilar-2" class="bloque-pilar col-md-3">
+            <div class="figura-pilar">
+                <div class="img-pilar">
+                    <img src="/images/sg/gestion-tecnica.jpg" />
+                </div>
+                <div class="text-pilar">
+                    GESTION TECNICA
+                </div>
+                <div class="base-pilar"></div>
+            </div>
+        </div>
+    </a>
+    <a href="/SistemaGestion/Nivel_1/3">
+        <div id="pilar-3" class="bloque-pilar col-md-3">
+            <div class="figura-pilar">
+                <div class="img-pilar">
+                    <img src="/images/sg/getion-talentoh.jpg" />
+                </div>
+                <div class="text-pilar">
+                    GESTION DEL TALENTO HUMANO
+                </div>
+                <div class="base-pilar"></div>
+            </div>
+        </div>
+    </a>
+    <a href="/SistemaGestion/Nivel_1/4">
+        <div id="pilar-4" class="bloque-pilar col-md-3">
+            <div class="figura-pilar">
+                <div class="img-pilar">
+                    <img src="/images/sg/gestion-procedimiento.gif" />
+                </div>
+                <div class="text-pilar">
+                    PROCEDIMIENTOS OPERATIVOS BASICO Y/O RELEVANTES
+                </div>
+                <div class="base-pilar"></div>
+            </div>
+        </div>
+    </a>
+</div>
 
-<img src="/images/sistemagestion.jpg" />
+<div class="col-md-1"></div>
+
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
+    <script type="text/javascript">
+        $(document).ready(function () { //////// Inicio Cargado el Documento
+        });
+    </script>
+}
