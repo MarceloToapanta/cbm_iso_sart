@@ -9,6 +9,24 @@
 /*top: -1px;
 position: relative;*/
 min-height: 92vh;
+max-width: 1340px;
+margin: 0 auto;
+}
+.icon-home img{
+  width: 34px;
+  margin: 3px 0px;
+  margin-right:5px;
+}
+.icon-home{
+  opacity:0.8;
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.icon-home:hover{
+  opacity:1;
+  color: #fff;
+  text-decoration:none;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -379,15 +397,18 @@ footer {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     background: url(/images/nav-dark.png);
-    height: 42px;
+    height: 84px;
     width: 100%;
-    padding: 0 20px;
+    padding: 12px 20px;
     border-top: 4px solid #EF705B;
     bottom: 0;
+    position:relative;
     font-size: 11px;
     color: #fff;
 }
-
+footer p{
+    text-align:right
+}
 .input-validation-error, .required {
     border-left: 5px solid #ee0000 !important;
 }
@@ -640,6 +661,8 @@ tfoot > tr > td a:hover{
  .jumbotron {
   padding: 5px 15px;
   background: url("/images/sky_bg.jpg");
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
  .jumbotron h1{
   margin: 5px 0px ;
