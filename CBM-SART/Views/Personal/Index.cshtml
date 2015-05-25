@@ -66,6 +66,7 @@
               grid.Column("ipe_dir_domicilio", "Dirección", style: "col-lg-3"),
               grid.Column("ipe_telf_1", "Teléfono.", style: "col-lg-1"),
               grid.Column("ipe_fecha_ingreso", "F. Ingreso", style: "col-lg-1", format: (item) => string.Format("{0:dd/MM/yyyy}", item.ipe_fecha_ingreso)),
+              //grid.Column("iso_empresa.iem_nombre_empresa", "Empresa", style: "col-lg-1"),
               grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
                 @Html.Raw("<a data-modal='' href='/Personal/details/" + item.ipe_id_personal + "' id='" + item.ipe_id_personal + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
