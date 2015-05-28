@@ -873,6 +873,13 @@ tfoot > tr > td a:hover{
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 /*////////////////////Fin Sistema de Gestion//////////////*/
+
+/*////////////////////Cargo Puesto de Trabajo//////////////*/
+.table-cargo{
+    width: 45% !important;
+}
+/*////////////////////Fin Cargo Puesto de Trabajo//////////////*/
+
 @media print {
     body{
         display:none;

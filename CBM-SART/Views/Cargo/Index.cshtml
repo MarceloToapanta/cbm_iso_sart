@@ -1,5 +1,5 @@
-﻿@model IEnumerable<CBM_SART.Models.iso_cargo>
-
+﻿@*@model IEnumerable<CBM_SART.Models.iso_cargo>*@
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_cargo>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,12 +7,81 @@
     Session["SidebarSelect"] = "Cargo";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+
+
+<div class="content table-cargo">
+    <div class="seccion-barra">
+        <img src="~/images/label-plain-black.png" height="24" width="24" />
+        Cargos registrados.
+        <span class="text-count">Nro. de  Cargos : @ViewBag.total</span>
+    </div>
+
+    @using (Html.BeginForm("index", null, FormMethod.Get))
+    {
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Nombre del Cargo" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="btn btn-success" data-modal="" href="/Cargo/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="col-md-12 grid-content">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column("icg_nombre", "Nombre", style: "col-lg-4"),
+              grid.Column("icg_num_trabajadores", "N Trab", style: "col-lg-1"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a data-modal='' href='/Cargo/details/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Cargo/edit/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Cargo/delete/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+
+                                                                                                                                                                         ));
+            }
+
+
+        </div>
+        <div class="clear"></div>
+    }
+</div>
+
+
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.icg_nombre)
@@ -93,4 +162,4 @@
     </tr>
 }
 
-</table>
+</table>*@

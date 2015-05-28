@@ -479,6 +479,7 @@
     <Content Include="Views\Plan\EliminarTarea.cshtml" />
     <Content Include="Views\Plan\EditarTarea.cshtml" />
     <Content Include="Views\SistemaGestion\Nivel_1.cshtml" />
+    <Content Include="Views\Cargo\PuestoTrabajoList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
