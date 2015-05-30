@@ -876,7 +876,15 @@ tfoot > tr > td a:hover{
 
 /*////////////////////Cargo Puesto de Trabajo//////////////*/
 .table-cargo{
-    width: 45% !important;
+    width: 47% !important;
+    float:left;
+    margin: 0 10px;
+}
+.glyphicon-asig:before {
+  content: "\e131";
+}
+.asigcargo:hover{
+    cursor:pointer;
 }
 /*////////////////////Fin Cargo Puesto de Trabajo//////////////*/
 

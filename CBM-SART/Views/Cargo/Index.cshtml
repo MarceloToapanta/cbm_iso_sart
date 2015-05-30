@@ -8,8 +8,6 @@
 }
 
 
-
-
 <div class="content table-cargo">
     <div class="seccion-barra">
         <img src="~/images/label-plain-black.png" height="24" width="24" />
@@ -69,97 +67,111 @@
                 @Html.Raw("<a data-modal='' href='/Cargo/details/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
                 @Html.Raw("<a data-modal='' href='/Cargo/edit/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
                 @Html.Raw("<a data-modal='' href='/Cargo/delete/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                @Html.Raw("<a class='asigcargo' title='Cargar Puestos de Trabajo' onclick= CargarPuestos('" + item.icg_id_cargo + "')> <span class='glyphicon glyphicon-asig'> </span> </a>")
                     </text>)
-
-                                                                                                                                                                         ));
+                              ));
             }
-
+            
 
         </div>
         <div class="clear"></div>
     }
+
 </div>
+<div id="contenedor-puestotrabajo" class="content table-cargo">
 
-
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_cod_clase_cargo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_num_trabajadores)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_area)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_jefe_inmediato)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_edad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_genero)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_instruccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_experiencia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.icg_conocimiento_adicional)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_cod_clase_cargo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_num_trabajadores)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_area)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_jefe_inmediato)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_edad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_genero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_instruccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_experiencia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.icg_conocimiento_adicional)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.icg_id_cargo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.icg_id_cargo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.icg_id_cargo })
-        </td>
-    </tr>
+</div>
+@section scripts{
+    <script>
+        //Carga por default
+        $(document).ready(function () {
+            $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/1");
+        });
+        function CargarPuestos(idCargo) {
+            $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/" + idCargo);
+        }
+    </script>
 }
 
-</table>*@
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_cod_clase_cargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_num_trabajadores)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_jefe_inmediato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_instruccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_experiencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.icg_conocimiento_adicional)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_cod_clase_cargo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_num_trabajadores)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_jefe_inmediato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_edad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_instruccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_experiencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.icg_conocimiento_adicional)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.icg_id_cargo }) |
+                @Html.ActionLink("Details", "Details", new { id=item.icg_id_cargo }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.icg_id_cargo })
+            </td>
+        </tr>
+    }
+
+    </table>*@

@@ -75,7 +75,7 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="icg_id_cargo,icg_nombre,icg_descripcion,icg_cod_clase_cargo,icg_num_trabajadores,icg_area,icg_jefe_inmediato,icg_edad,icg_genero,icg_instruccion,icg_experiencia,icg_conocimiento_adicional")] iso_cargo iso_cargo)
+        public async Task<ActionResult> Create([Bind(Include = "icg_id_cargo,icg_nombre,icg_descripcion,icg_cod_clase_cargo,icg_num_trabajadores,icg_area,icg_jefe_inmediato,icg_edad,icg_genero,icg_instruccion,icg_experiencia,icg_conocimiento_adicional")] iso_cargo iso_cargo)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="icg_id_cargo,icg_nombre,icg_descripcion,icg_cod_clase_cargo,icg_num_trabajadores,icg_area,icg_jefe_inmediato,icg_edad,icg_genero,icg_instruccion,icg_experiencia,icg_conocimiento_adicional")] iso_cargo iso_cargo)
+        public async Task<ActionResult> Edit([Bind(Include = "icg_id_cargo,icg_nombre,icg_descripcion,icg_cod_clase_cargo,icg_num_trabajadores,icg_area,icg_jefe_inmediato,icg_edad,icg_genero,icg_instruccion,icg_experiencia,icg_conocimiento_adicional")] iso_cargo iso_cargo)
         {
             if (ModelState.IsValid)
             {
@@ -145,22 +145,40 @@ namespace CBM_SART.Controllers
         }
 
 
-        public ActionResult PuestoTrabajoList(int? idCargo)
+        public ActionResult PuestoTrabajoList(int id, string filter = null, int page = 1, int pageSize = 15, string sort = "icg_nombre", string sortdir = "ASC")
         {
-            ////var iso_puesto_trabajo = db.iso_puesto_trabajo.ToList();
-            //if (idCargo == null) {
-            //    var iso_puesto_trabajo = db.iso_puesto_trabajo.ToList();
-            //    return PartialView(iso_puesto_trabajo);
-            //}
-            //else{
-                //iso_puesto_trabajo iso_puesto_trabajo = db.iso_puesto_trabajo.Where(x => x.iso_cargo.Any(y => y.icg_id_cargo == idCargo)).ToList();
-            var result = (from m in db.iso_puesto_trabajo
-                          from b in m.iso_cargo
-                          where b.icg_id_cargo == idCargo
-                          select m);
-            return PartialView(result);
-            //}
+            if (id <= 0)
+            {
+                var recordsvacio = new PagedList<iso_puesto_trabajo>();
+                recordsvacio.Content = db.iso_puesto_trabajo.ToList();
+                ViewBag.filter = filter;
+                recordsvacio.TotalRecords = db.iso_puesto_trabajo.Count();
+                ViewBag.total = recordsvacio.TotalRecords;
+                return PartialView(recordsvacio);
+            }
+
+
+            var iso_cargo = db.iso_cargo.Find(id);
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_puesto_trabajo>();
+            ViewBag.filter = filter;
+            records.Content = iso_cargo.iso_puesto_trabajo
+                        .Where(x => filter == null ||
+                                (x.ipt_nombre_puesto_t.ToLower().Contains(filter.ToLower().Trim()))
+                              )
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+            //// Count
+            records.TotalRecords = iso_cargo.iso_puesto_trabajo
+                         .Where(x => filter == null ||
+                                (x.ipt_nombre_puesto_t.ToLower().Contains(filter.ToLower().Trim()))).Count();
+            //records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+            return PartialView(records);
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
