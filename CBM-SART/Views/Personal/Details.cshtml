@@ -1,434 +1,467 @@
 ﻿@model CBM_SART.Models.iso_personal
 
 @{
-    ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>iso_personal</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_ced_ruc_personal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_ced_ruc_personal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_nombre_personal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_nombre_personal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_fecha_nacimiento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_fecha_nacimiento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_dir_domicilio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_dir_domicilio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_telf_1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_telf_1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_telf_2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_telf_2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_celular)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_celular)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_fecha_ingreso)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_fecha_ingreso)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_curriculum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_curriculum)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_empresa_anterior)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_empresa_anterior)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_descripcion_estudios)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_descripcion_estudios)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_descripcion_experiencia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_descripcion_experiencia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_archivo_curriculum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_archivo_curriculum)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_estado_personal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_estado_personal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_id_jefe)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_id_jefe)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_nro_afiliacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_nro_afiliacion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_genero)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_genero)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_profesion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_profesion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_trab_habitual)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_trab_habitual)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_horario_reg_ini)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_horario_reg_ini)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_horario_reg_fin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_horario_reg_fin)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_salario_diario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_salario_diario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_salario_mensual)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_salario_mensual)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_tiempo_servicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_tiempo_servicio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_estado_civil)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_estado_civil)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_lugar_nacimiento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_lugar_nacimiento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_nivel_educativo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_nivel_educativo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_apellido_paterno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_apellido_paterno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_edad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_edad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_tipo_sangre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_tipo_sangre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_factor_rh)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_factor_rh)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_tiempo_per_a)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_tiempo_per_a)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_tiempo_per_m)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_tiempo_per_m)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_descrip_cargo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_descrip_cargo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_cambio_area)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_cambio_area)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_id_centro_costo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_id_centro_costo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_apellido_materno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_apellido_materno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_etnia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_etnia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_cedula_militar)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_cedula_militar)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_ocupacion_anteriro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_ocupacion_anteriro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_familiares_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_familiares_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_tiene_experiencia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_tiene_experiencia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_nacionalidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_nacionalidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_vulnerabilidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_vulnerabilidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_codigo_personal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_codigo_personal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ipe_foto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ipe_foto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iso_cargo.icg_nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iso_cargo.icg_nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iso_departamento.ide_nombre_departamento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iso_departamento.ide_nombre_departamento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iso_empresa.iem_nombre_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iso_empresa.iem_nombre_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iso_puesto_trabajo.ipt_nombre_puesto_t)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iso_puesto_trabajo.ipt_nombre_puesto_t)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iso_puesto_trabajo1.ipt_nombre_puesto_t)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iso_puesto_trabajo1.ipt_nombre_puesto_t)
-        </dd>
-
-    </dl>
+<div class="title-window" style="height:32px">
+    Permite imprimir los datos de un Empleado.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ipe_id_personal }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@using (Html.BeginForm("Details", "Personal", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="modal-body">
+        <div class="form-personal">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipe_id_empresa, new { @class = "control-label col-md-3" })
+                    @*<label class="control-label col-md-3" for="cboEmpresa">Empresa</label>*@
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.ipe_id_empresa, (IEnumerable<SelectListItem>)ViewBag.ipe_id_empresa, new { @class = "form-control col-md-3", @disabled = "disabled" })
+                        <div class="clear"></div>
+                        @Html.ValidationMessageFor(model => model.ipe_id_empresa)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipe_id_departamento, new { @class = "control-label col-md-3" })
+                    @*<label class="control-label col-md-3">Departamento</label>*@
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.ipe_id_departamento, (IEnumerable<SelectListItem>)ViewBag.ipe_id_departamento, new { @class = "form-control col-md-3", @disabled = "disabled" })
+                        <div class="clear"></div>
+                        @Html.ValidationMessageFor(model => model.ipe_id_departamento)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipe_id_cargo, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.ipe_id_cargo, (IEnumerable<SelectListItem>)ViewBag.ipe_id_cargo, "", new { @class = "form-control col-md-3", @disabled = "disabled" })
+                        <div class="clear"></div>
+                        @Html.ValidationMessageFor(model => model.ipe_id_cargo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipe_id_puesto_trabajo, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.ipe_id_puesto_trabajo, (IEnumerable<SelectListItem>)ViewBag.ipe_id_puesto_trabajo, "", new { @class = "form-control col-md-3", @disabled = "disabled" })
+                        <div class="clear"></div>
+                        @Html.ValidationMessageFor(model => model.ipe_id_puesto_trabajo)
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-2 ">
+                @if (Model.ipe_foto != null)
+                {
+
+                    <div class="inline-image-preivew">
+                        <img id="blah" alt="Foto Personal" width="100" height="100" style="border: 1px solid #ccc; margin: 0 15%; max-width: 100%; height: auto" src="@Url.Action("GetImage", "Personal", new { ID = Model.ipe_id_personal })" />
+                    </div>
+                }
+                else
+                {
+                    <div class="inline-image-preivew">
+                        <img id="blah" src="~/images/foto_personal.png" width="100" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; margin: 0 15%; max-width: 100%; height: auto" />
+                    </div>
+                }
+
+            </div>
+            <div class="col-md-3">
+                @*<label class="col-md-12" for="cboEmpresa">Imagen</label>
+                <input type='file' id="file1" name="file1" multiple accept="image/*" />
+                <p class="help-block">Seleciona imagen de Trabajador (120 x 120)</p>*@
+
+
+                @Html.LabelFor(model => model.ipe_estado_personal, new { @class = "control-label col-md-4" })
+                @*<label class="col-" for="cboEmpresa">Estado</label>*@
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.ipe_estado_personal, new SelectList(
+                                new List<Object>{
+                                new { value = "A" , text = "Activo"  },
+                                new { value = "I" , text = "Inactivo" }
+                                },
+                                "value",
+                                "text",
+                    0), new { @class = "form-control col-md-3", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ipe_estado_personal)
+                </div>
+
+
+
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="modal-header">
+                <h4 class="modal-title">Datos Personales</h4>
+            </div>
+            <br />
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="">
+                        @Html.LabelFor(model => model.ipe_ced_ruc_personal, new { @class = "control-label col-md-3" })
+                        @*<label class="control-label col-md-2" for="ipe_ced_ruc_personal">Cédula/RUC *</label>*@
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.ipe_ced_ruc_personal, new { @class = "form-control", @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.ipe_ced_ruc_personal)
+                        </div>
+                    </div>
+                    <div class="">
+                        @Html.LabelFor(model => model.ipe_codigo_personal, new { @class = "control-label col-md-3" })
+                        @*<label class="control-label col-md-2" for="ipe_ced_ruc_personal">Cédula/RUC *</label>*@
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.ipe_codigo_personal, new { @class = "form-control", @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.ipe_codigo_personal)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipe_nombre_personal, new { @class = "control-label col-md-3" })
+                    @*<label class="control-label col-md-2" for="ipe_nombre_personal">Nombre *</label>*@
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ipe_nombre_personal, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_nombre_personal)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipe_apellido_paterno, new { @class = "control-label col-md-3" })
+                    @*<label class="control-label col-md-2" for="ipe_apellido_paterno">Apellido *</label>*@
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ipe_apellido_paterno, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_apellido_paterno)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipe_lugar_nacimiento, new { @class = "control-label col-md-3" })
+                    @Html.ValidationMessageFor(model => model.ipe_lugar_nacimiento)
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ipe_lugar_nacimiento, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="">
+                        @Html.LabelFor(model => model.ipe_fecha_nacimiento, new { @class = "control-label col-md-3" })
+                        @*<label class="control-label col-md-2" for="ipe_fecha_nacimiento">Fecha Nacimiento *</label>*@
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.ipe_fecha_nacimiento, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div class="">
+                        @Html.LabelFor(model => model.ipe_edad, new { @class = "control-label col-md-3" })
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.ipe_edad, new { @class = "form-control", @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.ipe_edad)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_estado_civil, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @*@Html.EditorFor(model => model.ipe_estado_civil)*@
+                        @Html.DropDownListFor(model => model.ipe_estado_civil, new SelectList(
+                                new List<Object>{
+                                new { value = "Soltero" , text = "Soltero"  },
+                                new { value = "Casado" , text = "Casado" },
+                                new { value = "Divorciado" , text = "Divorciado" },
+                                new { value = "Viudo" , text = "Viudo" },
+                                new { value = "Unión libre" , text = "Unión libre" }
+                                },
+                                "value",
+                                "text",
+                                0), "", new { @class = "form-control", @disabled = "disabled"})
+                        @Html.ValidationMessageFor(model => model.ipe_estado_civil)
+                    </div>
+                    @*</div>*@
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_genero, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @*@Html.EditorFor(model => model.ipe_genero)*@
+                        @Html.DropDownListFor(model => model.ipe_genero, new SelectList(
+                                new List<Object>{
+                                new { value = "Masculino" , text = "Masculino"  },
+                                new { value = "Femenino" , text = "Femenino" }
+                                },
+                                "value",
+                                "text",
+                 0), "", new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_genero)
+                    </div>
+                    @*</div>*@
+                </div>
+                <div class="row">
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_fecha_ingreso, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.ipe_fecha_ingreso, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_fecha_ingreso)
+                    </div>
+
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_nro_afiliacion, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.ipe_nro_afiliacion, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_nro_afiliacion)
+                    </div>
+                    @*</div>*@
+                </div>
+            </div>
+            <div class="col-md-1 separacion-personal"></div>
+            <div class="col-md-5">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipe_dir_domicilio, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.ipe_dir_domicilio, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_dir_domicilio)
+                    </div>
+                </div>
+
+                <div class="row">
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_telf_1, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.ipe_telf_1, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_telf_1)
+                    </div>
+                    @*</div>*@
+
+                    @*<div class="form-group">*@
+                    @*@Html.LabelFor(model => model.ipe_telf_2, new { @class = "control-label col-md-2"})
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.ipe_telf_2, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ipe_telf_2)
+                        </div>*@
+                    @*</div>*@
+
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_celular, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.ipe_celular, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_celular)
+                    </div>
+                    @*</div>*@
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipe_email, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ipe_email, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_email)
+                    </div>
+                </div>
+                <div class="row">
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_tipo_sangre, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @*@Html.EditorFor(model => model.ipe_tipo_sangre)*@
+                        @Html.DropDownListFor(model => model.ipe_tipo_sangre, new SelectList(
+                                new List<Object>{
+                                new { value = "O" , text = "O"  },
+                                new { value = "A" , text = "A" },
+                                new { value = "B" , text = "B" },
+                                new { value = "AB" , text = "AB" }
+                                },
+                                "value",
+                                "text",
+                    0), "", new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_tipo_sangre)
+                    </div>
+                    @*</div>*@
+
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_factor_rh, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @*@Html.EditorFor(model => model.ipe_factor_rh)*@
+                        @Html.DropDownListFor(model => model.ipe_factor_rh, new SelectList(
+                                new List<Object>{
+                                new { value = "Positivo" , text = "Positivo"  },
+                                new { value = "Negativo" , text = "Negativo" },
+                                },
+                                "value",
+                                "text",
+                    0), "", new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_tipo_sangre)
+                        @Html.ValidationMessageFor(model => model.ipe_factor_rh)
+                    </div>
+                    @*</div>*@
+                </div>
+                <div class="row">
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_etnia, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @*@Html.EditorFor(model => model.ipe_etnia)*@
+                        @Html.DropDownListFor(model => model.ipe_factor_rh, new SelectList(
+                                new List<Object>{
+                                new { value = "No determinada" , text = "No determinada"  },
+                                new { value = "Mestizo" , text = "Mestizo" },
+                                new { value = "Blanco" , text = "Blanco" },
+                                new { value = "Indígena Amazónico" , text = "Indígena Amazónico" },
+                                new { value = "Indígena Quichua Sierra" , text = "Indígena Quichua Sierra" },
+                                new { value = "Afroecuatoriano" , text = "Afroecuatoriano" },
+                                new { value = "Huancavilca" , text = "Huancavilca" },
+                                new { value = "Tsáchila" , text = "Tsáchila" },
+                                new { value = "Extranjero" , text = "Extranjero" },
+                                new { value = "Otro" , text = "Otro" }
+                                },
+                                "value",
+                                "text",
+                        0), "", new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_etnia)
+                    </div>
+                    @*</div>*@
+
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_nacionalidad, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.ipe_nacionalidad, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_nacionalidad)
+                    </div>
+                    @*</div>*@
+                </div>
+                <div class="row">
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_nivel_educativo, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @*@Html.EditorFor(model => model.ipe_nivel_educativo)*@
+                        @Html.DropDownListFor(model => model.ipe_nivel_educativo, new SelectList(
+                                new List<Object>{
+                                new { value = "Primaria" , text = "Primaria"},
+                                new { value = "Secundario" , text = "Secundario"},
+                                new { value = "Técnico" , text = "Técnico"},
+                                new { value = "Tecnólogo" , text = "Tecnólogico"},
+                                new { value = "Superior" , text = "Superior"},
+                                new { value = "Posgrado" , text = "Posgrado"}
+                                },
+                                "value",
+                                "text",
+                    0), "", new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_nivel_educativo)
+                    </div>
+                    @*</div>*@
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_profesion, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.ipe_profesion, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_profesion)
+                    </div>
+                    @*</div>*@
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="">
+                        @Html.LabelFor(model => model.ipe_vulnerabilidad, new { @class = "control-label col-md-3" })
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(model => model.ipe_vulnerabilidad, new SelectList(
+                                new List<Object>{
+                                new { value = "true" , text = "Si"},
+                                new { value = "false" , text = "No"},
+                                },
+                                "value",
+                                "text",
+                        0), new { @class = "form-control", @disabled = "disabled" })
+                            @*@Html.CheckBoxFor(model => model.ipe_vulnerabilidad)*@
+
+                            @Html.ValidationMessageFor(model => model.ipe_vulnerabilidad)
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_familiares_empresa, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.ipe_familiares_empresa, new SelectList(
+                                new List<Object>{
+                                new { value = "true" , text = "Si"},
+                                new { value = "false" , text = "No"},
+                                },
+                                "value",
+                                "text",
+                    0), new { @class = "form-control", @disabled = "disabled" })
+                        @*@Html.CheckBoxFor(model => model.ipe_familiares_empresa.AsBool())*@
+                        @Html.ValidationMessageFor(model => model.ipe_familiares_empresa)
+                    </div>
+                    @*</div>*@
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_cambio_area, new { @class = "control-label col-md-3" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.ipe_cambio_area, new SelectList(
+                                new List<Object>{
+                                new { value = "true" , text = "Si"},
+                                new { value = "false" , text = "No"},
+                                },
+                                "value",
+                                "text",
+                    0), new { @class = "form-control", @disabled = "disabled" })
+                        @*@Html.CheckBoxFor(model => model.ipe_cambio_area.AsBool())*@
+                        @*@Html.CheckBoxFor(model => Convert.ToBoolean(model.ipe_cambio_area))*@
+                        @Html.ValidationMessageFor(model => model.ipe_cambio_area)
+                    </div>
+                    @*</div>*@
+
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_tiempo_per_a, new { @class = "control-label col-md-2" })
+                    <div class="col-md-1">
+                        @Html.TextBoxFor(model => model.ipe_tiempo_per_a, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_tiempo_per_a)
+                    </div>
+                    @*</div>*@
+
+                    @*<div class="form-group">*@
+                    @Html.LabelFor(model => model.ipe_tiempo_per_m, new { @class = "control-label col-md-2" })
+                    <div class="col-md-1">
+                        @Html.TextBoxFor(model => model.ipe_tiempo_per_m, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipe_tiempo_per_m)
+                    </div>
+                    @*</div>*@
+
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="form-horizontal">
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                <a href="#" class="btn btn-primary " name="Imprimir" onclick="window.print();"> Imprimir </a>
+                @*<input type="button" id="btnEmpresa" value="Upload" />*@
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            autoclose: true
+        }); //Initialise any date pickers
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

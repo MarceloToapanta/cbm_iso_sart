@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using CBM_SART.Models;
 using System.Linq.Dynamic;
+using System.IO;
 
 namespace CBM_SART.Controllers
 {
@@ -23,7 +24,7 @@ namespace CBM_SART.Controllers
         //    return View(await iso_personal.ToListAsync());
         //}
 
-        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ipe_id_personal", string sortdir = "ASC")
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ipe_apellido_paterno", string sortdir = "ASC")
         {
             if (String.IsNullOrEmpty(filter)) { filter = null; }
             var records = new PagedList<iso_personal>();
@@ -65,17 +66,20 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_personal);
+            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo.OrderBy(x => x.icg_nombre), "icg_id_cargo", "icg_nombre");
+            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
+            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
+            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo.OrderBy(x => x.ipt_nombre_puesto_t), "ipt_id_puesto_t", "ipt_nombre_puesto_t");
+            return PartialView("Details", iso_personal);
         }
 
         // GET: /Personal/Create
         public ActionResult Create()
         {
-            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo, "icg_id_cargo", "icg_nombre");
-            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento");
-            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa");
-            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t");
-            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t");
+            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo.OrderBy(x => x.icg_nombre), "icg_id_cargo", "icg_nombre");
+            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
+            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
+            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo.OrderBy(x => x.ipt_nombre_puesto_t), "ipt_id_puesto_t", "ipt_nombre_puesto_t");
             var iso_personal = new iso_personal();
             return PartialView("Create", iso_personal);
             //return View();
@@ -90,17 +94,29 @@ namespace CBM_SART.Controllers
         {
             if (ModelState.IsValid)
             {
+                ///////imagen/////////
+                HttpPostedFileBase file = Request.Files["file1"];
+                if (file.FileName != "")
+                {
+                    iso_personal.ipe_foto = ConvertToBytes(file);
+                }
                 db.iso_personal.Add(iso_personal);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo, "icg_id_cargo", "icg_nombre", iso_personal.ipe_id_cargo);
-            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento", iso_personal.ipe_id_departamento);
-            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa", iso_personal.ipe_id_empresa);
-            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t", iso_personal.ipe_id_puesto_trabajo);
-            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t", iso_personal.ipe_id_puesto_trabajo);
-            return View(iso_personal);
+            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo.OrderBy(x => x.icg_nombre), "icg_id_cargo", "icg_nombre");
+            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
+            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
+            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo.OrderBy(x => x.ipt_nombre_puesto_t), "ipt_id_puesto_t", "ipt_nombre_puesto_t");
+            return PartialView("Create", iso_personal);
+        }
+        public byte[] ConvertToBytes(HttpPostedFileBase image)
+        {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(image.InputStream);
+            imageBytes = reader.ReadBytes((int)image.ContentLength);
+            return imageBytes;
         }
 
         // GET: /Personal/Edit/5
@@ -115,12 +131,11 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo, "icg_id_cargo", "icg_nombre", iso_personal.ipe_id_cargo);
-            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento", iso_personal.ipe_id_departamento);
-            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa", iso_personal.ipe_id_empresa);
-            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t", iso_personal.ipe_id_puesto_trabajo);
-            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t", iso_personal.ipe_id_puesto_trabajo);
-            return View(iso_personal);
+            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo.OrderBy(x => x.icg_nombre), "icg_id_cargo", "icg_nombre");
+            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
+            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
+            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo.OrderBy(x => x.ipt_nombre_puesto_t), "ipt_id_puesto_t", "ipt_nombre_puesto_t");
+            return PartialView("Edit", iso_personal);
         }
 
         // POST: /Personal/Edit/5
@@ -132,16 +147,21 @@ namespace CBM_SART.Controllers
         {
             if (ModelState.IsValid)
             {
+                ///////imagen/////////
+                HttpPostedFileBase file = Request.Files["file1"];
+                if (file.FileName != "")
+                {
+                    iso_personal.ipe_foto = ConvertToBytes(file);
+                }
                 db.Entry(iso_personal).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo, "icg_id_cargo", "icg_nombre", iso_personal.ipe_id_cargo);
-            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento", iso_personal.ipe_id_departamento);
-            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa, "iem_cod_empresa", "iem_nombre_empresa", iso_personal.ipe_id_empresa);
-            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t", iso_personal.ipe_id_puesto_trabajo);
-            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo, "ipt_id_puesto_t", "ipt_nombre_puesto_t", iso_personal.ipe_id_puesto_trabajo);
-            return View(iso_personal);
+            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo.OrderBy(x => x.icg_nombre), "icg_id_cargo", "icg_nombre");
+            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
+            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
+            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo.OrderBy(x => x.ipt_nombre_puesto_t), "ipt_id_puesto_t", "ipt_nombre_puesto_t");
+            return PartialView("Edit", iso_personal);
         }
 
         // GET: /Personal/Delete/5
@@ -156,7 +176,11 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_personal);
+            ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo.OrderBy(x => x.icg_nombre), "icg_id_cargo", "icg_nombre");
+            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
+            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
+            ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo.OrderBy(x => x.ipt_nombre_puesto_t), "ipt_id_puesto_t", "ipt_nombre_puesto_t");
+            return PartialView("Delete", iso_personal);
         }
 
         // POST: /Personal/Delete/5
@@ -170,6 +194,19 @@ namespace CBM_SART.Controllers
             return RedirectToAction("Index");
         }
 
+        public FileContentResult GetImage(int ID)
+        {
+            iso_personal cat = db.iso_personal.FirstOrDefault(c => c.ipe_id_personal == ID);
+            if (cat != null)
+            {
+                string type = "image/jpeg";
+                return File(cat.ipe_foto, type);
+            }
+            else
+            {
+                return null;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -211,7 +211,23 @@ namespace CBM_SART.Controllers
             //return Json(new { success = true });
             return RedirectToAction("Index");
         }
-
+        public ActionResult SetActivo(int id)
+        {
+            var empresa = db.iso_empresa;
+            foreach (iso_empresa us in empresa)
+            {
+                us.iem_actividad = "";
+                db.Entry(us).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            iso_empresa iso_empresa = db.iso_empresa.Find(id);
+            iso_empresa.iem_actividad = "si";
+            //Set variable para empresa activa
+            Session["empresa"] = id;
+            db.Entry(iso_empresa).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         /// <summary>
         public FileContentResult GetImage(int ID)
         {

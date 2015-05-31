@@ -11,6 +11,7 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_personal
     {
@@ -22,55 +23,106 @@ namespace CBM_SART.Models
         }
     
         public int ipe_id_personal { get; set; }
+        [Required(ErrorMessage = "Ingrese Cédula/RUC del Personal")]
+        [Display(Name = "Cédula/RUC")]
         public string ipe_ced_ruc_personal { get; set; }
+        [Display(Name = "Nombre")]
         public string ipe_nombre_personal { get; set; }
+        [Display(Name = "Fecha Nacimiento")]
         public Nullable<System.DateTime> ipe_fecha_nacimiento { get; set; }
+        [Display(Name = "Dirección")]
         public string ipe_dir_domicilio { get; set; }
+        [Display(Name = "Teléfono 1")]
         public string ipe_telf_1 { get; set; }
+        [Display(Name = "Teléfono 2")]
         public string ipe_telf_2 { get; set; }
+        [Display(Name = "Celular")]
         public string ipe_celular { get; set; }
+        [Display(Name = "Fecha Ingreso")]
         public Nullable<System.DateTime> ipe_fecha_ingreso { get; set; }
+        [Display(Name = "Cargo")]
         public Nullable<int> ipe_id_cargo { get; set; }
+        [Display(Name = "Empresa")]
         public int ipe_id_empresa { get; set; }
+        [Display(Name = "Departamento")]
         public int ipe_id_departamento { get; set; }
+        [Display(Name = "Curriculum")]
         public string ipe_curriculum { get; set; }
+        [Display(Name = "Empresa Aterior")]
         public string ipe_empresa_anterior { get; set; }
+        [Display(Name = "Descripción Estudios")]
         public string ipe_descripcion_estudios { get; set; }
+        [Display(Name = "Descripción Experiencia")]
         public string ipe_descripcion_experiencia { get; set; }
+
         public byte[] ipe_archivo_curriculum { get; set; }
+        [Display(Name = "Estado")]
         public string ipe_estado_personal { get; set; }
+        [Display(Name = "Jefe")]
         public Nullable<int> ipe_id_jefe { get; set; }
+        [Display(Name = "Nro. IESS")]
         public string ipe_nro_afiliacion { get; set; }
+        [Display(Name = "Genéro")]
         public string ipe_genero { get; set; }
+        [Display(Name = "Profesión")]
         public string ipe_profesion { get; set; }
+        [Display(Name = "Trabajo Habitual")]
         public string ipe_trab_habitual { get; set; }
+        [Display(Name = "Horario Inicio")]
         public Nullable<System.DateTime> ipe_horario_reg_ini { get; set; }
+        [Display(Name = "Horario Fin")]
         public Nullable<System.DateTime> ipe_horario_reg_fin { get; set; }
+        [Display(Name = "Salario Diario")]
         public string ipe_salario_diario { get; set; }
+        [Display(Name = "Salario Mensual")]
         public string ipe_salario_mensual { get; set; }
+        [Display(Name = "Timepo Servicio")]
         public string ipe_tiempo_servicio { get; set; }
+        [Display(Name = "Estado Civil")]
         public string ipe_estado_civil { get; set; }
+        [Display(Name = "Lugar de Nacimiento")]
         public string ipe_lugar_nacimiento { get; set; }
+        [Display(Name = "Email")]
         public string ipe_email { get; set; }
+        [Display(Name = "Nivel Educativo")]
         public string ipe_nivel_educativo { get; set; }
+        [Display(Name = "Apellido")]
         public string ipe_apellido_paterno { get; set; }
+        [Display(Name = "Edad")]
         public Nullable<int> ipe_edad { get; set; }
+        [Display(Name = "Tipo de Sangre")]
         public string ipe_tipo_sangre { get; set; }
+        [Display(Name = "Factor RH")]
         public string ipe_factor_rh { get; set; }
+        [Display(Name = "Timepo A")]
         public string ipe_tiempo_per_a { get; set; }
+        [Display(Name = "Tiempo M")]
         public string ipe_tiempo_per_m { get; set; }
+        [Display(Name = "Descripción Cargo")]
         public string ipe_descrip_cargo { get; set; }
+        [Display(Name = "Puesto de Trabajo")]
         public Nullable<int> ipe_id_puesto_trabajo { get; set; }
+        [Display(Name = "Cambio Area")]
         public Nullable<bool> ipe_cambio_area { get; set; }
+        [Display(Name = "Centro de Costo")]
         public Nullable<int> ipe_id_centro_costo { get; set; }
+        [Display(Name = "Aoellido Materno")]
         public string ipe_apellido_materno { get; set; }
+        [Display(Name = "Etnia")]
         public string ipe_etnia { get; set; }
+        [Display(Name = "Cedula Militar")]
         public string ipe_cedula_militar { get; set; }
+        [Display(Name = "Ocupación Anterior")]
         public string ipe_ocupacion_anteriro { get; set; }
+        [Display(Name = "Familiares en la Empresa")]
         public Nullable<bool> ipe_familiares_empresa { get; set; }
+        [Display(Name = "Tiene Experiencia")]
         public string ipe_tiene_experiencia { get; set; }
+        [Display(Name = "Nacionalidad")]
         public string ipe_nacionalidad { get; set; }
+        [Display(Name = "Vulnerable")]
         public Nullable<bool> ipe_vulnerabilidad { get; set; }
+        [Display(Name = "Código")]
         public string ipe_codigo_personal { get; set; }
         public byte[] ipe_foto { get; set; }
     

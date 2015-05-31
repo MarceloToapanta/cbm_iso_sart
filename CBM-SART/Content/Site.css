@@ -656,7 +656,7 @@ tfoot > tr > td a:hover{
  /*////////////////////////Fin Panel Historias Clinicas//////////////////////*/
  /*//////////////////////////Custom Bootstrap ///////////////////////*/
  .row{
-     margin:0;
+     margin: 5px -15px;
  }
  .jumbotron {
   padding: 5px 15px;
@@ -673,7 +673,7 @@ tfoot > tr > td a:hover{
 }
  /*///////////////////////////Form Personal/////////////////////////////*/
  .form-personal .form-control{
-     width:95%;
+     
      height:20px;
  }
  .form-personal {
@@ -896,3 +896,23 @@ tfoot > tr > td a:hover{
         display:block;
     }
 }
+/*///////////////Peronal//////////////////////*/
+.separacion-personal{
+    width: 50px !important;
+}
+form textarea{
+    height: initial !important;
+}
+.emp-activo {
+    width:30px;
+    margin: 0 6px;
+}
+.emp-inactivo{
+    width:30px;
+    margin: 0 6px;
+    opacity: 0.5;
+}
+.emp-inactivo:hover{
+    opacity: 1;
+}
+/*///////////////Fin Peronal//////////////////////*/
