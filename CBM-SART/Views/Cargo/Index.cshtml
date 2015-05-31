@@ -15,7 +15,7 @@
         <span class="text-count">Nro. de  Cargos : @ViewBag.total</span>
     </div>
 
-    @using (Html.BeginForm("index", null, FormMethod.Get))
+    @using (Html.BeginForm("Index", null, FormMethod.Get))
     {
         <div class="search">
             <div class="col-md-10">
@@ -79,18 +79,28 @@
 
 </div>
 <div id="contenedor-puestotrabajo" class="content table-cargo">
-
 </div>
+    <!-- modal placeholder-->
+    <div id='myModal' class='modal fade in' tabindex='-1'>
+        <div class="modal-dialog" style="width:70%;">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
+
+
 @section scripts{
-    <script>
+@Scripts.Render("~/scripts/appjs/phones.js")
+    @*<script>
         //Carga por default
         $(document).ready(function () {
-            $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/1");
+            $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/0");
         });
         function CargarPuestos(idCargo) {
             $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/" + idCargo);
         }
-    </script>
+    </script>*@
 }
 
 @*<table class="table">

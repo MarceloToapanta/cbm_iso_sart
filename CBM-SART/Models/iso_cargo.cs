@@ -11,6 +11,7 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_cargo
     {
@@ -22,16 +23,28 @@ namespace CBM_SART.Models
         }
     
         public int icg_id_cargo { get; set; }
+        [Display(Name = "Nombre")]
+        [Required]
         public string icg_nombre { get; set; }
+        [Display(Name = "Descripción")]
         public string icg_descripcion { get; set; }
+        [Display(Name = "Código")]
         public Nullable<int> icg_cod_clase_cargo { get; set; }
+        [Display(Name = "Nro. Trajadores")]
         public Nullable<int> icg_num_trabajadores { get; set; }
+        [Display(Name = "Departamento")]
         public string icg_area { get; set; }
+        [Display(Name = "Jefe Inmediato")]
         public string icg_jefe_inmediato { get; set; }
+        [Display(Name = "Edad")]
         public string icg_edad { get; set; }
+        [Display(Name = "Género")]
         public string icg_genero { get; set; }
+        [Display(Name = "Instrucción")]
         public string icg_instruccion { get; set; }
+        [Display(Name = "Experencia")]
         public string icg_experiencia { get; set; }
+        [Display(Name = "Conocimiento Adicional")]
         public string icg_conocimiento_adicional { get; set; }
     
         public virtual ICollection<iso_puesto_trabajo> iso_puesto_trabajo { get; set; }

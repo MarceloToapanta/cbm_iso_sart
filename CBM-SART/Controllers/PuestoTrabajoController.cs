@@ -8,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CBM_SART.Models;
-
+using System.Linq.Dynamic;
 namespace CBM_SART.Controllers
 {
     public class PuestoTrabajoController : Controller
@@ -16,11 +16,40 @@ namespace CBM_SART.Controllers
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
         // GET: /PuestoTrabajo/
-        public async Task<ActionResult> Index()
-        {
-            return View(await db.iso_puesto_trabajo.ToListAsync());
-        }
+        //public async Task<ActionResult> Index()
+        //{
+        //    //return View(await db.iso_puesto_trabajo.ToListAsync());
+        //    var iso_puesto_trabajo = await db.iso_puesto_trabajo.ToListAsync();
+        //    return  PartialView("Index", iso_puesto_trabajo);
+        //}
 
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ipt_nombre_puesto_t", string sortdir = "ASC")
+        {
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_puesto_trabajo>();
+            ViewBag.filter = filter;
+            records.Content = db.iso_puesto_trabajo
+                        .Where(x => filter == null ||
+                                (x.ipt_nombre_puesto_t.ToLower().Contains(filter.ToLower().Trim()))
+                              )
+                        .OrderBy(sort + " " + sortdir)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+
+            // Count
+            records.TotalRecords = db.iso_puesto_trabajo
+                         .Where(x => filter == null ||
+                                (x.ipt_nombre_puesto_t.ToLower().Contains(filter.ToLower().Trim()))).Count();
+
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+
+            return View(records);
+
+            //return View(db.iso_empresa.ToList());
+        }
         // GET: /PuestoTrabajo/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -33,13 +62,14 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_puesto_trabajo);
+            return PartialView("Details", iso_puesto_trabajo);
         }
 
         // GET: /PuestoTrabajo/Create
         public ActionResult Create()
         {
-            return View();
+            iso_puesto_trabajo iso_puesto_trabajo = new iso_puesto_trabajo();
+            return PartialView("Create", iso_puesto_trabajo);
         }
 
         // POST: /PuestoTrabajo/Create
@@ -56,7 +86,7 @@ namespace CBM_SART.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(iso_puesto_trabajo);
+            return PartialView("Create", iso_puesto_trabajo);
         }
 
         // GET: /PuestoTrabajo/Edit/5
@@ -71,7 +101,7 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_puesto_trabajo);
+            return PartialView("Edit", iso_puesto_trabajo);
         }
 
         // POST: /PuestoTrabajo/Edit/5
@@ -87,7 +117,7 @@ namespace CBM_SART.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(iso_puesto_trabajo);
+            return PartialView("Edit", iso_puesto_trabajo);
         }
 
         // GET: /PuestoTrabajo/Delete/5
@@ -102,7 +132,7 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_puesto_trabajo);
+            return PartialView("Delete", iso_puesto_trabajo);
         }
 
         // POST: /PuestoTrabajo/Delete/5
@@ -113,7 +143,7 @@ namespace CBM_SART.Controllers
             iso_puesto_trabajo iso_puesto_trabajo = await db.iso_puesto_trabajo.FindAsync(id);
             db.iso_puesto_trabajo.Remove(iso_puesto_trabajo);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return PartialView("Delete", iso_puesto_trabajo);
         }
 
         protected override void Dispose(bool disposing)

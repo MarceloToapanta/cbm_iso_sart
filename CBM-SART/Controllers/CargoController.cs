@@ -56,18 +56,21 @@ namespace CBM_SART.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.icg_area = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento");
             iso_cargo iso_cargo = await db.iso_cargo.FindAsync(id);
             if (iso_cargo == null)
             {
                 return HttpNotFound();
             }
-            return View(iso_cargo);
+            return PartialView("Details", iso_cargo);
         }
 
         // GET: /Cargo/Create
         public ActionResult Create()
         {
-            return View();
+            var iso_cargo = new iso_cargo();
+            ViewBag.icg_area = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento");
+            return PartialView("Create", iso_cargo);
         }
 
         // POST: /Cargo/Create
@@ -83,8 +86,7 @@ namespace CBM_SART.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            return View(iso_cargo);
+            return PartialView("Create", iso_cargo);
         }
 
         // GET: /Cargo/Edit/5
@@ -94,12 +96,13 @@ namespace CBM_SART.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.icg_area = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento");
             iso_cargo iso_cargo = await db.iso_cargo.FindAsync(id);
             if (iso_cargo == null)
             {
                 return HttpNotFound();
             }
-            return View(iso_cargo);
+            return PartialView("Edit", iso_cargo);
         }
 
         // POST: /Cargo/Edit/5
@@ -115,7 +118,7 @@ namespace CBM_SART.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(iso_cargo);
+            return PartialView("Edit", iso_cargo);
         }
 
         // GET: /Cargo/Delete/5
@@ -125,12 +128,13 @@ namespace CBM_SART.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.icg_area = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento");
             iso_cargo iso_cargo = await db.iso_cargo.FindAsync(id);
             if (iso_cargo == null)
             {
                 return HttpNotFound();
             }
-            return View(iso_cargo);
+            return PartialView("Delete", iso_cargo);
         }
 
         // POST: /Cargo/Delete/5
@@ -150,8 +154,13 @@ namespace CBM_SART.Controllers
             if (id <= 0)
             {
                 var recordsvacio = new PagedList<iso_puesto_trabajo>();
-                recordsvacio.Content = db.iso_puesto_trabajo.ToList();
+                recordsvacio.Content = db.iso_puesto_trabajo
+                        .OrderBy(x => x.ipt_nombre_puesto_t)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
                 ViewBag.filter = filter;
+                recordsvacio.PageSize = pageSize;
                 recordsvacio.TotalRecords = db.iso_puesto_trabajo.Count();
                 ViewBag.total = recordsvacio.TotalRecords;
                 return PartialView(recordsvacio);

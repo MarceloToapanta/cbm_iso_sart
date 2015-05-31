@@ -1,107 +1,142 @@
 ﻿@model CBM_SART.Models.iso_cargo
 
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+<div class="title-window" style="height:32px">
+    Permite imprimir los datos del Cargo selecionado.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Datos del Cargo</h4>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.icg_id_cargo)
+            <div class="col-md-5">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_nombre, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.icg_nombre, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_nombre)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_descripcion, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.icg_descripcion, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_descripcion)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_cod_clase_cargo, new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.icg_cod_clase_cargo, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_cod_clase_cargo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_num_trabajadores, new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.icg_num_trabajadores, new { @Value = "0", @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_num_trabajadores)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_area, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.icg_area, (IEnumerable<SelectListItem>)ViewBag.icg_area, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_area)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_jefe_inmediato, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.icg_jefe_inmediato, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_jefe_inmediato)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_edad, new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.icg_edad, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_edad)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_genero, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.icg_genero, new SelectList(
+                                new List<Object>{
+                                new { value = "indistinto" , text = "Indistinto"  },
+                                new { value = "masculino" , text = "Masculino" },
+                                new { value = "femenino" , text = "Femenino" }
+                                },
+                                "value",
+                                "text",
+                        0), new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_genero)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_instruccion, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.icg_instruccion, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_instruccion)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_experiencia, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.icg_experiencia, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_experiencia)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icg_conocimiento_adicional, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.icg_conocimiento_adicional, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.icg_conocimiento_adicional)
+                    </div>
+                </div>
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <button class="btn btn-primary" data-dismiss="modal">Imprimir</button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 }
 
-<h2>Details</h2>
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
 
-<div>
-    <h4>iso_cargo</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_nombre)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.icg_nombre)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_cod_clase_cargo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_cod_clase_cargo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_num_trabajadores)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_num_trabajadores)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_area)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_area)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_jefe_inmediato)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_jefe_inmediato)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_edad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_edad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_genero)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_genero)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_instruccion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_instruccion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_experiencia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_experiencia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.icg_conocimiento_adicional)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.icg_conocimiento_adicional)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.icg_id_cargo }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
