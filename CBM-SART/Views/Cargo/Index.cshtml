@@ -14,11 +14,10 @@
         Cargos registrados.
         <span class="text-count">Nro. de  Cargos : @ViewBag.total</span>
     </div>
-
     @using (Html.BeginForm("Index", null, FormMethod.Get))
     {
         <div class="search">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="input-group">
 
                     <input type="text"
@@ -35,6 +34,14 @@
             </div>
             <div class="col-md-2">
                 <div class="pull-right">
+                    <a class="btn btn-primary" data-modal="" href="/Cargo/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Asignar
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
                     <a class="btn btn-success" data-modal="" href="/Cargo/Create" id="btnCreate">
                         <span class="glyphicon glyphicon-plus"></span>
                         Nuevo
@@ -43,7 +50,6 @@
             </div>
             <div class="clear"></div>
         </div>
-
         <div class="col-md-12 grid-content">
             @{
         var grid = new WebGrid(
@@ -64,10 +70,10 @@
               grid.Column("icg_num_trabajadores", "N Trab", style: "col-lg-1"),
               grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
-                @Html.Raw("<a data-modal='' href='/Cargo/details/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a class='id-cargo' data-modal='' href='/Cargo/details/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
                 @Html.Raw("<a data-modal='' href='/Cargo/edit/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
                 @Html.Raw("<a data-modal='' href='/Cargo/delete/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
-                @Html.Raw("<a class='asigcargo' title='Cargar Puestos de Trabajo' onclick= CargarPuestos('" + item.icg_id_cargo + "')> <span class='glyphicon glyphicon-asig'> </span> </a>")
+                @Html.Raw("<a class='asigcargo' data-modal='' href='/Cargo/AsignarPuestoT/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Cargar Puestos de Trabajo'> <span class='glyphicon glyphicon-asig'> </span> </a>")
                     </text>)
                               ));
             }
@@ -78,7 +84,76 @@
     }
 
 </div>
+
+
+
 <div id="contenedor-puestotrabajo" class="content table-cargo">
+
+
+    <div class="seccion-barra">
+        <img src="/images/label-plain-black.png" height="24" width="24">
+        Puestos de Trabajo Asignados.
+        <span class="text-count">Nro. de  Puestos : 30</span>
+    </div>
+
+
+    <form action="/Cargo/PuestoTrabajoList/0" method="get">
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
+
+
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="btn btn-success" data-modal="" href="/PuestoTrabajo/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="col-md-12 grid-content">
+            <table class="table table-bordered table-hover table-responsive table-condensed" id="grid1" data-swhgajax="true" data-swhgcontainer="grid" data-swhgcallback="">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            Nombre
+                        </th>
+                        <th scope="col">
+                            N Trab
+                        </th>
+                        <th scope="col">
+                            Acción
+                        </th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        
+                    </tr>
+                </tfoot>
+                <tbody id="PuestosAsignados">
+                    <tr>
+                        <td colspan="3">
+                            <div class="text-muted" style="text-align:center">
+                                Seleciona un cargo para mostar los puesto Asignados
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+        <div class="clear"></div>
+    </form>
+    <!-- modal placeholder-->
 </div>
     <!-- modal placeholder-->
     <div id='myModal' class='modal fade in' tabindex='-1'>
@@ -92,15 +167,57 @@
 
 @section scripts{
 @Scripts.Render("~/scripts/appjs/phones.js")
-    @*<script>
+    <script>
         //Carga por default
-        $(document).ready(function () {
-            $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/0");
-        });
+        //$(document).ready(function () {
+        //    $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/0");
+        //});
         function CargarPuestos(idCargo) {
-            $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/" + idCargo);
+            //    $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/" + idCargo);
+            alert("venta para asignar Puesto")
         }
-    </script>*@
+        $("#grid tbody tr").click(function () {
+            $("#grid tbody tr").removeClass("select-cargo")
+            $(this).addClass("select-cargo")
+            var IdCargo = $(this).find(".id-cargo").attr('id');
+            console.log(IdCargo);
+            PuestoAsignados("PuestosAsignados", IdCargo)
+            //Ajax para traer datos
+
+        });
+        //updateId = id de div que se va a modificar
+        //value = id del cargo
+        function PuestoAsignados(updateId, value) {
+            if (value == '') { value = 0 };
+            $.getJSON("@Url.Action("PuestosAsignados", "Cargo")"
+                + "/" + value,
+                function (data) {
+                    $("#" + updateId).empty();
+                    var row = 0;
+                    $.each(data, function (i, item) {
+                        $("#" + updateId).append("<tr value='"
+                           + item.ipt_id_puesto_t + "'><td>" + item.ipt_nombre_puesto_t
+                           + "</td><td> " + item.ipt_nro_trbajadores
+                           + " </td> <td class='action'>" 
+                           + "<a data-modal='' href='/Cargo/details/" + item.ipt_id_puesto_t + "' id=" + item.ipt_id_puesto_t + " title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>"
+                           + "<a data-modal='' href='/PuestoTrabajo/edit/" + item.ipt_id_puesto_t + "' id=" + item.ipt_id_puesto_t + " title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>"
+                           + "<a data-modal='' href='/PuestoTrabajo/delete/" + item.ipt_id_puesto_t + "' id=" + item.ipt_id_puesto_t + " title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>"
+                           + "</td></tr>");
+                        row = row + 1;
+                    });
+                    if (row == 0) {
+                        $("#" + updateId).append("<tr> <td colspan='3'>" +
+                            "<div class='text-muted' style='text-align:center'>" +
+                                "No tiene Puestos de Trabajo asignados" +
+                            "</div></td></tr>");
+                    }
+                });
+            
+        }
+    </script>
+
+   
+
 }
 
 @*<table class="table">

@@ -1,0 +1,140 @@
+﻿@model CBM_SART.Models.iso_cargo
+<div class="title-window" style="height:32px">
+    Permite asignar Puestos de Trabajo.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+    <h4 class="modal-title">Puestos de Trabajo Disponibles/Asiganados para @Model.icg_nombre</h4>
+</div>
+<div class="modal-body-apt">
+    <form action="/Cargo/PuestoTrabajoList/0" method="get">
+        <div class="col-md-6">
+            <div class="search">
+                <div class="col-md-10">
+                    <div class="input-group">
+
+                        Disponibles
+
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="pull-right">
+                        <a class="btn btn-success" data-modal="" href="/PuestoTrabajo/Create" id="btnCreate">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Nuevo
+                        </a>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="col-md-12 grid-content-dialog">
+                <table class="table table-bordered table-hover table-responsive table-condensed" id="pt-disponibles" data-swhgajax="true" data-swhgcontainer="grid" data-swhgcallback="">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                            </th>
+                            <th scope="col">
+                                Nombre
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr></tr>
+                    </tfoot>
+                    <tbody id="PuestosDisponibles">
+
+                        @foreach (var item in ViewBag.puestosdisponibles)
+                        {
+                            <tr>
+                                <td class="colum-check">
+                                    <input type="checkbox" />
+                                </td>
+                                <td>
+                                    @item.ipt_nombre_puesto_t
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="counter1"></div>
+            <div class="paging1"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="search">
+                <div class="col-md-10">
+                    <div class="input-group">
+                        
+                        Asignados
+
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="pull-right">
+                        <a class="btn btn-success" data-modal="" href="/PuestoTrabajo/Create" id="btnCreate">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Nuevo
+                        </a>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="col-md-12 grid-content-dialog">
+                <table class="table table-bordered table-hover table-responsive table-condensed" id="pt-asignados" data-swhgajax="true" data-swhgcontainer="grid" data-swhgcallback="">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+
+                            </th>
+                            <th scope="col">
+                                Nombre
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr></tr>
+                    </tfoot>
+                    <tbody id="PuestosAsignados">
+                        @foreach (var item in ViewBag.puestos_asignados)
+                        {
+                            <tr>
+                                <td class="colum-check">
+                                    <input type="checkbox" />
+                                </td>
+                                <td>
+                                    @item.ipt_nombre_puesto_t
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+            </div>
+            <div class="counter2"></div>
+            <div class="paging2 paging pagination-datatables pagination pagination-centered"></div>
+        </div>
+
+        <div class="clear"></div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/Scripts/Datatable/datatable.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable-bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable.css">
+<script>
+    $('#pt-disponibles').datatable({
+        pageSize: 10,
+        sort: [false, true],
+        pagingDivSelector: ".paging1",
+    });
+    $('#pt-asignados').datatable({
+        pageSize: 10,
+        sort: [false, true],
+        pagingDivSelector: ".paging2",
+    });
+</script>
+
+
+

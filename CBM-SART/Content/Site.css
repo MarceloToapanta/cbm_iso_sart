@@ -886,6 +886,26 @@ tfoot > tr > td a:hover{
 .asigcargo:hover{
     cursor:pointer;
 }
+.select-cargo{
+    background-color: #d9edf7 !important;
+}
+.modal-body-apt{
+    min-height:400px;    
+}
+.grid-content-dialog{
+  height: 310px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.colum-check{
+    text-align:center;
+}
+#PuestosDisponibles tr td:first-child{
+    text-align:center;
+}
+#PuestosAsignados tr td:first-child{
+    text-align:center;
+}
 /*////////////////////Fin Cargo Puesto de Trabajo//////////////*/
 
 @media print {

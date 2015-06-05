@@ -147,6 +147,38 @@ namespace CBM_SART.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public ActionResult AsignarPuestoT(int id) {
+            iso_cargo iso_cargo = db.iso_cargo.Find(id);
+            //Asignados
+            var puestosasignados = iso_cargo.iso_puesto_trabajo;
+            ViewBag.puestos_asignados = puestosasignados;
+            //Disponibles
+            var puestosdisponibles = db.iso_puesto_trabajo.ToList();
+            var totalpuestosdisponibles = puestosdisponibles.Except(puestosasignados);
+            ViewBag.puestosdisponibles = totalpuestosdisponibles;
+            return PartialView("AsignarPuestoT",iso_cargo);
+        }
+        public ActionResult PuestosAsignados(int id)
+        {
+            if (id != 0)
+            {
+                var iso_cargo = db.iso_cargo.Find(id);
+                var puestos = iso_cargo.iso_puesto_trabajo.Select((x=>new{
+                    x.ipt_id_puesto_t, x.ipt_nro_trbajadores, x.ipt_nombre_puesto_t}));
+                return this.Json(puestos, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var puestos = db.iso_puesto_trabajo.Select((x => new {
+                    x.ipt_id_puesto_t,
+                    x.ipt_nro_trbajadores,
+                    x.ipt_nombre_puesto_t
+                }));
+                return this.Json(puestos.ToList(), JsonRequestBehavior.AllowGet);
+            }
+
+            
+        }
 
 
         public ActionResult PuestoTrabajoList(int id, string filter = null, int page = 1, int pageSize = 15, string sort = "icg_nombre", string sortdir = "ASC")

@@ -480,6 +480,7 @@
     <Content Include="Views\Plan\EditarTarea.cshtml" />
     <Content Include="Views\SistemaGestion\Nivel_1.cshtml" />
     <Content Include="Views\Cargo\PuestoTrabajoList.cshtml" />
+    <Content Include="Views\Cargo\AsignarPuestoT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
