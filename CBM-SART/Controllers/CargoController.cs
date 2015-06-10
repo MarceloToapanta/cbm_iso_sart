@@ -219,7 +219,42 @@ namespace CBM_SART.Controllers
             ViewBag.total = records.TotalRecords;
             return PartialView(records);
         }
-
+        public String AnadirPuestoT(int idcargo, int[] puestos)
+        {
+            //Bueca el cargo
+            iso_cargo iso_cargo = db.iso_cargo.Find(idcargo);
+            //Añade puestos
+            for (int i = 0; i < puestos.Length; i++)
+            {
+                iso_puesto_trabajo ord = new iso_puesto_trabajo();
+                ord  = db.iso_puesto_trabajo.Find(puestos[i]);
+                if (ord != null)
+                {
+                    iso_cargo.iso_puesto_trabajo.Add(ord);
+                }
+                //str = str + puestos[i];
+            }
+            db.SaveChanges();
+            return "Puestos Guardados";
+        }
+        public ActionResult QuitarPuestoT(int idcargo, int[] puestos)
+        {
+            //Bueca el cargo
+            iso_cargo iso_cargo = db.iso_cargo.Find(idcargo);
+            //Añade puestos
+            for (int i = 0; i < puestos.Length; i++)
+            {
+                iso_puesto_trabajo ord = new iso_puesto_trabajo();
+                ord = db.iso_puesto_trabajo.Find(puestos[i]);
+                if (ord != null)
+                {
+                    iso_cargo.iso_puesto_trabajo.Remove(ord);
+                }
+                //str = str + puestos[i];
+            }
+            db.SaveChanges();
+            return null;
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

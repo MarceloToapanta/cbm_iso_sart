@@ -8,32 +8,37 @@
 </div>
 <div class="modal-body-apt">
     <form action="/Cargo/PuestoTrabajoList/0" method="get">
-        <div class="col-md-6">
+        <div style="width: 4%; height: 1px; float: left;"></div>
+        <div class="col-md-5">
             <div class="search">
                 <div class="col-md-10">
-                    <div class="input-group">
-
-                        Disponibles
-
-                    </div>
+                    <p class="text-descrip">Puestos de Trabajo Disponibles</p>
                 </div>
                 <div class="col-md-2">
-                    <div class="pull-right">
-                        <a class="btn btn-success" data-modal="" href="/PuestoTrabajo/Create" id="btnCreate">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Nuevo
-                        </a>
+                    <div class="counterpt">
+                        @Enumerable.Count(ViewBag.puestosdisponibles)
                     </div>
                 </div>
+                @*<div class="col-md-2">
+                        <div class="pull-right">
+                            <a class="btn btn-success" data-modal="" href="/PuestoTrabajo/Create" id="btnCreate">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Nuevo
+                            </a>
+                        </div>
+                    </div>*@
+
                 <div class="clear"></div>
             </div>
             <div class="col-md-12 grid-content-dialog">
                 <table class="table table-bordered table-hover table-responsive table-condensed" id="pt-disponibles" data-swhgajax="true" data-swhgcontainer="grid" data-swhgcallback="">
                     <thead>
                         <tr>
-                            <th scope="col">
+                            <th >
                             </th>
-                            <th scope="col">
+                            <th >
+                            </th>
+                            <th >
                                 Nombre
                             </th>
                         </tr>
@@ -46,6 +51,9 @@
                         @foreach (var item in ViewBag.puestosdisponibles)
                         {
                             <tr>
+                                <td class="colum-check">
+                                    @item.ipt_id_puesto_t
+                                </td>
                                 <td class="colum-check">
                                     <input type="checkbox" />
                                 </td>
@@ -60,33 +68,42 @@
             <div class="counter1"></div>
             <div class="paging1"></div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-1" style="text-align: center;margin-top: 140px;">
+            <a id="btnAsignar" href="#" class="btn btn-success" style="margin-bottom: 8px;">>></a>
+
+            <a id="btnQuitar" href="#" class="btn btn-success"><<</a>
+        </div>
+        <div class="col-md-5">
             <div class="search">
                 <div class="col-md-10">
-                    <div class="input-group">
-                        
-                        Asignados
-
-                    </div>
+                    <p class="text-descrip">Puestos de Trabajo Disponibles</p>
                 </div>
                 <div class="col-md-2">
-                    <div class="pull-right">
-                        <a class="btn btn-success" data-modal="" href="/PuestoTrabajo/Create" id="btnCreate">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Nuevo
-                        </a>
+                    <div class="counterpt">
+                        @Enumerable.Count(ViewBag.puestos_asignados)
                     </div>
                 </div>
+                @*<div class="col-md-2">
+                        <div class="pull-right">
+                            <a class="btn btn-success" data-modal="" href="/PuestoTrabajo/Create" id="btnCreate">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Nuevo
+                            </a>
+                        </div>
+                    </div>*@
                 <div class="clear"></div>
             </div>
             <div class="col-md-12 grid-content-dialog">
                 <table class="table table-bordered table-hover table-responsive table-condensed" id="pt-asignados" data-swhgajax="true" data-swhgcontainer="grid" data-swhgcallback="">
                     <thead>
                         <tr>
-                            <th scope="col">
+                            <th>
 
                             </th>
-                            <th scope="col">
+                            <th>
+
+                            </th>
+                            <th>
                                 Nombre
                             </th>
                         </tr>
@@ -94,17 +111,20 @@
                     <tfoot>
                         <tr></tr>
                     </tfoot>
-                    <tbody id="PuestosAsignados">
+                    <tbody id="PuestosAsignadoss">
                         @foreach (var item in ViewBag.puestos_asignados)
                         {
-                            <tr>
-                                <td class="colum-check">
-                                    <input type="checkbox" />
-                                </td>
-                                <td>
-                                    @item.ipt_nombre_puesto_t
-                                </td>
-                            </tr>
+                        <tr>
+                            <td class="colum-check">
+                                @item.ipt_id_puesto_t
+                            </td>
+                            <td class="colum-check">
+                                <input type="checkbox" />
+                            </td>
+                            <td>
+                                @item.ipt_nombre_puesto_t
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -120,20 +140,23 @@
     </form>
 </div>
 
-<script type="text/javascript" src="/Scripts/Datatable/datatable.min.js"></script>
+<input id="IdCargo" type="hidden" value="@Model.icg_id_cargo" />
+<div id="out"></div>
+<script type="text/javascript" src="/Scripts/Datatable/datatable.js"></script>
 <link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable-bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable.css">
 <script>
     $('#pt-disponibles').datatable({
         pageSize: 10,
-        sort: [false, true],
+        sort: [false,false, true],
         pagingDivSelector: ".paging1",
     });
     $('#pt-asignados').datatable({
         pageSize: 10,
-        sort: [false, true],
+        sort: [false,false, true],
         pagingDivSelector: ".paging2",
     });
+
 </script>
 
 

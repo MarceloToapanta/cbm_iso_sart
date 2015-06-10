@@ -900,11 +900,32 @@ tfoot > tr > td a:hover{
 .colum-check{
     text-align:center;
 }
-#PuestosDisponibles tr td:first-child{
+#PuestosDisponibles tr td:first-child, #pt-disponibles thead tr th:first-child{
     text-align:center;
+    display:none;
 }
-#PuestosAsignados tr td:first-child{
+
+#PuestosAsignadoss tr td:first-child, #pt-asignados thead tr th:first-child{
     text-align:center;
+    display:none;
+}
+
+.text-descrip{
+  margin: 5px 5px;
+  color: #555;
+  font-size: 12px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2px;
+}
+.counterpt{
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 2px;
+  text-align: center;
+  margin: 5px 0px;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
 }
 /*////////////////////Fin Cargo Puesto de Trabajo//////////////*/
 

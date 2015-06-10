@@ -214,6 +214,44 @@
                 });
             
         }
+        $(document).on('click', '#btnAsignar', function () {
+            var ids = ""; //almacena ids de puesto de trabajo
+            $('#pt-disponibles tr').filter(':has(:checkbox:checked)').each(function () {
+                ids = ids + "&puestos=" + $(this).find('td:first').html(); //captura los check selecionados
+            });
+            var id = $('#IdCargo').val();
+            var puestos = ids;
+            var url = "@Url.Action("AnadirPuestoT", "Cargo")?idcargo=" + id + puestos;
+            $('#out').load(url);
+            //console.log(url);
+            //Recarga Dialog
+            $('#myModalContent').load('/Cargo/AsignarPuestoT/' + id, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindForm(this);
+            });
+        });
+        $(document).on('click', '#btnQuitar', function () {
+            var ids = ""; //almacena ids de puesto de trabajo
+            $('#pt-asignados tr').filter(':has(:checkbox:checked)').each(function () {
+                ids = ids + "&puestos=" + $(this).find('td:first').html(); //captura los check selecionados
+            });
+            console.log(ids);
+            var id = $('#IdCargo').val();
+            var puestos = ids;
+            //Obtiene la URL
+            var url = "@Url.Action("QuitarPuestoT", "Cargo")?idcargo=" + id + puestos;
+            $('#out').load(url);
+            //Recarga Dialog
+            $('#myModalContent').load('/Cargo/AsignarPuestoT/' + id, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+
+                bindForm(this);
+            });
+        });
     </script>
 
    
