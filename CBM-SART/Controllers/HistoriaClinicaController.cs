@@ -154,6 +154,20 @@ namespace CBM_SART.Controllers
             //var Personal = db.iso_personal.ToList();
             return PartialView("ListaPersonal", records);
         }
+
+        public FileContentResult GetImage(int ID)
+        {
+            iso_personal cat = db.iso_personal.FirstOrDefault(c => c.ipe_id_personal == ID);
+            if (cat != null)
+            {
+                string type = "image/jpeg";
+                return File(cat.ipe_foto, type);
+            }
+            else
+            {
+                return null;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

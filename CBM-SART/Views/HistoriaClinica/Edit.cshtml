@@ -5,56 +5,135 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    @Model.iso_personal.ipe_apellido_paterno @Model.iso_personal.ipe_nombre_personal
+<div class="col-md-12">
+    <div class="col-md-8">
+        <div class="col-md-5" style="padding-left:0">
+            <div><label class="label-1">Fecha Apertura: </label> @Html.TextBoxFor(model => model.ihc_fecha_historia_clinica, "{0:dd/MM/yyyy}", new { @disabled = "disabled", @style = "text-align: center;width: 80px;" })</div>
+            <div><label class="label-1">Codigo:</label></div>
+        </div>
+        <div class="col-md-7">
+            <div class="title-h">Historia Clinica</div>
+        </div>
+        <div class="col-md-12" style="padding-left:0">
+            <div><label class="label-1">Trabajador: </label><span class="nombre-personal-h">@Model.iso_personal.ipe_apellido_paterno @Model.iso_personal.ipe_nombre_personal</span></div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <button>Boton1</button>
+        <button>Boton2</button>
+        <button>Boton3</button>
+    </div>
+
 </div>
-<h4>Datos Personales</h4>
-<hr />
+<div class="clear"></div>
+<label class="label-2"> Datos Generales</label>
 <div class="hc-container-personal">
-    <div class="form-group">
-        <div class="col-md-1">
-            CI:
-        </div>
+    <div class="col-md-10">
         <div class="col-md-4">
-            @Model.iso_personal.ipe_ced_ruc_personal
+            <label class="label-3">CI:</label>@Model.iso_personal.ipe_ced_ruc_personal<br />            
+            <label class="label-3">Lugar Nacimiento:</label>@Model.iso_personal.ipe_lugar_nacimiento<br />
+            <label class="label-3">Fecha Nacimiento:</label>@Model.iso_personal.ipe_fecha_nacimiento<br />
+            <label class="label-3">Género:</label>@Model.iso_personal.ipe_genero<br />
+            <label class="label-3">Edad:</label>@Model.iso_personal.ipe_edad<br />
+            <label class="label-3">Estado Civil:</label>@Model.iso_personal.ipe_estado_civil
         </div>
-        <div class="col-md-1">
-            Direccion:
-        </div>
-        <div class="col-md-4">
-            @Model.iso_personal.ipe_dir_domicilio
+        <div class="col-md-8">
+            <label class="label-3">Dirección:</label>@Model.iso_personal.ipe_dir_domicilio<br />
+            <label class="label-3">Teléfono:</label>@Model.iso_personal.ipe_telf_1<br />
+            <label class="label-3">E-mail:</label>@Model.iso_personal.ipe_email
+            <label class="label-3">Nacionalidad:</label>@Model.iso_personal.ipe_nacionalidad<br />
+            <label class="label-3">Nivel Educativo:</label>@Model.iso_personal.ipe_nivel_educativo
+            <label class="label-3">Nro Afil IESS:</label>@Model.iso_personal.ipe_nro_afiliacion<br />
+            <label class="label-3">Profesión:</label>@Model.iso_personal.ipe_profesion<br />
+            <label class="label-3">Tipo Sangre:</label>@Model.iso_personal.ipe_tipo_sangre
+            <label class="label-3">Factor RH:</label>@Model.iso_personal.ipe_factor_rh
+            <label class="label-3">Etnia:</label>@Model.iso_personal.ipe_etnia<br />
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-1">
-            Lugar de Nacimiento:
+    <div class="col-md-2">
+        <div class="foto-h">
+            @if (Model.iso_personal.ipe_foto != null)
+            {
+                <div class="inline-image-preivew">
+                    <img id="blah" alt="Foto Personal" width="120" height="100" style="border: 1px solid #ccc; max-width: 100%; height: auto" src="@Url.Action("GetImage", "HistoriaClinica", new { ID = Model.iso_personal.ipe_id_personal })" />
+                </div>
+            }
+            else
+            {
+                <div class="inline-image-preivew">
+                    <img id="blah" src="~/images/foto_personal.png" width="120" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; max-width: 100%; height: auto; "/>
+                </div>
+            }
         </div>
-        <div class="col-md-4">
-            @Model.iso_personal.ipe_fecha_nacimiento
-        </div>
-        <div class="col-md-1">
-            Tipo Sangre:
-        </div>
-        <div class="col-md-1">
-            @Model.iso_personal.ipe_tipo_sangre
-        </div>
-        <div class="col-md-1">
-            Factor RH:
-        </div>
-        <div class="col-md-1">
-            @Model.iso_personal.ipe_factor_rh
-        </div>
+        
+    </div>
+</div>
+<div class="clear"></div>
+<label class="label-2"> Datos Empresa</label>
+<div class="clear"></div>
+<div class="hc-container-personal col-md-10">
+    <div class="col-md-12">
+        <label class="label-3">Razón Social:</label>@if (Model.iso_personal.iso_empresa.iem_razon_social == null || Model.iso_personal.iso_empresa.iem_razon_social == ""){<samp>Sin Registrar</samp>}else{ @Model.iso_personal.iso_empresa.iem_razon_social}
+        <label class="label-3">Ciudad-Sede:</label>@if (Model.iso_personal.iso_empresa.iem_direccion_empresa == null || Model.iso_personal.iso_empresa.iem_direccion_empresa == ""){<samp>Sin Registrar</samp>}else { @Model.iso_personal.iso_empresa.iem_direccion_empresa}
+        
+    </div>
+</div>
+<div class="col-md-2">
+    <span style="width:100%; text-align:center; display:block">Filtro de Historia Clinica</span>
+    <select style="width:100%" class="form-control">
+        <option>Preocupacional</option>
+        <option>Consulta Médica</option>
+        <option>Reintegro</option>
+    </select>
+</div>
+<div class="clear"></div>
+<br />
+<div class="col-md-12">
+    <ul class="nav nav-tabs">        
+        <li class="active"><a href="#inf" data-toggle="tab" aria-expanded="false">Información Ocupacional</a></li>
+        <li class=""><a href="#ant" data-toggle="tab" aria-expanded="false">Antecedentes de Salud</a></li>
+        <li class=""><a href="#sig" data-toggle="tab" aria-expanded="false">Signos y Sintomas</a></li>
+        <li class=""><a href="#hab" data-toggle="tab" aria-expanded="false">Hábitos/Estilos de Vida</a></li>
+        <li class=""><a href="#exa" data-toggle="tab" aria-expanded="false">Exámen Físico</a></li>
+        <li class=""><a href="#rev" data-toggle="tab" aria-expanded="false">Revisión por Sistemas</a></li>
+        <li class=""><a href="#lab" data-toggle="tab" aria-expanded="true">Ex. Laboratorio</a></li>
+        @*<li class="disabled"><a>Disabled</a></li>*@
+    </ul>
+</div>
+
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active in" id="inf">
+        <p>Informacion</p>
+    </div>
+    <div class="tab-pane fade " id="ant">
+        <p>Antecedentes</p>
+    </div>
+    <div class="tab-pane fade  in" id="sig">
+        <p>Signos</p>
+    </div>
+    <div class="tab-pane fade in" id="hab">
+        <p>Habitos</p>
+    </div>
+    <div class="tab-pane fade in" id="exa">
+        <p>Examenes</p>
+    </div>
+    <div class="tab-pane fade  in" id="rev">
+        <p>Revisiones</p>
+    </div>
+    <div class="tab-pane fade in" id="lab">
+        <p>Laboratorio</p>
     </div>
 </div>
 
-<hr />
 
-@using (Html.BeginForm())
+
+@*@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        
+
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.ihc_id_historia)
 
@@ -72,7 +151,7 @@
             <div class="control-label col-md-2">Empleado: </div>
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.iso_personal.ipe_nombre_personal)
-                
+
             </div>
         </div>
 
@@ -98,7 +177,7 @@
             </div>
         </div>
     </div>
-}
+}*@
 
 <div>
     @Html.ActionLink("Regresar", "Panel")

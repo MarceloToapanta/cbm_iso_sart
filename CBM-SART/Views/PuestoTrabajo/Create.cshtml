@@ -3,54 +3,67 @@
 @{
 }
 
-<h2>Create</h2>
+<div class="title-window" style="height:32px">
+    Permite registrar un Nuevo Puesto Trabajo.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Crear nuevo Puesto Trabajo</h4>
+</div>
 
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>iso_puesto_trabajo</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ipt_nombre_puesto_t, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ipt_nombre_puesto_t)
-                @Html.ValidationMessageFor(model => model.ipt_nombre_puesto_t)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipt_nombre_puesto_t, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipt_nombre_puesto_t, new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.ipt_nombre_puesto_t)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ipt_descrip_puesto_t, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ipt_descrip_puesto_t)
-                @Html.ValidationMessageFor(model => model.ipt_descrip_puesto_t)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipt_descrip_puesto_t, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ipt_descrip_puesto_t, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipt_descrip_puesto_t)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ipt_nro_trbajadores, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ipt_nro_trbajadores)
-                @Html.ValidationMessageFor(model => model.ipt_nro_trbajadores)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipt_nro_trbajadores, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipt_nro_trbajadores, new {@Value="0", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipt_nro_trbajadores)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

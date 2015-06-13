@@ -143,7 +143,7 @@ namespace CBM_SART.Controllers
             iso_puesto_trabajo iso_puesto_trabajo = await db.iso_puesto_trabajo.FindAsync(id);
             db.iso_puesto_trabajo.Remove(iso_puesto_trabajo);
             await db.SaveChangesAsync();
-            return PartialView("Delete", iso_puesto_trabajo);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

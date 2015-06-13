@@ -1,58 +1,70 @@
 ﻿@model CBM_SART.Models.iso_puesto_trabajo
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+   
 }
 
-<h2>Edit</h2>
+<div class="title-window" style="height:32px">
+    Permite editar el Puesto Trabajo selecionado.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Editar Puesto Trabajo</h4>
+</div>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>iso_puesto_trabajo</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.ipt_id_puesto_t)
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ipt_id_puesto_t)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ipt_nombre_puesto_t, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ipt_nombre_puesto_t)
-                @Html.ValidationMessageFor(model => model.ipt_nombre_puesto_t)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipt_nombre_puesto_t, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipt_nombre_puesto_t, new { @class = "form-control required valid" })
+                    @Html.ValidationMessageFor(model => model.ipt_nombre_puesto_t)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ipt_descrip_puesto_t, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ipt_descrip_puesto_t)
-                @Html.ValidationMessageFor(model => model.ipt_descrip_puesto_t)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipt_descrip_puesto_t, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ipt_descrip_puesto_t, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipt_descrip_puesto_t)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ipt_nro_trbajadores, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ipt_nro_trbajadores)
-                @Html.ValidationMessageFor(model => model.ipt_nro_trbajadores)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipt_nro_trbajadores, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipt_nro_trbajadores, new { @Value = "0", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipt_nro_trbajadores)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

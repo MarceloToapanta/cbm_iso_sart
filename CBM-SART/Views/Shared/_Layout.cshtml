@@ -49,7 +49,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("Index", "Personal")"><img class="boton-barra-imagen" src="@Url.Content("~/images/personal.png")" />Personal</a></li>
                             <li><a href="@Url.Action("Index", "Cargo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
-                            <li><a href="@Url.Action("Index", "PuestoTrabajo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/puestot.png")" />Puesto de Trabajo</a></li>
+                            <li><a href="@Url.Action("Index", "PuestoTrabajo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/puesto_t.png")" />Puesto de Trabajo</a></li>
                             <li><a href="@Url.Action("Index", "HistoriaClinica/Panel")"><img class="boton-barra-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
                             <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
                             <li><a href="@Url.Action("Index", "Profesiograma")"><img class="boton-barra-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>
@@ -97,7 +97,7 @@
                             <ul class="list-panel-modulos">
                                 <li><a class="@(Session["SidebarSelect"] == "Personal" ? "select" : "")" href="@Url.Action("Index", "Personal")"><img class="boton-panel-imagen " src="@Url.Content("~/images/personal.png")" />Personal</a></li>
                                 <li><a class="@(Session["SidebarSelect"] == "Cargo" ? "select" : "")" href="@Url.Action("Index", "Cargo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "Puesto" ? "select" : "")" href="@Url.Action("Index", "PuestoTrabajo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Puesto de Trabajo</a></li>
+                                <li><a class="@(Session["SidebarSelect"] == "Puesto" ? "select" : "")" href="@Url.Action("Index", "PuestoTrabajo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puesto_t.png")" />Puesto de Trabajo</a></li>
                                 <li><a class="@(Session["SidebarSelect"] == "Historia" ? "select" : "")" href="@Url.Action("Index", "HistoriaClinica/Panel")"><img class="boton-panel-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
                                 <li><a class="@(Session["SidebarSelect"] == "riesgos" ? "select" : "")" href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
                                 <li><a class="@(Session["SidebarSelect"] == "profesiograma" ? "select" : "")" href="@Url.Action("Index", "Profesiograma")"><img class="boton-panel-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>

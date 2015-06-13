@@ -11,7 +11,7 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class iso_puesto_trabajo
     {
         public iso_puesto_trabajo()
@@ -24,8 +24,12 @@ namespace CBM_SART.Models
         }
     
         public int ipt_id_puesto_t { get; set; }
+        [Display(Name = "Nombre")]
+        [Required]
         public string ipt_nombre_puesto_t { get; set; }
+        [Display(Name = "Descripción")]
         public string ipt_descrip_puesto_t { get; set; }
+        [Display(Name = "Nro. Trabajores")]
         public Nullable<int> ipt_nro_trbajadores { get; set; }
     
         public virtual ICollection<iso_cargo> iso_cargo { get; set; }
