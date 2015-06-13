@@ -100,6 +100,12 @@ namespace CBM_SART.Controllers
                 {
                     iso_personal.ipe_foto = ConvertToBytes(file);
                 }
+                ///////Curriculum/////////
+                HttpPostedFileBase filec = Request.Files["filedoc"];
+                if (filec.FileName != "")
+                {
+                    iso_personal.ipe_archivo_curriculum = ConvertToBytes(filec);
+                }
                 db.iso_personal.Add(iso_personal);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -152,6 +158,12 @@ namespace CBM_SART.Controllers
                 if (file.FileName != "")
                 {
                     iso_personal.ipe_foto = ConvertToBytes(file);
+                }
+                ///////Curriculum/////////
+                HttpPostedFileBase filec = Request.Files["filedoc"];
+                if (filec.FileName != "")
+                {
+                    iso_personal.ipe_archivo_curriculum = ConvertToBytes(filec);
                 }
                 db.Entry(iso_personal).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -206,6 +218,18 @@ namespace CBM_SART.Controllers
             {
                 return null;
             }
+        }
+        //Curriculum del Personal
+        public FileContentResult GetDoc(int ID)
+        {
+            iso_personal cat = db.iso_personal.FirstOrDefault(c => c.ipe_id_personal == ID);
+            if (cat != null)
+            {
+                string type = string.Empty;
+                type = "application/pdf";
+                return File(cat.ipe_archivo_curriculum, type);
+            }
+                return null;
         }
         protected override void Dispose(bool disposing)
         {

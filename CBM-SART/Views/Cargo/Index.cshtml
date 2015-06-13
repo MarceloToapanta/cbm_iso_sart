@@ -75,9 +75,9 @@
                 @Html.Raw("<a data-modal='' href='/Cargo/delete/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                 @Html.Raw("<a class='asigcargo' data-modal='' href='/Cargo/AsignarPuestoT/" + item.icg_id_cargo + "' id='" + item.icg_id_cargo + "' title='Cargar Puestos de Trabajo'> <span class='glyphicon glyphicon-asig'> </span> </a>")
                     </text>)
-                              ));
+                                               ));
             }
-            
+
 
         </div>
         <div class="clear"></div>
@@ -116,7 +116,7 @@
             </div>
             <div class="clear"></div>
         </div>
-        <div class="col-md-12 grid-content">
+        <div class="col-md-12 grid-content" style="height: 397px;overflow: auto;">
             <table class="table table-bordered table-hover table-responsive table-condensed" id="grid1" data-swhgajax="true" data-swhgcontainer="grid" data-swhgcallback="">
                 <thead>
                     <tr>
@@ -126,19 +126,14 @@
                         <th scope="col">
                             N Trab
                         </th>
-                        <th scope="col">
-                            Acción
-                        </th>
                     </tr>
                 </thead>
                 <tfoot>
-                    <tr>
-                        
-                    </tr>
+                    <tr></tr>
                 </tfoot>
                 <tbody id="PuestosAsignados">
                     <tr>
-                        <td colspan="3">
+                        <td colspan="2">
                             <div class="text-muted" style="text-align:center">
                                 Seleciona un cargo para mostar los puesto Asignados
                             </div>
@@ -155,18 +150,18 @@
     </form>
     <!-- modal placeholder-->
 </div>
-    <!-- modal placeholder-->
-    <div id='myModal' class='modal fade in' tabindex='-1'>
-        <div class="modal-dialog" style="width:70%;">
-            <div class="modal-content">
-                <div id='myModalContent'></div>
-            </div>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog" style="width:70%;">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
         </div>
     </div>
+</div>
 
 
 @section scripts{
-@Scripts.Render("~/scripts/appjs/phones.js")
+    @Scripts.Render("~/scripts/appjs/phones.js")
     <script>
         //Carga por default
         //$(document).ready(function () {
@@ -195,26 +190,24 @@
                     $("#" + updateId).empty();
                     var row = 0;
                     $.each(data, function (i, item) {
+                        var nroT = 0;
+                        if (item.ipt_nro_trbajadores > 0){nroT =item.ipt_nro_trbajadores; }
                         $("#" + updateId).append("<tr value='"
                            + item.ipt_id_puesto_t + "'><td>" + item.ipt_nombre_puesto_t
-                           + "</td><td> " + item.ipt_nro_trbajadores
-                           + " </td> <td class='action'>" 
-                           + "<a data-modal='' href='/Cargo/details/" + item.ipt_id_puesto_t + "' id=" + item.ipt_id_puesto_t + " title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>"
-                           + "<a data-modal='' href='/PuestoTrabajo/edit/" + item.ipt_id_puesto_t + "' id=" + item.ipt_id_puesto_t + " title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>"
-                           + "<a data-modal='' href='/PuestoTrabajo/delete/" + item.ipt_id_puesto_t + "' id=" + item.ipt_id_puesto_t + " title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>"
-                           + "</td></tr>");
+                           + "</td><td> " + nroT
+                           + " </td></tr>");
                         row = row + 1;
                     });
                     if (row == 0) {
-                        $("#" + updateId).append("<tr> <td colspan='3'>" +
+                        $("#" + updateId).append("<tr> <td colspan='2'>" +
                             "<div class='text-muted' style='text-align:center'>" +
                                 "No tiene Puestos de Trabajo asignados" +
                             "</div></td></tr>");
                     }
                 });
-            
         }
         $(document).on('click', '#btnAsignar', function () {
+            $('#myModalContent').css('opacity', '0.5');
             var ids = ""; //almacena ids de puesto de trabajo
             $('#pt-disponibles tr').filter(':has(:checkbox:checked)').each(function () {
                 ids = ids + "&puestos=" + $(this).find('td:first').html(); //captura los check selecionados
@@ -231,8 +224,10 @@
                 }, 'show');
                 bindForm(this);
             });
+            $('#myModalContent').css('opacity', '1');
         });
         $(document).on('click', '#btnQuitar', function () {
+            $('#myModalContent').css('opacity', '0.5');
             var ids = ""; //almacena ids de puesto de trabajo
             $('#pt-asignados tr').filter(':has(:checkbox:checked)').each(function () {
                 ids = ids + "&puestos=" + $(this).find('td:first').html(); //captura los check selecionados
@@ -251,10 +246,20 @@
 
                 bindForm(this);
             });
+            $('#myModalContent').css('opacity', '1');
         });
     </script>
 
-   
+    <script type="text/javascript" src="/Scripts/Datatable/datatable.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable.css">
+    <script>
+        //$('#grid1').datatable({
+        //    pageSize: 10,
+        //    sort: [false, false],
+        //    pagingDivSelector: ".paging1",
+        //});
+    </script>
 
 }
 

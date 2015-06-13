@@ -893,8 +893,8 @@ tfoot > tr > td a:hover{
     min-height:400px;    
 }
 .grid-content-dialog{
-  height: 310px;
-  margin-bottom: 10px;
+  height: 325px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
 }
 .colum-check{
@@ -904,7 +904,9 @@ tfoot > tr > td a:hover{
     text-align:center;
     display:none;
 }
-
+#PuestosDisponibles tr td:nth-child(2), #PuestosAsignadoss tr td:nth-child(2){
+    text-align:center;
+}
 #PuestosAsignadoss tr td:first-child, #pt-asignados thead tr th:first-child{
     text-align:center;
     display:none;
@@ -955,5 +957,8 @@ form textarea{
 }
 .emp-inactivo:hover{
     opacity: 1;
+}
+.file-curriculum{
+    margin-top: 5px;
 }
 /*///////////////Fin Peronal//////////////////////*/

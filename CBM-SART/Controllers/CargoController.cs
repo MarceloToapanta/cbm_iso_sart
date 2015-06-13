@@ -235,7 +235,7 @@ namespace CBM_SART.Controllers
                 //str = str + puestos[i];
             }
             db.SaveChanges();
-            return "Puestos Guardados";
+            return "";
         }
         public ActionResult QuitarPuestoT(int idcargo, int[] puestos)
         {
