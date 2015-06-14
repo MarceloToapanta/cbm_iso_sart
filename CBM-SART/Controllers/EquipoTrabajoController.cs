@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CBM_SART.Models;
+using System.Linq.Dynamic;
+using System.IO;
 
 namespace CBM_SART.Controllers
 {
@@ -16,9 +18,36 @@ namespace CBM_SART.Controllers
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
         // GET: /EquipoTrabajo/
-        public async Task<ActionResult> Index()
+        //public async Task<ActionResult> Index()
+        //{
+        //    return View(await db.iso_equipo_proteccion.ToListAsync());
+        //}
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "iep_nombre_equipo_p", string sortdir = "ASC")
         {
-            return View(await db.iso_equipo_proteccion.ToListAsync());
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_equipo_proteccion>();
+            ViewBag.filter = filter;
+            records.Content = db.iso_equipo_proteccion
+                        .Where(x => filter == null ||
+                                (x.iep_nombre_equipo_p.ToLower().Contains(filter.ToLower().Trim()))
+                              )
+                        .OrderBy(sort + " " + sortdir)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+
+            // Count
+            records.TotalRecords = db.iso_equipo_proteccion
+                         .Where(x => filter == null ||
+                                (x.iep_nombre_equipo_p.ToLower().Contains(filter.ToLower().Trim()))).Count();
+
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+
+            return View(records);
+
+            //return View(db.iso_empresa.ToList());
         }
 
         // GET: /EquipoTrabajo/Details/5
@@ -33,13 +62,22 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_equipo_proteccion);
+            //return View(iso_equipo_proteccion);
+            return PartialView("Details", iso_equipo_proteccion);
         }
-
+        public byte[] ConvertToBytes(HttpPostedFileBase image)
+        {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(image.InputStream);
+            imageBytes = reader.ReadBytes((int)image.ContentLength);
+            return imageBytes;
+        }
         // GET: /EquipoTrabajo/Create
         public ActionResult Create()
         {
-            return View();
+            iso_equipo_proteccion iso_equipo_proteccion = new iso_equipo_proteccion();
+            //return View();
+            return PartialView("Details", iso_equipo_proteccion);
         }
 
         // POST: /EquipoTrabajo/Create
@@ -49,14 +87,21 @@ namespace CBM_SART.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include="iep_id_equipo_p,iep_nombre_equipo_p,iep_ubic_imagen_equipo_p,iep_imagen_equipo_p,iep_stock")] iso_equipo_proteccion iso_equipo_proteccion)
         {
+
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["file1"];
+                if (file.FileName != "")
+                {
+                    iso_equipo_proteccion.iep_imagen_equipo_p = ConvertToBytes(file);
+                }
                 db.iso_equipo_proteccion.Add(iso_equipo_proteccion);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(iso_equipo_proteccion);
+            //return View(iso_equipo_proteccion);
+            return PartialView("Create", iso_equipo_proteccion);
         }
 
         // GET: /EquipoTrabajo/Edit/5
@@ -71,7 +116,8 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_equipo_proteccion);
+            //return View(iso_equipo_proteccion);
+            return PartialView("Edit", iso_equipo_proteccion);
         }
 
         // POST: /EquipoTrabajo/Edit/5
@@ -83,11 +129,16 @@ namespace CBM_SART.Controllers
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["file1"];
+                if (file.FileName != "")
+                {
+                    iso_equipo_proteccion.iep_imagen_equipo_p = ConvertToBytes(file);
+                }
                 db.Entry(iso_equipo_proteccion).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(iso_equipo_proteccion);
+            return PartialView("Edit", iso_equipo_proteccion);
         }
 
         // GET: /EquipoTrabajo/Delete/5
@@ -102,7 +153,7 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_equipo_proteccion);
+            return PartialView("Delete", iso_equipo_proteccion);
         }
 
         // POST: /EquipoTrabajo/Delete/5
@@ -116,6 +167,28 @@ namespace CBM_SART.Controllers
             return RedirectToAction("Index");
         }
 
+        public FileContentResult GetImage(int ID)
+        {
+            iso_equipo_proteccion cat = db.iso_equipo_proteccion.FirstOrDefault(c => c.iep_id_equipo_p == ID);
+            if (cat != null)
+            {
+
+                string type = string.Empty;
+                if (!string.IsNullOrEmpty(cat.iep_ubic_imagen_equipo_p))
+                {
+                    type = cat.iep_ubic_imagen_equipo_p;
+                }
+                else
+                {
+                    type = "image/jpeg";
+                }
+                return File(cat.iep_imagen_equipo_p, type);
+            }
+            else
+            {
+                return null;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

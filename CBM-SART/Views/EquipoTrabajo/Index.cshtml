@@ -1,5 +1,5 @@
-﻿@model IEnumerable<CBM_SART.Models.iso_equipo_proteccion>
-
+﻿@*@model IEnumerable<CBM_SART.Models.iso_equipo_proteccion>*@
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_equipo_proteccion>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,48 +7,107 @@
     Session["SidebarSelect"] = "equipop";
 }
 
-<h2>Index</h2>
+<div class="seccion-barra">
+    <img src="~/images/label-plain-black.png" height="24" width="24" />
+    Equipos de Protección registrados.
+    <span class="text-count">Nro : @ViewBag.total</span>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.iep_nombre_equipo_p)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iep_ubic_imagen_equipo_p)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iep_imagen_equipo_p)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iep_stock)
-        </th>
-        <th></th>
-    </tr>
+@using (Html.BeginForm("Index", null, FormMethod.Get))
+{
+    <div class="search">
+        <div class="col-md-11">
+            <div class="input-group">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.iep_nombre_equipo_p)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iep_ubic_imagen_equipo_p)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iep_imagen_equipo_p)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iep_stock)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.iep_id_equipo_p }) |
-            @Html.ActionLink("Details", "Details", new { id=item.iep_id_equipo_p }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.iep_id_equipo_p })
-        </td>
-    </tr>
+                <input type="text"
+                       name="filter"
+                       value="@ViewBag.filter"
+                       class="form-control"
+                       style="display: inline; height:30px"
+                       placeholder="Buscar por Nombre del Equipo" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                </span>
+
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="pull-right">
+                <a class="btn btn-success" data-modal="" href="/EquipoTrabajo/Create" id="btnCreate">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Nuevo
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="col-md-12 grid-content">
+        @{
+    var grid = new WebGrid(
+                    canPage: true,
+                    rowsPerPage: Model.PageSize,
+                    canSort: true,
+                    ajaxUpdateContainerId: "grid");
+
+    grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+    grid.Pager(WebGridPagerModes.All);
+    @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+        fillEmptyRows: false,
+                    tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+            grid.Column("iep_nombre_equipo_p", "Nombre", style: "col-lg-4"),
+            grid.Column("iep_stock", "Stock",  style: "col-lg-1"),
+            grid.Column(header: "Logo Empresa", canSort: false, style: "col-lg-2",
+              format: @<text>
+                @Html.Raw("<img style='max-width: 200px; max-height: 150px' src=" + @Url.Action("GetImage", "EquipoTrabajo", new { ID = item.iep_id_equipo_p }) + " />")
+              </text>),
+            
+            grid.Column(header: "Acción", canSort: false, style: "action",
+                    format: @<text>
+                @Html.Raw("<a data-modal='' href='/EquipoTrabajo/details/" + item.iep_id_equipo_p + "' id='" + item.iep_id_equipo_p + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/EquipoTrabajo/edit/" + item.iep_id_equipo_p + "' id='" + item.iep_id_equipo_p + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/EquipoTrabajo/delete/" + item.iep_id_equipo_p + "' id='" + item.iep_id_equipo_p + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+        ));
+        }
+
+
+    </div>
+    <div class="clear"></div>
 }
 
-</table>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog" style="width:50%;">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
+    <script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#blah').fadeIn("slow").attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    //$("#file1").change(function () {
+    $(document).delegate("#file1", "change", function (e) {
+        readURL(this);
+        //alert($("#file1").val());
+        var fic = $("#file1").val().split('\\');
+        $("#iep_ubic_imagen_equipo_p").val("[Base de Datos] " + fic[fic.length - 1]);
+
+    });
+</script>
+}
+}
+

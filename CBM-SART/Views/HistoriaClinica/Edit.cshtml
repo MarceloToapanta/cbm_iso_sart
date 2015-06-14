@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Historia Clinica";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "VigilaciaSalud";
+    Session["SidebarSelect"] = "Historia";
 }
 
 <div class="col-md-12">
@@ -20,7 +22,7 @@
     </div>
 
     <div class="col-md-4">
-        <button>Boton1</button>
+        <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Historia Clinica'><img width="100" src="/images/hc/hc.jpg" /></a>
         <button>Boton2</button>
         <button>Boton3</button>
     </div>
@@ -31,7 +33,7 @@
 <div class="hc-container-personal">
     <div class="col-md-10">
         <div class="col-md-4">
-            <label class="label-3">CI:</label>@Model.iso_personal.ipe_ced_ruc_personal<br />            
+            <label class="label-3">CI:</label>@Model.iso_personal.ipe_ced_ruc_personal<br />
             <label class="label-3">Lugar Nacimiento:</label>@Model.iso_personal.ipe_lugar_nacimiento<br />
             <label class="label-3">Fecha Nacimiento:</label>@Model.iso_personal.ipe_fecha_nacimiento<br />
             <label class="label-3">Género:</label>@Model.iso_personal.ipe_genero<br />
@@ -62,11 +64,11 @@
             else
             {
                 <div class="inline-image-preivew">
-                    <img id="blah" src="~/images/foto_personal.png" width="120" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; max-width: 100%; height: auto; "/>
+                    <img id="blah" src="~/images/foto_personal.png" width="120" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; max-width: 100%; height: auto; " />
                 </div>
             }
         </div>
-        
+
     </div>
 </div>
 <div class="clear"></div>
@@ -74,9 +76,15 @@
 <div class="clear"></div>
 <div class="hc-container-personal col-md-10">
     <div class="col-md-12">
-        <label class="label-3">Razón Social:</label>@if (Model.iso_personal.iso_empresa.iem_razon_social == null || Model.iso_personal.iso_empresa.iem_razon_social == ""){<samp>Sin Registrar</samp>}else{ @Model.iso_personal.iso_empresa.iem_razon_social}
-        <label class="label-3">Ciudad-Sede:</label>@if (Model.iso_personal.iso_empresa.iem_direccion_empresa == null || Model.iso_personal.iso_empresa.iem_direccion_empresa == ""){<samp>Sin Registrar</samp>}else { @Model.iso_personal.iso_empresa.iem_direccion_empresa}
-        
+        <label class="label-3">Razón Social:</label>@if (Model.iso_personal.iso_empresa.iem_razon_social == null || Model.iso_personal.iso_empresa.iem_razon_social == "")
+        {<samp>Sin Registrar</samp>}
+        else
+        { @Model.iso_personal.iso_empresa.iem_razon_social}
+        <label class="label-3">Ciudad-Sede:</label>@if (Model.iso_personal.iso_empresa.iem_direccion_empresa == null || Model.iso_personal.iso_empresa.iem_direccion_empresa == "")
+        {<samp>Sin Registrar</samp>}
+        else
+        { @Model.iso_personal.iso_empresa.iem_direccion_empresa}
+
     </div>
 </div>
 <div class="col-md-2">
@@ -89,8 +97,8 @@
 </div>
 <div class="clear"></div>
 <br />
-<div class="col-md-12">
-    <ul class="nav nav-tabs">        
+<div class="col-md-12" style="padding-left:0;padding-right:0">
+    <ul class="nav nav-tabs">
         <li class="active"><a href="#inf" data-toggle="tab" aria-expanded="false">Información Ocupacional</a></li>
         <li class=""><a href="#ant" data-toggle="tab" aria-expanded="false">Antecedentes de Salud</a></li>
         <li class=""><a href="#sig" data-toggle="tab" aria-expanded="false">Signos y Sintomas</a></li>
@@ -104,85 +112,150 @@
 
 <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active in" id="inf">
-        <p>Informacion</p>
+        <div class="block-tab-h col-lg-12">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <label class="label-3">Fecha Ingreso:</label>@Model.iso_personal.ipe_fecha_ingreso<br />
+                    @*<label class="label-3">Centro de Costos:</label>@Model.iso_personal.ipe_id_centro_costo<br />*@
+                    <label class="label-3">Area:</label>@if (@Model.iso_personal.iso_departamento == null || @Model.iso_personal.iso_departamento.ide_nombre_departamento == "")
+                    {<span>Sin Registrar</span>}
+                    else
+                    { @Model.iso_personal.iso_departamento.ide_nombre_departamento}<br />
+                    <label class="label-3">Cargo:</label>@if (@Model.iso_personal.iso_cargo == null)
+                    {<span>Sin Registrar</span>}
+                    else
+                    { @Model.iso_personal.iso_cargo.icg_nombre}<br />
+                    <label class="label-3">Puesto Trabajo:</label>@if (@Model.iso_personal.iso_puesto_trabajo == null)
+                    {<span>Sin Registrar</span>}
+                    else
+                    { @Model.iso_personal.iso_puesto_trabajo.ipt_nombre_puesto_t}<br />
+                </div>
+                <div class="col-md-6">
+                    <label class="label-3">Tiene Experencia:</label>@Model.iso_personal.ipe_tiene_experiencia<br />
+                    <label class="label-3">Tiene Familiares en la Empresa:</label>@Model.iso_personal.ipe_familiares_empresa<br />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+                <a href="#" class="btn btn-primary btn-xs">Accidentes Ocupacionales</a> <a href="#" class="btn btn-primary btn-xs">Incidentes Ocupacionales</a> <a href="#" class="btn btn-primary btn-xs">Equipos de Protección</a> <a href="#" class="btn btn-primary btn-xs">Actividades Extralaborales</a> <a href="#" class="btn btn-primary btn-xs">Trabajos Anteriores</a> <a href="#" class="btn btn-primary btn-xs"><strong>Profesiograma</strong></a>
+            </div>
+
+        </div>
     </div>
     <div class="tab-pane fade " id="ant">
-        <p>Antecedentes</p>
+        <div class="block-tab-h col-lg-12">
+            <p>Antecedentes Patológicos Personales</p>
+            <form>
+                <div class="col-md-12">
+                    
+                </div>
+            </form>
+        </div>
     </div>
     <div class="tab-pane fade  in" id="sig">
-        <p>Signos</p>
+        <div class="block-tab-h col-lg-12">
+            <p>Signos</p>
+        </div>
     </div>
     <div class="tab-pane fade in" id="hab">
-        <p>Habitos</p>
+        <div class="block-tab-h col-lg-12">
+            <p>Habitos</p>
+        </div>
     </div>
     <div class="tab-pane fade in" id="exa">
-        <p>Examenes</p>
+        <div class="block-tab-h col-lg-12">
+            <p>Examenes</p>
+        </div>
     </div>
     <div class="tab-pane fade  in" id="rev">
-        <p>Revisiones</p>
+        <div class="block-tab-h col-lg-12">
+            <p>Revisiones</p>
+        </div>
     </div>
     <div class="tab-pane fade in" id="lab">
-        <p>Laboratorio</p>
+        <div class="block-tab-h col-lg-12">
+            <p>Laboratorio</p>
+        </div>
     </div>
 </div>
 
 
 
 @*@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+        <div class="form-horizontal">
 
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.ihc_id_historia)
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ihc_id_historia)
 
-        @Html.HiddenFor(model => model.ihc_id_personal)
+            @Html.HiddenFor(model => model.ihc_id_personal)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ihc_id_empresa, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ihc_id_empresa)
-                @Html.ValidationMessageFor(model => model.ihc_id_empresa)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ihc_id_empresa, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ihc_id_empresa)
+                    @Html.ValidationMessageFor(model => model.ihc_id_empresa)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-md-2">Empleado: </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.iso_personal.ipe_nombre_personal)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ihc_lugar_historia_clinica, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ihc_lugar_historia_clinica)
+                    @Html.ValidationMessageFor(model => model.ihc_lugar_historia_clinica)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ihc_fecha_historia_clinica, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ihc_fecha_historia_clinica)
+                    @Html.ValidationMessageFor(model => model.ihc_fecha_historia_clinica)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="control-label col-md-2">Empleado: </div>
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.iso_personal.ipe_nombre_personal)
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ihc_lugar_historia_clinica, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ihc_lugar_historia_clinica)
-                @Html.ValidationMessageFor(model => model.ihc_lugar_historia_clinica)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ihc_fecha_historia_clinica, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ihc_fecha_historia_clinica)
-                @Html.ValidationMessageFor(model => model.ihc_fecha_historia_clinica)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}*@
+    }*@
 
 <div>
     @Html.ActionLink("Regresar", "Panel")
 </div>
 
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/scripts/appjs/phones.js")
+    <script type="text/javascript">
+        $(function () {
+            $(document).delegate(".webgrid-row-style", "click", function (e) {
+                var link = $(this).find('td:first #ipe_id_personal').attr('href');
+                var id = $(this).find('td:first #ipe_id_personal').val();
+                location.href = link;
+            });
+        });
+    </script>
+
 }
