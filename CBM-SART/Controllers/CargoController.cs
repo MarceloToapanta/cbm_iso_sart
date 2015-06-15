@@ -43,6 +43,7 @@ namespace CBM_SART.Controllers
             records.CurrentPage = page;
             records.PageSize = pageSize;
             ViewBag.total = records.TotalRecords;
+            ViewBag.totalpuestos = db.iso_puesto_trabajo.Count();
 
             return View(records);
 

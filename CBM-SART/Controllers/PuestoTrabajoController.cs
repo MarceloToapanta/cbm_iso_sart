@@ -45,9 +45,7 @@ namespace CBM_SART.Controllers
             records.CurrentPage = page;
             records.PageSize = pageSize;
             ViewBag.total = records.TotalRecords;
-
             return View(records);
-
             //return View(db.iso_empresa.ToList());
         }
         // GET: /PuestoTrabajo/Details/5
@@ -77,13 +75,20 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="ipt_id_puesto_t,ipt_nombre_puesto_t,ipt_descrip_puesto_t,ipt_nro_trbajadores")] iso_puesto_trabajo iso_puesto_trabajo)
+        public async Task<ActionResult> Create([Bind(Include = "ipt_id_puesto_t,ipt_nombre_puesto_t,ipt_descrip_puesto_t,ipt_nro_trbajadores")] iso_puesto_trabajo iso_puesto_trabajo, string path = "")
         {
             if (ModelState.IsValid)
             {
                 db.iso_puesto_trabajo.Add(iso_puesto_trabajo);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (path == "")
+                {
+                    return View("Index");
+                }
+                else
+                {
+                    return Redirect(path);
+                }
             }
 
             return PartialView("Create", iso_puesto_trabajo);
