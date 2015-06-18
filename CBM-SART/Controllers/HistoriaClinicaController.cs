@@ -51,7 +51,7 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="ihc_id_historia,ihc_id_personal,ihc_id_empresa,ihc_lugar_historia_clinica,ihc_fecha_historia_clinica")] iso_historia_clinica iso_historia_clinica)
+        public async Task<ActionResult> Create([Bind(Include = "ihc_id_historia,ihc_id_personal,ihc_id_empresa,ihc_lugar_historia_clinica,ihc_fecha_historia_clinica")] iso_historia_clinica iso_historia_clinica)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="ihc_id_historia,ihc_id_personal,ihc_id_empresa,ihc_lugar_historia_clinica,ihc_fecha_historia_clinica")] iso_historia_clinica iso_historia_clinica)
+        public async Task<ActionResult> Edit([Bind(Include = "ihc_id_historia,ihc_id_personal,ihc_id_empresa,ihc_lugar_historia_clinica,ihc_fecha_historia_clinica")] iso_historia_clinica iso_historia_clinica)
         {
             if (ModelState.IsValid)
             {
@@ -155,6 +155,29 @@ namespace CBM_SART.Controllers
             return PartialView("ListaPersonal", records);
         }
 
+        public int InsertarHistoria(int IdPersonal)
+        {
+            //Si existe la historia
+            int hc = db.iso_historia_clinica.Where(x => x.ihc_id_personal == IdPersonal).Count();
+            if (hc > 0)
+            {
+                iso_historia_clinica iso_historia_clinica_registrada = db.iso_historia_clinica.Where(x => x.ihc_id_personal == IdPersonal).First();
+                if (iso_historia_clinica_registrada != null)
+                {
+                    return iso_historia_clinica_registrada.ihc_id_historia;
+                }
+            }
+            iso_historia_clinica iso_historia_clinica = new iso_historia_clinica();
+            iso_personal iso_personal = db.iso_personal.Find(IdPersonal);
+
+            iso_historia_clinica.ihc_id_personal = iso_personal.ipe_id_personal;
+            iso_historia_clinica.ihc_id_empresa = iso_personal.iso_empresa.iem_cod_empresa;
+            iso_historia_clinica.ihc_fecha_historia_clinica = DateTime.Now;
+            iso_historia_clinica.ihc_lugar_historia_clinica = "CBM-SART";
+            db.iso_historia_clinica.Add(iso_historia_clinica);
+            db.SaveChanges();
+            return iso_historia_clinica.ihc_id_historia;
+        }
         public FileContentResult GetImage(int ID)
         {
             iso_personal cat = db.iso_personal.FirstOrDefault(c => c.ipe_id_personal == ID);

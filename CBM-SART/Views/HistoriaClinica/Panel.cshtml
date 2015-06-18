@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Panel Historias Clinicas";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Session["Sidebar"] = "VigilaciaSalud";
@@ -57,15 +56,32 @@
 
 @section scripts{
     @Scripts.Render("~/scripts/appjs/phones.js")
-
     <script type="text/javascript">
         $(function () {
             $(document).delegate(".webgrid-row-style", "click", function (e) {
                 var link = $(this).find('td:first #ipe_id_personal').attr('href');
                 var id = $(this).find('td:first #ipe_id_personal').val();
+                //Si no tiene link, crea la historia y redirecciona
+                if (link == "") {
+                    if (confirm('El Empleado selecionado no registra una Historia Clinica, Desea crear una con la fecha actual?')) {
+                        var url = "/HistoriaClinica/InsertarHistoria?IdPersonal=" + id;
+                        console.log(url);
+                        $.get(url, function (IdHistoriaClinica) {
+                            console.log(IdHistoriaClinica);
+                            if (IdHistoriaClinica != "") {
+                                link = "/HistoriaClinica/Edit/" + id;
+                                location.href = link;
+                            } else {
+                                link = "/HistoriaClinica/Panel";
+                                location.href = link;
+                            }
+                        }, 'html');
+                    } else {
+                        return false;
+                    }
+                }
                 location.href = link;
             });
         });
     </script>
-
 }
