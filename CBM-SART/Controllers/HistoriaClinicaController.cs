@@ -155,6 +155,17 @@ namespace CBM_SART.Controllers
             return PartialView("ListaPersonal", records);
         }
 
+        public ActionResult HistorialCM(int IdPersonal)
+        {
+
+            iso_personal iso_personal = db.iso_personal.Find(IdPersonal);
+            iso_historia_clinica iso_historia_clinica = iso_personal.iso_historia_clinica.First();
+            var iso_consulta_medica = iso_historia_clinica.iso_consulta_medica.ToList();
+
+            //var Personal = db.iso_personal.ToList();
+            return PartialView("HistorialCM", iso_consulta_medica);
+        }
+
         public int InsertarHistoria(int IdPersonal)
         {
             //Si existe la historia

@@ -51,6 +51,8 @@
         <AssociationConnector Association="cbm_iso_sart.FK_iso_riesgo_ocupacional_iso_tipo_riesgo_ocupacional" />
         <AssociationConnector Association="cbm_iso_sart.iso_equipo_puesto_trabajo" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_historia_clinica_iso_historia_clinica" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_tipo_consulta_m" Width="1.5" PointX="8.375" PointY="7.875" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_consulta_medica_iso_tipo_consulta_m" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

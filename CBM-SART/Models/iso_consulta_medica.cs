@@ -47,5 +47,6 @@ namespace CBM_SART.Models
         public Nullable<System.DateTime> icm_fecha_salida { get; set; }
     
         public virtual iso_historia_clinica iso_historia_clinica { get; set; }
+        public virtual iso_tipo_consulta_m iso_tipo_consulta_m { get; set; }
     }
 }

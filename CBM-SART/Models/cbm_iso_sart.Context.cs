@@ -47,5 +47,6 @@ namespace CBM_SART.Models
         public virtual DbSet<iso_riesgo_mrl> iso_riesgo_mrl { get; set; }
         public virtual DbSet<iso_riesgo_ocupacional> iso_riesgo_ocupacional { get; set; }
         public virtual DbSet<iso_tipo_riesgo_ocupacional> iso_tipo_riesgo_ocupacional { get; set; }
+        public virtual DbSet<iso_tipo_consulta_m> iso_tipo_consulta_m { get; set; }
     }
 }

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_consulta_medica>
+
+
+
+<div class="title-window" style="height:32px">
+    Historial de Consultas Médicas
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Selecione Consulta Médica</h4>
+</div>
+
+<div class="content-modal">
+    <table class="table table-bordered table-hover table-responsive table-condensed">
+        <thead>
+            <tr>
+                <td>Tipo</td>
+                <td>Fecha</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        @foreach (var colsulta in Model)
+        {
+            <tr>
+                <td>
+                    @colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m
+                </td>
+                <td>
+                    @String.Format("{0:MM/dd/yyyy}", @colsulta.icm_fecha_consulta)
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
+
+
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+

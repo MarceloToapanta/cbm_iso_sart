@@ -1022,6 +1022,11 @@ label.label-3{
   padding: 10px;
   min-height: 220px;
 }
+.cm-image{
+    width:100%;
+    height: 70px;
+    border: 1px solid #ccc;
+}
 /*///////////////Fin Historias Clinicas//////////////////////*/
 
 

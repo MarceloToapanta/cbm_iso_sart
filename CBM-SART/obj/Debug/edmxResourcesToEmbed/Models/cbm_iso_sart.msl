@@ -441,5 +441,13 @@
         <ScalarProperty Name="iep_id_equipo_p" ColumnName="iep_id_equipo" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="iso_tipo_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_tipo_consulta_m">
+        <MappingFragment StoreEntitySet="iso_tipo_consulta_m">
+          <ScalarProperty Name="itc_nom_tipo_consulta_m" ColumnName="itc_nom_tipo_consulta_m" />
+          <ScalarProperty Name="itc_id_tipo_consulta_m" ColumnName="itc_id_tipo_consulta_m" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

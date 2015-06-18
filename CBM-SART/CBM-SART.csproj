@@ -265,6 +265,9 @@
     <Compile Include="Models\iso_riesgo_ocupacional.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_tipo_consulta_m.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_tipo_riesgo_ocupacional.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
@@ -481,6 +484,8 @@
     <Content Include="Views\SistemaGestion\Nivel_1.cshtml" />
     <Content Include="Views\Cargo\PuestoTrabajoList.cshtml" />
     <Content Include="Views\Cargo\AsignarPuestoT.cshtml" />
+    <Content Include="Views\HistoriaClinica\HistorialCM.cshtml" />
+    <Content Include="Views\HistoriaClinica\IngresarCM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

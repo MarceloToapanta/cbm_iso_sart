@@ -149,7 +149,7 @@
     </Key>
     <Property Name="idp_id_detalle_plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idp_id_plan" Type="int" Nullable="false" />
-    <Property Name="idp_numero_plan" Type="int" Nullable="false" />
+    <Property Name="idp_numero_plan" Type="int" />
     <Property Name="idp_tarea" Type="nvarchar" MaxLength="255" />
     <Property Name="idp_observacion" Type="nvarchar" MaxLength="255" />
     <Property Name="idp_fecha_comienzo" Type="datetime" />
@@ -427,6 +427,13 @@
     <Property Name="irg_tipo_riesgo" Type="int" Nullable="false" />
     <Property Name="irg_nombre_riesgo" Type="varchar" MaxLength="250" />
   </EntityType>
+  <EntityType Name="iso_tipo_consulta_m">
+    <Key>
+      <PropertyRef Name="itc_id_tipo_consulta_m" />
+    </Key>
+    <Property Name="itc_id_tipo_consulta_m" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="itc_nom_tipo_consulta_m" Type="varchar" MaxLength="60" />
+  </EntityType>
   <EntityType Name="iso_tipo_riesgo_ocupacional">
     <Key>
       <PropertyRef Name="ito_id_tipo_riesgo" />
@@ -505,6 +512,20 @@
       <Dependent Role="iso_consulta_medica">
         <PropertyRef Name="icm_id_historia_clinica" />
         <PropertyRef Name="icm_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_consulta_medica_iso_tipo_consulta_m">
+    <End Role="iso_tipo_consulta_m" Type="Self.iso_tipo_consulta_m" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="iso_consulta_medica" Type="Self.iso_consulta_medica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_tipo_consulta_m">
+        <PropertyRef Name="itc_id_tipo_consulta_m" />
+      </Principal>
+      <Dependent Role="iso_consulta_medica">
+        <PropertyRef Name="icm_tipo_consulta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -824,6 +845,7 @@
     <EntitySet Name="iso_puesto_trabajo" EntityType="Self.iso_puesto_trabajo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_riesgo_mrl" EntityType="Self.iso_riesgo_mrl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_riesgo_ocupacional" EntityType="Self.iso_riesgo_ocupacional" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iso_tipo_consulta_m" EntityType="Self.iso_tipo_consulta_m" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_tipo_riesgo_ocupacional" EntityType="Self.iso_tipo_riesgo_ocupacional" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_iso_accidente_iso_personal" Association="Self.FK_iso_accidente_iso_personal">
       <End Role="iso_personal" EntitySet="iso_personal" />
@@ -843,6 +865,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_iso_consulta_medica_iso_historia_clinica" Association="Self.FK_iso_consulta_medica_iso_historia_clinica">
       <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_consulta_medica_iso_tipo_consulta_m" Association="Self.FK_iso_consulta_medica_iso_tipo_consulta_m">
+      <End Role="iso_tipo_consulta_m" EntitySet="iso_tipo_consulta_m" />
       <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
     </AssociationSet>
     <AssociationSet Name="FK_iso_departamento_iso_empresa" Association="Self.FK_iso_departamento_iso_empresa">

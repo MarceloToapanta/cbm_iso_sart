@@ -22,9 +22,19 @@
     </div>
 
     <div class="col-md-4">
-        <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Historia Clinica'><img width="100" src="/images/hc/hc.jpg" /></a>
-        <button>Boton2</button>
-        <button>Boton3</button>
+        <div class="col-md-4" style="text-align:center">
+            <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Lista de Trabajadores'><img class="cm-image" width="90" src="/images/hc/hc.jpg" /></a>
+            Trabajadores
+        </div>
+        <div class="col-md-4" style="text-align:center">
+            <a data-modal='' href='/HistoriaClinica/HistorialCM?IdPersonal=@Model.iso_personal.ipe_id_personal' title='Historial Consultas Médicas'><img class="cm-image" width="90" src="/images/hc/historial-cm.jpg" /></a>
+            Historial de Consultas Médicas
+        </div>
+        <div class="col-md-4" style="text-align:center">
+            <a data-modal='' href='/HistoriaClinica/IngresarCM' title='Ingresar Consulta Médica'><img class="cm-image" width="90" src="/images/hc/nueva-cm.jpg" /></a>
+            Ingresar Consulta Médica
+        </div>
+        
     </div>
 
 </div>
@@ -34,8 +44,8 @@
     <div class="col-md-10">
         <div class="col-md-4">
             <label class="label-3">CI:</label>@Model.iso_personal.ipe_ced_ruc_personal<br />
-            <label class="label-3">Lugar Nacimiento:</label>@Model.iso_personal.ipe_lugar_nacimiento<br />
-            <label class="label-3">Fecha Nacimiento:</label>@Model.iso_personal.ipe_fecha_nacimiento<br />
+            <label class="label-3">Lugar Nacimiento:</label>@String.Format("{0:MM/dd/yyyy}",@Model.iso_personal.ipe_lugar_nacimiento)<br />
+            <label class="label-3">Fecha Nacimiento:</label>@String.Format("{0:MM/dd/yyyy}",@Model.iso_personal.ipe_fecha_nacimiento)<br />
             <label class="label-3">Género:</label>@Model.iso_personal.ipe_genero<br />
             <label class="label-3">Edad:</label>@Model.iso_personal.ipe_edad<br />
             <label class="label-3">Estado Civil:</label>@Model.iso_personal.ipe_estado_civil
@@ -57,15 +67,15 @@
         <div class="foto-h">
             @if (Model.iso_personal.ipe_foto != null)
             {
-                <div class="inline-image-preivew">
-                    <img id="blah" alt="Foto Personal" width="120" height="100" style="border: 1px solid #ccc; max-width: 100%; height: auto" src="@Url.Action("GetImage", "HistoriaClinica", new { ID = Model.iso_personal.ipe_id_personal })" />
-                </div>
+            <div class="inline-image-preivew">
+                <img id="blah" alt="Foto Personal" width="120" height="100" style="border: 1px solid #ccc; max-width: 100%; height: auto" src="@Url.Action("GetImage", "HistoriaClinica", new { id = Model.iso_personal.ipe_id_personal })" />
+            </div>
             }
             else
             {
-                <div class="inline-image-preivew">
-                    <img id="blah" src="~/images/foto_personal.png" width="120" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; max-width: 100%; height: auto; " />
-                </div>
+            <div class="inline-image-preivew">
+                <img id="blah" src="~/images/foto_personal.png" width="120" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; max-width: 100%; height: auto; " />
+            </div>
             }
         </div>
 
@@ -74,7 +84,7 @@
 <div class="clear"></div>
 <label class="label-2"> Datos Empresa</label>
 <div class="clear"></div>
-<div class="hc-container-personal col-md-10">
+<div class="hc-container-personal col-md-9" style="width:79%;">
     <div class="col-md-12">
         <label class="label-3">Razón Social:</label>@if (Model.iso_personal.iso_empresa.iem_razon_social == null || Model.iso_personal.iso_empresa.iem_razon_social == "")
         {<samp>Sin Registrar</samp>}
@@ -87,12 +97,13 @@
 
     </div>
 </div>
-<div class="col-md-2">
+<div class="col-md-3" style="width:21%;">
     <span style="width:100%; text-align:center; display:block">Filtro de Historia Clinica</span>
-    <select style="width:100%" class="form-control">
-        <option>Preocupacional</option>
-        <option>Consulta Médica</option>
-        <option>Reintegro</option>
+    <select style="width: 100%; text-align: center" class="form-control">
+        @foreach (var colsulta in Model.iso_consulta_medica)
+        {
+            <option>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>
+        }
     </select>
 </div>
 <div class="clear"></div>
@@ -106,7 +117,8 @@
         <li class=""><a href="#exa" data-toggle="tab" aria-expanded="false">Exámen Físico</a></li>
         <li class=""><a href="#rev" data-toggle="tab" aria-expanded="false">Revisión por Sistemas</a></li>
         <li class=""><a href="#lab" data-toggle="tab" aria-expanded="true">Ex. Laboratorio</a></li>
-        @*<li class="disabled"><a>Disabled</a></li>*@
+        @*
+        <li class="disabled"><a>Disabled</a></li>*@
     </ul>
 </div>
 
@@ -115,7 +127,7 @@
         <div class="block-tab-h col-lg-12">
             <div class="col-md-12">
                 <div class="col-md-6">
-                    <label class="label-3">Fecha Ingreso:</label>@Model.iso_personal.ipe_fecha_ingreso<br />
+                    <label class="label-3">Fecha Ingreso:</label>@String.Format("{0:MM/dd/yyyy}",@Model.iso_personal.ipe_fecha_ingreso)<br />
                     @*<label class="label-3">Centro de Costos:</label>@Model.iso_personal.ipe_id_centro_costo<br />*@
                     <label class="label-3">Area:</label>@if (@Model.iso_personal.iso_departamento == null || @Model.iso_personal.iso_departamento.ide_nombre_departamento == "")
                     {<span>Sin Registrar</span>}
@@ -147,7 +159,7 @@
             <p>Antecedentes Patológicos Personales</p>
             <form>
                 <div class="col-md-12">
-                    
+
                 </div>
             </form>
         </div>
@@ -185,51 +197,51 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+<div class="form-horizontal">
 
-            @Html.ValidationSummary(true)
-            @Html.HiddenFor(model => model.ihc_id_historia)
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.ihc_id_historia)
 
-            @Html.HiddenFor(model => model.ihc_id_personal)
+    @Html.HiddenFor(model => model.ihc_id_personal)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ihc_id_empresa, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ihc_id_empresa)
-                    @Html.ValidationMessageFor(model => model.ihc_id_empresa)
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="control-label col-md-2">Empleado: </div>
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.iso_personal.ipe_nombre_personal)
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ihc_lugar_historia_clinica, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ihc_lugar_historia_clinica)
-                    @Html.ValidationMessageFor(model => model.ihc_lugar_historia_clinica)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ihc_fecha_historia_clinica, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ihc_fecha_historia_clinica)
-                    @Html.ValidationMessageFor(model => model.ihc_fecha_historia_clinica)
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ihc_id_empresa, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ihc_id_empresa)
+            @Html.ValidationMessageFor(model => model.ihc_id_empresa)
         </div>
+    </div>
+
+    <div class="form-group">
+        <div class="control-label col-md-2">Empleado: </div>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.iso_personal.ipe_nombre_personal)
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ihc_lugar_historia_clinica, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ihc_lugar_historia_clinica)
+            @Html.ValidationMessageFor(model => model.ihc_lugar_historia_clinica)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ihc_fecha_historia_clinica, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ihc_fecha_historia_clinica)
+            @Html.ValidationMessageFor(model => model.ihc_fecha_historia_clinica)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
     }*@
 
 <div>
@@ -248,33 +260,33 @@
 
 @section Scripts {
     @Scripts.Render("~/scripts/appjs/phones.js")
-    <script type="text/javascript">
-        $(function () {
-            $(document).delegate(".webgrid-row-style", "click", function (e) {
-                var link = $(this).find('td:first #ipe_id_personal').attr('href');
-                var id = $(this).find('td:first #ipe_id_personal').val();
-                //Si no tiene link, crea la historia y redirecciona
-                if (link == "") {
-                    if (confirm('El Empleado selecionado no registra una Historia Clinica, Desea crear una con la fecha actual?')) {
-                        var url = "/HistoriaClinica/InsertarHistoria?IdPersonal=" + id;
-                        console.log(url);
-                        $.get(url, function (IdHistoriaClinica) {
-                            console.log(IdHistoriaClinica);
-                            if (IdHistoriaClinica != "") {
-                                link = "/HistoriaClinica/Edit/" + id;
-                                location.href = link;
-                            } else {
-                                link = "/HistoriaClinica/Panel";
-                                location.href = link;
-                            }
-                        }, 'html');
-                    } else {
-                        return false;
-                    }
+<script type="text/javascript">
+    $(function () {
+        $(document).delegate(".webgrid-row-style", "click", function (e) {
+            var link = $(this).find('td:first #ipe_id_personal').attr('href');
+            var id = $(this).find('td:first #ipe_id_personal').val();
+            //Si no tiene link, crea la historia y redirecciona
+            if (link == "") {
+                if (confirm('El Empleado selecionado no registra una Historia Clinica, Desea crear una con la fecha actual?')) {
+                    var url = "/HistoriaClinica/InsertarHistoria?IdPersonal=" + id;
+                    console.log(url);
+                    $.get(url, function (IdHistoriaClinica) {
+                        console.log(IdHistoriaClinica);
+                        if (IdHistoriaClinica != "") {
+                            link = "/HistoriaClinica/Edit/" + id;
+                            location.href = link;
+                        } else {
+                            link = "/HistoriaClinica/Panel";
+                            location.href = link;
+                        }
+                    }, 'html');
+                } else {
+                    return false;
                 }
-                location.href = link;
-            });
+            }
+            location.href = link;
         });
-    </script>
+    });
+</script>
 
 }

@@ -154,7 +154,7 @@
           </Key>
           <Property Name="idp_id_detalle_plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idp_id_plan" Type="int" Nullable="false" />
-          <Property Name="idp_numero_plan" Type="int" Nullable="false" />
+          <Property Name="idp_numero_plan" Type="int" />
           <Property Name="idp_tarea" Type="nvarchar" MaxLength="255" />
           <Property Name="idp_observacion" Type="nvarchar" MaxLength="255" />
           <Property Name="idp_fecha_comienzo" Type="datetime" />
@@ -432,6 +432,13 @@
           <Property Name="irg_tipo_riesgo" Type="int" Nullable="false" />
           <Property Name="irg_nombre_riesgo" Type="varchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="iso_tipo_consulta_m">
+          <Key>
+            <PropertyRef Name="itc_id_tipo_consulta_m" />
+          </Key>
+          <Property Name="itc_id_tipo_consulta_m" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itc_nom_tipo_consulta_m" Type="varchar" MaxLength="60" />
+        </EntityType>
         <EntityType Name="iso_tipo_riesgo_ocupacional">
           <Key>
             <PropertyRef Name="ito_id_tipo_riesgo" />
@@ -510,6 +517,20 @@
             <Dependent Role="iso_consulta_medica">
               <PropertyRef Name="icm_id_historia_clinica" />
               <PropertyRef Name="icm_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iso_consulta_medica_iso_tipo_consulta_m">
+          <End Role="iso_tipo_consulta_m" Type="Self.iso_tipo_consulta_m" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="iso_consulta_medica" Type="Self.iso_consulta_medica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_tipo_consulta_m">
+              <PropertyRef Name="itc_id_tipo_consulta_m" />
+            </Principal>
+            <Dependent Role="iso_consulta_medica">
+              <PropertyRef Name="icm_tipo_consulta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -829,6 +850,7 @@
           <EntitySet Name="iso_puesto_trabajo" EntityType="Self.iso_puesto_trabajo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_riesgo_mrl" EntityType="Self.iso_riesgo_mrl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_riesgo_ocupacional" EntityType="Self.iso_riesgo_ocupacional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iso_tipo_consulta_m" EntityType="Self.iso_tipo_consulta_m" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="iso_tipo_riesgo_ocupacional" EntityType="Self.iso_tipo_riesgo_ocupacional" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_iso_accidente_iso_personal" Association="Self.FK_iso_accidente_iso_personal">
             <End Role="iso_personal" EntitySet="iso_personal" />
@@ -848,6 +870,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_iso_consulta_medica_iso_historia_clinica" Association="Self.FK_iso_consulta_medica_iso_historia_clinica">
             <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
+            <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iso_consulta_medica_iso_tipo_consulta_m" Association="Self.FK_iso_consulta_medica_iso_tipo_consulta_m">
+            <End Role="iso_tipo_consulta_m" EntitySet="iso_tipo_consulta_m" />
             <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
           </AssociationSet>
           <AssociationSet Name="FK_iso_departamento_iso_empresa" Association="Self.FK_iso_departamento_iso_empresa">
@@ -997,6 +1023,7 @@
           <Property Name="icm_r4" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="icm_fecha_salida" Type="DateTime" Precision="3" />
           <NavigationProperty Name="iso_historia_clinica" Relationship="Self.FK_iso_consulta_medica_iso_historia_clinica" FromRole="iso_consulta_medica" ToRole="iso_historia_clinica" />
+          <NavigationProperty Name="iso_tipo_consulta_m" Relationship="cbm_iso_sart.FK_iso_consulta_medica_iso_tipo_consulta_m" FromRole="iso_consulta_medica" ToRole="iso_tipo_consulta_m" />
         </EntityType>
         <EntityType Name="iso_departamento">
           <Key>
@@ -1224,6 +1251,11 @@
             <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />
             <End Role="iso_historia_clinica1" EntitySet="iso_historia_clinica" />
           </AssociationSet>
+          <EntitySet Name="iso_tipo_consulta_m" EntityType="cbm_iso_sart.iso_tipo_consulta_m" />
+          <AssociationSet Name="FK_iso_consulta_medica_iso_tipo_consulta_m" Association="cbm_iso_sart.FK_iso_consulta_medica_iso_tipo_consulta_m">
+            <End Role="iso_tipo_consulta_m" EntitySet="iso_tipo_consulta_m" />
+            <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="iso_personal">
           <Key>
@@ -1450,7 +1482,7 @@
           </Key>
           <Property Name="idp_id_detalle_plan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idp_id_plan" Type="Int32" Nullable="false" />
-          <Property Name="idp_numero_plan" Type="Int32" Nullable="false" />
+          <Property Name="idp_numero_plan" Type="Int32" />
           <Property Name="idp_tarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="idp_observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="idp_fecha_comienzo" Type="DateTime" Precision="3" />
@@ -1840,6 +1872,28 @@
             <Dependent Role="iso_historia_clinica1">
               <PropertyRef Name="ihc_id_historia" />
               <PropertyRef Name="ihc_id_personal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="iso_tipo_consulta_m">
+          <Key>
+            <PropertyRef Name="itc_id_tipo_consulta_m" />
+          </Key>
+          <Property Name="itc_id_tipo_consulta_m" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="itc_nom_tipo_consulta_m" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_consulta_medica_iso_tipo_consulta_m" FromRole="iso_tipo_consulta_m" ToRole="iso_consulta_medica" />
+        </EntityType>
+        <Association Name="FK_iso_consulta_medica_iso_tipo_consulta_m">
+          <End Type="cbm_iso_sart.iso_tipo_consulta_m" Role="iso_tipo_consulta_m" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iso_tipo_consulta_m">
+              <PropertyRef Name="itc_id_tipo_consulta_m" />
+            </Principal>
+            <Dependent Role="iso_consulta_medica">
+              <PropertyRef Name="icm_tipo_consulta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2289,6 +2343,14 @@
               <ScalarProperty Name="iep_id_equipo_p" ColumnName="iep_id_equipo" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="iso_tipo_consulta_m">
+            <EntityTypeMapping TypeName="cbm_iso_sart.iso_tipo_consulta_m">
+              <MappingFragment StoreEntitySet="iso_tipo_consulta_m">
+                <ScalarProperty Name="itc_nom_tipo_consulta_m" ColumnName="itc_nom_tipo_consulta_m" />
+                <ScalarProperty Name="itc_id_tipo_consulta_m" ColumnName="itc_id_tipo_consulta_m" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
