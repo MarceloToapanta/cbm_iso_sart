@@ -102,7 +102,12 @@
     <select style="width: 100%; text-align: center" class="form-control">
         @foreach (var colsulta in Model.iso_consulta_medica)
         {
-            <option>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>
+            if (ViewBag.idConsulta == colsulta.icm_id_consulta)
+            {
+                <option selected>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>    
+            }else{
+                <option>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>    
+            }   
         }
     </select>
 </div>

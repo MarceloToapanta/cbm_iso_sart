@@ -12,11 +12,13 @@
 </div>
 
 <div class="content-modal">
-    <table class="table table-bordered table-hover table-responsive table-condensed">
+    <br />
+    <table class="table table-bordered table-hover table-responsive table-condensed" id="HistorialCM">
         <thead>
             <tr>
-                <td>Tipo</td>
+                <td>Tipo Consulta</td>
                 <td>Fecha</td>
+                <td>Acción</td>
             </tr>
         </thead>
         <tbody></tbody>
@@ -29,16 +31,22 @@
                 <td>
                     @String.Format("{0:MM/dd/yyyy}", @colsulta.icm_fecha_consulta)
                 </td>
+                <td>
+                    <a data-modal='' href='/HistoriaClinica/Edit/@colsulta.icm_id_personal?idConsulta=@colsulta.icm_id_consulta' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>
+                    <a data-modal='' href='/Cargo/delete/1' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>
+                </td>
             </tr>
 
         }
     </table>
 </div>
 
+<div class="paging1 paging pagination-datatables pagination pagination-centered"></div>
 
+<script type="text/javascript" src="/Scripts/Datatable/datatable.js"></script>
+<link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable-bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable.css">
 <script>
-    $("form").removeData("validator");
-    $("form").removeData("unobtrusiveValidation");
-    $.validator.unobtrusive.parse("form");
-</script>
+    
 
+</script>
