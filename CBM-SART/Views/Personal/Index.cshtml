@@ -61,6 +61,12 @@
             columns: grid.Columns(
               grid.Column("ipe_ced_ruc_personal", "CI/RUC", style: "col-lg-1"),
               grid.Column("ipe_nombre_personal", "Nombre", style: "col-lg-2"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a data-modal='' href='/Personal/details/" + item.ipe_id_personal + "' id='" + item.ipe_id_personal + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Personal/edit/" + item.ipe_id_personal + "' id='" + item.ipe_id_personal + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Personal/delete/" + item.ipe_id_personal + "' id='" + item.ipe_id_personal + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
               grid.Column("ipe_apellido_paterno", "Apellido", style: "col-lg-2"),
               grid.Column("ipe_fecha_nacimiento", "F. Nacimiento", style: "col-lg-1", format: (item) => string.Format("{0:dd/MM/yyyy}", item.ipe_fecha_nacimiento)),
               grid.Column("ipe_dir_domicilio", "Dirección", style: "col-lg-3"),

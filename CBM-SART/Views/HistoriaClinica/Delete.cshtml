@@ -1,57 +1,136 @@
 ﻿@model CBM_SART.Models.iso_historia_clinica
 
 @{
-    ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="title-window" style="height:32px">
+    Permite eliminar la Historia Clinica selecionada.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <div class="form-group">
+        <h4>
+            <span class="label label-danger">
+                Estas seguro de eliminar este Historia Clinica?
+            </span>
+        </h4>
+
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ihc_id_personal, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownList("ide_id_empresa", String.Empty)*@
+                    @*@Html.DropDownListFor(x => x.ide_id_empresa, (IEnumerable<SelectListItem>)ViewBag.ide_id_empresa, new { @class = "control-label", @disabled = "disabled" })*@
+
+                    <input class="form-control" disabled="disabled" id="iso_personal_ipe_nombre_personal" name="iso_personal.ipe_nombre_personal" type="text" value="@Model.iso_personal.ipe_nombre_personal @Model.iso_personal.ipe_apellido_paterno">
+                    @*@Html.ValidationMessageFor(model => model.ide_id_empresa)*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ihc_id_empresa, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownList("ide_id_empresa", String.Empty)*@
+                    @*@Html.DropDownListFor(x => x.ide_id_empresa, (IEnumerable<SelectListItem>)ViewBag.ide_id_empresa, new { @class = "control-label", @disabled = "disabled" })*@
+                    @Html.TextBoxFor(model => model.iso_personal.iso_empresa.iem_nombre_empresa, new { @class = "form-control", @disabled = "disabled" })
+                    @*@Html.ValidationMessageFor(model => model.ide_id_empresa)*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ihc_lugar_historia_clinica, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.ide_nombre_departamento)*@
+                    @Html.TextBoxFor(m => m.ihc_lugar_historia_clinica, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ihc_lugar_historia_clinica)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ihc_fecha_historia_clinica, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ihc_fecha_historia_clinica, "{0:dd/MM/yyyy}", new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ihc_fecha_historia_clinica)
+                </div>
+            </div>
+            <br />
+
+            @if (Model.iso_consulta_medica.Count > 0)
+            {
+                <div class="col-md-12 grid-content" style="height: 200px;overflow: auto;">
+
+                    <div class="text-info">
+                        <h4>
+                            Consultas Médicas registradas
+                        </h4>
+                    </div>
+                    
+
+                    <table class="table table-bordered table-hover table-responsive table-condensed" id="grid" data-swhgajax="true" data-swhgcontainer="grid" data-swhgcallback="">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tipo Consulta</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr></tr>
+                        </tfoot>
+                        <tbody id="ConsultasMedicas">
+                            @foreach (var consulta in Model.iso_consulta_medica)
+                            {
+                                <tr>
+                                    <td>
+                                        @consulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m
+                                    </td>
+                                    <td>
+                                        
+                                        @String.Format("{0:MM/dd/yyyy}", @consulta.icm_fecha_consulta)
+                                    </td>
+                                    <td>
+                                        @consulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <br />
+                    
+                </div>
+                <div class="clear"></div>
+            }
+
+
+
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span class="text-warning" style="float:left;">
+                    Si elimina la Historia Clinica, tambien se eliminara las sigientes Consultas Médicas
+                </span>
+                @*<span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>*@
+                
+                <button class="btn btn-primary" data-dismiss="modal">No</button>
+                <input class="btn btn-danger" type="submit" value="Si" />
+            </div>
+
+        </div>
+    </div>
+
+
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>iso_historia_clinica</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ihc_id_empresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ihc_id_empresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ihc_lugar_historia_clinica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ihc_lugar_historia_clinica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ihc_fecha_historia_clinica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ihc_fecha_historia_clinica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.iso_personal.ipe_ced_ruc_personal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.iso_personal.ipe_ced_ruc_personal)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
-</div>

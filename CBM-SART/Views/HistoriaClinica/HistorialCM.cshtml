@@ -16,28 +16,29 @@
     <table class="table table-bordered table-hover table-responsive table-condensed" id="HistorialCM">
         <thead>
             <tr>
-                <td>Tipo Consulta</td>
-                <td>Fecha</td>
-                <td>Acción</td>
+                <th scope="col">Tipo Consulta</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Acción</th>
             </tr>
         </thead>
-        <tbody></tbody>
-        @foreach (var colsulta in Model)
-        {
-            <tr>
-                <td>
-                    @colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m
-                </td>
-                <td>
-                    @String.Format("{0:MM/dd/yyyy}", @colsulta.icm_fecha_consulta)
-                </td>
-                <td>
-                    <a data-modal='' href='/HistoriaClinica/Edit/@colsulta.icm_id_personal?idConsulta=@colsulta.icm_id_consulta' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>
-                    <a data-modal='' href='/Cargo/delete/1' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>
-                </td>
-            </tr>
+        <tbody>
+            @foreach (var colsulta in Model)
+            {
+                <tr>
+                    <td>
+                        @colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m
+                    </td>
+                    <td>
+                        @String.Format("{0:MM/dd/yyyy}", @colsulta.icm_fecha_consulta)
+                    </td>
+                    <td>
+                        <a data-modal='' href='/HistoriaClinica/Edit/@colsulta.icm_id_personal?idConsulta=@colsulta.icm_id_consulta' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>
+                        <a data-modal='' href='/Cargo/delete/1' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>
+                    </td>
+                </tr>
 
-        }
+            }
+        </tbody>
     </table>
 </div>
 

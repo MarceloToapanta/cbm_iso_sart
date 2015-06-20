@@ -18,11 +18,43 @@ namespace CBM_SART.Controllers
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
         // GET: /HistoriaClinica/
-        public async Task<ActionResult> Index()
+        //public async Task<ActionResult> Index()
+        //{
+        //    var iso_historia_clinica = db.iso_historia_clinica.Include(i => i.iso_personal);
+        //    return View(await iso_historia_clinica.ToListAsync());
+        //}
+
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "iso_personal.ipe_nombre_personal", string sortdir = "ASC")
         {
-            var iso_historia_clinica = db.iso_historia_clinica.Include(i => i.iso_personal);
-            return View(await iso_historia_clinica.ToListAsync());
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_historia_clinica>();
+            ViewBag.filter = filter;
+            records.Content = db.iso_historia_clinica
+                        .Where(x => filter == null ||
+                                (x.iso_personal.ipe_nombre_personal.ToLower().Contains(filter.ToLower().Trim()) ||
+                                x.iso_personal.ipe_apellido_paterno.ToLower().Contains(filter.ToLower().Trim()))
+                              )
+                        .OrderBy(sort + " " + sortdir)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+
+            // Count
+            records.TotalRecords = db.iso_historia_clinica
+                         .Where(x => filter == null ||
+                                (x.iso_personal.ipe_nombre_personal.ToLower().Contains(filter.ToLower().Trim()))
+                                ||
+                                x.iso_personal.ipe_apellido_paterno.ToLower().Contains(filter.ToLower().Trim())).Count();
+
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+
+            return View(records);
+
+            //return View(db.iso_empresa.ToList());
         }
+
 
         // GET: /HistoriaClinica/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -112,12 +144,12 @@ namespace CBM_SART.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            iso_historia_clinica iso_historia_clinica = await db.iso_historia_clinica.FindAsync(id);
+            iso_historia_clinica iso_historia_clinica = db.iso_historia_clinica.Where(x => x.ihc_id_historia == id).First();
             if (iso_historia_clinica == null)
             {
                 return HttpNotFound();
             }
-            return View(iso_historia_clinica);
+            return PartialView(iso_historia_clinica);
         }
 
         // POST: /HistoriaClinica/Delete/5
@@ -125,9 +157,15 @@ namespace CBM_SART.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            iso_historia_clinica iso_historia_clinica = await db.iso_historia_clinica.FindAsync(id);
+            iso_historia_clinica iso_historia_clinica = db.iso_historia_clinica.Where(x => x.ihc_id_historia == id).First();
             db.iso_historia_clinica.Remove(iso_historia_clinica);
             await db.SaveChangesAsync();
+            //Elimina Consultas medicas
+            var iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_historia_clinica == id).ToList();
+            foreach(iso_consulta_medica consulta in iso_consulta_medica ){
+                db.iso_consulta_medica.Remove(consulta);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
         public ActionResult Panel()
@@ -186,6 +224,7 @@ namespace CBM_SART.Controllers
                     return iso_historia_clinica_registrada.ihc_id_historia;
                 }
             }
+            //Ingresa consulta Historia Clinica
             iso_historia_clinica iso_historia_clinica = new iso_historia_clinica();
             iso_personal iso_personal = db.iso_personal.Find(IdPersonal);
 
@@ -195,6 +234,15 @@ namespace CBM_SART.Controllers
             iso_historia_clinica.ihc_lugar_historia_clinica = "CBM-SART";
             db.iso_historia_clinica.Add(iso_historia_clinica);
             db.SaveChanges();
+            //Ingresa consulta medica Ocupacional
+            iso_consulta_medica iso_consulta_medica = new iso_consulta_medica();
+            iso_consulta_medica.icm_id_historia_clinica = iso_historia_clinica.ihc_id_historia;
+            iso_consulta_medica.icm_id_personal = iso_personal.ipe_id_personal;
+            iso_consulta_medica.icm_tipo_consulta = 1; //Preocupacional
+            iso_consulta_medica.icm_fecha_consulta = DateTime.Now;
+            db.iso_consulta_medica.Add(iso_consulta_medica);
+            db.SaveChanges();
+
             return iso_historia_clinica.ihc_id_historia;
         }
         public FileContentResult GetImage(int ID)

@@ -118,7 +118,7 @@
               grid.Column("ipe_ced_ruc_personal", "CI/RUC", style: "col-lg-1"),
               grid.Column("ipe_nombre_personal", "Nombre", style: "col-lg-4"),
               grid.Column("ipe_apellido_paterno", "Apellido", style: "col-lg-4"),
-              grid.Column("ipe_fecha_nacimiento", "Fecha Nacimiento", style: "col-lg-3")
+              grid.Column("ipe_fecha_nacimiento", "Fecha Nacimiento", style: "col-lg-3", format: (item) => string.Format("{0:dd/MM/yyyy}", item.ipe_fecha_nacimiento))
              ));
             }
 

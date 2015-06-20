@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CBM_SART.Models.iso_historia_clinica>
+﻿@*@model IEnumerable<CBM_SART.Models.iso_historia_clinica>*@
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_historia_clinica>
 
 @{
     ViewBag.Title = "Index";
@@ -7,48 +8,91 @@
     Session["SidebarSelect"] = "Historia";
 }
 
-<h2>Index</h2>
+<div class="seccion-barra">
+    <img src="~/images/label-plain-black.png" height="24" width="24" />
+    Informacion de las Historias Clinicas registradas.
+    <span class="text-count">Nro. de  HC : @ViewBag.total</span>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ihc_id_empresa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ihc_lugar_historia_clinica)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ihc_fecha_historia_clinica)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iso_personal.ipe_ced_ruc_personal)
-        </th>
-        <th></th>
-    </tr>
+<div class="content">
+    @using (Html.BeginForm("index", null, FormMethod.Get))
+    {
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ihc_id_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ihc_lugar_historia_clinica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ihc_fecha_historia_clinica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iso_personal.ipe_nombre_personal)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Nombre del Empleado" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="btn btn-success" data-modal="" href="/HistoriaClinica/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="col-md-12 grid-content">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column(header: "Nombre Empleado", style: "col-lg-3",
+                     format: @<text>
+              @Html.Raw("<span>" + item.iso_personal.ipe_nombre_personal + " " + item.iso_personal.ipe_apellido_paterno + " </span> ")
+                    </text>),
+              grid.Column("iso_personal.iso_empresa.iem_nombre_empresa", "Empresa Empleado", style: "col-lg-3"),
+              grid.Column("ihc_lugar_historia_clinica", "Lugar", style: "col-lg-3"),
+              grid.Column("ihc_fecha_historia_clinica", "Fecha Creación", style: "col-lg-2", format: (item) => string.Format("{0:dd/MM/yyyy}", item.ihc_fecha_historia_clinica)),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a data-modal='' href='/HistoriaClinica/details/" + item.ihc_id_historia + "' id='" + item.ihc_id_historia + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/HistoriaClinica/edit/" + item.ihc_id_historia + "' id='" + item.ihc_id_historia + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/HistoriaClinica/delete/" + item.ihc_id_historia + "' id='" + item.ihc_id_historia + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+
+             ));
+            }
+
+
+        </div>
+        <div class="clear"></div>
+    }
+</div>
+
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
+
 }
-
-</table>
