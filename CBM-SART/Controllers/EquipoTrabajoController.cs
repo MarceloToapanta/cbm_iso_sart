@@ -77,7 +77,7 @@ namespace CBM_SART.Controllers
         {
             iso_equipo_proteccion iso_equipo_proteccion = new iso_equipo_proteccion();
             //return View();
-            return PartialView("Details", iso_equipo_proteccion);
+            return PartialView("Create", iso_equipo_proteccion);
         }
 
         // POST: /EquipoTrabajo/Create

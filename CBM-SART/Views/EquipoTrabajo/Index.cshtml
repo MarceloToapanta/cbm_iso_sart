@@ -59,7 +59,7 @@
         columns: grid.Columns(
             grid.Column("iep_nombre_equipo_p", "Nombre", style: "col-lg-4"),
             grid.Column("iep_stock", "Stock",  style: "col-lg-1"),
-            grid.Column(header: "Logo Empresa", canSort: false, style: "col-lg-2",
+            grid.Column(header: "Imagen Equipo", canSort: false, style: "col-lg-2",
               format: @<text>
                 @Html.Raw("<img style='max-width: 200px; max-height: 150px' src=" + @Url.Action("GetImage", "EquipoTrabajo", new { ID = item.iep_id_equipo_p }) + " />")
               </text>),
@@ -109,5 +109,5 @@
     });
 </script>
 }
-}
+
 

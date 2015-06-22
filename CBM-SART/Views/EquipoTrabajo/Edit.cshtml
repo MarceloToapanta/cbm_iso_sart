@@ -1,62 +1,85 @@
 ﻿@model CBM_SART.Models.iso_equipo_proteccion
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="title-window" style="height:32px">
+    Permite editar el Equipo de Trabajo selecionado.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
 
-@using (Html.BeginForm())
+    <h4 class="modal-title">Editar Equipo de Trabajo</h4>
+</div>
+
+@using (Html.BeginForm("Edit", "EquipoTrabajo", FormMethod.Post, new { enctype = "multipart/form-data", id = "f" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>iso_equipo_proteccion</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.iep_id_equipo_p)
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.iep_id_equipo_p)
+    @Html.HiddenFor(model => model.iep_imagen_equipo_p)
+    <div class="modal-body">
+        <div class="form-horizontal">
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.iep_nombre_equipo_p, new { @class = "control-label col-md-2" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.iep_nombre_equipo_p, new { @class = "form-control required valid" })
+                        @Html.ValidationMessageFor(model => model.iep_nombre_equipo_p)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.iep_stock, new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.iep_stock, new { @Value = "0", @class = "form-control required valid" })
+                        @Html.ValidationMessageFor(model => model.iep_stock)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.iep_nombre_equipo_p, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.iep_nombre_equipo_p)
-                @Html.ValidationMessageFor(model => model.iep_nombre_equipo_p)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.iep_ubic_imagen_equipo_p, new { @class = "control-label col-md-2" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.iep_ubic_imagen_equipo_p, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.iep_ubic_imagen_equipo_p)
+                    </div>
+                    <br />
+                    <br />
+                    <div class="col-md-10">
+                        <input type='file' id="file1" name="file1" value="" multiple accept="image/*" />
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="col-md-4">
+                <div class="row" style="margin-top:0;">
+                    <div class="editor-field">
+                        <div class="inline-image-preivew">
+                            <img id="blah" src="~/images/no_logo.png" alt="Logo de la Empresa" style="border: 1px solid #29ABE2; max-width: 200px; height: auto" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                <button class="btn btn-primary" type="submit" name="Guardar"> Guardar </button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.iep_ubic_imagen_equipo_p, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.iep_ubic_imagen_equipo_p)
-                @Html.ValidationMessageFor(model => model.iep_ubic_imagen_equipo_p)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.iep_imagen_equipo_p, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.iep_imagen_equipo_p)
-                @Html.ValidationMessageFor(model => model.iep_imagen_equipo_p)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.iep_stock, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.iep_stock)
-                @Html.ValidationMessageFor(model => model.iep_stock)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
