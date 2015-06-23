@@ -168,7 +168,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => Model.iem_icono_empresa, new { @class = "control-label col-sm-2" })
                     <div class="col-sm-10">
-                        @Html.TextBoxFor(m => m.iem_icono_empresa, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.iem_icono_empresa, new { @class = "form-control",@readonly = "true"} })
                         <div>
                             @Html.ValidationMessageFor(m => m.iem_icono_empresa)
                         </div>

@@ -6,19 +6,19 @@
 }
 
 <div class="title-window" style="height:32px">
-    Permite eliminar la empresa selecionada.
+    Permite eliminar la Empresa selecionada.
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-header">
 
     <div class="form-group">
-        
-            <h4>
-                <span class="label label-danger">
-                    Estas seguro de eliminar esta Empresa?
-                </span>
-            </h4>
-        
+
+        <h4>
+            <span class="label label-danger">
+                Estas seguro de eliminar esta Empresa?
+            </span>
+        </h4>
+
     </div>
 </div>
 
@@ -67,9 +67,9 @@
             </div>
 
             <div class="form-group ">
-                @Html.LabelFor(m => Model.iem_telefono_empresa, new { @class = "control-label col-sm-2"})
+                @Html.LabelFor(m => Model.iem_telefono_empresa, new { @class = "control-label col-sm-2" })
                 <div class="col-sm-4">
-                    @Html.TextBoxFor(m => m.iem_telefono_empresa, new { @class = "form-control ",@disabled = "disabled"})
+                    @Html.TextBoxFor(m => m.iem_telefono_empresa, new { @class = "form-control ", @disabled = "disabled" })
                     <div>
                         @Html.ValidationMessageFor(m => m.iem_telefono_empresa)
                     </div>
@@ -134,15 +134,19 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="form-horizontal">
 
-    @*<div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>*@
-    
-    <div class="modal-footer">
-        <button class="btn btn-primary" data-dismiss="modal">No</button>
-        <input class="btn btn-danger" type="submit" value="Si" />
+            @*<div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </div>*@
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">No</button>
+                <input class="btn btn-danger" type="submit" value="Si" />
+            </div>
+        </div>
     </div>
 }
 

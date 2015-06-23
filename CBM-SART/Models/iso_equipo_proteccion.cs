@@ -11,6 +11,7 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_equipo_proteccion
     {
@@ -21,9 +22,13 @@ namespace CBM_SART.Models
         }
     
         public int iep_id_equipo_p { get; set; }
+        [Display(Name = "Nombre")]
+        [Required]
         public string iep_nombre_equipo_p { get; set; }
+        [Display(Name = "Ubicación Imagen")]
         public string iep_ubic_imagen_equipo_p { get; set; }
         public byte[] iep_imagen_equipo_p { get; set; }
+        [Display(Name = "Stock")]
         public Nullable<int> iep_stock { get; set; }
     
         public virtual ICollection<iso_equipo_caracteristica> iso_equipo_caracteristica { get; set; }
