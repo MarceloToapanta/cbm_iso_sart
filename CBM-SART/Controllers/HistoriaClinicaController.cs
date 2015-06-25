@@ -245,6 +245,50 @@ namespace CBM_SART.Controllers
 
             return iso_historia_clinica.ihc_id_historia;
         }
+        ///TABLAS CONSULTA MEDICA 
+        ///Antecendete Perosnal
+        public ActionResult CmAntePersonal(int IdConsulta)
+        {
+            //Busca consulta Medica
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
+            var iso_ante_personal_consulta_m = iso_consulta_medica.iso_ante_personal_consulta_m;
+
+            return PartialView(iso_ante_personal_consulta_m);
+        }
+        public ActionResult AntePersonal()
+        {
+            //Busca Antecendentes Personales
+            var iso_antecedente_personal = db.iso_antecedente_personal.ToList();
+
+            return PartialView("CMParametros/AntePersonal",iso_antecedente_personal);
+        }
+        public ActionResult CmAnteFamiliarMorb(int IdConsulta)
+        {
+            //Busca consulta Medica
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
+            var iso_ante_familiar_consulta_m = iso_consulta_medica.iso_ante_familiar_consulta_m.Where(x => x.iso_antecedente_familiar.iaf_tipo_antecedente_f == "MORBILIDAD").ToList();
+            return PartialView(iso_ante_familiar_consulta_m);
+        }
+        public ActionResult CmAnteFamiliarMort(int IdConsulta)
+        {
+            //Busca consulta Medica
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
+            var iso_ante_familiar_consulta_m = iso_consulta_medica.iso_ante_familiar_consulta_m.Where(x => x.iso_antecedente_familiar.iaf_tipo_antecedente_f == "MORBILIDAD").ToList();
+            return PartialView(iso_ante_familiar_consulta_m);
+        }
+        public string EliminarAntecente(int IdConsulta, int IdAntecente, string TipoAntecente)
+        {
+            string mensaje = "No se pudo eliminar";
+            if (TipoAntecente=="Personal"){
+                iso_ante_personal_consulta_m iso_ante_personal_consulta_m = db.iso_ante_personal_consulta_m.Where(
+                    x => x.ipc_id_consulta_medica == IdConsulta && x.ipc_id_antecedente_p == IdAntecente).First();
+                db.iso_ante_personal_consulta_m.Remove(iso_ante_personal_consulta_m);
+                db.SaveChanges();
+                mensaje = "Registro eliminado";
+            }
+            return mensaje;
+        }
+
         public FileContentResult GetImage(int ID)
         {
             iso_personal cat = db.iso_personal.FirstOrDefault(c => c.ipe_id_personal == ID);

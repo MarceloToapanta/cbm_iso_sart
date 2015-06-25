@@ -449,5 +449,205 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="iso_ante_familiar_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_ante_familiar_consulta_m">
+        <MappingFragment StoreEntitySet="iso_ante_familiar_consulta_m">
+          <ScalarProperty Name="ifc_observacion" ColumnName="ifc_observacion" />
+          <ScalarProperty Name="ifc_edad" ColumnName="ifc_edad" />
+          <ScalarProperty Name="ifc_tipo_antecedente_f" ColumnName="ifc_tipo_antecedente_f" />
+          <ScalarProperty Name="ifc_id_antecedente_familiar" ColumnName="ifc_id_antecedente_familiar" />
+          <ScalarProperty Name="ifc_id_personal" ColumnName="ifc_id_personal" />
+          <ScalarProperty Name="ifc_id_historia_clinica" ColumnName="ifc_id_historia_clinica" />
+          <ScalarProperty Name="ifc_id_consulta_medica" ColumnName="ifc_id_consulta_medica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_ante_mujer_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_ante_mujer_consulta_m">
+        <MappingFragment StoreEntitySet="iso_ante_mujer_consulta_m">
+          <ScalarProperty Name="imc_edad_mujer" ColumnName="imc_edad_mujer" />
+          <ScalarProperty Name="imc_descripcion" ColumnName="imc_descripcion" />
+          <ScalarProperty Name="imc_observacion" ColumnName="imc_observacion" />
+          <ScalarProperty Name="imc_id_antecedente_mujer" ColumnName="imc_id_antecedente_mujer" />
+          <ScalarProperty Name="imc_id_personal" ColumnName="imc_id_personal" />
+          <ScalarProperty Name="imc_id_historia_clinica" ColumnName="imc_id_historia_clinica" />
+          <ScalarProperty Name="imc_id_consulta_medica" ColumnName="imc_id_consulta_medica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_ante_personal_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_ante_personal_consulta_m">
+        <MappingFragment StoreEntitySet="iso_ante_personal_consulta_m">
+          <ScalarProperty Name="ipc_observacion" ColumnName="ipc_observacion" />
+          <ScalarProperty Name="ipc_edad" ColumnName="ipc_edad" />
+          <ScalarProperty Name="ipc_id_antecedente_p" ColumnName="ipc_id_antecedente_p" />
+          <ScalarProperty Name="ipc_id_personal" ColumnName="ipc_id_personal" />
+          <ScalarProperty Name="ipc_id_historia_clinica" ColumnName="ipc_id_historia_clinica" />
+          <ScalarProperty Name="ipc_id_consulta_medica" ColumnName="ipc_id_consulta_medica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_antecedente_familiar">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_antecedente_familiar">
+        <MappingFragment StoreEntitySet="iso_antecedente_familiar">
+          <ScalarProperty Name="iaf_tipo_antecedente_f" ColumnName="iaf_tipo_antecedente_f" />
+          <ScalarProperty Name="iaf_nombre_antecedente_f" ColumnName="iaf_nombre_antecedente_f" />
+          <ScalarProperty Name="iaf_id_antecedente_familiar" ColumnName="iaf_id_antecedente_familiar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_antecedente_mujer">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_antecedente_mujer">
+        <MappingFragment StoreEntitySet="iso_antecedente_mujer">
+          <ScalarProperty Name="iam_nombre_antecedente_m" ColumnName="iam_nombre_antecedente_m" />
+          <ScalarProperty Name="iam_id_antecedente_mujer" ColumnName="iam_id_antecedente_mujer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_antecedente_personal">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_antecedente_personal">
+        <MappingFragment StoreEntitySet="iso_antecedente_personal">
+          <ScalarProperty Name="iap_nombre_antecedente_p" ColumnName="iap_nombre_antecedente_p" />
+          <ScalarProperty Name="iap_id_antecedente_p" ColumnName="iap_id_antecedente_p" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_antecedente_vacuna">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_antecedente_vacuna">
+        <MappingFragment StoreEntitySet="iso_antecedente_vacuna">
+          <ScalarProperty Name="iav_nombre_vacuna" ColumnName="iav_nombre_vacuna" />
+          <ScalarProperty Name="iav_id_vacuna" ColumnName="iav_id_vacuna" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_exam_fisico_parametro">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_exam_fisico_parametro">
+        <MappingFragment StoreEntitySet="iso_exam_fisico_parametro">
+          <ScalarProperty Name="ief_nombre_examen" ColumnName="ief_nombre_examen" />
+          <ScalarProperty Name="ief_tipo_examen" ColumnName="ief_tipo_examen" />
+          <ScalarProperty Name="ief_id_examen_fis" ColumnName="ief_id_examen_fis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_exam_fp_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_exam_fp_consulta_m">
+        <MappingFragment StoreEntitySet="iso_exam_fp_consulta_m">
+          <ScalarProperty Name="iec_campo5" ColumnName="iec_campo5" />
+          <ScalarProperty Name="iec_campo4" ColumnName="iec_campo4" />
+          <ScalarProperty Name="iec_campo3" ColumnName="iec_campo3" />
+          <ScalarProperty Name="iec_campo2" ColumnName="iec_campo2" />
+          <ScalarProperty Name="iec_campo1" ColumnName="iec_campo1" />
+          <ScalarProperty Name="iec_id_tipo_exam_fisico" ColumnName="iec_id_tipo_exam_fisico" />
+          <ScalarProperty Name="iec_id_exam_fisico" ColumnName="iec_id_exam_fisico" />
+          <ScalarProperty Name="iec_id_personal" ColumnName="iec_id_personal" />
+          <ScalarProperty Name="iec_id_historia_clinica" ColumnName="iec_id_historia_clinica" />
+          <ScalarProperty Name="iec_id_consulta_medica" ColumnName="iec_id_consulta_medica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_pedido_exam_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_pedido_exam_consulta_m">
+        <MappingFragment StoreEntitySet="iso_pedido_exam_consulta_m">
+          <ScalarProperty Name="ipc_archivo" ColumnName="ipc_archivo" />
+          <ScalarProperty Name="ipc_ubicacion_archivo" ColumnName="ipc_ubicacion_archivo" />
+          <ScalarProperty Name="ipc_observacion" ColumnName="ipc_observacion" />
+          <ScalarProperty Name="ipc_fecha" ColumnName="ipc_fecha" />
+          <ScalarProperty Name="ipc_descrip" ColumnName="ipc_descrip" />
+          <ScalarProperty Name="ipc_id_tipo_pexamen" ColumnName="ipc_id_tipo_pexamen" />
+          <ScalarProperty Name="ipc_id_pexamen" ColumnName="ipc_id_pexamen" />
+          <ScalarProperty Name="ipc_id_personal" ColumnName="ipc_id_personal" />
+          <ScalarProperty Name="ipc_id_historia_clinica" ColumnName="ipc_id_historia_clinica" />
+          <ScalarProperty Name="ipc_id_consulta_medica" ColumnName="ipc_id_consulta_medica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_pedido_examen">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_pedido_examen">
+        <MappingFragment StoreEntitySet="iso_pedido_examen">
+          <ScalarProperty Name="ipe_nombre_pexamen" ColumnName="ipe_nombre_pexamen" />
+          <ScalarProperty Name="ipe_id_pexamen" ColumnName="ipe_id_pexamen" />
+          <ScalarProperty Name="ipe_id_tipo_pexamen" ColumnName="ipe_id_tipo_pexamen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_sindrome">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_sindrome">
+        <MappingFragment StoreEntitySet="iso_sindrome">
+          <ScalarProperty Name="iso_nombre_sindrome" ColumnName="iso_nombre_sindrome" />
+          <ScalarProperty Name="iso_id_sindrome" ColumnName="iso_id_sindrome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_sindrome_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_sindrome_consulta_m">
+        <MappingFragment StoreEntitySet="iso_sindrome_consulta_m">
+          <ScalarProperty Name="isd_descripcion" ColumnName="isd_descripcion" />
+          <ScalarProperty Name="isd_id_consulta_medica" ColumnName="isd_id_consulta_medica" />
+          <ScalarProperty Name="isd_id_personal" ColumnName="isd_id_personal" />
+          <ScalarProperty Name="isd_id_historia_clinica" ColumnName="isd_id_historia_clinica" />
+          <ScalarProperty Name="isd_id_sindrome" ColumnName="isd_id_sindrome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_sintoma">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_sintoma">
+        <MappingFragment StoreEntitySet="iso_sintoma">
+          <ScalarProperty Name="ist_nombre_sintoma" ColumnName="ist_nombre_sintoma" />
+          <ScalarProperty Name="ist_id_tipo_sintoma" ColumnName="ist_id_tipo_sintoma" />
+          <ScalarProperty Name="ist_id_sintoma" ColumnName="ist_id_sintoma" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_sintoma_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_sintoma_consulta_m">
+        <MappingFragment StoreEntitySet="iso_sintoma_consulta_m">
+          <ScalarProperty Name="isc_valor_sintoma" ColumnName="isc_valor_sintoma" />
+          <ScalarProperty Name="isc_tiempo_sintoma" ColumnName="isc_tiempo_sintoma" />
+          <ScalarProperty Name="isc_id_tipo_sintoma" ColumnName="isc_id_tipo_sintoma" />
+          <ScalarProperty Name="isc_id_sintoma" ColumnName="isc_id_sintoma" />
+          <ScalarProperty Name="isc_id_personal" ColumnName="isc_id_personal" />
+          <ScalarProperty Name="isc_id_historia_clinica" ColumnName="isc_id_historia_clinica" />
+          <ScalarProperty Name="isc_id_consulta_medica" ColumnName="isc_id_consulta_medica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_tipo_exam_fisico">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_tipo_exam_fisico">
+        <MappingFragment StoreEntitySet="iso_tipo_exam_fisico">
+          <ScalarProperty Name="ite_id_tipo_efpadre" ColumnName="ite_id_tipo_efpadre" />
+          <ScalarProperty Name="ite_nombre_tipo_ef" ColumnName="ite_nombre_tipo_ef" />
+          <ScalarProperty Name="ite_id_tipo_ef" ColumnName="ite_id_tipo_ef" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_tipo_pedido_exam">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_tipo_pedido_exam">
+        <MappingFragment StoreEntitySet="iso_tipo_pedido_exam">
+          <ScalarProperty Name="itp_id_tpedido_padre" ColumnName="itp_id_tpedido_padre" />
+          <ScalarProperty Name="itp_nombre_tpedido" ColumnName="itp_nombre_tpedido" />
+          <ScalarProperty Name="itp_id_tpedido_exam" ColumnName="itp_id_tpedido_exam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_tipo_sintoma">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_tipo_sintoma">
+        <MappingFragment StoreEntitySet="iso_tipo_sintoma">
+          <ScalarProperty Name="its_nombre_tipo_sintoma" ColumnName="its_nombre_tipo_sintoma" />
+          <ScalarProperty Name="its_id_tipo_sintoma" ColumnName="its_id_tipo_sintoma" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_vacuna_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_vacuna_consulta_m">
+        <MappingFragment StoreEntitySet="iso_vacuna_consulta_m">
+          <ScalarProperty Name="ivm_observacion" ColumnName="ivm_observacion" />
+          <ScalarProperty Name="ivm_dosis" ColumnName="ivm_dosis" />
+          <ScalarProperty Name="ivm_id_vacuna" ColumnName="ivm_id_vacuna" />
+          <ScalarProperty Name="ivm_id_personal" ColumnName="ivm_id_personal" />
+          <ScalarProperty Name="ivm_id_historia_clinica" ColumnName="ivm_id_historia_clinica" />
+          <ScalarProperty Name="ivm_id_consulta_medica" ColumnName="ivm_id_consulta_medica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

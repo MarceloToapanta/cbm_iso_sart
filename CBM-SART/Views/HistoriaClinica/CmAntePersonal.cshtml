@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_ante_personal_consulta_m>
+
+<div class="cm-title-ant">
+    1.- Antecedentes Patológicos Personales
+</div>
+<div class="col-md-11" style="padding-left:0">
+    <table class="table table-bordered table-hover table-responsive table-condensed" id="grid1" data-swhgajax="true" data-swhgcontainer="grid" data-swhgcallback="">
+        <thead>
+            <tr>
+                <th scope="col" style="width:2%"></th>
+                <th scope="col" style="width:30%">
+                    Antecedente Personal
+                </th>
+                <th scope="col" style="width:50%">
+                    Diagnóstico
+                </th>
+                <th scope="col" style="width:10%">
+                    Fecha CM
+                </th>
+                <th scope="col" style="width:8%">
+                    Acción
+                </th>
+            </tr>
+        </thead>
+        @{int i = 1;}
+        @foreach (CBM_SART.Models.iso_ante_personal_consulta_m item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iso_antecedente_personal.iap_nombre_antecedente_p)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ipc_observacion)
+                </td>
+                <td>
+                    @String.Format("{0:MM/dd/yyyy}", item.iso_consulta_medica.icm_fecha_consulta)
+                </td>
+                <td>
+                    <a data-modal='' class="confirm" href='/Delete/@item.ipc_id_antecedente_p' id='@item.ipc_id_antecedente_p' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>
+                </td>
+            </tr>
+            i++;
+        }
+        @if (@Model.Count() <= 0)
+        {
+            <tr>
+                <td colspan="6" class="sin-registros">No se encontro registros</td>
+            </tr>
+        }
+        
+    </table>
+</div>
+<div class="col-md-1">
+    <a class="btn btn-success confirm" data-modal="" href="/HistoriaClinica/AntePersonal" id="btn">
+        <span class="glyphicon glyphicon-plus"></span>
+        Nuevo
+    </a>
+</div>
+
+
+
+
+<div class="clear"></div>
+
+<script type="text/javascript" src="/Scripts/Confirm/jquery.confirm.min.js"></script>
+@if (@Model.Count() > 0) { 
+<script>
+    $(".confirm").confirm({
+        text: "Esta seguro(a) de eliminar el registro selecionado?",
+        title: "Atención",
+        confirm: function (button) {
+            //Elimina Tablas
+            var url = "@Url.Action("EliminarAntecente", "HistoriaClinica")?IdConsulta=@Model.First().ipc_id_consulta_medica&IdAntecente=" + button.attr("id") + "&TipoAntecente=Personal";
+            console.log(url);
+            $('#ms_cm_ante_personal').load(url);
+            //Recargar Tablas
+            var url = "@Url.Action("CmAntePersonal", "HistoriaClinica")?IdConsulta=@Model.First().ipc_id_consulta_medica";
+            $('#cm_ante_personal').load(url);
+            console.log("Eliminado !!");
+        },
+        cancel: function (button) {
+            // nothing to do
+        },
+        confirmButton: "Si",
+        cancelButton: "No",
+        post: true,
+        confirmButtonClass: "btn-danger",
+        cancelButtonClass: "btn-default",
+        dialogClass: "modal-dialog modal-lg modal-delete" // Bootstrap classes for large modal
+    });
+</script>
+}

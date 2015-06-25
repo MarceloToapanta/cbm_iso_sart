@@ -14,6 +14,18 @@ namespace CBM_SART.Models
     
     public partial class iso_consulta_medica
     {
+        public iso_consulta_medica()
+        {
+            this.iso_ante_familiar_consulta_m = new HashSet<iso_ante_familiar_consulta_m>();
+            this.iso_ante_mujer_consulta_m = new HashSet<iso_ante_mujer_consulta_m>();
+            this.iso_ante_personal_consulta_m = new HashSet<iso_ante_personal_consulta_m>();
+            this.iso_exam_fp_consulta_m = new HashSet<iso_exam_fp_consulta_m>();
+            this.iso_pedido_exam_consulta_m = new HashSet<iso_pedido_exam_consulta_m>();
+            this.iso_sindrome_consulta_m = new HashSet<iso_sindrome_consulta_m>();
+            this.iso_sintoma_consulta_m = new HashSet<iso_sintoma_consulta_m>();
+            this.iso_vacuna_consulta_m = new HashSet<iso_vacuna_consulta_m>();
+        }
+    
         public int icm_id_consulta { get; set; }
         public int icm_id_historia_clinica { get; set; }
         public int icm_id_personal { get; set; }
@@ -48,5 +60,13 @@ namespace CBM_SART.Models
     
         public virtual iso_historia_clinica iso_historia_clinica { get; set; }
         public virtual iso_tipo_consulta_m iso_tipo_consulta_m { get; set; }
+        public virtual ICollection<iso_ante_familiar_consulta_m> iso_ante_familiar_consulta_m { get; set; }
+        public virtual ICollection<iso_ante_mujer_consulta_m> iso_ante_mujer_consulta_m { get; set; }
+        public virtual ICollection<iso_ante_personal_consulta_m> iso_ante_personal_consulta_m { get; set; }
+        public virtual ICollection<iso_exam_fp_consulta_m> iso_exam_fp_consulta_m { get; set; }
+        public virtual ICollection<iso_pedido_exam_consulta_m> iso_pedido_exam_consulta_m { get; set; }
+        public virtual ICollection<iso_sindrome_consulta_m> iso_sindrome_consulta_m { get; set; }
+        public virtual ICollection<iso_sintoma_consulta_m> iso_sintoma_consulta_m { get; set; }
+        public virtual ICollection<iso_vacuna_consulta_m> iso_vacuna_consulta_m { get; set; }
     }
 }

@@ -1026,6 +1026,42 @@ label.label-3{
     height: 70px;
     border: 1px solid #ccc;
 }
+.cm-block{
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+.cm-title-ant{
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-style: italic;
+}
+.modal-delete{
+    margin-top: 18% !important;
+    width: 25% !important;
+}
+.modal-delete .modal-footer{
+    padding: 5px 15px !important;
+    margin: 10px;
+}
+.modal-delete .modal-body{
+    margin-top: 10px;
+}
+.modal-delete .modal-header{
+    padding: 3px 10px 3px 10px;
+    border-bottom: 2px solid rgb(241, 100, 72);
+    background: url("/images/nav-dark.png");
+    color: #fff;
+}
+.modal-delete .modal-header {
+    font-size: 15px;
+}
+.sin-registros{
+    text-align:center;
+    font-style:italic;
+}
 /*///////////////Fin Historias Clinicas//////////////////////*/
 
 

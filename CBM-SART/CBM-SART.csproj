@@ -205,6 +205,27 @@
     <Compile Include="Models\iso_accidente.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_antecedente_familiar.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_antecedente_mujer.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_antecedente_personal.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_antecedente_vacuna.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_ante_familiar_consulta_m.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_ante_mujer_consulta_m.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_ante_personal_consulta_m.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_avance_plan.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
@@ -235,6 +256,12 @@
     <Compile Include="Models\iso_equipo_proteccion.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_exam_fisico_parametro.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_exam_fp_consulta_m.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_historia_clinica.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
@@ -248,6 +275,12 @@
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iso_matriz_riesgo_ocupacional.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_pedido_examen.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_pedido_exam_consulta_m.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iso_personal.cs">
@@ -265,10 +298,34 @@
     <Compile Include="Models\iso_riesgo_ocupacional.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_sindrome.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_sindrome_consulta_m.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_sintoma.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_sintoma_consulta_m.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_tipo_consulta_m.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_tipo_exam_fisico.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_tipo_pedido_exam.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_tipo_riesgo_ocupacional.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_tipo_sintoma.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_vacuna_consulta_m.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PagedList.cs" />
@@ -486,6 +543,10 @@
     <Content Include="Views\Cargo\AsignarPuestoT.cshtml" />
     <Content Include="Views\HistoriaClinica\HistorialCM.cshtml" />
     <Content Include="Views\HistoriaClinica\IngresarCM.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmAntePersonal.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmAnteFamiliarMorb.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmAnteFamiliarMort.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\AntePersonal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

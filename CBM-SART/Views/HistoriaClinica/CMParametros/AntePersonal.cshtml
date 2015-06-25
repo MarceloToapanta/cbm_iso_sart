@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_antecedente_personal>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.iap_nombre_antecedente_p)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.iap_nombre_antecedente_p)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.iap_id_antecedente_p }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iap_id_antecedente_p }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iap_id_antecedente_p })
+        </td>
+    </tr>
+}
+
+</table>

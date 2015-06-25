@@ -48,5 +48,24 @@ namespace CBM_SART.Models
         public virtual DbSet<iso_riesgo_ocupacional> iso_riesgo_ocupacional { get; set; }
         public virtual DbSet<iso_tipo_riesgo_ocupacional> iso_tipo_riesgo_ocupacional { get; set; }
         public virtual DbSet<iso_tipo_consulta_m> iso_tipo_consulta_m { get; set; }
+        public virtual DbSet<iso_ante_familiar_consulta_m> iso_ante_familiar_consulta_m { get; set; }
+        public virtual DbSet<iso_ante_mujer_consulta_m> iso_ante_mujer_consulta_m { get; set; }
+        public virtual DbSet<iso_ante_personal_consulta_m> iso_ante_personal_consulta_m { get; set; }
+        public virtual DbSet<iso_antecedente_familiar> iso_antecedente_familiar { get; set; }
+        public virtual DbSet<iso_antecedente_mujer> iso_antecedente_mujer { get; set; }
+        public virtual DbSet<iso_antecedente_personal> iso_antecedente_personal { get; set; }
+        public virtual DbSet<iso_antecedente_vacuna> iso_antecedente_vacuna { get; set; }
+        public virtual DbSet<iso_exam_fisico_parametro> iso_exam_fisico_parametro { get; set; }
+        public virtual DbSet<iso_exam_fp_consulta_m> iso_exam_fp_consulta_m { get; set; }
+        public virtual DbSet<iso_pedido_exam_consulta_m> iso_pedido_exam_consulta_m { get; set; }
+        public virtual DbSet<iso_pedido_examen> iso_pedido_examen { get; set; }
+        public virtual DbSet<iso_sindrome> iso_sindrome { get; set; }
+        public virtual DbSet<iso_sindrome_consulta_m> iso_sindrome_consulta_m { get; set; }
+        public virtual DbSet<iso_sintoma> iso_sintoma { get; set; }
+        public virtual DbSet<iso_sintoma_consulta_m> iso_sintoma_consulta_m { get; set; }
+        public virtual DbSet<iso_tipo_exam_fisico> iso_tipo_exam_fisico { get; set; }
+        public virtual DbSet<iso_tipo_pedido_exam> iso_tipo_pedido_exam { get; set; }
+        public virtual DbSet<iso_tipo_sintoma> iso_tipo_sintoma { get; set; }
+        public virtual DbSet<iso_vacuna_consulta_m> iso_vacuna_consulta_m { get; set; }
     }
 }

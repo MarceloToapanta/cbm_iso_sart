@@ -59,6 +59,14 @@
     <Property Name="icm_fecha_salida" Type="DateTime" Precision="3" />
     <NavigationProperty Name="iso_historia_clinica" Relationship="Self.FK_iso_consulta_medica_iso_historia_clinica" FromRole="iso_consulta_medica" ToRole="iso_historia_clinica" />
     <NavigationProperty Name="iso_tipo_consulta_m" Relationship="cbm_iso_sart.FK_iso_consulta_medica_iso_tipo_consulta_m" FromRole="iso_consulta_medica" ToRole="iso_tipo_consulta_m" />
+    <NavigationProperty Name="iso_ante_familiar_consulta_m" Relationship="cbm_iso_sart.FK_iso_ante_familiar_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_ante_familiar_consulta_m" />
+    <NavigationProperty Name="iso_ante_mujer_consulta_m" Relationship="cbm_iso_sart.FK_iso_ante_mujer_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_ante_mujer_consulta_m" />
+    <NavigationProperty Name="iso_ante_personal_consulta_m" Relationship="cbm_iso_sart.FK_iso_ante_personal_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_ante_personal_consulta_m" />
+    <NavigationProperty Name="iso_exam_fp_consulta_m" Relationship="cbm_iso_sart.FK_iso_exam_fp_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_exam_fp_consulta_m" />
+    <NavigationProperty Name="iso_pedido_exam_consulta_m" Relationship="cbm_iso_sart.FK_iso_pedido_exam_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_pedido_exam_consulta_m" />
+    <NavigationProperty Name="iso_sindrome_consulta_m" Relationship="cbm_iso_sart.FK_iso_sindrome_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_sindrome_consulta_m" />
+    <NavigationProperty Name="iso_sintoma_consulta_m" Relationship="cbm_iso_sart.FK_iso_sintoma_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_sintoma_consulta_m" />
+    <NavigationProperty Name="iso_vacuna_consulta_m" Relationship="cbm_iso_sart.FK_iso_vacuna_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_vacuna_consulta_m" />
   </EntityType>
   <EntityType Name="iso_departamento">
     <Key>
@@ -290,6 +298,101 @@
     <AssociationSet Name="FK_iso_consulta_medica_iso_tipo_consulta_m" Association="cbm_iso_sart.FK_iso_consulta_medica_iso_tipo_consulta_m">
       <End Role="iso_tipo_consulta_m" EntitySet="iso_tipo_consulta_m" />
       <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+    </AssociationSet>
+    <EntitySet Name="iso_ante_familiar_consulta_m" EntityType="cbm_iso_sart.iso_ante_familiar_consulta_m" />
+    <EntitySet Name="iso_ante_mujer_consulta_m" EntityType="cbm_iso_sart.iso_ante_mujer_consulta_m" />
+    <EntitySet Name="iso_ante_personal_consulta_m" EntityType="cbm_iso_sart.iso_ante_personal_consulta_m" />
+    <EntitySet Name="iso_antecedente_familiar" EntityType="cbm_iso_sart.iso_antecedente_familiar" />
+    <EntitySet Name="iso_antecedente_mujer" EntityType="cbm_iso_sart.iso_antecedente_mujer" />
+    <EntitySet Name="iso_antecedente_personal" EntityType="cbm_iso_sart.iso_antecedente_personal" />
+    <EntitySet Name="iso_antecedente_vacuna" EntityType="cbm_iso_sart.iso_antecedente_vacuna" />
+    <EntitySet Name="iso_exam_fisico_parametro" EntityType="cbm_iso_sart.iso_exam_fisico_parametro" />
+    <EntitySet Name="iso_exam_fp_consulta_m" EntityType="cbm_iso_sart.iso_exam_fp_consulta_m" />
+    <EntitySet Name="iso_pedido_exam_consulta_m" EntityType="cbm_iso_sart.iso_pedido_exam_consulta_m" />
+    <EntitySet Name="iso_pedido_examen" EntityType="cbm_iso_sart.iso_pedido_examen" />
+    <EntitySet Name="iso_sindrome" EntityType="cbm_iso_sart.iso_sindrome" />
+    <EntitySet Name="iso_sindrome_consulta_m" EntityType="cbm_iso_sart.iso_sindrome_consulta_m" />
+    <EntitySet Name="iso_sintoma" EntityType="cbm_iso_sart.iso_sintoma" />
+    <EntitySet Name="iso_sintoma_consulta_m" EntityType="cbm_iso_sart.iso_sintoma_consulta_m" />
+    <EntitySet Name="iso_tipo_exam_fisico" EntityType="cbm_iso_sart.iso_tipo_exam_fisico" />
+    <EntitySet Name="iso_tipo_pedido_exam" EntityType="cbm_iso_sart.iso_tipo_pedido_exam" />
+    <EntitySet Name="iso_tipo_sintoma" EntityType="cbm_iso_sart.iso_tipo_sintoma" />
+    <EntitySet Name="iso_vacuna_consulta_m" EntityType="cbm_iso_sart.iso_vacuna_consulta_m" />
+    <AssociationSet Name="FK_iso_ante_familiar_consulta_m_iso_antecedente_familiar" Association="cbm_iso_sart.FK_iso_ante_familiar_consulta_m_iso_antecedente_familiar">
+      <End Role="iso_antecedente_familiar" EntitySet="iso_antecedente_familiar" />
+      <End Role="iso_ante_familiar_consulta_m" EntitySet="iso_ante_familiar_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_ante_familiar_consulta_m_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_ante_familiar_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_ante_familiar_consulta_m" EntitySet="iso_ante_familiar_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_ante_mujer_consulta_m_iso_antecedente_mujer" Association="cbm_iso_sart.FK_iso_ante_mujer_consulta_m_iso_antecedente_mujer">
+      <End Role="iso_antecedente_mujer" EntitySet="iso_antecedente_mujer" />
+      <End Role="iso_ante_mujer_consulta_m" EntitySet="iso_ante_mujer_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_ante_mujer_consulta_m_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_ante_mujer_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_ante_mujer_consulta_m" EntitySet="iso_ante_mujer_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_ante_personal_consulta_m_iso_antecedente_personal" Association="cbm_iso_sart.FK_iso_ante_personal_consulta_m_iso_antecedente_personal">
+      <End Role="iso_antecedente_personal" EntitySet="iso_antecedente_personal" />
+      <End Role="iso_ante_personal_consulta_m" EntitySet="iso_ante_personal_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_ante_personal_consulta_m_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_ante_personal_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_ante_personal_consulta_m" EntitySet="iso_ante_personal_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_vacuna_consulta_m_iso_antecedente_vacuna" Association="cbm_iso_sart.FK_iso_vacuna_consulta_m_iso_antecedente_vacuna">
+      <End Role="iso_antecedente_vacuna" EntitySet="iso_antecedente_vacuna" />
+      <End Role="iso_vacuna_consulta_m" EntitySet="iso_vacuna_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_exam_fp_consulta_m_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_exam_fp_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_exam_fp_consulta_m" EntitySet="iso_exam_fp_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_pedido_exam_consulta_m_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_pedido_exam_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_pedido_exam_consulta_m" EntitySet="iso_pedido_exam_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_sindrome_consulta_m_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_sindrome_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_sindrome_consulta_m" EntitySet="iso_sindrome_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_sintoma_consulta_m_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_sintoma_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_sintoma_consulta_m" EntitySet="iso_sintoma_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_vacuna_consulta_m_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_vacuna_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_vacuna_consulta_m" EntitySet="iso_vacuna_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_exam_fisico_parametro_iso_tipo_exam_fisico" Association="cbm_iso_sart.FK_iso_exam_fisico_parametro_iso_tipo_exam_fisico">
+      <End Role="iso_tipo_exam_fisico" EntitySet="iso_tipo_exam_fisico" />
+      <End Role="iso_exam_fisico_parametro" EntitySet="iso_exam_fisico_parametro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_exam_fp_consulta_m_iso_exam_fisico_parametro" Association="cbm_iso_sart.FK_iso_exam_fp_consulta_m_iso_exam_fisico_parametro">
+      <End Role="iso_exam_fisico_parametro" EntitySet="iso_exam_fisico_parametro" />
+      <End Role="iso_exam_fp_consulta_m" EntitySet="iso_exam_fp_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_pedido_exam_consulta_m_iso_pedido_examen" Association="cbm_iso_sart.FK_iso_pedido_exam_consulta_m_iso_pedido_examen">
+      <End Role="iso_pedido_examen" EntitySet="iso_pedido_examen" />
+      <End Role="iso_pedido_exam_consulta_m" EntitySet="iso_pedido_exam_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_pedido_examen_iso_tipo_pedido_exam" Association="cbm_iso_sart.FK_iso_pedido_examen_iso_tipo_pedido_exam">
+      <End Role="iso_tipo_pedido_exam" EntitySet="iso_tipo_pedido_exam" />
+      <End Role="iso_pedido_examen" EntitySet="iso_pedido_examen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_sindrome_consulta_m_iso_sindrome" Association="cbm_iso_sart.FK_iso_sindrome_consulta_m_iso_sindrome">
+      <End Role="iso_sindrome" EntitySet="iso_sindrome" />
+      <End Role="iso_sindrome_consulta_m" EntitySet="iso_sindrome_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_sintoma_consulta_m_iso_sintoma" Association="cbm_iso_sart.FK_iso_sintoma_consulta_m_iso_sintoma">
+      <End Role="iso_sintoma" EntitySet="iso_sintoma" />
+      <End Role="iso_sintoma_consulta_m" EntitySet="iso_sintoma_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_sintoma_iso_tipo_sintoma" Association="cbm_iso_sart.FK_iso_sintoma_iso_tipo_sintoma">
+      <End Role="iso_tipo_sintoma" EntitySet="iso_tipo_sintoma" />
+      <End Role="iso_sintoma" EntitySet="iso_sintoma" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="iso_personal">
@@ -929,6 +1032,551 @@
       </Principal>
       <Dependent Role="iso_consulta_medica">
         <PropertyRef Name="icm_tipo_consulta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="iso_ante_familiar_consulta_m">
+    <Key>
+      <PropertyRef Name="ifc_id_consulta_medica" />
+      <PropertyRef Name="ifc_id_historia_clinica" />
+      <PropertyRef Name="ifc_id_personal" />
+      <PropertyRef Name="ifc_id_antecedente_familiar" />
+    </Key>
+    <Property Name="ifc_id_consulta_medica" Type="Int32" Nullable="false" />
+    <Property Name="ifc_id_historia_clinica" Type="Int32" Nullable="false" />
+    <Property Name="ifc_id_personal" Type="Int32" Nullable="false" />
+    <Property Name="ifc_id_antecedente_familiar" Type="Int32" Nullable="false" />
+    <Property Name="ifc_tipo_antecedente_f" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ifc_edad" Type="Int16" />
+    <Property Name="ifc_observacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_antecedente_familiar" Relationship="cbm_iso_sart.FK_iso_ante_familiar_consulta_m_iso_antecedente_familiar" FromRole="iso_ante_familiar_consulta_m" ToRole="iso_antecedente_familiar" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_ante_familiar_consulta_m_iso_consulta_medica" FromRole="iso_ante_familiar_consulta_m" ToRole="iso_consulta_medica" />
+  </EntityType>
+  <EntityType Name="iso_ante_mujer_consulta_m">
+    <Key>
+      <PropertyRef Name="imc_id_consulta_medica" />
+      <PropertyRef Name="imc_id_historia_clinica" />
+      <PropertyRef Name="imc_id_personal" />
+      <PropertyRef Name="imc_id_antecedente_mujer" />
+    </Key>
+    <Property Name="imc_id_consulta_medica" Type="Int32" Nullable="false" />
+    <Property Name="imc_id_historia_clinica" Type="Int32" Nullable="false" />
+    <Property Name="imc_id_personal" Type="Int32" Nullable="false" />
+    <Property Name="imc_id_antecedente_mujer" Type="Int32" Nullable="false" />
+    <Property Name="imc_observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="imc_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="imc_edad_mujer" Type="Int32" />
+    <NavigationProperty Name="iso_antecedente_mujer" Relationship="cbm_iso_sart.FK_iso_ante_mujer_consulta_m_iso_antecedente_mujer" FromRole="iso_ante_mujer_consulta_m" ToRole="iso_antecedente_mujer" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_ante_mujer_consulta_m_iso_consulta_medica" FromRole="iso_ante_mujer_consulta_m" ToRole="iso_consulta_medica" />
+  </EntityType>
+  <EntityType Name="iso_ante_personal_consulta_m">
+    <Key>
+      <PropertyRef Name="ipc_id_consulta_medica" />
+      <PropertyRef Name="ipc_id_historia_clinica" />
+      <PropertyRef Name="ipc_id_personal" />
+      <PropertyRef Name="ipc_id_antecedente_p" />
+    </Key>
+    <Property Name="ipc_id_consulta_medica" Type="Int32" Nullable="false" />
+    <Property Name="ipc_id_historia_clinica" Type="Int32" Nullable="false" />
+    <Property Name="ipc_id_personal" Type="Int32" Nullable="false" />
+    <Property Name="ipc_id_antecedente_p" Type="Int32" Nullable="false" />
+    <Property Name="ipc_edad" Type="Int16" />
+    <Property Name="ipc_observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_antecedente_personal" Relationship="cbm_iso_sart.FK_iso_ante_personal_consulta_m_iso_antecedente_personal" FromRole="iso_ante_personal_consulta_m" ToRole="iso_antecedente_personal" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_ante_personal_consulta_m_iso_consulta_medica" FromRole="iso_ante_personal_consulta_m" ToRole="iso_consulta_medica" />
+  </EntityType>
+  <EntityType Name="iso_antecedente_familiar">
+    <Key>
+      <PropertyRef Name="iaf_id_antecedente_familiar" />
+    </Key>
+    <Property Name="iaf_id_antecedente_familiar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="iaf_nombre_antecedente_f" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="iaf_tipo_antecedente_f" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_ante_familiar_consulta_m" Relationship="cbm_iso_sart.FK_iso_ante_familiar_consulta_m_iso_antecedente_familiar" FromRole="iso_antecedente_familiar" ToRole="iso_ante_familiar_consulta_m" />
+  </EntityType>
+  <EntityType Name="iso_antecedente_mujer">
+    <Key>
+      <PropertyRef Name="iam_id_antecedente_mujer" />
+    </Key>
+    <Property Name="iam_id_antecedente_mujer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="iam_nombre_antecedente_m" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_ante_mujer_consulta_m" Relationship="cbm_iso_sart.FK_iso_ante_mujer_consulta_m_iso_antecedente_mujer" FromRole="iso_antecedente_mujer" ToRole="iso_ante_mujer_consulta_m" />
+  </EntityType>
+  <EntityType Name="iso_antecedente_personal">
+    <Key>
+      <PropertyRef Name="iap_id_antecedente_p" />
+    </Key>
+    <Property Name="iap_id_antecedente_p" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="iap_nombre_antecedente_p" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_ante_personal_consulta_m" Relationship="cbm_iso_sart.FK_iso_ante_personal_consulta_m_iso_antecedente_personal" FromRole="iso_antecedente_personal" ToRole="iso_ante_personal_consulta_m" />
+  </EntityType>
+  <EntityType Name="iso_antecedente_vacuna">
+    <Key>
+      <PropertyRef Name="iav_id_vacuna" />
+    </Key>
+    <Property Name="iav_id_vacuna" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="iav_nombre_vacuna" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_vacuna_consulta_m" Relationship="cbm_iso_sart.FK_iso_vacuna_consulta_m_iso_antecedente_vacuna" FromRole="iso_antecedente_vacuna" ToRole="iso_vacuna_consulta_m" />
+  </EntityType>
+  <EntityType Name="iso_exam_fisico_parametro">
+    <Key>
+      <PropertyRef Name="ief_id_examen_fis" />
+      <PropertyRef Name="ief_tipo_examen" />
+    </Key>
+    <Property Name="ief_id_examen_fis" Type="Int32" Nullable="false" />
+    <Property Name="ief_tipo_examen" Type="Int32" Nullable="false" />
+    <Property Name="ief_nombre_examen" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_tipo_exam_fisico" Relationship="cbm_iso_sart.FK_iso_exam_fisico_parametro_iso_tipo_exam_fisico" FromRole="iso_exam_fisico_parametro" ToRole="iso_tipo_exam_fisico" />
+    <NavigationProperty Name="iso_exam_fp_consulta_m" Relationship="cbm_iso_sart.FK_iso_exam_fp_consulta_m_iso_exam_fisico_parametro" FromRole="iso_exam_fisico_parametro" ToRole="iso_exam_fp_consulta_m" />
+  </EntityType>
+  <EntityType Name="iso_exam_fp_consulta_m">
+    <Key>
+      <PropertyRef Name="iec_id_consulta_medica" />
+      <PropertyRef Name="iec_id_historia_clinica" />
+      <PropertyRef Name="iec_id_personal" />
+      <PropertyRef Name="iec_id_exam_fisico" />
+      <PropertyRef Name="iec_id_tipo_exam_fisico" />
+    </Key>
+    <Property Name="iec_id_consulta_medica" Type="Int32" Nullable="false" />
+    <Property Name="iec_id_historia_clinica" Type="Int32" Nullable="false" />
+    <Property Name="iec_id_personal" Type="Int32" Nullable="false" />
+    <Property Name="iec_id_exam_fisico" Type="Int32" Nullable="false" />
+    <Property Name="iec_id_tipo_exam_fisico" Type="Int32" Nullable="false" />
+    <Property Name="iec_campo1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="iec_campo2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="iec_campo3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="iec_campo4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="iec_campo5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_exam_fp_consulta_m_iso_consulta_medica" FromRole="iso_exam_fp_consulta_m" ToRole="iso_consulta_medica" />
+    <NavigationProperty Name="iso_exam_fisico_parametro" Relationship="cbm_iso_sart.FK_iso_exam_fp_consulta_m_iso_exam_fisico_parametro" FromRole="iso_exam_fp_consulta_m" ToRole="iso_exam_fisico_parametro" />
+  </EntityType>
+  <EntityType Name="iso_pedido_exam_consulta_m">
+    <Key>
+      <PropertyRef Name="ipc_id_consulta_medica" />
+      <PropertyRef Name="ipc_id_historia_clinica" />
+      <PropertyRef Name="ipc_id_personal" />
+      <PropertyRef Name="ipc_id_pexamen" />
+      <PropertyRef Name="ipc_id_tipo_pexamen" />
+    </Key>
+    <Property Name="ipc_id_consulta_medica" Type="Int32" Nullable="false" />
+    <Property Name="ipc_id_historia_clinica" Type="Int32" Nullable="false" />
+    <Property Name="ipc_id_personal" Type="Int32" Nullable="false" />
+    <Property Name="ipc_id_pexamen" Type="Int32" Nullable="false" />
+    <Property Name="ipc_id_tipo_pexamen" Type="Int32" Nullable="false" />
+    <Property Name="ipc_descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ipc_fecha" Type="DateTime" Precision="3" />
+    <Property Name="ipc_observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ipc_ubicacion_archivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ipc_archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_pedido_exam_consulta_m_iso_consulta_medica" FromRole="iso_pedido_exam_consulta_m" ToRole="iso_consulta_medica" />
+    <NavigationProperty Name="iso_pedido_examen" Relationship="cbm_iso_sart.FK_iso_pedido_exam_consulta_m_iso_pedido_examen" FromRole="iso_pedido_exam_consulta_m" ToRole="iso_pedido_examen" />
+  </EntityType>
+  <EntityType Name="iso_pedido_examen">
+    <Key>
+      <PropertyRef Name="ipe_id_tipo_pexamen" />
+      <PropertyRef Name="ipe_id_pexamen" />
+    </Key>
+    <Property Name="ipe_id_tipo_pexamen" Type="Int32" Nullable="false" />
+    <Property Name="ipe_id_pexamen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ipe_nombre_pexamen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_pedido_exam_consulta_m" Relationship="cbm_iso_sart.FK_iso_pedido_exam_consulta_m_iso_pedido_examen" FromRole="iso_pedido_examen" ToRole="iso_pedido_exam_consulta_m" />
+    <NavigationProperty Name="iso_tipo_pedido_exam" Relationship="cbm_iso_sart.FK_iso_pedido_examen_iso_tipo_pedido_exam" FromRole="iso_pedido_examen" ToRole="iso_tipo_pedido_exam" />
+  </EntityType>
+  <EntityType Name="iso_sindrome">
+    <Key>
+      <PropertyRef Name="iso_id_sindrome" />
+    </Key>
+    <Property Name="iso_id_sindrome" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="iso_nombre_sindrome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_sindrome_consulta_m" Relationship="cbm_iso_sart.FK_iso_sindrome_consulta_m_iso_sindrome" FromRole="iso_sindrome" ToRole="iso_sindrome_consulta_m" />
+  </EntityType>
+  <EntityType Name="iso_sindrome_consulta_m">
+    <Key>
+      <PropertyRef Name="isd_id_sindrome" />
+      <PropertyRef Name="isd_id_historia_clinica" />
+      <PropertyRef Name="isd_id_personal" />
+      <PropertyRef Name="isd_id_consulta_medica" />
+    </Key>
+    <Property Name="isd_id_sindrome" Type="Int32" Nullable="false" />
+    <Property Name="isd_id_historia_clinica" Type="Int32" Nullable="false" />
+    <Property Name="isd_id_personal" Type="Int32" Nullable="false" />
+    <Property Name="isd_id_consulta_medica" Type="Int32" Nullable="false" />
+    <Property Name="isd_descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_sindrome_consulta_m_iso_consulta_medica" FromRole="iso_sindrome_consulta_m" ToRole="iso_consulta_medica" />
+    <NavigationProperty Name="iso_sindrome" Relationship="cbm_iso_sart.FK_iso_sindrome_consulta_m_iso_sindrome" FromRole="iso_sindrome_consulta_m" ToRole="iso_sindrome" />
+  </EntityType>
+  <EntityType Name="iso_sintoma">
+    <Key>
+      <PropertyRef Name="ist_id_sintoma" />
+      <PropertyRef Name="ist_id_tipo_sintoma" />
+    </Key>
+    <Property Name="ist_id_sintoma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ist_id_tipo_sintoma" Type="Int32" Nullable="false" />
+    <Property Name="ist_nombre_sintoma" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_sintoma_consulta_m" Relationship="cbm_iso_sart.FK_iso_sintoma_consulta_m_iso_sintoma" FromRole="iso_sintoma" ToRole="iso_sintoma_consulta_m" />
+    <NavigationProperty Name="iso_tipo_sintoma" Relationship="cbm_iso_sart.FK_iso_sintoma_iso_tipo_sintoma" FromRole="iso_sintoma" ToRole="iso_tipo_sintoma" />
+  </EntityType>
+  <EntityType Name="iso_sintoma_consulta_m">
+    <Key>
+      <PropertyRef Name="isc_id_consulta_medica" />
+      <PropertyRef Name="isc_id_historia_clinica" />
+      <PropertyRef Name="isc_id_personal" />
+      <PropertyRef Name="isc_id_sintoma" />
+      <PropertyRef Name="isc_id_tipo_sintoma" />
+    </Key>
+    <Property Name="isc_id_consulta_medica" Type="Int32" Nullable="false" />
+    <Property Name="isc_id_historia_clinica" Type="Int32" Nullable="false" />
+    <Property Name="isc_id_personal" Type="Int32" Nullable="false" />
+    <Property Name="isc_id_sintoma" Type="Int32" Nullable="false" />
+    <Property Name="isc_id_tipo_sintoma" Type="Int32" Nullable="false" />
+    <Property Name="isc_tiempo_sintoma" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="isc_valor_sintoma" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_sintoma_consulta_m_iso_consulta_medica" FromRole="iso_sintoma_consulta_m" ToRole="iso_consulta_medica" />
+    <NavigationProperty Name="iso_sintoma" Relationship="cbm_iso_sart.FK_iso_sintoma_consulta_m_iso_sintoma" FromRole="iso_sintoma_consulta_m" ToRole="iso_sintoma" />
+  </EntityType>
+  <EntityType Name="iso_tipo_exam_fisico">
+    <Key>
+      <PropertyRef Name="ite_id_tipo_ef" />
+    </Key>
+    <Property Name="ite_id_tipo_ef" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ite_nombre_tipo_ef" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="ite_id_tipo_efpadre" Type="Int32" />
+    <NavigationProperty Name="iso_exam_fisico_parametro" Relationship="cbm_iso_sart.FK_iso_exam_fisico_parametro_iso_tipo_exam_fisico" FromRole="iso_tipo_exam_fisico" ToRole="iso_exam_fisico_parametro" />
+  </EntityType>
+  <EntityType Name="iso_tipo_pedido_exam">
+    <Key>
+      <PropertyRef Name="itp_id_tpedido_exam" />
+    </Key>
+    <Property Name="itp_id_tpedido_exam" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="itp_nombre_tpedido" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="itp_id_tpedido_padre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_pedido_examen" Relationship="cbm_iso_sart.FK_iso_pedido_examen_iso_tipo_pedido_exam" FromRole="iso_tipo_pedido_exam" ToRole="iso_pedido_examen" />
+  </EntityType>
+  <EntityType Name="iso_tipo_sintoma">
+    <Key>
+      <PropertyRef Name="its_id_tipo_sintoma" />
+    </Key>
+    <Property Name="its_id_tipo_sintoma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="its_nombre_tipo_sintoma" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_sintoma" Relationship="cbm_iso_sart.FK_iso_sintoma_iso_tipo_sintoma" FromRole="iso_tipo_sintoma" ToRole="iso_sintoma" />
+  </EntityType>
+  <EntityType Name="iso_vacuna_consulta_m">
+    <Key>
+      <PropertyRef Name="ivm_id_consulta_medica" />
+      <PropertyRef Name="ivm_id_historia_clinica" />
+      <PropertyRef Name="ivm_id_personal" />
+      <PropertyRef Name="ivm_id_vacuna" />
+    </Key>
+    <Property Name="ivm_id_consulta_medica" Type="Int32" Nullable="false" />
+    <Property Name="ivm_id_historia_clinica" Type="Int32" Nullable="false" />
+    <Property Name="ivm_id_personal" Type="Int32" Nullable="false" />
+    <Property Name="ivm_id_vacuna" Type="Int32" Nullable="false" />
+    <Property Name="ivm_dosis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ivm_observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_antecedente_vacuna" Relationship="cbm_iso_sart.FK_iso_vacuna_consulta_m_iso_antecedente_vacuna" FromRole="iso_vacuna_consulta_m" ToRole="iso_antecedente_vacuna" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_vacuna_consulta_m_iso_consulta_medica" FromRole="iso_vacuna_consulta_m" ToRole="iso_consulta_medica" />
+  </EntityType>
+  <Association Name="FK_iso_ante_familiar_consulta_m_iso_antecedente_familiar">
+    <End Type="cbm_iso_sart.iso_antecedente_familiar" Role="iso_antecedente_familiar" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_ante_familiar_consulta_m" Role="iso_ante_familiar_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_antecedente_familiar">
+        <PropertyRef Name="iaf_id_antecedente_familiar" />
+      </Principal>
+      <Dependent Role="iso_ante_familiar_consulta_m">
+        <PropertyRef Name="ifc_id_antecedente_familiar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_ante_familiar_consulta_m_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_ante_familiar_consulta_m" Role="iso_ante_familiar_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_ante_familiar_consulta_m">
+        <PropertyRef Name="ifc_id_consulta_medica" />
+        <PropertyRef Name="ifc_id_historia_clinica" />
+        <PropertyRef Name="ifc_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_ante_mujer_consulta_m_iso_antecedente_mujer">
+    <End Type="cbm_iso_sart.iso_antecedente_mujer" Role="iso_antecedente_mujer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_ante_mujer_consulta_m" Role="iso_ante_mujer_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_antecedente_mujer">
+        <PropertyRef Name="iam_id_antecedente_mujer" />
+      </Principal>
+      <Dependent Role="iso_ante_mujer_consulta_m">
+        <PropertyRef Name="imc_id_antecedente_mujer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_ante_mujer_consulta_m_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_ante_mujer_consulta_m" Role="iso_ante_mujer_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_ante_mujer_consulta_m">
+        <PropertyRef Name="imc_id_consulta_medica" />
+        <PropertyRef Name="imc_id_historia_clinica" />
+        <PropertyRef Name="imc_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_ante_personal_consulta_m_iso_antecedente_personal">
+    <End Type="cbm_iso_sart.iso_antecedente_personal" Role="iso_antecedente_personal" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_ante_personal_consulta_m" Role="iso_ante_personal_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_antecedente_personal">
+        <PropertyRef Name="iap_id_antecedente_p" />
+      </Principal>
+      <Dependent Role="iso_ante_personal_consulta_m">
+        <PropertyRef Name="ipc_id_antecedente_p" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_ante_personal_consulta_m_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_ante_personal_consulta_m" Role="iso_ante_personal_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_ante_personal_consulta_m">
+        <PropertyRef Name="ipc_id_consulta_medica" />
+        <PropertyRef Name="ipc_id_historia_clinica" />
+        <PropertyRef Name="ipc_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_vacuna_consulta_m_iso_antecedente_vacuna">
+    <End Type="cbm_iso_sart.iso_antecedente_vacuna" Role="iso_antecedente_vacuna" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_vacuna_consulta_m" Role="iso_vacuna_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_antecedente_vacuna">
+        <PropertyRef Name="iav_id_vacuna" />
+      </Principal>
+      <Dependent Role="iso_vacuna_consulta_m">
+        <PropertyRef Name="ivm_id_vacuna" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_exam_fp_consulta_m_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_exam_fp_consulta_m" Role="iso_exam_fp_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_exam_fp_consulta_m">
+        <PropertyRef Name="iec_id_consulta_medica" />
+        <PropertyRef Name="iec_id_historia_clinica" />
+        <PropertyRef Name="iec_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_pedido_exam_consulta_m_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_pedido_exam_consulta_m" Role="iso_pedido_exam_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_pedido_exam_consulta_m">
+        <PropertyRef Name="ipc_id_consulta_medica" />
+        <PropertyRef Name="ipc_id_historia_clinica" />
+        <PropertyRef Name="ipc_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_sindrome_consulta_m_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_sindrome_consulta_m" Role="iso_sindrome_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_sindrome_consulta_m">
+        <PropertyRef Name="isd_id_consulta_medica" />
+        <PropertyRef Name="isd_id_historia_clinica" />
+        <PropertyRef Name="isd_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_sintoma_consulta_m_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_sintoma_consulta_m" Role="iso_sintoma_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_sintoma_consulta_m">
+        <PropertyRef Name="isc_id_consulta_medica" />
+        <PropertyRef Name="isc_id_historia_clinica" />
+        <PropertyRef Name="isc_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_vacuna_consulta_m_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_vacuna_consulta_m" Role="iso_vacuna_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_vacuna_consulta_m">
+        <PropertyRef Name="ivm_id_consulta_medica" />
+        <PropertyRef Name="ivm_id_historia_clinica" />
+        <PropertyRef Name="ivm_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_exam_fisico_parametro_iso_tipo_exam_fisico">
+    <End Type="cbm_iso_sart.iso_tipo_exam_fisico" Role="iso_tipo_exam_fisico" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_exam_fisico_parametro" Role="iso_exam_fisico_parametro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_tipo_exam_fisico">
+        <PropertyRef Name="ite_id_tipo_ef" />
+      </Principal>
+      <Dependent Role="iso_exam_fisico_parametro">
+        <PropertyRef Name="ief_tipo_examen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_exam_fp_consulta_m_iso_exam_fisico_parametro">
+    <End Type="cbm_iso_sart.iso_exam_fisico_parametro" Role="iso_exam_fisico_parametro" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_exam_fp_consulta_m" Role="iso_exam_fp_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_exam_fisico_parametro">
+        <PropertyRef Name="ief_id_examen_fis" />
+        <PropertyRef Name="ief_tipo_examen" />
+      </Principal>
+      <Dependent Role="iso_exam_fp_consulta_m">
+        <PropertyRef Name="iec_id_exam_fisico" />
+        <PropertyRef Name="iec_id_tipo_exam_fisico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_pedido_exam_consulta_m_iso_pedido_examen">
+    <End Type="cbm_iso_sart.iso_pedido_examen" Role="iso_pedido_examen" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_pedido_exam_consulta_m" Role="iso_pedido_exam_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_pedido_examen">
+        <PropertyRef Name="ipe_id_tipo_pexamen" />
+        <PropertyRef Name="ipe_id_pexamen" />
+      </Principal>
+      <Dependent Role="iso_pedido_exam_consulta_m">
+        <PropertyRef Name="ipc_id_tipo_pexamen" />
+        <PropertyRef Name="ipc_id_pexamen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_pedido_examen_iso_tipo_pedido_exam">
+    <End Type="cbm_iso_sart.iso_tipo_pedido_exam" Role="iso_tipo_pedido_exam" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_pedido_examen" Role="iso_pedido_examen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_tipo_pedido_exam">
+        <PropertyRef Name="itp_id_tpedido_exam" />
+      </Principal>
+      <Dependent Role="iso_pedido_examen">
+        <PropertyRef Name="ipe_id_tipo_pexamen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_sindrome_consulta_m_iso_sindrome">
+    <End Type="cbm_iso_sart.iso_sindrome" Role="iso_sindrome" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_sindrome_consulta_m" Role="iso_sindrome_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_sindrome">
+        <PropertyRef Name="iso_id_sindrome" />
+      </Principal>
+      <Dependent Role="iso_sindrome_consulta_m">
+        <PropertyRef Name="isd_id_sindrome" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_sintoma_consulta_m_iso_sintoma">
+    <End Type="cbm_iso_sart.iso_sintoma" Role="iso_sintoma" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_sintoma_consulta_m" Role="iso_sintoma_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_sintoma">
+        <PropertyRef Name="ist_id_sintoma" />
+        <PropertyRef Name="ist_id_tipo_sintoma" />
+      </Principal>
+      <Dependent Role="iso_sintoma_consulta_m">
+        <PropertyRef Name="isc_id_sintoma" />
+        <PropertyRef Name="isc_id_tipo_sintoma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_sintoma_iso_tipo_sintoma">
+    <End Type="cbm_iso_sart.iso_tipo_sintoma" Role="iso_tipo_sintoma" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="cbm_iso_sart.iso_sintoma" Role="iso_sintoma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_tipo_sintoma">
+        <PropertyRef Name="its_id_tipo_sintoma" />
+      </Principal>
+      <Dependent Role="iso_sintoma">
+        <PropertyRef Name="ist_id_tipo_sintoma" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

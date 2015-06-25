@@ -160,13 +160,19 @@
         </div>
     </div>
     <div class="tab-pane fade " id="ant">
-        <div class="block-tab-h col-lg-12">
-            <p>Antecedentes Patológicos Personales</p>
-            <form>
-                <div class="col-md-12">
-
-                </div>
-            </form>
+        <div class="block-tab-h col-md-12">
+            <div class="col-md-12" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_ante_personal"></div>
+                <div id="ms_cm_ante_personal"></div>
+            </div>
+            <div class="col-md-6">
+                <div class="cm-block" id="cm_ante_familiar_morb"></div>
+                <div id="ms_cm_ante_personal"></div>
+            </div>
+            <div class="col-md-6">
+                <div class="cm-block" id="cm_ante_familiar_mort"></div>
+                <div id="ms_cm_ante_personal"></div>
+            </div>
         </div>
     </div>
     <div class="tab-pane fade  in" id="sig">
@@ -196,64 +202,6 @@
     </div>
 </div>
 
-
-
-@*@using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.ihc_id_historia)
-
-    @Html.HiddenFor(model => model.ihc_id_personal)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ihc_id_empresa, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ihc_id_empresa)
-            @Html.ValidationMessageFor(model => model.ihc_id_empresa)
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="control-label col-md-2">Empleado: </div>
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.iso_personal.ipe_nombre_personal)
-
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ihc_lugar_historia_clinica, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ihc_lugar_historia_clinica)
-            @Html.ValidationMessageFor(model => model.ihc_lugar_historia_clinica)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ihc_fecha_historia_clinica, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ihc_fecha_historia_clinica)
-            @Html.ValidationMessageFor(model => model.ihc_fecha_historia_clinica)
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-    }*@
-
-<div>
-    @Html.ActionLink("Regresar", "Panel")
-</div>
-
-
 <!-- modal placeholder-->
 <div id='myModal' class='modal fade in' tabindex='-1'>
     <div class="modal-dialog">
@@ -262,10 +210,32 @@
         </div>
     </div>
 </div>
+<div>
+    @Html.ActionLink("Regresar", "Panel")
+</div>
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/scripts/appjs/phones.js")
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        //Antecedente Personal
+        var url = "@Url.Action("CmAntePersonal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+        console.log(url);
+        $('#cm_ante_personal').load(url);
+        //Antecedente Familiar
+        var url = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+        console.log(url);
+        $('#cm_ante_familiar_morb').load(url);
+        var url = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+        console.log(url);
+        $('#cm_ante_familiar_mort').load(url);
+    });
+
+    
     $(function () {
         $(document).delegate(".webgrid-row-style", "click", function (e) {
             var link = $(this).find('td:first #ipe_id_personal').attr('href');
