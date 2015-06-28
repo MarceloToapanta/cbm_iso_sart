@@ -1062,6 +1062,24 @@ label.label-3{
     text-align:center;
     font-style:italic;
 }
+#table-s{
+
+}
+
+#table tr {
+width: 100%;
+display: inline-table;
+}
+
+#table{
+ height:300px; 
+}
+#table tbody{
+  overflow-y: scroll;
+  height: 200px;
+  width: 100%;
+  position: absolute;
+}
 /*///////////////Fin Historias Clinicas//////////////////////*/
 
 
