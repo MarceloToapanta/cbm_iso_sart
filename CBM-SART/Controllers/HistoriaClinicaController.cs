@@ -262,7 +262,8 @@ namespace CBM_SART.Controllers
 
             return PartialView("CMParametros/AntePersonal",iso_antecedente_personal);
         }
-        public ActionResult CmAnteFamiliarMorb(int IdConsulta, string filter = null, int page = 1, int pageSize = 15, string sort = "ifc_observacion", string sortdir = "ASC")
+        ////////////////////////////Antecendete Familiar///////////////////////////////////
+        public ActionResult CmAnteFamiliarMorb(int IdConsulta, string filter = null, int page = 1, int pageSize = 5, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
         {
             iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
             if (String.IsNullOrEmpty(filter)) { filter = null; }
@@ -270,7 +271,7 @@ namespace CBM_SART.Controllers
             ViewBag.filter = filter;
             records.Content = iso_consulta_medica.iso_ante_familiar_consulta_m
                         .Where(x => filter == null ||
-                                (x.ifc_observacion.ToLower().Contains(filter.ToLower().Trim()))
+                                (x.iso_antecedente_familiar.iaf_nombre_antecedente_f.ToLower().Contains(filter.ToLower().Trim()))
                               )
                         .Skip((page - 1) * pageSize)
                         .Take(pageSize)
@@ -278,24 +279,68 @@ namespace CBM_SART.Controllers
             // Count
             records.TotalRecords = iso_consulta_medica.iso_ante_familiar_consulta_m
                          .Where(x => filter == null ||
-                                (x.ifc_observacion.ToLower().Contains(filter.ToLower().Trim()))).Count();
+                                (x.iso_antecedente_familiar.iaf_nombre_antecedente_f.ToLower().Contains(filter.ToLower().Trim()))).Count();
             records.CurrentPage = page;
             records.PageSize = pageSize;
             ViewBag.total = records.TotalRecords;
             ViewBag.idConsulta = IdConsulta;
             return PartialView(records);
         }
-        public ActionResult CmAnteFamiliarMort(int IdConsulta)
+        public ActionResult CrearAnteFamiliarMorb(int idConsulta)
         {
-            //Busca consulta Medica
-            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
-            var iso_ante_familiar_consulta_m = iso_consulta_medica.iso_ante_familiar_consulta_m.Where(x => x.iso_antecedente_familiar.iaf_tipo_antecedente_f == "MORBILIDAD").ToList();
-            return PartialView(iso_ante_familiar_consulta_m);
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_ante_familiar_consulta_m.ToList();
+            List<iso_antecedente_familiar> list = new List<iso_antecedente_familiar>();
+            foreach (iso_ante_familiar_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_antecedente_familiar);
+            }
+            var total = db.iso_antecedente_familiar
+                .Where(x => x.iaf_tipo_antecedente_f == "MORBILIDAD")
+                .OrderBy(x => x.iaf_nombre_antecedente_f).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iaf_id_antecedente_familiar", "iaf_nombre_antecedente_f");
+            iso_ante_familiar_consulta_m iso_ante_familiar_consulta_m = new iso_ante_familiar_consulta_m();
+            return PartialView("CMParametros/CrearAnteFamiliarMorb", iso_ante_familiar_consulta_m);
         }
+        public string GuardarAnteFamiliarMorb(int idConsulta, iso_ante_familiar_consulta_m iso_ante_familiar_consulta_m)
+        {
+            //Obtiene Consulta
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            iso_ante_familiar_consulta_m.ifc_id_consulta_medica = iso_consulta_medica.icm_id_consulta;
+            iso_ante_familiar_consulta_m.ifc_id_historia_clinica = iso_consulta_medica.icm_id_historia_clinica;
+            iso_ante_familiar_consulta_m.ifc_id_personal = iso_consulta_medica.icm_id_personal;
+            db.iso_ante_familiar_consulta_m.Add(iso_ante_familiar_consulta_m);
+            return db.SaveChanges().ToString();
+        }
+
+        public ActionResult ModificarAnteFamiliarMorb(int idConsulta, int IdParametro)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_ante_familiar_consulta_m.ToList();
+            List<iso_antecedente_familiar> list = new List<iso_antecedente_familiar>();
+            foreach (iso_ante_familiar_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_antecedente_familiar);
+            }
+            var total = db.iso_antecedente_familiar
+                .Where(x => x.iaf_tipo_antecedente_f == "MORBILIDAD")
+                .OrderBy(x => x.iaf_nombre_antecedente_f).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iaf_id_antecedente_familiar", "iaf_nombre_antecedente_f");
+            iso_ante_familiar_consulta_m iso_ante_familiar_consulta_m = db.iso_ante_familiar_consulta_m
+                .Where(x => x.ifc_id_antecedente_familiar == IdParametro && x.ifc_id_consulta_medica == idConsulta).First();
+            return PartialView("CMParametros/ModificarAnteFamiliarMorb", iso_ante_familiar_consulta_m);
+        }
+        ////////////////////////////Fin Antecendete Familiar///////////////////////////////////
+        ///Eliminar
         public string EliminarAntecente(int IdConsulta, int IdAntecente, string TipoAntecente)
         {
             string mensaje = "No se pudo eliminar";
-            if (TipoAntecente=="Personal"){
+            if (TipoAntecente == "Personal")
+            {
                 iso_ante_personal_consulta_m iso_ante_personal_consulta_m = db.iso_ante_personal_consulta_m.Where(
                     x => x.ipc_id_consulta_medica == IdConsulta && x.ipc_id_antecedente_p == IdAntecente).First();
                 db.iso_ante_personal_consulta_m.Remove(iso_ante_personal_consulta_m);
@@ -313,55 +358,6 @@ namespace CBM_SART.Controllers
             return mensaje;
         }
 
-        public ActionResult NuevoParametro(string TipoParametro, int idConsulta)
-        {
-            ViewBag.TipoParametro = TipoParametro;
-            ViewBag.idConsulta = idConsulta;
-            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
-            if (TipoParametro == "AntePersonal") {                
-                ViewBag.SelectListParametro = new SelectList(db.iso_antecedente_personal
-                    .OrderBy(x => x.iap_nombre_antecedente_p), "iap_id_antecedente_p", "iap_nombre_antecedente_p");
-
-            }
-            else if (TipoParametro == "AnteFamiliarMorb") {
-                var asignadosm = iso_consulta_medica.iso_ante_familiar_consulta_m.ToList();
-                List<iso_antecedente_familiar> list = new List<iso_antecedente_familiar>();
-                foreach (iso_ante_familiar_consulta_m var in asignadosm)
-                {
-                    list.Add(var.iso_antecedente_familiar);
-                }
-                var total = db.iso_antecedente_familiar
-                    .Where(x => x.iaf_tipo_antecedente_f == "MORBILIDAD")
-                    .OrderBy(x => x.iaf_nombre_antecedente_f).ToList();
-                var totalresult = total.Except(list);
-                ViewBag.SelectListParametro = new SelectList(totalresult, "iaf_id_antecedente_familiar", "iaf_nombre_antecedente_f"); 
-            }
-            else if (TipoParametro == "AnteFamiliarMorb") {
-                ViewBag.SelectListParametro = new SelectList(db.iso_antecedente_familiar
-                        .Where(x => x.iaf_tipo_antecedente_f == "MORTALIDAD")
-                        .OrderBy(x => x.iaf_nombre_antecedente_f), "iaf_id_antecedente_familiar", "iaf_nombre_antecedente_f");
-            }
-            else if (TipoParametro == "AnteMujer") { }
-            else if (TipoParametro == "AnteVacunas") { }
-
-
-            return PartialView("CMParametros/NuevoParametro",TipoParametro);
-        }
-
-        public string GuardarAnteFamiliarMorb(int idConsulta, int idAntecedente,int Edad,string Diagnostico)
-        {
-            //Obtiene Consulta
-            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
-            iso_ante_familiar_consulta_m iso_ante_familiar_consulta_m = new iso_ante_familiar_consulta_m();
-            iso_ante_familiar_consulta_m.ifc_id_antecedente_familiar = idAntecedente;
-            iso_ante_familiar_consulta_m.ifc_id_consulta_medica = iso_consulta_medica.icm_id_consulta;
-            iso_ante_familiar_consulta_m.ifc_id_historia_clinica = iso_consulta_medica.icm_id_historia_clinica;
-            iso_ante_familiar_consulta_m.ifc_id_personal = iso_consulta_medica.icm_id_personal;
-            iso_ante_familiar_consulta_m.ifc_edad = short.Parse(Edad.ToString());
-            iso_ante_familiar_consulta_m.ifc_observacion = Diagnostico;
-            db.iso_ante_familiar_consulta_m.Add(iso_ante_familiar_consulta_m);
-            return db.SaveChanges().ToString();
-        }
 
         public FileContentResult GetImage(int ID)
         {

@@ -1,0 +1,105 @@
+﻿@model CBM_SART.Models.iso_historia_clinica
+
+@{
+    SelectList list = ViewBag.SelectListParametro;
+}
+
+<div class="title-window" style="height:32px">
+    Seleciona un Antecedente Personal.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Antecedentes Personales</h4>
+</div>
+
+<div class="modal-body">
+    <div class="form-horizontal">
+        <form>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="control-label col-md-3">
+                        <label for="parametro">
+                            Antecedente Personal:
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownList("parametro", list, "Selecionar", new { @class = "form-control required" })
+                        <span class="field-validation-error" data-valmsg-for="ipe_nombre_personal" data-valmsg-replace="true">
+                            <span for="ipe_nombre_personal" generated="true" class="">Este campo es obligatorio.</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="control-label col-md-3">
+                        <label for="edad">
+                            Edad:
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.TextBox("edad", "", new { @class = "form-control required" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-3">
+                        <label for="diagnostico">
+                            Diagnóstico:
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextArea("diagnostico", "", new { @class = "form-control required" })
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <button class="btn btn-primary " type="button" id="btn-guardar" name="@ViewBag.TipoParametro">Guardar</button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<input type="hidden" id="out" />
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+    $("#btn-guardar").click(function () {
+        //Valida Datos
+        var parametro = $("#parametro").val();
+        var edad = $("#edad").val();
+        var diagnostico = $("#diagnostico").val();
+        //Guarda Datos
+        var url = "@Url.Action("GuardarAnteFamiliarMorb", "HistoriaClinica")?idConsulta=@ViewBag.idConsulta&idAntecedente=" + parametro + "&Edad=" + edad + "&Diagnostico=" + diagnostico;
+        console.log(url);
+        $('#out').load(url);
+        //Carga Antecedente Familiar
+        //Antecedente Familiar
+        $('#cm_ante_familiar_morb').fadeOut(400);
+        var url1 = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+        console.log(url1);
+        $('#cm_ante_familiar_morb').load(url1);
+        //Cierra el modal
+        $("#modal-container").modal('hide');
+        $('#cm_ante_familiar_morb').fadeIn(400);
+
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
+
+

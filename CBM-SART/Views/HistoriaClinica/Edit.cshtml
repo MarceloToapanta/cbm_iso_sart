@@ -221,14 +221,11 @@
     $(document).ready(function () {
         //Antecedente Personal
         var url = "@Url.Action("CmAntePersonal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-        console.log(url);
         $('#cm_ante_personal').load(url);
         //Antecedente Familiar
         var url = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-        console.log(url);
         $('#cm_ante_familiar_morb').load(url);
         var url = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-        console.log(url);
         $('#cm_ante_familiar_mort').load(url);
     });
 

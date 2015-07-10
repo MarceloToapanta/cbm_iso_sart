@@ -1031,6 +1031,7 @@ label.label-3{
     padding: 10px;
     border-radius: 3px;
     background-color: #fff;
+    min-height: 250px;
 }
 .cm-title-ant{
     color: #555;

@@ -4,70 +4,71 @@
 <div class="cm-title-ant">
     2.- Antecedentes Patológicos Familiares Morbilidad(Enfermedad)
 </div>
+@{
+    string url = "CmAnteFamiliarMorb?idConsulta=" + ViewBag.idConsulta;
+}
 <div class="content">
-    @using (Html.BeginForm("index", null, FormMethod.Get))
-    {
-        <div class="search">
-            <div class="col-md-10">
-                <div class="input-group">
+    <div class="search">
+        <div class="col-md-10">
+            <div class="input-group">
 
-                    <input type="text"
-                           name="filter"
-                           value="@ViewBag.filter"
-                           class="form-control"
-                           style="display: inline; height:30px"
-                           placeholder="Buscar por Nombre" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
-                    </span>
+                <input type="text"
+                       id="filter"
+                       name="filter"
+                       value="@ViewBag.filter"
+                       class="form-control"
+                       style="display: inline; height:30px"
+                       placeholder="Buscar por Nombre" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" id="btn-ante-familar-morb" type="button">Buscar</button>
+                </span>
 
-                </div>
             </div>
-            <div class="col-md-2">
-                <div class="pull-right">
-                    <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/NuevoParametro?TipoParametro=AnteFamiliarMorb&idConsulta=@ViewBag.idConsulta" id="btnCreate">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Nuevo
-                    </a>
-                </div>
-            </div>
-            <div class="clear"></div>
         </div>
+        <div class="col-md-2">
+            <div class="pull-right">
+                <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/CrearAnteFamiliarMorb?idConsulta=@ViewBag.idConsulta" id="btnCreate">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Nuevo
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
 
-        <div class="col-md-12 grid-content">
-            @{
-        var grid = new WebGrid(
-                        canPage: true,
-                        rowsPerPage: Model.PageSize,
-                        canSort: true,
-                        ajaxUpdateContainerId: "grid");
+    <div class="col-md-12 grid-content">
+        @{
+            var grid = new WebGrid(
+                            canPage: true,
+                            rowsPerPage: Model.PageSize,
+                            canSort: true,
+                            ajaxUpdateContainerId: "grid");
 
-        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
-        grid.Pager(WebGridPagerModes.All);
+            grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+            grid.Pager(WebGridPagerModes.All);
 
-        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
             fillEmptyRows: false,
                       tableStyle: "table table-bordered table-hover table-responsive table-condensed",
             mode: WebGridPagerModes.All,
             columns: grid.Columns(
-              grid.Column(header: "No.", 
+              grid.Column(header: "No.",
                 format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
               grid.Column("iso_antecedente_familiar.iaf_nombre_antecedente_f", "Nombre", style: "col-lg-3"),
               grid.Column("ifc_edad", "Edad", style: "col-lg-4"),
               grid.Column("ifc_observacion", "Diagnóstico", style: "col-lg-1"),
               grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
-                @Html.Raw("<a data-modal='' href='/His/AnteFamiliarMorb/" + item.ifc_id_antecedente_familiar + "' id='" + item.ifc_id_antecedente_familiar + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
-                @Html.Raw("<a data-modal='' href='/HistoriaClinica/AnteFamiliarMorb/" + item.ifc_id_antecedente_familiar + "' id='" + item.ifc_id_antecedente_familiar + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarAnteFamiliarMorb?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.ifc_id_antecedente_familiar + "' id='" + item.ifc_id_antecedente_familiar + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
                 @Html.Raw("<a class='confirm' data-modal='' href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.ifc_id_antecedente_familiar + "&TipoAntecente=AnteFamiliarMorb' id='" + item.ifc_id_antecedente_familiar + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                     </text>)
-            ));
-            }
+                                                               ));
+        }
 
 
-        </div>
-        <div class="clear"></div>
-    }
+    </div>
+    <div class="clear"></div>
+
 </div>
 
 <div id='myModal' class='modal fade in' tabindex='-1'>
@@ -88,37 +89,56 @@
 @if (ViewBag.total > 0)
 {
     <script>
-    $(".confirm").confirm({
-        text: "Esta seguro(a) de eliminar el registro selecionado?",
-        title: "Atención",
-        confirm: function (button) {
-            //Elimina Tablas
-            var url = button.attr("href");
-            console.log(url);
-            $('#ms_cm_ante_familiar_morb').load(url);
-            
-            //Recargar Tablas
-            $('#cm_ante_familiar_morb').fadeOut(400);
-            var url1 = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-            $('#cm_ante_familiar_morb').load(url1);
-            $('#cm_ante_familiar_morb').fadeIn(400);
-            console.log("Eliminado !!");
-        },
-        cancel: function (button) {
-            // nothing to do
-        },
-        confirmButton: "Si",
-        cancelButton: "No",
-        post: true,
-        confirmButtonClass: "btn-danger",
-        cancelButtonClass: "btn-default",
-        dialogClass: "modal-dialog modal-lg modal-delete" // Bootstrap classes for large modal
-    });
+        $(".confirm").confirm({
+            text: "Esta seguro(a) de eliminar el registro selecionado?",
+            title: "Atención",
+            confirm: function (button) {
+                //Elimina Tablas
+                var url = button.attr("href");
+                console.log(url);
+                $('#ms_cm_ante_familiar_morb').load(url);
+
+                //Recargar Tablas
+                $('#cm_ante_familiar_morb').fadeOut(400);
+                var url1 = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_ante_familiar_morb').load(url1);
+                $('#cm_ante_familiar_morb').fadeIn(400);
+                console.log("Eliminado !!");
+            },
+            cancel: function (button) {
+                // nothing to do
+            },
+            confirmButton: "Si",
+            cancelButton: "No",
+            post: true,
+            confirmButtonClass: "btn-danger",
+            cancelButtonClass: "btn-default",
+            dialogClass: "modal-dialog modal-lg modal-delete" // Bootstrap classes for large modal
+        });
     </script>
 }
+<script>
+    if ($("#filter") != "") {
+        $("#filter").focus();
+        $("#filter")[0].setSelectionRange($("#filter").val().length, $("#filter").val().length);
+    }
+    $("#btn-ante-familar-morb").click(function () {
+        filter();
+    });
 
+    $('#filter').keypress(function (e) {
+        if (e.which == 13) {//Enter key pressed
+            filter();
+        }
+    });
+    function filter() {
+        var filter = $("#filter").val();
+        var url = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
+        $('#cm_ante_familiar_morb').load(url);
+        return false;
+    }
+</script>
 
 @section scripts{
     @Scripts.Render("~/scripts/appjs/phones.js")
-
 }
