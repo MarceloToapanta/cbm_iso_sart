@@ -319,7 +319,7 @@ namespace CBM_SART.Controllers
         {
             ViewBag.idConsulta = idConsulta;
             iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
-            var asignadosm = iso_consulta_medica.iso_ante_familiar_consulta_m.ToList();
+            var asignadosm = iso_consulta_medica.iso_ante_familiar_consulta_m.Where(x => x.ifc_id_antecedente_familiar != IdParametro).ToList();
             List<iso_antecedente_familiar> list = new List<iso_antecedente_familiar>();
             foreach (iso_ante_familiar_consulta_m var in asignadosm)
             {
@@ -333,6 +333,11 @@ namespace CBM_SART.Controllers
             iso_ante_familiar_consulta_m iso_ante_familiar_consulta_m = db.iso_ante_familiar_consulta_m
                 .Where(x => x.ifc_id_antecedente_familiar == IdParametro && x.ifc_id_consulta_medica == idConsulta).First();
             return PartialView("CMParametros/ModificarAnteFamiliarMorb", iso_ante_familiar_consulta_m);
+        }
+        public string ActualizarAnteFamiliarMorb(iso_ante_familiar_consulta_m iso_ante_familiar_consulta_m)
+        {
+            db.Entry(iso_ante_familiar_consulta_m).State = EntityState.Modified;
+            return db.SaveChanges().ToString();
         }
         ////////////////////////////Fin Antecendete Familiar///////////////////////////////////
         ///Eliminar
