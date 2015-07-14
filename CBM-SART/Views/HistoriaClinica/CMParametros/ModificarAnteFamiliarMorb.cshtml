@@ -23,13 +23,14 @@
             @Html.HiddenFor(model => model.ifc_id_historia_clinica)
             @Html.HiddenFor(model => model.ifc_id_personal)
             @Html.HiddenFor(model => model.ifc_tipo_antecedente_f)
+            @Html.HiddenFor(model => model.ifc_id_antecedente_familiar)
             @Html.HiddenFor(model => model.iso_antecedente_familiar)
             @Html.HiddenFor(model => model.iso_consulta_medica)
             <div class="col-md-12">
                 <div class="form-group">
                     @Html.LabelFor(model => model.ifc_id_antecedente_familiar, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.DropDownList("ifc_id_antecedente_familiar", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro, "-Selecionar-", new { @class = "form-control required valid"})
+                        @Html.DropDownList("ifc_id_antecedente_familiar", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro, "-Selecionar-", new { @class = "form-control required valid", @disabled = "disabled" })
                         @Html.ValidationMessageFor(model => model.ifc_id_antecedente_familiar)
                     </div>
                 </div>

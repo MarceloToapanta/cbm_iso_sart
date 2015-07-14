@@ -54,15 +54,15 @@
             columns: grid.Columns(
               grid.Column(header: "No.",
                 format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
-              grid.Column("iso_antecedente_familiar.iaf_nombre_antecedente_f", "Nombre", style: "col-lg-3"),
-              grid.Column("ifc_edad", "Edad", style: "col-lg-4"),
-              grid.Column("ifc_observacion", "Diagnóstico", style: "col-lg-1"),
+              grid.Column("iso_antecedente_familiar.iaf_nombre_antecedente_f", "Nombre", canSort: false, style: "col-lg-4"),
+              grid.Column("ifc_edad", "Edad", canSort: false, style: "col-lg-1 text-center"),
+              grid.Column("ifc_observacion", "Diagnóstico", canSort: false, style: "col-lg-5"),
               grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
                 @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarAnteFamiliarMorb?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.ifc_id_antecedente_familiar + "' id='" + item.ifc_id_antecedente_familiar + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
-                @Html.Raw("<a class='confirm' data-modal='' href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.ifc_id_antecedente_familiar + "&TipoAntecente=AnteFamiliarMorb' id='" + item.ifc_id_antecedente_familiar + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete' data-href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.ifc_id_antecedente_familiar + "&TipoAntecente=AnteFamiliarMorb' id='" + item.ifc_id_antecedente_familiar + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                     </text>)
-                                                               ));
+                           ));
         }
 
 
@@ -81,39 +81,45 @@
 
 <div id="modal-container" class="modal fade"
      tabindex="-1" role="dialog">
-    <div class="modal-content" style="width: 50%; margin: 50px auto; overflow: hidden; ">
+    <div class="modal-content" style="width: 40%; margin: 50px auto; overflow: hidden; ">
     </div>
 </div>
 
-<script type="text/javascript" src="/Scripts/Confirm/jquery.confirm.min.js"></script>
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 350px;">
+        <div class="modal-content">
+            <div class="modal-header title-window">
+                Atención
+            </div>
+            <div class="modal-body">
+                Esta seguro(a) de eliminar el registro selecionado?
+            </div>
+            <div class="modal-footer" style="margin: 0 12px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <a class="btn btn-danger btn-ok">Si</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @if (ViewBag.total > 0)
 {
     <script>
-        $(".confirm").confirm({
-            text: "Esta seguro(a) de eliminar el registro selecionado?",
-            title: "Atención",
-            confirm: function (button) {
-                //Elimina Tablas
-                var url = button.attr("href");
-                console.log(url);
+        $('#confirm-delete').on('show.bs.modal', function (e) {
+            //$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $(this).find('.btn-ok').click(function () {
+                $('#confirm-delete').modal('toggle');
+                //Elimina
+                var url = $(e.relatedTarget).data('href')
                 $('#ms_cm_ante_familiar_morb').load(url);
-
                 //Recargar Tablas
                 $('#cm_ante_familiar_morb').fadeOut(400);
                 var url1 = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
                 $('#cm_ante_familiar_morb').load(url1);
                 $('#cm_ante_familiar_morb').fadeIn(400);
-                console.log("Eliminado !!");
-            },
-            cancel: function (button) {
-                // nothing to do
-            },
-            confirmButton: "Si",
-            cancelButton: "No",
-            post: true,
-            confirmButtonClass: "btn-danger",
-            cancelButtonClass: "btn-default",
-            dialogClass: "modal-dialog modal-lg modal-delete" // Bootstrap classes for large modal
+            });
+
         });
     </script>
 }

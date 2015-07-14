@@ -34,7 +34,7 @@
             <a data-modal='' href='/HistoriaClinica/IngresarCM' title='Ingresar Consulta Médica'><img class="cm-image" width="90" src="/images/hc/nueva-cm.jpg" /></a>
             Ingresar Consulta Médica
         </div>
-        
+
     </div>
 
 </div>
@@ -44,8 +44,8 @@
     <div class="col-md-10">
         <div class="col-md-4">
             <label class="label-3">CI:</label>@Model.iso_personal.ipe_ced_ruc_personal<br />
-            <label class="label-3">Lugar Nacimiento:</label>@String.Format("{0:MM/dd/yyyy}",@Model.iso_personal.ipe_lugar_nacimiento)<br />
-            <label class="label-3">Fecha Nacimiento:</label>@String.Format("{0:MM/dd/yyyy}",@Model.iso_personal.ipe_fecha_nacimiento)<br />
+            <label class="label-3">Lugar Nacimiento:</label>@String.Format("{0:MM/dd/yyyy}", @Model.iso_personal.ipe_lugar_nacimiento)<br />
+            <label class="label-3">Fecha Nacimiento:</label>@String.Format("{0:MM/dd/yyyy}", @Model.iso_personal.ipe_fecha_nacimiento)<br />
             <label class="label-3">Género:</label>@Model.iso_personal.ipe_genero<br />
             <label class="label-3">Edad:</label>@Model.iso_personal.ipe_edad<br />
             <label class="label-3">Estado Civil:</label>@Model.iso_personal.ipe_estado_civil
@@ -67,15 +67,15 @@
         <div class="foto-h">
             @if (Model.iso_personal.ipe_foto != null)
             {
-            <div class="inline-image-preivew">
-                <img id="blah" alt="Foto Personal" width="120" height="100" style="border: 1px solid #ccc; max-width: 100%; height: auto" src="@Url.Action("GetImage", "HistoriaClinica", new { id = Model.iso_personal.ipe_id_personal })" />
-            </div>
+                <div class="inline-image-preivew">
+                    <img id="blah" alt="Foto Personal" width="120" height="100" style="border: 1px solid #ccc; max-width: 100%; height: auto" src="@Url.Action("GetImage", "HistoriaClinica", new { id = Model.iso_personal.ipe_id_personal })" />
+                </div>
             }
             else
             {
-            <div class="inline-image-preivew">
-                <img id="blah" src="~/images/foto_personal.png" width="120" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; max-width: 100%; height: auto; " />
-            </div>
+                <div class="inline-image-preivew">
+                    <img id="blah" src="~/images/foto_personal.png" width="120" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; max-width: 100%; height: auto; " />
+                </div>
             }
         </div>
 
@@ -104,10 +104,12 @@
         {
             if (ViewBag.idConsulta == colsulta.icm_id_consulta)
             {
-                <option selected>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>    
-            }else{
-                <option>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>    
-            }   
+                <option selected>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>
+            }
+            else
+            {
+                <option>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>
+            }
         }
     </select>
 </div>
@@ -123,7 +125,7 @@
         <li class=""><a href="#rev" data-toggle="tab" aria-expanded="false">Revisión por Sistemas</a></li>
         <li class=""><a href="#lab" data-toggle="tab" aria-expanded="true">Ex. Laboratorio</a></li>
         @*
-        <li class="disabled"><a>Disabled</a></li>*@
+            <li class="disabled"><a>Disabled</a></li>*@
     </ul>
 </div>
 
@@ -132,7 +134,7 @@
         <div class="block-tab-h col-lg-12">
             <div class="col-md-12">
                 <div class="col-md-6">
-                    <label class="label-3">Fecha Ingreso:</label>@String.Format("{0:MM/dd/yyyy}",@Model.iso_personal.ipe_fecha_ingreso)<br />
+                    <label class="label-3">Fecha Ingreso:</label>@String.Format("{0:MM/dd/yyyy}", @Model.iso_personal.ipe_fecha_ingreso)<br />
                     @*<label class="label-3">Centro de Costos:</label>@Model.iso_personal.ipe_id_centro_costo<br />*@
                     <label class="label-3">Area:</label>@if (@Model.iso_personal.iso_departamento == null || @Model.iso_personal.iso_departamento.ide_nombre_departamento == "")
                     {<span>Sin Registrar</span>}
@@ -216,46 +218,45 @@
 
 @section Scripts {
     @Scripts.Render("~/scripts/appjs/phones.js")
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $(document).ready(function () {
-        //Antecedente Personal
-        var url = "@Url.Action("CmAntePersonal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-        $('#cm_ante_personal').load(url);
-        //Antecedente Familiar
-        var url = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-        $('#cm_ante_familiar_morb').load(url);
-        var url = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-        $('#cm_ante_familiar_mort').load(url);
-    });
-
-    
-    $(function () {
-        $(document).delegate(".webgrid-row-style", "click", function (e) {
-            var link = $(this).find('td:first #ipe_id_personal').attr('href');
-            var id = $(this).find('td:first #ipe_id_personal').val();
-            //Si no tiene link, crea la historia y redirecciona
-            if (link == "") {
-                if (confirm('El Empleado selecionado no registra una Historia Clinica, Desea crear una con la fecha actual?')) {
-                    var url = "/HistoriaClinica/InsertarHistoria?IdPersonal=" + id;
-                    console.log(url);
-                    $.get(url, function (IdHistoriaClinica) {
-                        console.log(IdHistoriaClinica);
-                        if (IdHistoriaClinica != "") {
-                            link = "/HistoriaClinica/Edit/" + id;
-                            location.href = link;
-                        } else {
-                            link = "/HistoriaClinica/Panel";
-                            location.href = link;
-                        }
-                    }, 'html');
-                } else {
-                    return false;
-                }
-            }
-            location.href = link;
+        $(document).ready(function () {
+            //Antecedente Personal
+            var url = "@Url.Action("CmAntePersonal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ante_personal').load(url);
+            //Antecedente Familiar
+            var url = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ante_familiar_morb').load(url);
+            var url = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ante_familiar_mort').load(url);
         });
-    });
-</script>
 
+
+        $(function () {
+            $(document).delegate(".webgrid-row-style", "click", function (e) {
+                var link = $(this).find('td:first #ipe_id_personal').attr('href');
+                var id = $(this).find('td:first #ipe_id_personal').val();
+                //Si no tiene link, crea la historia y redirecciona
+                if (link == "") {
+                    if (confirm('El Empleado selecionado no registra una Historia Clinica, Desea crear una con la fecha actual?')) {
+                        var url = "/HistoriaClinica/InsertarHistoria?IdPersonal=" + id;
+                        console.log(url);
+                        $.get(url, function (IdHistoriaClinica) {
+                            console.log(IdHistoriaClinica);
+                            if (IdHistoriaClinica != "") {
+                                link = "/HistoriaClinica/Edit/" + id;
+                                location.href = link;
+                            } else {
+                                link = "/HistoriaClinica/Panel";
+                                location.href = link;
+                            }
+                        }, 'html');
+                    } else {
+                        return false;
+                    }
+                }
+                location.href = link;
+            });
+        });
+    </script>
 }
