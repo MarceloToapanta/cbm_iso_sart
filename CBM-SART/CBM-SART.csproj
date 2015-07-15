@@ -550,6 +550,8 @@
     <Content Include="Views\HistoriaClinica\CMParametros\NuevoAnteFamiliarMorb.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\CrearAnteFamiliarMorb.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarAnteFamiliarMorb.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\CrearAntePersonal.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\ModificarAntePersonal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

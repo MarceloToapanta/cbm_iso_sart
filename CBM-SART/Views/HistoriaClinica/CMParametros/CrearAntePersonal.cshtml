@@ -1,0 +1,93 @@
+﻿@model CBM_SART.Models.iso_ante_personal_consulta_m
+
+@{
+    Layout = null;
+    SelectList list = ViewBag.SelectListParametro;
+}
+
+<div class="title-window" style="height:32px">
+    Seleciona un Antecedente Personal
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Antecedentes Personales</h4>
+</div>
+
+<div class="modal-body">
+    <div class="form-horizontal">
+
+        <form action="/HistoriaClinica/GuardarAntePersonal?idConsulta=@ViewBag.idConsulta" method="post" id="form">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipc_id_antecedente_p , new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("ipc_id_antecedente_p", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro, "-Selecionar-", new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ipc_id_antecedente_p)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipc_observacion, new { @class = "control-label col-md-3" })
+
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.ipc_observacion, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ipc_observacion)
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <span id="ms-error" class="text-center text-danger" style="display:none">
+                    Atención, Complete los campos necesarios
+                </span>
+                <button class="btn btn-primary " type="button" id="btn-guardar-ante-personal" name="@ViewBag.TipoParametro">Guardar</button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<input type="hidden" id="out" />
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+    $("#btn-guardar-ante-personal").click(function () {
+        $("#progress").show();
+        $("#ms-error").hide();
+        var url = $("#form").attr("action");
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: $('#form').serialize(),
+            success: function (data) {
+                $('#cm_ante_personal').fadeOut(400);
+                var url_load = "@Url.Action("CmAntePersonal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_ante_personal').load(url_load);
+                //Cierra el modal
+                $("#modal-container").modal('hide');
+                $('#cm_ante_personal').fadeIn(400);
+            },
+            error: function (error) {
+                $("#progress").hide();
+                $("#ms-error").show();
+                console.log('error: ' + error);
+            }
+        });
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+

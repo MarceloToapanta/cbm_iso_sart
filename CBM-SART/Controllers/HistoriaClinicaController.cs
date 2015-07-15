@@ -246,21 +246,79 @@ namespace CBM_SART.Controllers
             return iso_historia_clinica.ihc_id_historia;
         }
         ///TABLAS CONSULTA MEDICA 
-        ///Antecendete Perosnal
-        public ActionResult CmAntePersonal(int IdConsulta)
+        ////////////////////////////Antecendete Personal///////////////////////////////////
+        public ActionResult CmAntePersonal(int IdConsulta, string filter = null, int page = 1, int pageSize = 5, string sort = "iso_antecedente_personal.iap_nombre_antecedente_p", string sortdir = "ASC")
         {
-            //Busca consulta Medica
             iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
-            var iso_ante_personal_consulta_m = iso_consulta_medica.iso_ante_personal_consulta_m;
-
-            return PartialView(iso_ante_personal_consulta_m);
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_ante_personal_consulta_m>();
+            ViewBag.filter = filter;
+            records.Content = iso_consulta_medica.iso_ante_personal_consulta_m
+                        .Where(x => filter == null ||
+                                (x.iso_antecedente_personal.iap_nombre_antecedente_p.ToLower().Contains(filter.ToLower().Trim()))
+                              )
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+            // Count
+            records.TotalRecords = iso_consulta_medica.iso_ante_personal_consulta_m
+                         .Where(x => filter == null ||
+                                (x.iso_antecedente_personal.iap_nombre_antecedente_p.ToLower().Contains(filter.ToLower().Trim()))).Count();
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+            ViewBag.idConsulta = IdConsulta;
+            return PartialView(records);
         }
-        public ActionResult AntePersonal()
+        public ActionResult CrearAntePersonal(int idConsulta)
         {
-            //Busca Antecendentes Personales
-            var iso_antecedente_personal = db.iso_antecedente_personal.ToList();
-
-            return PartialView("CMParametros/AntePersonal",iso_antecedente_personal);
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_ante_personal_consulta_m.ToList();
+            List<iso_antecedente_personal> list = new List<iso_antecedente_personal>();
+            foreach (iso_ante_personal_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_antecedente_personal);
+            }
+            var total = db.iso_antecedente_personal
+                .OrderBy(x => x.iap_nombre_antecedente_p).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iap_id_antecedente_p", "iap_nombre_antecedente_p");
+            iso_ante_personal_consulta_m iso_ante_personal_consulta_m = new iso_ante_personal_consulta_m();
+            return PartialView("CMParametros/CrearAntePersonal", iso_ante_personal_consulta_m);
+        }
+        public string GuardarAntePersonal(int idConsulta, iso_ante_personal_consulta_m iso_ante_personal_consulta_m)
+        {
+            //Obtiene Consulta
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            iso_ante_personal_consulta_m.ipc_id_consulta_medica = iso_consulta_medica.icm_id_consulta;
+            iso_ante_personal_consulta_m.ipc_id_historia_clinica = iso_consulta_medica.icm_id_historia_clinica;
+            iso_ante_personal_consulta_m.ipc_id_personal = iso_consulta_medica.icm_id_personal;
+            db.iso_ante_personal_consulta_m.Add(iso_ante_personal_consulta_m);
+            return db.SaveChanges().ToString();
+        }
+        public ActionResult ModificarAntePersonal(int idConsulta, int IdParametro)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_ante_personal_consulta_m.Where(x => x.ipc_id_antecedente_p != IdParametro).ToList();
+            List<iso_antecedente_personal> list = new List<iso_antecedente_personal>();
+            foreach (iso_ante_personal_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_antecedente_personal);
+            }
+            var total = db.iso_antecedente_personal
+                .OrderBy(x => x.iap_nombre_antecedente_p).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iap_id_antecedente_p", "iap_nombre_antecedente_p");
+            iso_ante_personal_consulta_m iso_ante_personal_consulta_m = db.iso_ante_personal_consulta_m
+                .Where(x => x.ipc_id_antecedente_p == IdParametro && x.ipc_id_consulta_medica == idConsulta).First();
+            return PartialView("CMParametros/ModificarAntePersonal", iso_ante_personal_consulta_m);
+        }
+        public string ActualizarAntePersonal(iso_ante_personal_consulta_m iso_ante_personal_consulta_m)
+        {
+            db.Entry(iso_ante_personal_consulta_m).State = EntityState.Modified;
+            return db.SaveChanges().ToString();
         }
         ////////////////////////////Antecendete Familiar///////////////////////////////////
         public ActionResult CmAnteFamiliarMorb(int IdConsulta, string filter = null, int page = 1, int pageSize = 5, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
@@ -284,7 +342,7 @@ namespace CBM_SART.Controllers
             records.PageSize = pageSize;
             ViewBag.total = records.TotalRecords;
             ViewBag.idConsulta = IdConsulta;
-            return PartialView(records);
+            return PartialView("CmAnteFamiliarMorb", records);
         }
         public ActionResult CrearAnteFamiliarMorb(int idConsulta)
         {
