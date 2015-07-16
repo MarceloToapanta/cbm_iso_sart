@@ -1,96 +1,130 @@
-﻿@model IEnumerable<CBM_SART.Models.iso_ante_familiar_consulta_m>
+﻿@*@model IEnumerable<CBM_SART.Models.iso_ante_familiar_consulta_m>*@
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_ante_familiar_consulta_m>
 
 <div class="cm-title-ant">
-    3.- Antecedentes Patológicos Familiares Morbilidad(Enfermedad)
+    3.- Antecedentes Patológicos Familiares Mortalidad(Muerte)
 </div>
-<div class="col-md-11" style="padding-left:0">
-    <table class="table table-bordered table-hover table-responsive table-condensed" id="grid1" data-swhgajax="true" data-swhgcontainer="grid" data-swhgcallback="">
-        <thead>
-            <tr>
-                <th scope="col" style="width:2%"></th>
-                <th scope="col" style="width:30%">
-                    Parentesco
-                </th>
-                <th scope="col" style="width:10%">
-                    Edad
-                </th>
-                <th scope="col" style="width:30%">
-                    Diagnóstico
-                </th>
-                <th scope="col" style="width:15%">
-                    Fecha CM
-                </th>
-                <th scope="col" style="width:8%">
-                    Acción
-                </th>
-            </tr>
-        </thead>
-        @{int i = 1;}
-        @foreach (CBM_SART.Models.iso_ante_familiar_consulta_m item in Model)
-        {
-            <tr>
-                <td>@i</td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.iso_antecedente_familiar.iaf_nombre_antecedente_f)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ifc_edad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ifc_observacion)
-                </td>
-                <td>
-                    @String.Format("{0:MM/dd/yyyy}", item.iso_consulta_medica.icm_fecha_consulta)
-                </td>
-                <td>
-                    <a data-modal='' class="confirm" href='/Delete/@item.ifc_id_antecedente_familiar' id='@item.ifc_id_antecedente_familiar' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>
-                </td>
-            </tr>
-            i++;
-        }
-        @if (@Model.Count() <= 0)
-        {
-            <tr>
-                <td colspan="6" class="sin-registros">No se encontro registros</td>
-            </tr>
+@{
+    string url = "CmAnteFamiliarMort?idConsulta=" + ViewBag.idConsulta;
+}
+<div class="content">
+    <div class="search">
+        <div class="col-md-10">
+            <div class="input-group">
+
+                <input type="text"
+                       id="filter-familiar-mort"
+                       name="filter"
+                       value="@ViewBag.filter"
+                       class="form-control"
+                       style="display: inline; height:30px"
+                       placeholder="Buscar por Nombre" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" id="btn-ante-familar-mort" type="button" style="height: 28px;">Buscar</button>
+                </span>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="pull-right">
+                <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/CrearAnteFamiliarMort?idConsulta=@ViewBag.idConsulta" id="btnCreate">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Nuevo
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="col-md-12 grid-content">
+        @{
+            var grid = new WebGrid(
+                            canPage: true,
+                            rowsPerPage: Model.PageSize,
+                            canSort: true,
+                            ajaxUpdateContainerId: "grid-afmort");
+
+            grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+            grid.Pager(WebGridPagerModes.All);
+
+            @grid.GetHtml(htmlAttributes: new { id = "grid-afmort" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column(header: "No.",
+                format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+              grid.Column("iso_antecedente_familiar.iaf_nombre_antecedente_f", "Nombre", canSort: false, style: "col-lg-4"),
+              grid.Column("ifc_edad", "Edad", canSort: false, style: "col-lg-1 text-center"),
+              grid.Column("ifc_observacion", "Diagnóstico", canSort: false, style: "col-lg-5"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                    @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarAnteFamiliarMort?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.ifc_id_antecedente_familiar + "' id='" + item.ifc_id_antecedente_familiar + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                    @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-mort' data-href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.ifc_id_antecedente_familiar + "&TipoAntecente=AnteFamiliarMort' id='" + item.ifc_id_antecedente_familiar + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+                           ));
         }
 
-    </table>
-</div>
-<div class="col-md-1">
-    <a class="btn btn-success" data-modal="" href="/Cargo/Create" id="btnCreate">
-        <span class="glyphicon glyphicon-plus"></span>
-    </a>
-</div>
-<div class="clear"></div>
 
-<script type="text/javascript" src="/Scripts/Confirm/jquery.confirm.min.js"></script>
-@if (@Model.Count() > 0)
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+<div class="modal fade" id="confirm-delete-mort" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 350px;">
+        <div class="modal-content">
+            <div class="modal-header title-window">
+                Atención
+            </div>
+            <div class="modal-body">
+                Esta seguro(a) de eliminar el registro selecionado?
+            </div>
+            <div class="modal-footer" style="margin: 0 12px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <a class="btn btn-danger btn-ok">Si</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ViewBag.total > 0)
 {
     <script>
-        $(".confirm").confirm({
-            text: "Esta seguro(a) de eliminar el registro selecionado?",
-            title: "Atención",
-            confirm: function (button) {
-                //Elimina Tablas
-
-                var url = "@Url.Action("EliminarAntecente", "HistoriaClinica")?IdConsulta=@Model.First().ifc_id_consulta_medica&IdAntecente=" + button.attr("id") + "&TipoAntecente=FamiliarMorb";
-                console.log(url);
-                $('#ms_cm_ante_personal').load(url);
+        $('#confirm-delete-mort').on('show.bs.modal', function (e) {
+            //$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $(this).find('.btn-ok').click(function () {
+                $('#confirm-delete-mort').modal('toggle');
+                //Elimina
+                var url = $(e.relatedTarget).data('href')
+                $('#ms_cm_ante_familiar_mort').load(url);
                 //Recargar Tablas
-                var url = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@Model.First().ifc_id_consulta_medica";
-                $('#cm_ante_personal').load(url);
-                console.log("Eliminado !!");
-            },
-            cancel: function (button) {
-                // nothing to do
-            },
-            confirmButton: "Si",
-            cancelButton: "No",
-            post: true,
-            confirmButtonClass: "btn-danger",
-            cancelButtonClass: "btn-default",
-            dialogClass: "modal-dialog modal-lg modal-delete" // Bootstrap classes for large modal
+                $('#cm_ante_familiar_mort').fadeOut(400);
+                var url1 = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_ante_familiar_mort').load(url1);
+                $('#cm_ante_familiar_mort').fadeIn(400);
+            });
+
         });
     </script>
 }
+<script>
+    
+    $("#btn-ante-familar-mort").click(function () {
+        filter();
+    });
+
+    $('#filter-familiar-mort').keypress(function (e) {
+        if (e.which == 13) {//Enter key pressed
+            filter();
+        }
+    });
+    function filter() {
+        var filter = $("#filter-familiar-mort").val();
+        var url = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
+        console.log(url);
+        $('#cm_ante_familiar_mort').load(url);
+        return false;
+    }
+</script>

@@ -98,8 +98,8 @@
     </div>
 </div>
 <div class="col-md-3" style="width:21%;">
-    <span style="width:100%; text-align:center; display:block">Filtro de Historia Clinica</span>
-    <select style="width: 100%; text-align: center" class="form-control">
+    <span style="width: 100%; text-align: center; display: block; top: -11px; position: relative; font-weight:bold">Filtro de Historia Clinica</span>
+    <select style="width: 100%; text-align: center; position: relative; top: -9px;" class="form-control">
         @foreach (var colsulta in Model.iso_consulta_medica)
         {
             if (ViewBag.idConsulta == colsulta.icm_id_consulta)
@@ -114,7 +114,6 @@
     </select>
 </div>
 <div class="clear"></div>
-<br />
 <div class="col-md-12" style="padding-left:0;padding-right:0">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#inf" data-toggle="tab" aria-expanded="false">Información Ocupacional</a></li>
@@ -173,7 +172,7 @@
             </div>
             <div class="col-md-6">
                 <div class="cm-block" id="cm_ante_familiar_mort"></div>
-                <div id="ms_cm_ante_personal"></div>
+                <div id="ms_cm_ante_familiar_mort"></div>
             </div>
         </div>
     </div>
@@ -231,9 +230,9 @@
             var url = "@Url.Action("CmAntePersonal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_ante_personal').load(url);
             //Antecedente Familiar
-            var url = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            url = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_ante_familiar_morb').load(url);
-            var url = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            url = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_ante_familiar_mort').load(url);
         });
 

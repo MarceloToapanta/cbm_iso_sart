@@ -42,12 +42,12 @@
                             canPage: true,
                             rowsPerPage: Model.PageSize,
                             canSort: true,
-                            ajaxUpdateContainerId: "grid");
+                            ajaxUpdateContainerId: "grid-afmorb");
 
             grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
             grid.Pager(WebGridPagerModes.All);
 
-            @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            @grid.GetHtml(htmlAttributes: new { id = "grid-afmorb" },   // id for ajaxUpdateContainerId parameter
             fillEmptyRows: false,
                       tableStyle: "table table-bordered table-hover table-responsive table-condensed",
             mode: WebGridPagerModes.All,
@@ -110,10 +110,6 @@
     </script>
 }
 <script>
-    if ($("#filter") != "") {
-        $("#filter").focus();
-        $("#filter")[0].setSelectionRange($("#filter").val().length, $("#filter").val().length);
-    }
     $("#btn-ante-familar-morb").click(function () {
         filter();
     });

@@ -1,28 +1,36 @@
 ﻿@model CBM_SART.Models.iso_ante_familiar_consulta_m
-
 @{
     Layout = null;
     SelectList list = ViewBag.SelectListParametro;
 }
 
 <div class="title-window" style="height:32px">
-    Seleciona un Antecedente Familiar.
+    Modificar Antecedente Familiar.
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-header">
 
-    <h4 class="modal-title">Antecedentes Familiares Morbilidad</h4>
+    <h4 class="modal-title">Datos Antecedente Familiar Mortalidad</h4>
 </div>
 
 <div class="modal-body">
     <div class="form-horizontal">
 
-        <form action="/HistoriaClinica/GuardarAnteFamiliarMorb?idConsulta=@ViewBag.idConsulta" method="post" id="form">
+        <form action="/HistoriaClinica/ActualizarAnteFamiliarMorb" method="post" id="form">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ifc_id_consulta_medica)
+            @Html.HiddenFor(model => model.ifc_id_historia_clinica)
+            @Html.HiddenFor(model => model.ifc_id_personal)
+            @Html.HiddenFor(model => model.ifc_tipo_antecedente_f)
+            @Html.HiddenFor(model => model.ifc_id_antecedente_familiar)
+            @Html.HiddenFor(model => model.iso_antecedente_familiar)
+            @Html.HiddenFor(model => model.iso_consulta_medica)
             <div class="col-md-12">
                 <div class="form-group">
                     @Html.LabelFor(model => model.ifc_id_antecedente_familiar, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.DropDownList("ifc_id_antecedente_familiar", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro,"-Selecionar-", new { @class = "form-control required" })
+                        @Html.DropDownList("ifc_id_antecedente_familiar", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro, "-Selecionar-", new { @class = "form-control required valid", @disabled = "disabled" })
                         @Html.ValidationMessageFor(model => model.ifc_id_antecedente_familiar)
                     </div>
                 </div>
@@ -32,7 +40,7 @@
                     @Html.LabelFor(model => model.ifc_edad, new { @class = "control-label col-md-3" })
 
                     <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.ifc_edad, new { @class = "form-control required" })
+                        @Html.TextBoxFor(model => model.ifc_edad, new { @class = "form-control required valid" })
                         @Html.ValidationMessageFor(model => model.ifc_edad)
                     </div>
                 </div>
@@ -40,7 +48,7 @@
                     @Html.LabelFor(model => model.ifc_observacion, new { @class = "control-label col-md-3" })
 
                     <div class="col-md-9">
-                        @Html.TextAreaFor(model => model.ifc_observacion, new { @class = "form-control required" })
+                        @Html.TextAreaFor(model => model.ifc_observacion, new { @class = "form-control required valid"})
                         @Html.ValidationMessageFor(model => model.ifc_observacion)
                     </div>
                 </div>
@@ -56,7 +64,7 @@
                 <span id="ms-error" class="text-center text-danger" style="display:none">
                     Atención, Complete los campos necesarios
                 </span>
-                <button class="btn btn-primary " type="button" id="btn-guardar" name="@ViewBag.TipoParametro">Guardar</button>
+                <button class="btn btn-primary " type="button" id="btn-guardar-ante-familiar-mort" name="@ViewBag.TipoParametro">Guardar</button>
                 <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
             </div>
         </form>
@@ -70,7 +78,7 @@
 </script>
 <script>
 
-    $("#btn-guardar").click(function () {
+    $("#btn-guardar-ante-familiar-mort").click(function () {
         $("#progress").show();
         $("#ms-error").hide();
         var url = $("#form").attr("action");
@@ -80,12 +88,12 @@
             dataType: 'json',
             data: $('#form').serialize(),
             success: function (data) {
-                $('#cm_ante_familiar_morb').fadeOut(400);
-                var url_load = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-                $('#cm_ante_familiar_morb').load(url_load);
+                $('#cm_ante_familiar_mort').fadeOut(400);
+                var url_load = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_ante_familiar_mort').load(url_load);
                 //Cierra el modal
                 $("#modal-container").modal('hide');
-                $('#cm_ante_familiar_morb').fadeIn(400);
+                $('#cm_ante_familiar_mort').fadeIn(400);
             },
             error: function (error) {
                 $("#progress").hide();

@@ -11,7 +11,7 @@
 </div>
 <div class="modal-header">
 
-    <h4 class="modal-title">Antecedentes Familiares Morbilidad</h4>
+    <h4 class="modal-title">Antecedentes Familiares Mortalidad</h4>
 </div>
 
 <div class="modal-body">
@@ -80,12 +80,12 @@
             dataType: 'json',
             data: $('#form').serialize(),
             success: function (data) {
-                $('#cm_ante_familiar_morb').fadeOut(400);
-                var url_load = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-                $('#cm_ante_familiar_morb').load(url_load);
+                $('#cm_ante_familiar_mort').fadeOut(400);
+                var url_load = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_ante_familiar_mort').load(url_load);
                 //Cierra el modal
                 $("#modal-container").modal('hide');
-                $('#cm_ante_familiar_morb').fadeIn(400);
+                $('#cm_ante_familiar_mort').fadeIn(400);
             },
             error: function (error) {
                 $("#progress").hide();
