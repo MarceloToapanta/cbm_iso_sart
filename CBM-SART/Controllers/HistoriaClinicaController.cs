@@ -402,7 +402,7 @@ namespace CBM_SART.Controllers
         public string EliminarAntecente(int IdConsulta, int IdAntecente, string TipoAntecente)
         {
             string mensaje = "No se pudo eliminar";
-            if (TipoAntecente == "Personal")
+            if (TipoAntecente == "AntePersonal")
             {
                 iso_ante_personal_consulta_m iso_ante_personal_consulta_m = db.iso_ante_personal_consulta_m.Where(
                     x => x.ipc_id_consulta_medica == IdConsulta && x.ipc_id_antecedente_p == IdAntecente).First();
