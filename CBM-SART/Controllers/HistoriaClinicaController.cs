@@ -479,6 +479,82 @@ namespace CBM_SART.Controllers
             return db.SaveChanges().ToString();
         }
         ////////////////////////////Fin Antecendete Familiar Mortalidad///////////////////////////////////
+        ////////////////////////////Antecendete Vacunas///////////////////////////////////
+        public ActionResult CmAnteVacuna(int IdConsulta, string filter = null, int page = 1, int pageSize = 5, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
+        {
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records_mort = new PagedList<iso_vacuna_consulta_m>();
+            ViewBag.filter = filter;
+            records_mort.Content = iso_consulta_medica.iso_vacuna_consulta_m
+                        .Where(x => filter == null ||
+                                (x.iso_antecedente_vacuna.iav_nombre_vacuna.ToLower().Contains(filter.ToLower().Trim())))
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+            // Count
+            records_mort.TotalRecords = iso_consulta_medica.iso_vacuna_consulta_m
+                         .Where(x => filter == null ||
+                                (x.iso_antecedente_vacuna.iav_nombre_vacuna.ToLower().Contains(filter.ToLower().Trim())))
+                         .Count()
+                                ;
+            records_mort.CurrentPage = page;
+            records_mort.PageSize = pageSize;
+            ViewBag.total = records_mort.TotalRecords;
+            ViewBag.idConsulta = IdConsulta;
+            return PartialView("CmAnteVacuna", records_mort);
+        }
+        public ActionResult CrearAnteVacuna(int idConsulta)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_vacuna_consulta_m.ToList();
+            List<iso_antecedente_vacuna> list = new List<iso_antecedente_vacuna>();
+            foreach (iso_vacuna_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_antecedente_vacuna);
+            }
+            var total = db.iso_antecedente_vacuna
+                .OrderBy(x => x.iav_nombre_vacuna).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iav_id_vacuna", "iav_nombre_vacuna");
+            iso_vacuna_consulta_m iso_vacuna_consulta_m = new iso_vacuna_consulta_m();
+            return PartialView("CMParametros/CrearAnteVacuna", iso_vacuna_consulta_m);
+        }
+        public string GuardarAnteVacuna(int idConsulta, iso_vacuna_consulta_m iso_vacuna_consulta_m)
+        {
+            //Obtiene Consulta
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            iso_vacuna_consulta_m.ivm_id_consulta_medica = iso_consulta_medica.icm_id_consulta;
+            iso_vacuna_consulta_m.ivm_id_historia_clinica = iso_consulta_medica.icm_id_historia_clinica;
+            iso_vacuna_consulta_m.ivm_id_personal = iso_consulta_medica.icm_id_personal;
+            db.iso_vacuna_consulta_m.Add(iso_vacuna_consulta_m);
+            return db.SaveChanges().ToString();
+        }
+        public ActionResult ModificarAnteVacuna(int idConsulta, int IdParametro)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_vacuna_consulta_m.Where(x => x.ivm_id_vacuna != IdParametro).ToList();
+            List<iso_antecedente_vacuna> list = new List<iso_antecedente_vacuna>();
+            foreach (iso_vacuna_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_antecedente_vacuna);
+            }
+            var total = db.iso_antecedente_vacuna
+                .OrderBy(x => x.iav_nombre_vacuna).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iav_id_vacuna", "iav_nombre_vacuna");
+            iso_vacuna_consulta_m iso_vacuna_consulta_m = db.iso_vacuna_consulta_m
+                .Where(x => x.ivm_id_vacuna == IdParametro && x.ivm_id_consulta_medica == idConsulta).First();
+            return PartialView("CMParametros/ModificarAnteVacuna", iso_vacuna_consulta_m);
+        }
+        public string ActualizarAnteVacuna(iso_vacuna_consulta_m iso_vacuna_consulta_m)
+        {
+            db.Entry(iso_vacuna_consulta_m).State = EntityState.Modified;
+            return db.SaveChanges().ToString();
+        }
+        ////////////////////////////Fin Antecendete Vacunas///////////////////////////////////
         ///Eliminar
         public string EliminarAntecente(int IdConsulta, int IdAntecente, string TipoAntecente)
         {
@@ -506,6 +582,14 @@ namespace CBM_SART.Controllers
                     x => x.ifc_id_consulta_medica == IdConsulta && x.ifc_id_antecedente_familiar == IdAntecente
                     && x.iso_antecedente_familiar.iaf_tipo_antecedente_f == "MORTALIDAD").First();
                 db.iso_ante_familiar_consulta_m.Remove(iso_ante_familiar_consulta_m);
+                db.SaveChanges();
+                mensaje = "Registro eliminado";
+            }
+            else if (TipoAntecente == "AnteVacuna")
+            {
+                iso_vacuna_consulta_m iso_vacuna_consulta_m = db.iso_vacuna_consulta_m.Where(
+                    x => x.ivm_id_consulta_medica == IdConsulta && x.ivm_id_vacuna == IdAntecente).First();
+                db.iso_vacuna_consulta_m.Remove(iso_vacuna_consulta_m);
                 db.SaveChanges();
                 mensaje = "Registro eliminado";
             }

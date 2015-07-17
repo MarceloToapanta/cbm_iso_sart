@@ -1,0 +1,129 @@
+﻿@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_vacuna_consulta_m>
+
+<div class="cm-title-ant">
+    4.- Antecedentes de Vacuas
+</div>
+@{
+    string url = "CmAnteVacuna?idConsulta=" + ViewBag.idConsulta;
+}
+<div class="content">
+    <div class="search">
+        <div class="col-md-11">
+            <div class="input-group">
+
+                <input type="text"
+                       id="filter-ante-vacuna"
+                       name="filter"
+                       value="@ViewBag.filter"
+                       class="form-control"
+                       style="display: inline; height:30px"
+                       placeholder="Buscar por Nombre" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" id="btn-ante-vacuna" type="button" style="height: 28px;">Buscar</button>
+                </span>
+
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="pull-right">
+                <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/CrearAnteVacuna?idConsulta=@ViewBag.idConsulta" id="btnCreate">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Nuevo
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="col-md-12 grid-content">
+        @{
+            var grid = new WebGrid(
+                            canPage: true,
+                            rowsPerPage: Model.PageSize,
+                            canSort: true,
+                            ajaxUpdateContainerId: "grid-ante-vacuna");
+
+            grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+            grid.Pager(WebGridPagerModes.All);
+
+            @grid.GetHtml(htmlAttributes: new { id = "grid-ante-vacuna" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+                grid.Column(header: "No.", style: "",
+                format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+              grid.Column("iso_antecedente_vacuna.iav_nombre_vacuna", "Nombre", canSort: false, style: "col-lg-4"),
+              grid.Column("ivm_dosis", "Dosis", canSort: false, style: "col-lg-1"),
+              grid.Column("ivm_observacion", "Diagnóstico", canSort: false, style: "col-lg-6"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarAnteVacuna?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.ivm_id_vacuna + "' id='" + item.ivm_id_vacuna + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-vacuna' data-href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.ivm_id_vacuna + "&TipoAntecente=AnteVacuna' id='" + item.ivm_id_vacuna + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+                ));
+        }
+
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+
+
+<div class="modal fade" id="confirm-delete-vacuna" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 350px;">
+        <div class="modal-content">
+            <div class="modal-header title-window">
+                Atención
+            </div>
+            <div class="modal-body">
+                Esta seguro(a) de eliminar el registro selecionado?
+            </div>
+            <div class="modal-footer" style="margin: 0 12px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <a class="btn btn-danger btn-ok">Si</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ViewBag.total > 0)
+{
+    <script>
+        $('#confirm-delete-vacuna').on('show.bs.modal', function (e) {
+            //$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $(this).find('.btn-ok').click(function () {
+                $('#confirm-delete-vacuna').modal('toggle');
+                //Elimina
+                var url = $(e.relatedTarget).data('href')
+                $('#ms_cm_ante_vacuna').load(url);
+                //Recargar Tablas
+                $('#cm_ante_vacuna').fadeOut(400);
+                var url1 = "@Url.Action("CmAnteVacuna", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_ante_vacuna').load(url1);
+                $('#cm_ante_vacuna').fadeIn(400);
+            });
+
+        });
+    </script>
+}
+<script>
+    $("#btn-ante-vacuna").click(function () {
+        filter_ante_personal();
+    });
+
+    $('#filter-ante-vacuna').keypress(function (e) {
+        if (e.which == 13) {//Enter key pressed
+            filter_ante_personal();
+        }
+    });
+    function filter_ante_personal() {
+        var filter = $("#filter-ante-vacuna").val();
+        var url = "@Url.Action("CmAnteVacuna", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
+        $('#cm_ante_vacuna').load(url);
+        return false;
+    }
+</script>

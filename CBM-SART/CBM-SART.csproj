@@ -552,6 +552,9 @@
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarAntePersonal.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\CrearAnteFamiliarMort.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarAnteFamiliarMort.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmAnteVacuna.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\CrearAnteVacuna.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\ModificarAnteVacuna.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
