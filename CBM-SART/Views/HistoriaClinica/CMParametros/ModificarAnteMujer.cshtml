@@ -1,0 +1,135 @@
+﻿@model CBM_SART.Models.iso_ante_mujer_consulta_m
+@{
+    Layout = null;
+    SelectList list = ViewBag.SelectListParametro;
+}
+
+<div class="title-window" style="height:32px">
+    Actualizar un Antecedente de Gineco - Obstétrico.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Datos Antecedente Gineco - Obstétrico</h4>
+</div>
+
+<div class="modal-body">
+    <div class="form-horizontal">
+
+        <form action="/HistoriaClinica/ActualizarAnteMujer" method="post" id="form">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.imc_id_consulta_medica)
+            @Html.HiddenFor(model => model.imc_id_historia_clinica)
+            @Html.HiddenFor(model => model.imc_id_personal)
+            @Html.HiddenFor(model => model.imc_id_antecedente_mujer)
+            @Html.HiddenFor(model => model.iso_antecedente_mujer)
+            @Html.HiddenFor(model => model.iso_consulta_medica)
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.imc_id_antecedente_mujer, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("imc_id_antecedente_mujer", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro, "-Selecionar-", new { @class = "form-control required valid", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.imc_id_antecedente_mujer)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.imc_edad_mujer, new { @class = "control-label col-md-3" })
+
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.imc_edad_mujer, new { @class = "form-control required valid" })
+                        @Html.ValidationMessageFor(model => model.imc_edad_mujer)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.imc_observacion, new { @class = "control-label col-md-3" })
+
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.imc_observacion, new { @class = "form-control required valid" })
+                        @Html.ValidationMessageFor(model => model.imc_observacion)
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <span id="ms-error" class="text-center text-danger" style="display:none">
+                    Atención, Complete los campos necesarios
+                </span>
+                <button class="btn btn-primary " type="button" id="btn-guardar-mujer" name="@ViewBag.TipoParametro">Guardar</button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<input type="hidden" id="out" />
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+
+    $("#btn-guardar-mujer").click(function () {
+        $("#progress").show();
+        $("#ms-error").hide();
+        var url = $("#form").attr("action");
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: $('#form').serialize(),
+            success: function (data) {
+                $('#cm_ante_mujer').fadeOut(400);
+                var url_load = "@Url.Action("CmAnteMujer", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_ante_mujer').load(url_load);
+                //Cierra el modal
+                $("#modal-container").modal('hide');
+                $('#cm_ante_mujer').fadeIn(400);
+            },
+            error: function (error) {
+                $("#progress").hide();
+                $("#ms-error").show();
+                
+                console.log('error: ' + error);
+            }
+        });
+
+
+        @*//Valida Datos
+        var parametro = $("#parametro").val();
+        var edad = $("#edad").val();
+        var diagnostico = $("#diagnostico").val();
+        //Guarda Datos
+        var url = "@Url.Action("GuardarAnteFamiliarMorb", "HistoriaClinica")?idConsulta=@ViewBag.idConsulta&idAntecedente=" + parametro + "&Edad=" + edad + "&Diagnostico=" + diagnostico;
+        console.log(url);
+        $('#out').load(url);
+        //Carga Antecedente Familiar
+        //Antecedente Familiar
+        $('#cm_ante_familiar_morb').fadeOut(400);
+        var url1 = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+        console.log(url1);
+        $('#cm_ante_familiar_morb').load(url1);
+        //Cierra el modal
+        $("#modal-container").modal('hide');
+        $('#cm_ante_familiar_morb').fadeIn(400);*@
+
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
+
+
+
+

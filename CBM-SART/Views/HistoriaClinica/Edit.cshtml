@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     Session["Sidebar"] = "VigilaciaSalud";
     Session["SidebarSelect"] = "Historia";
+    Session["TabSelect"] = "ant";
 }
 
 <div class="col-md-12">
@@ -116,7 +117,7 @@
 <div class="clear"></div>
 <div class="col-md-12" style="padding-left:0;padding-right:0">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#inf" data-toggle="tab" aria-expanded="false">Información Ocupacional</a></li>
+        <li class=""><a href="#inf" data-toggle="tab" aria-expanded="false">Información Ocupacional</a></li>
         <li class=""><a href="#ant" data-toggle="tab" aria-expanded="false">Antecedentes de Salud</a></li>
         <li class=""><a href="#sig" data-toggle="tab" aria-expanded="false">Signos y Sintomas</a></li>
         <li class=""><a href="#hab" data-toggle="tab" aria-expanded="false">Hábitos/Estilos de Vida</a></li>
@@ -179,11 +180,22 @@
                 <div class="cm-block" id="cm_ante_vacuna"></div>
                 <div id="ms_cm_ante_vacuna"></div>
             </div>
+            <div class="col-md-12" style="margin-top: 10px;">
+                <div class="cm-block" id="cm_ante_mujer"></div>
+                <div id="ms_cm_ante_mujer"></div>
+            </div>
         </div>
     </div>
     <div class="tab-pane fade  in" id="sig">
         <div class="block-tab-h col-lg-12">
-            <p>Signos</p>
+            <div class="col-md-12" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_signo"></div>
+                <div id="ms_cm_signo"></div>
+            </div>
+            <div class="col-md-12" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_medida"></div>
+                <div id="ms_cm_medida"></div>
+            </div>
         </div>
     </div>
     <div class="tab-pane fade in" id="hab">
@@ -230,6 +242,11 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+            var tab = "@Session["TabSelect"]";
+            console.log(tab);
+            $('a[href="#' + tab + '"]').tab('show');
+                
+
             //Antecedente Personal
             var url = "@Url.Action("CmAntePersonal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_ante_personal').load(url);
@@ -240,9 +257,17 @@
             $('#cm_ante_familiar_mort').load(url);
             url = "@Url.Action("CmAnteVacuna", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_ante_vacuna').load(url);
+            url = "@Url.Action("CmAnteMujer", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ante_mujer').load(url);
+            //Signos
+            url = "@Url.Action("CmSigno", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_signo').load(url);
         });
 
-
+        $('ul.nav.nav-tabs li a').on('click', function () {
+            console.log($(this).attr('href'));
+            //@Session["TabSelect"] = $(this).attr('href');
+        });
         $(function () {
             $(document).delegate(".webgrid-row-style", "click", function (e) {
                 var link = $(this).find('td:first #ipe_id_personal').attr('href');

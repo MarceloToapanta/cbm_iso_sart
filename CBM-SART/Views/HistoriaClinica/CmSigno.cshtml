@@ -1,0 +1,130 @@
+﻿@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_sintoma_consulta_m>
+
+<div class="cm-title-ant">
+    Signos y Síntomas de sus principales estructuras y funciones.
+</div>
+@{
+    string url = "CmSigno?idConsulta=" + ViewBag.idConsulta;
+}
+<div class="content">
+    <div class="search">
+        <div class="col-md-11">
+            <div class="input-group">
+
+                <input type="text"
+                       id="filter-ante-signo"
+                       name="filter"
+                       value="@ViewBag.filter"
+                       class="form-control"
+                       style="display: inline; height:30px"
+                       placeholder="Buscar por Nombre" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" id="btn-signo" type="button" style="height: 28px;">Buscar</button>
+                </span>
+
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="pull-right">
+                <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/CrearSigno?idConsulta=@ViewBag.idConsulta" id="btnCreate">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Nuevo
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="col-md-12 grid-content">
+        @{
+            var grid = new WebGrid(
+                            canPage: true,
+                            rowsPerPage: Model.PageSize,
+                            canSort: true,
+                            ajaxUpdateContainerId: "grid-signo");
+
+            grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+            grid.Pager(WebGridPagerModes.All);
+
+            @grid.GetHtml(htmlAttributes: new { id = "grid-signo" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+                grid.Column(header: "No.", style: "",
+                format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+              grid.Column("iso_sintoma.iso_tipo_sintoma.its_nombre_tipo_sintoma", "Tipo", canSort: false, style: "col-lg-4"),
+              grid.Column("iso_sintoma.ist_nombre_sintoma", "Nombre", canSort: false, style: "col-lg-4"),
+              grid.Column("isc_tiempo_sintoma", "Tiempo", canSort: false, style: "col-lg-1"),
+              grid.Column("isc_valor_sintoma", "Valor", canSort: false, style: "col-lg-1"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarSigno?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.isc_id_sintoma + "' id='" + item.isc_id_sintoma + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-signo' data-href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.isc_id_sintoma + "&TipoAntecente=Signo' id='" + item.isc_id_sintoma + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+                ));
+        }
+
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+
+
+<div class="modal fade" id="confirm-delete-signo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 350px;">
+        <div class="modal-content">
+            <div class="modal-header title-window">
+                Atención
+            </div>
+            <div class="modal-body" style="  margin: 15px 0;">
+                Esta seguro(a) de eliminar el registro selecionado?
+            </div>
+            <div class="modal-footer" style="margin: 0 12px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <a class="btn btn-danger btn-ok">Si</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ViewBag.total > 0)
+{
+    <script>
+        $('#confirm-delete-signo').on('show.bs.modal', function (e) {
+            //$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $(this).find('.btn-ok').click(function () {
+                $('#confirm-delete-signo').modal('toggle');
+                //Elimina
+                var url = $(e.relatedTarget).data('href')
+                $('#ms_cm_signo').load(url);
+                //Recargar Tablas
+                $('#cm_signo').fadeOut(400);
+                var url1 = "@Url.Action("CmSigno", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_signo').load(url1);
+                $('#cm_signo').fadeIn(400);
+            });
+
+        });
+    </script>
+}
+<script>
+    $("#btn-signo").click(function () {
+        filter_ante_personal();
+    });
+
+    $('#filter-signo').keypress(function (e) {
+        if (e.which == 13) {//Enter key pressed
+            filter_ante_personal();
+        }
+    });
+    function filter_ante_personal() {
+        var filter = $("#filter-signo").val();
+        var url = "@Url.Action("CmSigno", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
+        $('#cm_signo').load(url);
+        return false;
+    }
+</script>

@@ -247,7 +247,7 @@ namespace CBM_SART.Controllers
         }
         ///TABLAS CONSULTA MEDICA 
         ////////////////////////////Antecendete Personal///////////////////////////////////
-        public ActionResult CmAntePersonal(int IdConsulta, string filter = null, int page = 1, int pageSize = 5, string sort = "iso_antecedente_personal.iap_nombre_antecedente_p", string sortdir = "ASC")
+        public ActionResult CmAntePersonal(int IdConsulta, string filter = null, int page = 1, int pageSize = 3, string sort = "iso_antecedente_personal.iap_nombre_antecedente_p", string sortdir = "ASC")
         {
             iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
             if (String.IsNullOrEmpty(filter)) { filter = null; }
@@ -321,7 +321,7 @@ namespace CBM_SART.Controllers
             return db.SaveChanges().ToString();
         }
         ////////////////////////////Antecendete Familiar Morbilidad///////////////////////////////////
-        public ActionResult CmAnteFamiliarMorb(int IdConsulta, string filter = null, int page = 1, int pageSize = 5, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
+        public ActionResult CmAnteFamiliarMorb(int IdConsulta, string filter = null, int page = 1, int pageSize = 3, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
         {
             iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
             if (String.IsNullOrEmpty(filter)) { filter = null; }
@@ -400,7 +400,7 @@ namespace CBM_SART.Controllers
         }
         ////////////////////////////Fin Antecendete Familiar Morbilidad///////////////////////////////////
         ////////////////////////////Antecendete Familiar Mortalidad///////////////////////////////////
-        public ActionResult CmAnteFamiliarMort(int IdConsulta, string filter = null, int page = 1, int pageSize = 5, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
+        public ActionResult CmAnteFamiliarMort(int IdConsulta, string filter = null, int page = 1, int pageSize = 3, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
         {
             iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
             if (String.IsNullOrEmpty(filter)) { filter = null; }
@@ -480,7 +480,7 @@ namespace CBM_SART.Controllers
         }
         ////////////////////////////Fin Antecendete Familiar Mortalidad///////////////////////////////////
         ////////////////////////////Antecendete Vacunas///////////////////////////////////
-        public ActionResult CmAnteVacuna(int IdConsulta, string filter = null, int page = 1, int pageSize = 5, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
+        public ActionResult CmAnteVacuna(int IdConsulta, string filter = null, int page = 1, int pageSize = 3, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
         {
             iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
             if (String.IsNullOrEmpty(filter)) { filter = null; }
@@ -555,6 +555,177 @@ namespace CBM_SART.Controllers
             return db.SaveChanges().ToString();
         }
         ////////////////////////////Fin Antecendete Vacunas///////////////////////////////////
+        ////////////////////////////Antecendete Mujer///////////////////////////////////
+        public ActionResult CmAnteMujer(int IdConsulta, string filter = null, int page = 1, int pageSize = 3, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
+        {
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records_mort = new PagedList<iso_ante_mujer_consulta_m>();
+            ViewBag.filter = filter;
+            records_mort.Content = iso_consulta_medica.iso_ante_mujer_consulta_m
+                        .Where(x => filter == null ||
+                                (x.iso_antecedente_mujer.iam_nombre_antecedente_m.ToLower().Contains(filter.ToLower().Trim())))
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+            // Count
+            records_mort.TotalRecords = iso_consulta_medica.iso_ante_mujer_consulta_m
+                         .Where(x => filter == null ||
+                                (x.iso_antecedente_mujer.iam_nombre_antecedente_m.ToLower().Contains(filter.ToLower().Trim())))
+                         .Count()
+                                ;
+            records_mort.CurrentPage = page;
+            records_mort.PageSize = pageSize;
+            ViewBag.total = records_mort.TotalRecords;
+            ViewBag.idConsulta = IdConsulta;
+            return PartialView("CmAnteMujer", records_mort);
+        }
+        public ActionResult CrearAnteMujer(int idConsulta)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_ante_mujer_consulta_m.ToList();
+            List<iso_antecedente_mujer> list = new List<iso_antecedente_mujer>();
+            foreach (iso_ante_mujer_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_antecedente_mujer);
+            }
+            var total = db.iso_antecedente_mujer
+                .OrderBy(x => x.iam_nombre_antecedente_m).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iam_id_antecedente_mujer", "iam_nombre_antecedente_m");
+            iso_ante_mujer_consulta_m iso_ante_mujer_consulta_m = new iso_ante_mujer_consulta_m();
+            return PartialView("CMParametros/CrearAnteMujer", iso_ante_mujer_consulta_m);
+        }
+        public string GuardarAnteMujer(int idConsulta, iso_ante_mujer_consulta_m iso_ante_mujer_consulta_m)
+        {
+            //Obtiene Consulta
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            iso_ante_mujer_consulta_m.imc_id_consulta_medica = iso_consulta_medica.icm_id_consulta;
+            iso_ante_mujer_consulta_m.imc_id_historia_clinica = iso_consulta_medica.icm_id_historia_clinica;
+            iso_ante_mujer_consulta_m.imc_id_personal = iso_consulta_medica.icm_id_personal;
+            db.iso_ante_mujer_consulta_m.Add(iso_ante_mujer_consulta_m);
+            return db.SaveChanges().ToString();
+        }
+        public ActionResult ModificarAnteMujer(int idConsulta, int IdParametro)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_ante_mujer_consulta_m.Where(x => x.imc_id_antecedente_mujer != IdParametro).ToList();
+            List<iso_antecedente_mujer> list = new List<iso_antecedente_mujer>();
+            foreach (iso_ante_mujer_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_antecedente_mujer);
+            }
+            var total = db.iso_antecedente_mujer
+                .OrderBy(x => x.iam_nombre_antecedente_m).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iam_id_antecedente_mujer", "iam_nombre_antecedente_m");
+            iso_ante_mujer_consulta_m iso_ante_mujer_consulta_m = db.iso_ante_mujer_consulta_m
+                .Where(x => x.imc_id_antecedente_mujer == IdParametro && x.imc_id_consulta_medica == idConsulta).First();
+            return PartialView("CMParametros/ModificarAnteMujer", iso_ante_mujer_consulta_m);
+        }
+        public string ActualizarAnteMujer(iso_ante_mujer_consulta_m iso_ante_mujer_consulta_m)
+        {
+            db.Entry(iso_ante_mujer_consulta_m).State = EntityState.Modified;
+            return db.SaveChanges().ToString();
+        }
+        ////////////////////////////Fin Antecendete Mujer///////////////////////////////////
+        ////////////////*****************Signos y Sintomas*******************/////////////////////////////
+        public ActionResult CmSigno(int IdConsulta, string filter = null, int page = 1, int pageSize = 10, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
+        {
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records_mort = new PagedList<iso_sintoma_consulta_m>();
+            ViewBag.filter = filter;
+            records_mort.Content = iso_consulta_medica.iso_sintoma_consulta_m
+                        .Where(x => filter == null ||
+                                (x.iso_sintoma.ist_nombre_sintoma.ToLower().Contains(filter.ToLower().Trim())))
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+            // Count
+            records_mort.TotalRecords = iso_consulta_medica.iso_sintoma_consulta_m
+                         .Where(x => filter == null ||
+                                (x.iso_sintoma.ist_nombre_sintoma.ToLower().Contains(filter.ToLower().Trim())))
+                         .Count()
+                                ;
+            records_mort.CurrentPage = page;
+            records_mort.PageSize = pageSize;
+            ViewBag.total = records_mort.TotalRecords;
+            ViewBag.idConsulta = IdConsulta;
+            return PartialView("CmSigno", records_mort);
+        }
+        public ActionResult CrearSigno(int idConsulta)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_sintoma_consulta_m.ToList();
+            List<iso_sintoma> list = new List<iso_sintoma>();
+            foreach (iso_sintoma_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_sintoma );
+            }
+            var total = db.iso_sintoma
+                .OrderBy(x => x.ist_nombre_sintoma).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "ist_id_sintoma", "ist_nombre_sintoma");
+            ViewBag.SelectListTipoParametro = new SelectList(db.iso_tipo_sintoma.ToList(), "its_id_tipo_sintoma", "its_nombre_tipo_sintoma");
+            iso_sintoma_consulta_m iso_sintoma_consulta_m = new iso_sintoma_consulta_m();
+            return PartialView("CMParametros/CrearSigno", iso_sintoma_consulta_m);
+        }
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult ObetenerSignoPorTipo(int idConsulta, int idTipo)
+        {
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_sintoma_consulta_m.ToList();
+            List<iso_sintoma> list = new List<iso_sintoma>();
+            foreach (iso_sintoma_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_sintoma);
+            }
+            var total = db.iso_sintoma
+                .Where(x => x.ist_id_tipo_sintoma == idTipo)
+                .OrderBy(x => x.ist_nombre_sintoma).ToList();
+            var totalresult = total.Except(list);
+            SelectList SelectListParametro = new SelectList(totalresult, "ist_id_sintoma", "ist_nombre_sintoma");
+            return Json(SelectListParametro, JsonRequestBehavior.AllowGet);
+        }
+        public string GuardarSigno(int idConsulta, iso_sintoma_consulta_m iso_sintoma_consulta_m)
+        {
+            //Obtiene Consulta
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            iso_sintoma_consulta_m.isc_id_consulta_medica = iso_consulta_medica.icm_id_consulta;
+            iso_sintoma_consulta_m.isc_id_historia_clinica = iso_consulta_medica.icm_id_historia_clinica;
+            iso_sintoma_consulta_m.isc_id_personal = iso_consulta_medica.icm_id_personal;
+            db.iso_sintoma_consulta_m.Add(iso_sintoma_consulta_m);
+            return db.SaveChanges().ToString();
+        }
+        public ActionResult ModificarSigno(int idConsulta, int IdParametro)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_sintoma_consulta_m.Where(x => x.isc_id_sintoma != IdParametro).ToList();
+            List<iso_sintoma> list = new List<iso_sintoma>();
+            foreach (iso_sintoma_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_sintoma);
+            }
+            var total = db.iso_sintoma
+                .OrderBy(x => x.ist_nombre_sintoma).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "ist_id_sintoma", "ist_nombre_sintoma");
+            ViewBag.SelectListTipoParametro = new SelectList(db.iso_tipo_sintoma.ToList(), "its_id_tipo_sintoma", "its_nombre_tipo_sintoma");
+            iso_sintoma_consulta_m iso_sintoma_consulta_m = db.iso_sintoma_consulta_m
+                .Where(x => x.isc_id_sintoma == IdParametro && x.isc_id_consulta_medica == idConsulta).First();
+            return PartialView("CMParametros/ModificarSigno", iso_sintoma_consulta_m);
+        }
+        public string ActualizarSigno(iso_sintoma_consulta_m iso_sintoma_consulta_m)
+        {
+            db.Entry(iso_sintoma_consulta_m).State = EntityState.Modified;
+            return db.SaveChanges().ToString();
+        }
+        ////////////////////////////Signos y Sintomas///////////////////////////////////
         ///Eliminar
         public string EliminarAntecente(int IdConsulta, int IdAntecente, string TipoAntecente)
         {
@@ -590,6 +761,22 @@ namespace CBM_SART.Controllers
                 iso_vacuna_consulta_m iso_vacuna_consulta_m = db.iso_vacuna_consulta_m.Where(
                     x => x.ivm_id_consulta_medica == IdConsulta && x.ivm_id_vacuna == IdAntecente).First();
                 db.iso_vacuna_consulta_m.Remove(iso_vacuna_consulta_m);
+                db.SaveChanges();
+                mensaje = "Registro eliminado";
+            }
+            else if (TipoAntecente == "AnteMujer")
+            {
+                iso_ante_mujer_consulta_m iso_ante_mujer_consulta_m = db.iso_ante_mujer_consulta_m.Where(
+                    x => x.imc_id_consulta_medica == IdConsulta && x.imc_id_antecedente_mujer == IdAntecente).First();
+                db.iso_ante_mujer_consulta_m.Remove(iso_ante_mujer_consulta_m);
+                db.SaveChanges();
+                mensaje = "Registro eliminado";
+            }
+            else if (TipoAntecente == "Signo")
+            {
+                iso_sintoma_consulta_m iso_sintoma_consulta_m = db.iso_sintoma_consulta_m.Where(
+                    x => x.isc_id_consulta_medica == IdConsulta && x.isc_id_sintoma == IdAntecente).First();
+                db.iso_sintoma_consulta_m.Remove(iso_sintoma_consulta_m);
                 db.SaveChanges();
                 mensaje = "Registro eliminado";
             }

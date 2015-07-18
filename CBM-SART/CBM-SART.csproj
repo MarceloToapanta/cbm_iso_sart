@@ -555,6 +555,12 @@
     <Content Include="Views\HistoriaClinica\CmAnteVacuna.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\CrearAnteVacuna.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarAnteVacuna.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmAnteMujer.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\ModificarAnteMujer.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\CrearAnteMujer.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmSigno.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\CrearSigno.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\ModificarSigno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
