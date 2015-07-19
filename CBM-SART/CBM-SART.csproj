@@ -262,6 +262,12 @@
     <Compile Include="Models\iso_exam_fp_consulta_m.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_habitos.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_habito_consulta_m.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_historia_clinica.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
@@ -564,6 +570,9 @@
     <Content Include="Views\HistoriaClinica\CmSindrome.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\CrearSindrome.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarSindrome.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmHabito.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\CrearHabito.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\ModificarHabito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

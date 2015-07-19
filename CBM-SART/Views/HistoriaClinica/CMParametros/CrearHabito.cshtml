@@ -1,0 +1,112 @@
+﻿@model CBM_SART.Models.iso_habito_consulta_m
+
+@{
+    Layout = null;
+    SelectList list = ViewBag.SelectListParametro;
+}
+
+<div class="title-window" style="height:32px">
+    Seleciona Habito y/o Estilo de Vida.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Habito y/o Estilo de Vida</h4>
+</div>
+
+<div class="modal-body">
+    <div class="form-horizontal">
+
+        <form action="/HistoriaClinica/GuardarHabito?idConsulta=@ViewBag.idConsulta" method="post" id="form">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ihc_id_habito , new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("ihc_id_habito", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro, "-Selecionar-", new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ihc_id_habito)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ihc_caracteristica, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ihc_caracteristica, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ihc_caracteristica)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ihc_cantidad, new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.ihc_cantidad, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ihc_cantidad)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ihc_frecuencia, new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.ihc_frecuencia, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ihc_frecuencia)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ihc_factor_riesgo, new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.ihc_factor_riesgo, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ihc_factor_riesgo)
+                    </div>
+                </div>
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <span id="ms-error" class="text-center text-danger" style="display:none">
+                    Atención, Complete los campos necesarios
+                </span>
+                <button class="btn btn-primary " type="button" id="btn-guardar-habito" name="@ViewBag.TipoParametro">Guardar</button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<input type="hidden" id="out" />
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+    $("#btn-guardar-habito").click(function () {
+        $("#progress").show();
+        $("#ms-error").hide();
+        var url = $("#form").attr("action");
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: $('#form').serialize(),
+            success: function (data) {
+                $('#cm_habito').fadeOut(400);
+                var url_load = "@Url.Action("CmHabito", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_habito').load(url_load);
+                //Cierra el modal
+                $("#modal-container").modal('hide');
+                $('#cm_habito').fadeIn(400);
+            },
+            error: function (error) {
+                $("#progress").hide();
+                $("#ms-error").show();
+                console.log('error: ' + error);
+            }
+        });
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+

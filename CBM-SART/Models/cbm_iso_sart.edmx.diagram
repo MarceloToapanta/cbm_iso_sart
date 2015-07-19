@@ -91,6 +91,10 @@
         <AssociationConnector Association="cbm_iso_sart.FK_iso_sindrome_consulta_m_iso_sindrome" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_sintoma_consulta_m_iso_sintoma" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_sintoma_iso_tipo_sintoma" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_habito_consulta_m" Width="2.375" PointX="9" PointY="10" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_habitos" Width="2.375" PointX="0.5" PointY="11.25" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_habito_consulta_m_iso_consulta_medica" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_habito_consulta_m_iso_habitos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

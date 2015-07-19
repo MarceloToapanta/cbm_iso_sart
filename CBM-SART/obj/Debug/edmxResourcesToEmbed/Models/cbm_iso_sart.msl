@@ -649,5 +649,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="iso_habito_consulta_m">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_habito_consulta_m">
+        <MappingFragment StoreEntitySet="iso_habito_consulta_m">
+          <ScalarProperty Name="ihc_observacion" ColumnName="ihc_observacion" />
+          <ScalarProperty Name="ihc_descripcion" ColumnName="ihc_descripcion" />
+          <ScalarProperty Name="ihc_factor_riesgo" ColumnName="ihc_factor_riesgo" />
+          <ScalarProperty Name="ihc_frecuencia" ColumnName="ihc_frecuencia" />
+          <ScalarProperty Name="ihc_cantidad" ColumnName="ihc_cantidad" />
+          <ScalarProperty Name="ihc_caracteristica" ColumnName="ihc_caracteristica" />
+          <ScalarProperty Name="ihc_id_habito" ColumnName="ihc_id_habito" />
+          <ScalarProperty Name="ihc_id_personal" ColumnName="ihc_id_personal" />
+          <ScalarProperty Name="ihc_id_historia_clinica" ColumnName="ihc_id_historia_clinica" />
+          <ScalarProperty Name="ihc_id_consulta_medica" ColumnName="ihc_id_consulta_medica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_habitos">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_habitos">
+        <MappingFragment StoreEntitySet="iso_habitos">
+          <ScalarProperty Name="iht_nombre_habito" ColumnName="iht_nombre_habito" />
+          <ScalarProperty Name="iht_id_habito" ColumnName="iht_id_habito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

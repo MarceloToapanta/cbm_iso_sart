@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     Session["Sidebar"] = "VigilaciaSalud";
     Session["SidebarSelect"] = "Historia";
-    Session["TabSelect"] = "sig";
+    Session["TabSelect"] = "hab";
 }
 
 <div class="col-md-12">
@@ -200,7 +200,10 @@
     </div>
     <div class="tab-pane fade in" id="hab">
         <div class="block-tab-h col-lg-12">
-            <p>Habitos</p>
+            <div class="col-md-12" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_habito"></div>
+                <div id="ms_cm_habito"></div>
+            </div>
         </div>
     </div>
     <div class="tab-pane fade in" id="exa">
@@ -245,7 +248,7 @@
             var tab = "@Session["TabSelect"]";
             console.log(tab);
             $('a[href="#' + tab + '"]').tab('show');
-                
+
 
             //Antecedente Personal
             var url = "@Url.Action("CmAntePersonal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
@@ -264,6 +267,9 @@
             $('#cm_signo').load(url);
             url = "@Url.Action("CmSindrome", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_sindrome').load(url);
+            //Habitos
+            url = "@Url.Action("CmHabito", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_habito').load(url);
         });
 
         $('ul.nav.nav-tabs li a').on('click', function () {
@@ -297,29 +303,29 @@
             });
         });
     </script>
-<script type="text/javascript">
-    $(function () {
-        // Initialize numeric spinner input boxes
-        //$(".numeric-spinner").spinedit();
-        // Initialize modal dialog
-        // attach modal-container bootstrap attributes to links with .modal-link class.
-        // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
-        $('body').on('click', '.modal-link', function (e) {
-            e.preventDefault();
-            $(this).attr('data-target', '#modal-container');
-            $(this).attr('data-toggle', 'modal');
+    <script type="text/javascript">
+        $(function () {
+            // Initialize numeric spinner input boxes
+            //$(".numeric-spinner").spinedit();
+            // Initialize modal dialog
+            // attach modal-container bootstrap attributes to links with .modal-link class.
+            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+            });
+            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+            $('body').on('click', '.modal-close-btn', function () {
+                $('#modal-container').modal('hide');
+            });
+            //clear modal cache, so that new content can be loaded
+            $('#modal-container').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+            $('#CancelModal').on('click', function () {
+                return false;
+            });
         });
-        // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
-        $('body').on('click', '.modal-close-btn', function () {
-            $('#modal-container').modal('hide');
-        });
-        //clear modal cache, so that new content can be loaded
-        $('#modal-container').on('hidden.bs.modal', function () {
-            $(this).removeData('bs.modal');
-        });
-        $('#CancelModal').on('click', function () {
-            return false;
-        });
-    });
-</script>
+    </script>
 }

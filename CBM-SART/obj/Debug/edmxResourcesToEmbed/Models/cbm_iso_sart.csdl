@@ -67,6 +67,7 @@
     <NavigationProperty Name="iso_sindrome_consulta_m" Relationship="cbm_iso_sart.FK_iso_sindrome_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_sindrome_consulta_m" />
     <NavigationProperty Name="iso_sintoma_consulta_m" Relationship="cbm_iso_sart.FK_iso_sintoma_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_sintoma_consulta_m" />
     <NavigationProperty Name="iso_vacuna_consulta_m" Relationship="cbm_iso_sart.FK_iso_vacuna_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_vacuna_consulta_m" />
+    <NavigationProperty Name="iso_habito_consulta_m" Relationship="cbm_iso_sart.FK_iso_habito_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_habito_consulta_m" />
   </EntityType>
   <EntityType Name="iso_departamento">
     <Key>
@@ -393,6 +394,16 @@
     <AssociationSet Name="FK_iso_sintoma_iso_tipo_sintoma" Association="cbm_iso_sart.FK_iso_sintoma_iso_tipo_sintoma">
       <End Role="iso_tipo_sintoma" EntitySet="iso_tipo_sintoma" />
       <End Role="iso_sintoma" EntitySet="iso_sintoma" />
+    </AssociationSet>
+    <EntitySet Name="iso_habito_consulta_m" EntityType="cbm_iso_sart.iso_habito_consulta_m" />
+    <EntitySet Name="iso_habitos" EntityType="cbm_iso_sart.iso_habitos" />
+    <AssociationSet Name="FK_iso_habito_consulta_m_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_habito_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_habito_consulta_m" EntitySet="iso_habito_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_habito_consulta_m_iso_habitos" Association="cbm_iso_sart.FK_iso_habito_consulta_m_iso_habitos">
+      <End Role="iso_habitos" EntitySet="iso_habitos" />
+      <End Role="iso_habito_consulta_m" EntitySet="iso_habito_consulta_m" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="iso_personal">
@@ -1577,6 +1588,62 @@
       </Principal>
       <Dependent Role="iso_sintoma">
         <PropertyRef Name="ist_id_tipo_sintoma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="iso_habito_consulta_m">
+    <Key>
+      <PropertyRef Name="ihc_id_consulta_medica" />
+      <PropertyRef Name="ihc_id_historia_clinica" />
+      <PropertyRef Name="ihc_id_personal" />
+      <PropertyRef Name="ihc_id_habito" />
+    </Key>
+    <Property Name="ihc_id_consulta_medica" Type="Int32" Nullable="false" />
+    <Property Name="ihc_id_historia_clinica" Type="Int32" Nullable="false" />
+    <Property Name="ihc_id_personal" Type="Int32" Nullable="false" />
+    <Property Name="ihc_id_habito" Type="Int32" Nullable="false" />
+    <Property Name="ihc_caracteristica" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ihc_cantidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ihc_frecuencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ihc_factor_riesgo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ihc_descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ihc_observacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_habito_consulta_m_iso_consulta_medica" FromRole="iso_habito_consulta_m" ToRole="iso_consulta_medica" />
+    <NavigationProperty Name="iso_habitos" Relationship="cbm_iso_sart.FK_iso_habito_consulta_m_iso_habitos" FromRole="iso_habito_consulta_m" ToRole="iso_habitos" />
+  </EntityType>
+  <EntityType Name="iso_habitos">
+    <Key>
+      <PropertyRef Name="iht_id_habito" />
+    </Key>
+    <Property Name="iht_id_habito" Type="Int32" Nullable="false" />
+    <Property Name="iht_nombre_habito" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_habito_consulta_m" Relationship="cbm_iso_sart.FK_iso_habito_consulta_m_iso_habitos" FromRole="iso_habitos" ToRole="iso_habito_consulta_m" />
+  </EntityType>
+  <Association Name="FK_iso_habito_consulta_m_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="1" />
+    <End Type="cbm_iso_sart.iso_habito_consulta_m" Role="iso_habito_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_habito_consulta_m">
+        <PropertyRef Name="ihc_id_consulta_medica" />
+        <PropertyRef Name="ihc_id_historia_clinica" />
+        <PropertyRef Name="ihc_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_habito_consulta_m_iso_habitos">
+    <End Type="cbm_iso_sart.iso_habitos" Role="iso_habitos" Multiplicity="1" />
+    <End Type="cbm_iso_sart.iso_habito_consulta_m" Role="iso_habito_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_habitos">
+        <PropertyRef Name="iht_id_habito" />
+      </Principal>
+      <Dependent Role="iso_habito_consulta_m">
+        <PropertyRef Name="ihc_id_habito" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

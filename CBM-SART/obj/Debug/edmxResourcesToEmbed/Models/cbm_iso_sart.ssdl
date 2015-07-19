@@ -330,6 +330,31 @@
     <Property Name="iec_campo4" Type="varchar" MaxLength="50" />
     <Property Name="iec_campo5" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="iso_habito_consulta_m">
+    <Key>
+      <PropertyRef Name="ihc_id_consulta_medica" />
+      <PropertyRef Name="ihc_id_historia_clinica" />
+      <PropertyRef Name="ihc_id_personal" />
+      <PropertyRef Name="ihc_id_habito" />
+    </Key>
+    <Property Name="ihc_id_consulta_medica" Type="int" Nullable="false" />
+    <Property Name="ihc_id_historia_clinica" Type="int" Nullable="false" />
+    <Property Name="ihc_id_personal" Type="int" Nullable="false" />
+    <Property Name="ihc_id_habito" Type="int" Nullable="false" />
+    <Property Name="ihc_caracteristica" Type="varchar" MaxLength="255" />
+    <Property Name="ihc_cantidad" Type="varchar" MaxLength="100" />
+    <Property Name="ihc_frecuencia" Type="varchar" MaxLength="100" />
+    <Property Name="ihc_factor_riesgo" Type="varchar" MaxLength="100" />
+    <Property Name="ihc_descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="ihc_observacion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="iso_habitos">
+    <Key>
+      <PropertyRef Name="iht_id_habito" />
+    </Key>
+    <Property Name="iht_id_habito" Type="int" Nullable="false" />
+    <Property Name="iht_nombre_habito" Type="varchar" MaxLength="80" />
+  </EntityType>
   <EntityType Name="iso_historia_clinica">
     <Key>
       <PropertyRef Name="ihc_id_historia" />
@@ -1012,6 +1037,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_iso_habito_consulta_m_iso_consulta_medica">
+    <End Role="iso_consulta_medica" Type="Self.iso_consulta_medica" Multiplicity="1" />
+    <End Role="iso_habito_consulta_m" Type="Self.iso_habito_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_habito_consulta_m">
+        <PropertyRef Name="ihc_id_consulta_medica" />
+        <PropertyRef Name="ihc_id_historia_clinica" />
+        <PropertyRef Name="ihc_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_habito_consulta_m_iso_habitos">
+    <End Role="iso_habitos" Type="Self.iso_habitos" Multiplicity="1" />
+    <End Role="iso_habito_consulta_m" Type="Self.iso_habito_consulta_m" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_habitos">
+        <PropertyRef Name="iht_id_habito" />
+      </Principal>
+      <Dependent Role="iso_habito_consulta_m">
+        <PropertyRef Name="ihc_id_habito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_iso_historia_clinica_iso_historia_clinica">
     <End Role="iso_historia_clinica" Type="Self.iso_historia_clinica" Multiplicity="1" />
     <End Role="iso_historia_clinica1" Type="Self.iso_historia_clinica" Multiplicity="0..1" />
@@ -1359,6 +1412,8 @@
     <EntitySet Name="iso_equipo_puesto_trabajo" EntityType="Self.iso_equipo_puesto_trabajo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_exam_fisico_parametro" EntityType="Self.iso_exam_fisico_parametro" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_exam_fp_consulta_m" EntityType="Self.iso_exam_fp_consulta_m" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iso_habito_consulta_m" EntityType="Self.iso_habito_consulta_m" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iso_habitos" EntityType="Self.iso_habitos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_historia_clinica" EntityType="Self.iso_historia_clinica" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_incidente_trabajo" EntityType="Self.iso_incidente_trabajo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_matriz_mrl" EntityType="Self.iso_matriz_mrl" Schema="dbo" store:Type="Tables" />
@@ -1476,6 +1531,14 @@
     <AssociationSet Name="FK_iso_exam_fp_consulta_m_iso_exam_fisico_parametro" Association="Self.FK_iso_exam_fp_consulta_m_iso_exam_fisico_parametro">
       <End Role="iso_exam_fisico_parametro" EntitySet="iso_exam_fisico_parametro" />
       <End Role="iso_exam_fp_consulta_m" EntitySet="iso_exam_fp_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_habito_consulta_m_iso_consulta_medica" Association="Self.FK_iso_habito_consulta_m_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_habito_consulta_m" EntitySet="iso_habito_consulta_m" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_habito_consulta_m_iso_habitos" Association="Self.FK_iso_habito_consulta_m_iso_habitos">
+      <End Role="iso_habitos" EntitySet="iso_habitos" />
+      <End Role="iso_habito_consulta_m" EntitySet="iso_habito_consulta_m" />
     </AssociationSet>
     <AssociationSet Name="FK_iso_historia_clinica_iso_historia_clinica" Association="Self.FK_iso_historia_clinica_iso_historia_clinica">
       <End Role="iso_historia_clinica" EntitySet="iso_historia_clinica" />

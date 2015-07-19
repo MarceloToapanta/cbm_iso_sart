@@ -24,6 +24,7 @@ namespace CBM_SART.Models
             this.iso_sindrome_consulta_m = new HashSet<iso_sindrome_consulta_m>();
             this.iso_sintoma_consulta_m = new HashSet<iso_sintoma_consulta_m>();
             this.iso_vacuna_consulta_m = new HashSet<iso_vacuna_consulta_m>();
+            this.iso_habito_consulta_m = new HashSet<iso_habito_consulta_m>();
         }
     
         public int icm_id_consulta { get; set; }
@@ -68,5 +69,6 @@ namespace CBM_SART.Models
         public virtual ICollection<iso_sindrome_consulta_m> iso_sindrome_consulta_m { get; set; }
         public virtual ICollection<iso_sintoma_consulta_m> iso_sintoma_consulta_m { get; set; }
         public virtual ICollection<iso_vacuna_consulta_m> iso_vacuna_consulta_m { get; set; }
+        public virtual ICollection<iso_habito_consulta_m> iso_habito_consulta_m { get; set; }
     }
 }
