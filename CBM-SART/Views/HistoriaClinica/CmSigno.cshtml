@@ -12,7 +12,7 @@
             <div class="input-group">
 
                 <input type="text"
-                       id="filter-ante-signo"
+                       id="filter-signo"
                        name="filter"
                        value="@ViewBag.filter"
                        class="form-control"
@@ -113,15 +113,15 @@
 }
 <script>
     $("#btn-signo").click(function () {
-        filter_ante_personal();
+        filter_signo();
     });
 
     $('#filter-signo').keypress(function (e) {
         if (e.which == 13) {//Enter key pressed
-            filter_ante_personal();
+            filter_signo();
         }
     });
-    function filter_ante_personal() {
+    function filter_signo() {
         var filter = $("#filter-signo").val();
         var url = "@Url.Action("CmSigno", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
         $('#cm_signo').load(url);

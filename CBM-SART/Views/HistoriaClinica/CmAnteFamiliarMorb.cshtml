@@ -111,15 +111,15 @@
 }
 <script>
     $("#btn-ante-familar-morb").click(function () {
-        filter();
+        filter_ante_familiar_morb();
     });
 
     $('#filter').keypress(function (e) {
         if (e.which == 13) {//Enter key pressed
-            filter();
+            filter_ante_familiar_morb();
         }
     });
-    function filter() {
+    function filter_ante_familiar_morb() {
         var filter = $("#filter").val();
         var url = "@Url.Action("CmAnteFamiliarMorb", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
         $('#cm_ante_familiar_morb').load(url);

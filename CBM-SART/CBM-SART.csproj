@@ -561,6 +561,9 @@
     <Content Include="Views\HistoriaClinica\CmSigno.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\CrearSigno.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarSigno.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmSindrome.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\CrearSindrome.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\ModificarSindrome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

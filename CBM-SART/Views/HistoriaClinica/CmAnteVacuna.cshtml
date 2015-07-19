@@ -112,15 +112,15 @@
 }
 <script>
     $("#btn-ante-vacuna").click(function () {
-        filter_ante_personal();
+        filter_ante_vacuna();
     });
 
     $('#filter-ante-vacuna').keypress(function (e) {
         if (e.which == 13) {//Enter key pressed
-            filter_ante_personal();
+            filter_ante_vacuna();
         }
     });
-    function filter_ante_personal() {
+    function filter_ante_vacuna() {
         var filter = $("#filter-ante-vacuna").val();
         var url = "@Url.Action("CmAnteVacuna", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
         $('#cm_ante_vacuna').load(url);

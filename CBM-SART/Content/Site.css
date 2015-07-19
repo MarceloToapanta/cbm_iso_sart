@@ -465,9 +465,10 @@ tfoot > tr > td {
 .search  .input-group input{
     height:28px !important;
 }
-.search .col-md-10{
+.search .col-md-9, .search .col-md-10, .search .col-md-11, .search .col-md-12{
     padding-left:0px;
 }
+
 .clear{
     clear:both;
 }.seccion-barra {

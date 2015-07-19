@@ -726,6 +726,82 @@ namespace CBM_SART.Controllers
             return db.SaveChanges().ToString();
         }
         ////////////////////////////Signos y Sintomas///////////////////////////////////
+        ////////////////*****************Sindromas"Medidas Antropometricas"*******************/////////////////////////////
+        public ActionResult CmSindrome(int IdConsulta, string filter = null, int page = 1, int pageSize = 10, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
+        {
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records_mort = new PagedList<iso_sindrome_consulta_m>();
+            ViewBag.filter = filter;
+            records_mort.Content = iso_consulta_medica.iso_sindrome_consulta_m
+                        .Where(x => filter == null ||
+                                (x.iso_sindrome.iso_nombre_sindrome.ToLower().Contains(filter.ToLower().Trim())))
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+            // Count
+            records_mort.TotalRecords = iso_consulta_medica.iso_sindrome_consulta_m
+                         .Where(x => filter == null ||
+                                (x.iso_sindrome.iso_nombre_sindrome.ToLower().Contains(filter.ToLower().Trim())))
+                         .Count()
+                                ;
+            records_mort.CurrentPage = page;
+            records_mort.PageSize = pageSize;
+            ViewBag.total = records_mort.TotalRecords;
+            ViewBag.idConsulta = IdConsulta;
+            return PartialView("CmSindrome", records_mort);
+        }
+        public ActionResult CrearSindrome(int idConsulta)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_sindrome_consulta_m.ToList();
+            List<iso_sindrome> list = new List<iso_sindrome>();
+            foreach (iso_sindrome_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_sindrome);
+            }
+            var total = db.iso_sindrome
+                .OrderBy(x => x.iso_nombre_sindrome).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iso_id_sindrome", "iso_nombre_sindrome");
+            iso_sindrome_consulta_m iso_sindrome_consulta_m = new iso_sindrome_consulta_m();
+            return PartialView("CMParametros/CrearSindrome", iso_sindrome_consulta_m);
+        }
+        public string GuardarSindrome(int idConsulta, iso_sindrome_consulta_m iso_sindrome_consulta_m)
+        {
+            //Obtiene Consulta
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            iso_sindrome_consulta_m.isd_id_consulta_medica = iso_consulta_medica.icm_id_consulta;
+            iso_sindrome_consulta_m.isd_id_historia_clinica = iso_consulta_medica.icm_id_historia_clinica;
+            iso_sindrome_consulta_m.isd_id_personal = iso_consulta_medica.icm_id_personal;
+            db.iso_sindrome_consulta_m.Add(iso_sindrome_consulta_m);
+            return db.SaveChanges().ToString();
+        }
+        public ActionResult ModificarSindrome(int idConsulta, int IdParametro)
+        {
+            ViewBag.idConsulta = idConsulta;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_sindrome_consulta_m.Where(x => x.isd_id_sindrome != IdParametro).ToList();
+            List<iso_sindrome> list = new List<iso_sindrome>();
+            foreach (iso_sindrome_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_sindrome);
+            }
+            var total = db.iso_sindrome
+                .OrderBy(x => x.iso_nombre_sindrome).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "iso_id_sindrome", "iso_nombre_sindrome");
+            iso_sindrome_consulta_m iso_sindrome_consulta_m = db.iso_sindrome_consulta_m
+                .Where(x => x.isd_id_sindrome == IdParametro && x.isd_id_consulta_medica == idConsulta).First();
+            return PartialView("CMParametros/ModificarSindrome", iso_sindrome_consulta_m);
+        }
+        public string ActualizarSindrome(iso_sindrome_consulta_m iso_sindrome_consulta_m)
+        {
+            db.Entry(iso_sindrome_consulta_m).State = EntityState.Modified;
+            return db.SaveChanges().ToString();
+        }
+        ////////////////////////////Sindromas"Medidas Antropometricas"///////////////////////////////////
         ///Eliminar
         public string EliminarAntecente(int IdConsulta, int IdAntecente, string TipoAntecente)
         {
@@ -777,6 +853,14 @@ namespace CBM_SART.Controllers
                 iso_sintoma_consulta_m iso_sintoma_consulta_m = db.iso_sintoma_consulta_m.Where(
                     x => x.isc_id_consulta_medica == IdConsulta && x.isc_id_sintoma == IdAntecente).First();
                 db.iso_sintoma_consulta_m.Remove(iso_sintoma_consulta_m);
+                db.SaveChanges();
+                mensaje = "Registro eliminado";
+            }
+            else if (TipoAntecente == "Sindrome")
+            {
+                iso_sindrome_consulta_m iso_sindrome_consulta_m = db.iso_sindrome_consulta_m.Where(
+                    x => x.isd_id_consulta_medica == IdConsulta && x.isd_id_sindrome == IdAntecente).First();
+                db.iso_sindrome_consulta_m.Remove(iso_sindrome_consulta_m);
                 db.SaveChanges();
                 mensaje = "Registro eliminado";
             }

@@ -112,15 +112,15 @@
 <script>
     
     $("#btn-ante-familar-mort").click(function () {
-        filter();
+        filter_ante_familiar_mort();
     });
 
     $('#filter-familiar-mort').keypress(function (e) {
         if (e.which == 13) {//Enter key pressed
-            filter();
+            filter_ante_familiar_mort();
         }
     });
-    function filter() {
+    function filter_ante_familiar_mort() {
         var filter = $("#filter-familiar-mort").val();
         var url = "@Url.Action("CmAnteFamiliarMort", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
         console.log(url);

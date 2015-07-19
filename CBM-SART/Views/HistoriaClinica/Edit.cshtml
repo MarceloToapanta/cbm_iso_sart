@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     Session["Sidebar"] = "VigilaciaSalud";
     Session["SidebarSelect"] = "Historia";
-    Session["TabSelect"] = "ant";
+    Session["TabSelect"] = "sig";
 }
 
 <div class="col-md-12">
@@ -193,8 +193,8 @@
                 <div id="ms_cm_signo"></div>
             </div>
             <div class="col-md-12" style="margin-bottom: 10px;">
-                <div class="cm-block" id="cm_medida"></div>
-                <div id="ms_cm_medida"></div>
+                <div class="cm-block" id="cm_sindrome"></div>
+                <div id="ms_cm_sindrome"></div>
             </div>
         </div>
     </div>
@@ -262,6 +262,8 @@
             //Signos
             url = "@Url.Action("CmSigno", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_signo').load(url);
+            url = "@Url.Action("CmSindrome", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_sindrome').load(url);
         });
 
         $('ul.nav.nav-tabs li a').on('click', function () {

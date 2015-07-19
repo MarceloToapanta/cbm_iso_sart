@@ -1,31 +1,32 @@
-﻿@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_ante_mujer_consulta_m>
+﻿@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_sindrome_consulta_m>
 
 <div class="cm-title-ant">
-    4.- Antecedentes Gineco - Obstétricos
+    Medidas Antropométricas
 </div>
 @{
-    string url = "CmAnteMujer?idConsulta=" + ViewBag.idConsulta;
+    string url = "CmAnteVacuna?idConsulta=" + ViewBag.idConsulta;
 }
 <div class="content">
     <div class="search">
         <div class="col-md-11">
             <div class="input-group">
+
                 <input type="text"
-                       id="filter-ante-mujer"
+                       id="filter-sindrome"
                        name="filter"
                        value="@ViewBag.filter"
                        class="form-control"
                        style="display: inline; height:30px"
                        placeholder="Buscar por Nombre" />
                 <span class="input-group-btn">
-                    <button class="btn btn-default btn-sm" id="btn-ante-mujer" type="button" style="height: 28px;">Buscar</button>
+                    <button class="btn btn-default btn-sm" id="btn-sindrome" type="button" style="height: 28px;">Buscar</button>
                 </span>
 
             </div>
         </div>
         <div class="col-md-1">
             <div class="pull-right">
-                <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/CrearAnteMujer?idConsulta=@ViewBag.idConsulta" id="btnCreate">
+                <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/CrearSindrome?idConsulta=@ViewBag.idConsulta" id="btnCreate">
                     <span class="glyphicon glyphicon-plus"></span>
                     Nuevo
                 </a>
@@ -40,25 +41,24 @@
                             canPage: true,
                             rowsPerPage: Model.PageSize,
                             canSort: true,
-                            ajaxUpdateContainerId: "grid-ante-mujer");
+                            ajaxUpdateContainerId: "grid-sindrome");
 
             grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
             grid.Pager(WebGridPagerModes.All);
 
-            @grid.GetHtml(htmlAttributes: new { id = "grid-ante-mujer" },   // id for ajaxUpdateContainerId parameter
+            @grid.GetHtml(htmlAttributes: new { id = "grid-sindrome" },   // id for ajaxUpdateContainerId parameter
             fillEmptyRows: false,
                       tableStyle: "table table-bordered table-hover table-responsive table-condensed",
             mode: WebGridPagerModes.All,
             columns: grid.Columns(
                 grid.Column(header: "No.", style: "",
                 format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
-              grid.Column("iso_antecedente_mujer.iam_nombre_antecedente_m", "Nombre", canSort: false, style: "col-lg-4"),
-              grid.Column("imc_edad_mujer", "Edad", canSort: false, style: "col-lg-1"),
-              grid.Column("imc_observacion", "Diagnóstico", canSort: false, style: "col-lg-6"),
+              grid.Column("iso_sindrome.iso_nombre_sindrome", "Nombre", canSort: false, style: "col-lg-8"),
+              grid.Column("isd_descripcion", "Valor", canSort: false, style: "col-lg-2"),
               grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
-                @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarAnteMujer?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.imc_id_antecedente_mujer + "' id='" + item.imc_id_antecedente_mujer + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
-                @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-mujer' data-href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.imc_id_antecedente_mujer + "&TipoAntecente=AnteMujer' id='" + item.imc_id_antecedente_mujer + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarSindrome?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.isd_id_sindrome + "' id='" + item.isd_id_sindrome + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-sindrome' data-href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.isd_id_sindrome + "&TipoAntecente=Sindrome' id='" + item.isd_id_sindrome + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                     </text>)
                 ));
         }
@@ -71,7 +71,7 @@
 
 
 
-<div class="modal fade" id="confirm-delete-mujer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirm-delete-sindrome" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width: 350px;">
         <div class="modal-content">
             <div class="modal-header title-window">
@@ -92,37 +92,37 @@
 @if (ViewBag.total > 0)
 {
     <script>
-        $('#confirm-delete-mujer').on('show.bs.modal', function (e) {
+        $('#confirm-delete-sindrome').on('show.bs.modal', function (e) {
             //$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             $(this).find('.btn-ok').click(function () {
-                $('#confirm-delete-mujer').modal('toggle');
+                $('#confirm-delete-sindrome').modal('toggle');
                 //Elimina
                 var url = $(e.relatedTarget).data('href')
-                $('#ms_cm_ante_mujer').load(url);
+                $('#ms_cm_sindrome').load(url);
                 //Recargar Tablas
-                $('#cm_ante_mujer').fadeOut(400);
-                var url1 = "@Url.Action("CmAnteMujer", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-                $('#cm_ante_mujer').load(url1);
-                $('#cm_ante_mujer').fadeIn(400);
+                $('#cm_sindrome').fadeOut(400);
+                var url1 = "@Url.Action("CmSindrome", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_sindrome').load(url1);
+                $('#cm_sindrome').fadeIn(400);
             });
 
         });
     </script>
 }
 <script>
-    $("#btn-ante-mujer").click(function () {
-        filter_ante_mujer();
+    $("#btn-sindrome").click(function () {
+        filter_sindrome();
     });
 
-    $('#filter-ante-mujer').keypress(function (e) {
+    $('#filter-sindrome').keypress(function (e) {
         if (e.which == 13) {//Enter key pressed
-            filter_ante_mujer();
+            filter_sindrome();
         }
     });
-    function filter_ante_mujer() {
-        var filter = $("#filter-ante-mujer").val();
-        var url = "@Url.Action("CmAnteMujer", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
-        $('#cm_ante_mujer').load(url);
+    function filter_sindrome() {
+        var filter = $("#filter-sindrome").val();
+        var url = "@Url.Action("CmSindrome", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&filter=" + filter;
+        $('#cm_sindrome').load(url);
         return false;
     }
 </script>

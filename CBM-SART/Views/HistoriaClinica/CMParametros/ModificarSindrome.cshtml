@@ -1,0 +1,105 @@
+﻿@model CBM_SART.Models.iso_sindrome_consulta_m
+@{
+    Layout = null;
+    SelectList list = ViewBag.SelectListParametro;
+}
+
+<div class="title-window" style="height:32px">
+    Actualizar Medida Atropométrica.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Datos Medida Atropométrica</h4>
+</div>
+
+<div class="modal-body">
+    <div class="form-horizontal">
+
+        <form action="/HistoriaClinica/ActualizarSindrome" method="post" id="form">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.isd_id_consulta_medica)
+            @Html.HiddenFor(model => model.isd_id_historia_clinica)
+            @Html.HiddenFor(model => model.isd_id_personal)
+            @Html.HiddenFor(model => model.isd_id_sindrome)
+            @Html.HiddenFor(model => model.iso_sindrome)
+            @Html.HiddenFor(model => model.iso_consulta_medica)
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.isd_id_sindrome, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("isd_id_sindrome", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro, "-Selecionar-", new { @class = "form-control required valid", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.isd_id_sindrome)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.isd_descripcion, new { @class = "control-label col-md-3" })
+
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.isd_descripcion, new { @class = "form-control required valid" })
+                        @Html.ValidationMessageFor(model => model.isd_descripcion)
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <span id="ms-error" class="text-center text-danger" style="display:none">
+                    Atención, Complete los campos necesarios
+                </span>
+                <button class="btn btn-primary " type="button" id="btn-guardar-sindrome" name="@ViewBag.TipoParametro">Guardar</button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<input type="hidden" id="out" />
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+
+    $("#btn-guardar-sindrome").click(function () {
+        $("#progress").show();
+        $("#ms-error").hide();
+        var url = $("#form").attr("action");
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: $('#form').serialize(),
+            success: function (data) {
+                $('#cm_sindrome').fadeOut(400);
+                var url_load = "@Url.Action("CmSindrome", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_sindrome').load(url_load);
+                //Cierra el modal
+                $("#modal-container").modal('hide');
+                $('#cm_sindrome').fadeIn(400);
+            },
+            error: function (error) {
+                $("#progress").hide();
+                $("#ms-error").show();
+                
+                console.log('error: ' + error);
+            }
+        });
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
+
+
+
+
