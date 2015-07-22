@@ -439,6 +439,7 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="App_Code\TrewView.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -573,6 +574,9 @@
     <Content Include="Views\HistoriaClinica\CmHabito.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\CrearHabito.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarHabito.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmExamenLab.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\CrearExamenLab.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\ModificarExamenLab.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

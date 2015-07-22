@@ -226,7 +226,7 @@ namespace CBM_SART.Controllers
             if (cat != null)
             {
                 string type = string.Empty;
-                type = "application/pdf";
+                type = "application/unknown";
                 return File(cat.ipe_archivo_curriculum, type);
             }
                 return null;

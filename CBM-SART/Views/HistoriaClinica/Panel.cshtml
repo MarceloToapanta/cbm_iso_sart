@@ -5,7 +5,7 @@
     Session["SidebarSelect"] = "Historia";
 }
 
-
+@*<img id="spinner" style="display:none" src="/images/spinner.gif">*@
 <div class="hc-container">
     <div class="hc-vertical">
         <ul>
@@ -61,6 +61,7 @@
             $(document).delegate(".webgrid-row-style", "click", function (e) {
                 var link = $(this).find('td:first #ipe_id_personal').attr('href');
                 var id = $(this).find('td:first #ipe_id_personal').val();
+                $("#spinner").show();
                 //Si no tiene link, crea la historia y redirecciona
                 if (link == "") {
                     if (confirm('El Empleado selecionado no registra una Historia Clinica, Desea crear una con la fecha actual?')) {

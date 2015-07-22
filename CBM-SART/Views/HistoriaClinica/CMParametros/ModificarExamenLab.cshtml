@@ -1,0 +1,201 @@
+﻿@model CBM_SART.Models.iso_pedido_exam_consulta_m
+
+@{
+    Layout = null;
+    SelectList list = ViewBag.SelectListParametro;
+}
+
+<div class="title-window" style="height:32px">
+    Seleciona un Exámen Laboratorio.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Datos Exámen Laboratorio</h4>
+</div>
+
+<div class="modal-body">
+    <div class="form-horizontal">
+
+        <form action="/HistoriaClinica/ActualizarExamenLab?idConsulta=@ViewBag.idConsulta" method="post" id="form-a" enctype="multipart/form-data" novalidate="novalidate">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ipc_id_consulta_medica)
+            @Html.HiddenFor(model => model.ipc_id_historia_clinica)
+            @Html.HiddenFor(model => model.ipc_id_personal)
+            @Html.HiddenFor(model => model.ipc_id_pexamen)
+            @Html.HiddenFor(model => model.ipc_id_tipo_pexamen)
+            @Html.HiddenFor(model => model.ipc_archivo)
+            @Html.HiddenFor(model => model.iso_pedido_examen)
+            @Html.HiddenFor(model => model.iso_consulta_medica)
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipc_id_tipo_pexamen, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("ipc_id_tipo_pexamen", (IEnumerable<SelectListItem>)ViewBag.SelectListTipoParametro, "-Selecionar-", new { @class = "form-control required valid", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipc_id_tipo_pexamen)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipc_id_pexamen, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("ipc_id_pexamen", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro, "-Selecionar-", new { @class = "form-control required valid", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ipc_id_pexamen)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipc_fecha, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.ipc_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker required valid" })
+                        @Html.ValidationMessageFor(model => model.ipc_fecha)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipc_descrip, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.ipc_descrip, new { @class = "form-control required valid" })
+                        @Html.ValidationMessageFor(model => model.ipc_descrip)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipc_observacion, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.ipc_observacion, new { @class = "form-control required valid" })
+                        @Html.ValidationMessageFor(model => model.ipc_observacion)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipc_ubicacion_archivo, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ipc_ubicacion_archivo, new { @class = "form-control ", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.ipc_ubicacion_archivo)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                        <input type='file' id="file2" name="file2" multiple />
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <span id="ms-error" class="text-center text-danger" style="display:none">
+                    Atención, Complete los campos necesarios
+                </span>
+                <button class="btn btn-primary " type="button" id="btn-guardar-examen-lab" name="@ViewBag.TipoParametro">Guardar</button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<input type="hidden" id="out" />
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+
+    @*$("#ipc_id_tipo_pexamen").change(function () {
+        if ($("#ipc_id_tipo_pexamen").val() != "") {
+            $.getJSON("/HistoriaClinica/ObetenerExamenLabPorTipo", { idConsulta: "@ViewBag.idConsulta", idTipo: $("#ipc_id_tipo_pexamen").val() },
+            function (results) {
+                $("#ipc_id_pexamen").empty();
+                $("#ipc_id_pexamen").prop("disabled", false);
+                $("#ipc_id_pexamen").append('<option value="">-Selecionar-</option>');
+                $.each(results, function (i, team) {
+                    $("#ipc_id_pexamen").append("<option value=" + team.Value + ">" + team.Text + "</option>");
+                });
+            });
+        }
+        else {
+            $("#ipc_id_pexamen").prop("disabled", true);
+        }
+    });*@
+
+
+
+    $("#btn-guardar-examen-lab").click(function () {
+        $("#progress").show();
+        $("#ms-error").hide();
+        var url = $("#form-a").attr("action");
+        var jForm = new FormData();
+        jForm.append("ipc_id_tipo_pexamen", $('#ipc_id_tipo_pexamen').val());
+        jForm.append("ipc_id_pexamen", $('#ipc_id_pexamen').val());
+        jForm.append("ipc_id_consulta_medica", $('#ipc_id_consulta_medica').val());
+        jForm.append("ipc_id_historia_clinica", $('#ipc_id_historia_clinica').val());
+        jForm.append("ipc_id_personal", $('#ipc_id_personal').val());
+
+        jForm.append("ipc_fecha", $('#ipc_fecha').val());
+        jForm.append("ipc_descrip", $('#ipc_descrip').val());
+        jForm.append("ipc_observacion", $('#ipc_observacion').val());
+        jForm.append("ipc_ubicacion_archivo", $('#ipc_ubicacion_archivo').val());
+        jForm.append("ipc_archivo", $('#ipc_archivo').val());        
+        jForm.append("file2", $('#file2').get(0).files[0]);
+
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: jForm,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                $('#cm_examen_lab').fadeOut(400);
+                var url_load = "@Url.Action("CmExamenLab", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+                $('#cm_examen_lab').load(url_load);
+                //Cierra el modal
+                $("#modal-container").modal('hide');
+                $('#cm_examen_lab').fadeIn(400);
+            },
+            error: function (error) {
+                $("#progress").hide();
+                $("#ms-error").show();
+                console.log('error: ' + error);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            autoclose: true
+        }); //Initialise any date pickers
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () { //////// Inicio Cargado el Documento
+        //Date Piker
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+    });
+    $(document).delegate("#file2", "change", function (e) {
+        //  readURL(this);
+        //alert($("#file1").val());
+        var fic = $("#file2").val().split('\\');
+        $("#ipc_ubicacion_archivo").val("[Base de Datos] " + fic[fic.length - 1]);
+        $("#ipc_ubicacion_archivo").addClass("valid");
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
