@@ -50,9 +50,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div id='myModalContent'></div>
+            <div id='personal-new'></div>
         </div>
     </div>
 </div>
+
+
 
 @section scripts{
     @Scripts.Render("~/scripts/appjs/phones.js")
@@ -83,6 +86,10 @@
                 }
                 location.href = link;
             });
+        });
+        $(document).ready(function () { //////// Inicio Cargado el Documento
+            //Date Piker
+            jQuery.validator.methods["date"] = function (value, element) { return true; }
         });
     </script>
 }

@@ -11,6 +11,7 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_consulta_medica
     {
@@ -31,6 +32,9 @@ namespace CBM_SART.Models
         public int icm_id_historia_clinica { get; set; }
         public int icm_id_personal { get; set; }
         public Nullable<int> icm_tipo_consulta { get; set; }
+        [Display(Name = "Fecha Consulta Médica")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> icm_fecha_consulta { get; set; }
         public string icm_motivo_consulta { get; set; }
         public string icm_observaciones { get; set; }

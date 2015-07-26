@@ -1,137 +1,77 @@
-﻿@*@model IEnumerable<CBM_SART.Models.iso_personal>*@
-@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_personal>
+﻿@model CBM_SART.Models.iso_consulta_medica
 
+@{
+    Layout = null;
+    string link = "GuardarCM";
+}
 
 <div class="title-window" style="height:32px">
-    Lista de Trabajadores
+    Selecionar Tipo de Consulta Médica
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
 <div class="modal-header">
 
-    <h4 class="modal-title">Selecione un Trabajador para ver História Clinica/Consulta Médica</h4>
+    <h4 class="modal-title">Nueva Consulta Medica</h4>
 </div>
 
-@*<div class="modal-body">
-        <table class="table">
-            <tr>
-                <th></th>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ipe_ced_ruc_personal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ipe_nombre_personal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ipe_fecha_nacimiento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ipe_apellido_paterno)
-                </th>
 
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>Ver</td>
-                    <td></td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ipe_ced_ruc_personal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ipe_nombre_personal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ipe_fecha_nacimiento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ipe_apellido_paterno)
-                    </td>
-                </tr>
-            }
-
-        </table>
-    </div>*@
-
-<div class="content-modal">
-    @using (Html.BeginForm("ListaPersonal", null, FormMethod.Get))
-    {
-        <div class="search">
-            <div class="col-md-10">
-                <div class="input-group">
-                    <input type="text"
-                           name="filter"
-                           value="@ViewBag.filter"
-                           class="form-control"
-                           style="display: inline; height:30px"
-                           placeholder="Buscar por Nombre del Personal" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-sm" data-modal="" type="submit">Buscar</button>
-                        
-                    </span>
-
+@using (Html.BeginForm(link, null, FormMethod.Post))
+{
+    <div class="modal-body">
+        <div class="form-horizontal">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.icm_id_historia_clinica)
+            @Html.HiddenFor(model => model.icm_id_personal)
+            <div class="col-md-12 grid-content">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.icm_fecha_consulta, new { @class = "control-label col-md-3" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.icm_fecha_consulta, "{0:dd/MM/yyyy}", new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker required valid" })
+                        @Html.ValidationMessageFor(model => model.icm_fecha_consulta)
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="pull-right">
-                    <a class="btn btn-success" data-modal="" href="/Personal/Create" id="btnCreate">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Nuevo
-                    </a>
+                <div class="form-group">
+                    <label class="text-center" style="width:100%">Tipo Consulta Medica</label>
+                    <div class="clear"></div>
+                    <div class="block-tipo-consulta">
+                        
+                        @foreach (CBM_SART.Models.iso_tipo_consulta_m var in ViewBag.TipoConsutla)
+                        {
+                            <label>
+                                @Html.RadioButtonFor(x => x.icm_tipo_consulta, var.itc_id_tipo_consulta_m, new { @class = "required " })
+                                @var.itc_nom_tipo_consulta_m
+                            </label>
+                        }
+                        @Html.ValidationMessageFor(model => model.icm_tipo_consulta)
+                    </div>
                 </div>
             </div>
             <div class="clear"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
-
-        <div class="col-md-12 grid-content">
-            @{
-        var grid = new WebGrid(
-                        canPage: true,
-                        rowsPerPage: Model.PageSize,
-                        canSort: true,
-                        ajaxUpdateContainerId: "grid");
-
-        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
-        grid.Pager(WebGridPagerModes.All);
-
-        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
-            fillEmptyRows: false,
-                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
-                      alternatingRowStyle: "webgrid-row-style",
-                      selectedRowStyle: "webgrid-selected-row",
-                      rowStyle: "webgrid-row-style",
-            mode: WebGridPagerModes.All,
-            columns: grid.Columns(
-              grid.Column(header: "HC", canSort: false, style: "action-hc",
-              format: @<text>
-              @if (item.iso_historia_clinica.Count == 1)
-              {
-                  @Html.Raw("<input type='hidden' href='/HistoriaClinica/Edit/" + @item.ipe_id_personal + "' id='ipe_id_personal' value='" + @item.ipe_id_personal + "' />")
-                  @Html.Raw("<img src='/images/hclinica.png' heigth=30 />")
-              }
-              else
-              {
-                  @Html.Raw("<input type='hidden' href='' id='ipe_id_personal' value='" + @item.ipe_id_personal + "' />")
-              }
-              </text>),
-              grid.Column("ipe_ced_ruc_personal", "CI/RUC", style: "col-lg-1"),
-              grid.Column("ipe_nombre_personal", "Nombre", style: "col-lg-4"),
-              grid.Column("ipe_apellido_paterno", "Apellido", style: "col-lg-4"),
-              grid.Column("ipe_fecha_nacimiento", "Fecha Nacimiento", style: "col-lg-3")
-             ));
-            }
-
-
-        </div>
-        <div class="clear"></div>
-    }
-</div>
-
-
+    </div>
+}
 <script>
     $("form").removeData("validator");
     $("form").removeData("unobtrusiveValidation");
     $.validator.unobtrusive.parse("form");
+    jQuery.validator.methods["date"] = function (value, element) { return true; }
+</script>
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            autoclose: true
+        }); //Initialise any date pickers
+    });
 </script>
 

@@ -32,7 +32,7 @@
             Historial de Consultas Médicas
         </div>
         <div class="col-md-4" style="text-align:center">
-            <a data-modal='' href='/HistoriaClinica/IngresarCM' title='Ingresar Consulta Médica'><img class="cm-image" width="90" src="/images/hc/nueva-cm.jpg" /></a>
+            <a data-modal='' href='/HistoriaClinica/IngresarCM/@Model.ihc_id_historia' title='Ingresar Consulta Médica'><img class="cm-image" width="90" src="/images/hc/nueva-cm.jpg" /></a>
             Ingresar Consulta Médica
         </div>
 
@@ -100,16 +100,16 @@
 </div>
 <div class="col-md-3" style="width:21%;">
     <span style="width: 100%; text-align: center; display: block; top: -11px; position: relative; font-weight:bold">Filtro de Historia Clinica</span>
-    <select style="width: 100%; text-align: center; position: relative; top: -9px;" class="form-control">
+    <select style="width: 100%; text-align: center; position: relative; top: -9px;" class="form-control" id="combo-consulta-medica">
         @foreach (var colsulta in Model.iso_consulta_medica)
         {
             if (ViewBag.idConsulta == colsulta.icm_id_consulta)
             {
-                <option selected>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>
+                <option value="@colsulta.icm_id_consulta" selected>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:dd/MM/yyyy}", colsulta.icm_fecha_consulta)</option>
             }
             else
             {
-                <option>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:MM/dd/yyyy}", colsulta.icm_fecha_consulta)</option>
+                <option value="@colsulta.icm_id_consulta">@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:dd/MM/yyyy}", colsulta.icm_fecha_consulta)</option>
             }
         }
     </select>
@@ -134,7 +134,7 @@
         <div class="block-tab-h col-lg-12">
             <div class="col-md-12">
                 <div class="col-md-6">
-                    <label class="label-3">Fecha Ingreso:</label>@String.Format("{0:MM/dd/yyyy}", @Model.iso_personal.ipe_fecha_ingreso)<br />
+                    <label class="label-3">Fecha Ingreso:</label>@String.Format("{0:dd/MM/yyyy}", @Model.iso_personal.ipe_fecha_ingreso)<br />
                     @*<label class="label-3">Centro de Costos:</label>@Model.iso_personal.ipe_id_centro_costo<br />*@
                     <label class="label-3">Area:</label>@if (@Model.iso_personal.iso_departamento == null || @Model.iso_personal.iso_departamento.ide_nombre_departamento == "")
                     {<span>Sin Registrar</span>}
@@ -245,6 +245,7 @@
 
 @section Scripts {
     @Scripts.Render("~/scripts/appjs/phones.js")
+    
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -333,5 +334,12 @@
                 return false;
             });
         });
+    </script>
+    <script>
+        $("#combo-consulta-medica").change(function () {
+            var link = "/HistoriaClinica/Edit/@Model.ihc_id_personal?idConsulta=" + $(this).val();
+            window.location.href = link;
+        });
+        
     </script>
 }

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using CBM_SART.Models;
 using System.Linq.Dynamic;
 using System.IO;
+using System.Globalization;
 
 namespace CBM_SART.Controllers
 {
@@ -171,6 +172,39 @@ namespace CBM_SART.Controllers
         public ActionResult Panel()
         {
             return View();
+        }
+        public ActionResult IngresarCM(int id)
+        {
+            iso_historia_clinica iso_historia_clinica = db.iso_historia_clinica.Where(x => x.ihc_id_historia == id).First();
+            ViewBag.IdHC = id;
+            iso_consulta_medica iso_consulta_medica = new iso_consulta_medica();
+            iso_consulta_medica.icm_id_historia_clinica = iso_historia_clinica.ihc_id_historia;
+            iso_consulta_medica.icm_id_personal = iso_historia_clinica.ihc_id_personal;
+            //Id 1 pertenece a consulta medica PREOCUPACIONAL
+            ViewBag.TipoConsutla = db.iso_tipo_consulta_m.Where(x => x.itc_id_tipo_consulta_m != 1).ToArray();
+            return View(iso_consulta_medica);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GuardarCM(iso_consulta_medica iso_consulta_medica)
+        {
+            if (ModelState.Count() > 1)
+            {
+                int cm_count = db.iso_consulta_medica.Where(x => x.icm_fecha_consulta == iso_consulta_medica.icm_fecha_consulta
+                    && x.icm_tipo_consulta == iso_consulta_medica.icm_tipo_consulta).Count();
+                if (cm_count == 0)
+                {
+                    db.iso_consulta_medica.Add(iso_consulta_medica);
+                    db.SaveChanges();
+                    return RedirectToAction("Edit", "HistoriaClinica", new { id = iso_consulta_medica.icm_id_personal, idConsulta = iso_consulta_medica.icm_id_consulta });
+                }
+                else
+                {
+                    iso_consulta_medica cm = db.iso_consulta_medica.Where(x => x.icm_fecha_consulta == iso_consulta_medica.icm_fecha_consulta
+                    && x.icm_tipo_consulta == iso_consulta_medica.icm_tipo_consulta).First();
+                    return RedirectToAction("Edit", "HistoriaClinica", new { id = cm.icm_id_personal, idConsulta = cm.icm_id_consulta });
+                }
+            }
+            return View("IngresarCM/" + iso_consulta_medica.icm_id_historia_clinica);
         }
         public ActionResult ListaPersonal(string filter = null, int page = 1, int pageSize = 18, string sort = "ipe_apellido_paterno", string sortdir = "ASC")
         {

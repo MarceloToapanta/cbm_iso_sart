@@ -10,50 +10,6 @@
 
     <h4 class="modal-title">Selecione un Trabajador para ver História Clinica/Consulta Médica</h4>
 </div>
-
-@*<div class="modal-body">
-        <table class="table">
-            <tr>
-                <th></th>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ipe_ced_ruc_personal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ipe_nombre_personal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ipe_fecha_nacimiento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ipe_apellido_paterno)
-                </th>
-
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>Ver</td>
-                    <td></td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ipe_ced_ruc_personal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ipe_nombre_personal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ipe_fecha_nacimiento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ipe_apellido_paterno)
-                    </td>
-                </tr>
-            }
-
-        </table>
-    </div>*@
-
 <div class="content-modal">
     @using (Html.BeginForm("ListaPersonal", null, FormMethod.Get))
     {
@@ -62,22 +18,22 @@
                 <div class="input-group">
                     <input type="text"
                            name="filter"
+                           id="filter-lista"
                            value="@ViewBag.filter"
                            class="form-control"
                            style="display: inline; height:30px"
                            placeholder="Buscar por Nombre del Personal" />
                     <span class="input-group-btn">
-                        <button class="btn btn-default btn-sm" data-modal="" type="submit">Buscar</button>
-                        
+                        <button class="btn btn-default btn-sm" id="btn-filtrar-lista" type="button">Buscar</button>
                     </span>
 
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="pull-right">
-                    <a class="btn btn-success" data-modal="" href="/Personal/Create" id="btnCreate">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Nuevo
+                    <a class="btn btn-success" data-modal="" href="/Personal/" id="btnCreate">
+                        <span class="glyphicon glyphicon-menu-right"></span>
+                        Personal
                     </a>
                 </div>
             </div>
@@ -129,9 +85,52 @@
 </div>
 
 
+
 <script>
     $("form").removeData("validator");
     $("form").removeData("unobtrusiveValidation");
     $.validator.unobtrusive.parse("form");
 </script>
+
+
+
+<script>
+    $("#btn-filtrar-lista").click(function () {
+        filter_lista();
+    });
+
+    $('#filter-lista').keypress(function (e) {
+        if (e.which == 13) {//Enter key pressed
+            filter_lista();
+            return false;
+        }
+        
+    });
+    function filter_lista() {
+        var filter = $("#filter-lista").val();
+        var url = "@Url.Action("ListaPersonal", "HistoriaClinica")?filter=" + filter;
+        $('#myModalContent').load(url);
+        return false;
+    }
+</script>
+
+
+@*<script>
+    $("#btnCreate").click(function () {
+        load_new();
+        return false;
+    });
+
+    function load_new() {
+        var url = "@Url.Action("Create", "Personal")";
+        console.log(url);
+        $(".modal-dialog").css("width", "inherit");
+        $('#myModalContent').load(url);
+        return false;
+    }
+</script>*@
+
+
+
+
 

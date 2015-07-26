@@ -39,7 +39,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ipc_fecha, new { @class = "control-label col-md-3" })
                     <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.ipc_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker required" })
+                        @Html.TextBoxFor(model => model.ipc_fecha, "{0:dd/MM/yyyy}", new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker required valid" })
                         @Html.ValidationMessageFor(model => model.ipc_fecha)
                     </div>
                 </div>
