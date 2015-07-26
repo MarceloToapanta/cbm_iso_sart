@@ -11,15 +11,24 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_sintoma_consulta_m
     {
         public int isc_id_consulta_medica { get; set; }
         public int isc_id_historia_clinica { get; set; }
         public int isc_id_personal { get; set; }
+        [Display(Name = "Signo y/o Síntoma")]
+        [Required]
         public int isc_id_sintoma { get; set; }
+        [Display(Name = "Tipo Signo y/o Síntoma")]
+        [Required]
         public int isc_id_tipo_sintoma { get; set; }
+        [Display(Name = "Tiempo")]
+        [Required]
         public string isc_tiempo_sintoma { get; set; }
+        [Display(Name = "Valor")]
+        [Required]
         public string isc_valor_sintoma { get; set; }
     
         public virtual iso_consulta_medica iso_consulta_medica { get; set; }

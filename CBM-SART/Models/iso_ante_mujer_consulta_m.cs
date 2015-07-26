@@ -11,15 +11,22 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_ante_mujer_consulta_m
     {
         public int imc_id_consulta_medica { get; set; }
         public int imc_id_historia_clinica { get; set; }
         public int imc_id_personal { get; set; }
+        [Display(Name = "Antecedente Gineco Obtétrico")]
+        [Required]
         public int imc_id_antecedente_mujer { get; set; }
+        [Display(Name = "Diagnóstico")]
+        [Required]
         public string imc_observacion { get; set; }
         public string imc_descripcion { get; set; }
+        [Display(Name = "Edad")]
+        [Required]
         public Nullable<int> imc_edad_mujer { get; set; }
     
         public virtual iso_antecedente_mujer iso_antecedente_mujer { get; set; }

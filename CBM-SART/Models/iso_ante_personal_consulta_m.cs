@@ -11,14 +11,19 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_ante_personal_consulta_m
     {
         public int ipc_id_consulta_medica { get; set; }
         public int ipc_id_historia_clinica { get; set; }
         public int ipc_id_personal { get; set; }
+        [Display(Name = "Antecedente Personal")]
+        [Required]
         public int ipc_id_antecedente_p { get; set; }
         public Nullable<short> ipc_edad { get; set; }
+        [Display(Name = "Diagnóstico")]
+        [Required]
         public string ipc_observacion { get; set; }
     
         public virtual iso_antecedente_personal iso_antecedente_personal { get; set; }

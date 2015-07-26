@@ -11,14 +11,21 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_vacuna_consulta_m
     {
         public int ivm_id_consulta_medica { get; set; }
         public int ivm_id_historia_clinica { get; set; }
         public int ivm_id_personal { get; set; }
+        [Display(Name = "Antecedente de Vacuna")]
+        [Required]
         public int ivm_id_vacuna { get; set; }
+        [Display(Name = "Dosis")]
+        [Required]
         public string ivm_dosis { get; set; }
+        [Display(Name = "Diagnóstico")]
+        [Required]
         public string ivm_observacion { get; set; }
     
         public virtual iso_antecedente_vacuna iso_antecedente_vacuna { get; set; }

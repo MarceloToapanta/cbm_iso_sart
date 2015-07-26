@@ -11,18 +11,31 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_pedido_exam_consulta_m
     {
         public int ipc_id_consulta_medica { get; set; }
         public int ipc_id_historia_clinica { get; set; }
         public int ipc_id_personal { get; set; }
+        [Display(Name = "Exámen Pedido")]
+        [Required]
         public int ipc_id_pexamen { get; set; }
+        [Display(Name = "Tipo Exámen Pedido")]
+        [Required]
         public int ipc_id_tipo_pexamen { get; set; }
+        [Display(Name = "Resultado")]
+        [Required]
         public string ipc_descrip { get; set; }
+        [Display(Name = "Fecha")]
+        [Required]
         public Nullable<System.DateTime> ipc_fecha { get; set; }
+        [Display(Name = "Observación")]
+        [Required]
         public string ipc_observacion { get; set; }
+        [Display(Name = "Archivo")]
         public string ipc_ubicacion_archivo { get; set; }
+
         public byte[] ipc_archivo { get; set; }
     
         public virtual iso_consulta_medica iso_consulta_medica { get; set; }

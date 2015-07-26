@@ -11,16 +11,27 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_habito_consulta_m
     {
         public int ihc_id_consulta_medica { get; set; }
         public int ihc_id_historia_clinica { get; set; }
         public int ihc_id_personal { get; set; }
+        [Display(Name = "Hábito")]
+        [Required]
         public int ihc_id_habito { get; set; }
+        [Display(Name = "Característica")]
+        [Required]
         public string ihc_caracteristica { get; set; }
+        [Display(Name = "Cantidad")]
+        [Required]
         public string ihc_cantidad { get; set; }
+        [Display(Name = "Frecuencia")]
+        [Required]
         public string ihc_frecuencia { get; set; }
+        [Display(Name = "Factor de Riesgo")]
+        [Required]
         public string ihc_factor_riesgo { get; set; }
         public string ihc_descripcion { get; set; }
         public string ihc_observacion { get; set; }

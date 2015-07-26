@@ -11,13 +11,18 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_sindrome_consulta_m
     {
+        [Display(Name = "Medida Antropómetrica")]
+        [Required]
         public int isd_id_sindrome { get; set; }
         public int isd_id_historia_clinica { get; set; }
         public int isd_id_personal { get; set; }
         public int isd_id_consulta_medica { get; set; }
+        [Display(Name = "Valor")]
+        [Required]
         public string isd_descripcion { get; set; }
     
         public virtual iso_consulta_medica iso_consulta_medica { get; set; }
