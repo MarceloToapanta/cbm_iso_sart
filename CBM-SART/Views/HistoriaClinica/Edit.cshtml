@@ -207,8 +207,39 @@
         </div>
     </div>
     <div class="tab-pane fade in" id="exa">
-        <div class="block-tab-h col-lg-12">
-            <p>Examenes</p>
+        <div class="block-tab-h col-lg-12" >
+            <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_ef_1"></div>
+                <div id="ms_ef_1"></div>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_ef_2"></div>
+                <div id="ms_ef_2"></div>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_ef_perimetro_abdominal"></div>
+                <div id="ms_ef_perimetro_abdominal"></div>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_ef_imc"></div>
+                <div id="ms_ef_imc"></div>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_ef_agudeza_visual_distante"></div>
+                <div id="ms_ef_agudeza_visual_distante"></div>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_ef_agudeza_visual_cerca"></div>
+                <div id="ms_ef_agudeza_visual_cerca"></div>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_ef_logometria_auditiva"></div>
+                <div id="ms_ef_logometria_auditiva"></div>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="cm-block" id="cm_ef_preguntas"></div>
+                <div id="ms_ef_preguntas"></div>
+            </div>
         </div>
     </div>
     <div class="tab-pane fade  in" id="rev">
@@ -280,7 +311,26 @@
             //Habitos
             url = "@Url.Action("CmHabito", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_habito').load(url);
-            //Examen Laboratorio
+            //Exámen Fisico
+            url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=1";
+            $('#cm_ef_1').load(url);
+            url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=2";
+            $('#cm_ef_2').load(url);
+            @*url = "@Url.Action("CmEFSignoVital", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ef_signo_vital').load(url);
+            url = "@Url.Action("CmEFPerimetroAbdominal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ef_perimetro_abdominal').load(url);
+            url = "@Url.Action("CmEFIMC", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ef_imc').load(url);
+            url = "@Url.Action("CmEFAgudezaVisualDistante", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ef_agudeza_visual_distante').load(url);
+            url = "@Url.Action("CmEFAgudezaVisualCerca", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ef_agudeza_visual_cerca').load(url);
+            url = "@Url.Action("CmEFLogometriaAuditiva", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ef_logometria_auditiva').load(url);
+            url = "@Url.Action("CmEFPreguntas", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
+            $('#cm_ef_preguntas').load(url);*@
+            //Exámen Laboratorio
             url = "@Url.Action("CmExamenLab", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_examen_lab').load(url);
         });

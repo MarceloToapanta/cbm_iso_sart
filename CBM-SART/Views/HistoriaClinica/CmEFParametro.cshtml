@@ -1,0 +1,144 @@
+﻿@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_exam_fp_consulta_m>
+@{
+    string url = "CmSigno?idConsulta=" + ViewBag.idConsulta;
+    int Tipo = ViewBag.IdTipoParametro;
+    string titulo = "";
+    switch (Tipo)
+    {
+        case 1:
+            titulo = "Aspectos Generales";
+            Console.WriteLine("Case 1");
+            break;
+        case 2:
+            titulo = "Signos Vitales";
+            Console.WriteLine("Case 2");
+            break;
+        default:
+            Console.WriteLine("Default case");
+            break;
+    }
+}
+<div class="cm-title-ant">
+    @titulo
+</div>
+
+<div class="content">
+    <div class="search">
+        <div class="col-md-10">
+            <div class="input-group">
+
+                <input type="text"
+                       id="filter-ef-@ViewBag.IdTipoParametro"
+                       name="filter"
+                       value="@ViewBag.filter"
+                       class="form-control"
+                       style="display: inline; height:30px"
+                       placeholder="Buscar por Nombre" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" id="btn-ef-@ViewBag.IdTipoParametro" type="button" style="height: 28px;">Buscar</button>
+                </span>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="pull-right">
+                <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/CrearExamenLab?idConsulta=@ViewBag.idConsulta" id="btnCreate">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Nuevo
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="col-md-12 grid-content">
+        @{
+            var grid = new WebGrid(
+                            canPage: true,
+                            rowsPerPage: Model.PageSize,
+                            canSort: true,
+                            ajaxUpdateContainerId: "grid-ef-" + ViewBag.IdTipoParametro);
+
+            grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+            grid.Pager(WebGridPagerModes.All);
+
+            @grid.GetHtml(htmlAttributes: new { id = "grid-ef-" + ViewBag.IdTipoParametro },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+                grid.Column(header: "No.", style: "",
+                format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+              grid.Column("iso_exam_fisico_parametro.ief_nombre_examen", "Nombre", canSort: false, style: "col-lg-3"),
+              grid.Column("iec_campo1", "Valor", canSort: false, style: "col-lg-3"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarExamenLab?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.iec_id_exam_fisico + "' id='" + item.iec_id_exam_fisico + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-examen-lab' data-href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.iec_id_exam_fisico + "&TipoAntecente=ExamenLab' id='" + item.iec_id_exam_fisico + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+                ));
+        }
+
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+
+
+<div class="modal fade" id="confirm-delete-ef-@ViewBag.IdTipoParametro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 350px;">
+        <div class="modal-content">
+            <div class="modal-header title-window">
+                Atención
+            </div>
+            <div class="modal-body" style="  margin: 15px 0;">
+                Esta seguro(a) de eliminar el registro selecionado?
+            </div>
+            <div class="modal-footer" style="margin: 0 12px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <a class="btn btn-danger btn-ok">Si</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ViewBag.total > 0)
+{
+    <script>
+        $('#confirm-delete-ef-@ViewBag.IdTipoParametro').on('show.bs.modal', function (e) {
+            //$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $(this).find('.btn-ok').click(function () {
+                $('#confirm-delete-ef-@ViewBag.IdTipoParametro').modal('toggle');
+                //Elimina
+                var url = $(e.relatedTarget).data('href')
+                $('#ms_cm_ef-@ViewBag.IdTipoParametro').load(url);
+                //Recargar Tablas
+                $('#cm_ef-@ViewBag.IdTipoParametro').fadeOut(400);
+                var url1 = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro";
+                $('#cm_ef-@ViewBag.IdTipoParametro').load(url1);
+                $('#cm_ef-@ViewBag.IdTipoParametro').fadeIn(400);
+            });
+
+        });
+    </script>
+}
+<script>
+    $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
+        filter_examen_lab();
+    });
+
+    $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
+        if (e.which == 13) {//Enter key pressed
+            filter_examen_lab();
+        }
+    });
+    function filter_examen_lab() {
+        var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
+        var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
+        $('#cm_ef-@ViewBag.IdTipoParametro').load(url);
+        return false;
+    }
+</script>

@@ -577,6 +577,7 @@
     <Content Include="Views\HistoriaClinica\CmExamenLab.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\CrearExamenLab.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarExamenLab.cshtml" />
+    <Content Include="Views\HistoriaClinica\CmEFParametro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

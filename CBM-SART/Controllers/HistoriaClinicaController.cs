@@ -951,6 +951,35 @@ namespace CBM_SART.Controllers
             return db.SaveChanges().ToString();
         }
         ////////////////////////////Habitos"///////////////////////////////////
+        ///////////////////////////Examen Fisico/////////////////////////////
+        public ActionResult CmEFParametro(int IdConsulta, int IdTipoParametro, string filter = null, int page = 1, int pageSize = 10, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
+        {
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records_mort = new PagedList<iso_exam_fp_consulta_m>();
+            ViewBag.filter = filter;
+            records_mort.Content = iso_consulta_medica.iso_exam_fp_consulta_m
+                        .Where(x => filter == null ||
+                                (x.iso_exam_fisico_parametro.ief_nombre_examen.ToLower().Contains(filter.ToLower().Trim())))
+                        .Where(x => x.iec_id_tipo_exam_fisico == IdTipoParametro)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+            // Count
+            records_mort.TotalRecords = iso_consulta_medica.iso_exam_fp_consulta_m
+                         .Where(x => filter == null ||
+                                (x.iso_exam_fisico_parametro.ief_nombre_examen.ToLower().Contains(filter.ToLower().Trim())))
+                        .Where(x => x.iec_id_tipo_exam_fisico == IdTipoParametro)
+                         .Count()
+                                ;
+            records_mort.CurrentPage = page;
+            records_mort.PageSize = pageSize;
+            ViewBag.total = records_mort.TotalRecords;
+            ViewBag.idConsulta = IdConsulta;
+            ViewBag.IdTipoParametro = IdTipoParametro;
+            return PartialView("CmEFParametro", records_mort);
+        }
+        ////////////////*****************Examen Fisico"*******************/////////////////////////////
         ////////////////*****************Examen Laboratorio"*******************/////////////////////////////
         public ActionResult CmExamenLab(int IdConsulta, string filter = null, int page = 1, int pageSize = 10, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
         {
