@@ -570,7 +570,7 @@ tfoot > tr > td a:hover{
  /*////////////////////////Ventanas Emergentes//////////////////////*/
  .title-window{
     border-bottom: 2px solid rgb(241, 100, 72);
-    background: url("/images/nav-dark.png");
+    background: url("/images/nav-dark.png") !important ;
     padding: 0 10px;
     color: #fff;
     font-size: 14px;

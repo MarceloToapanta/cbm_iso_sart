@@ -224,7 +224,7 @@ namespace CBM_SART.Controllers
             // Count
             records.TotalRecords = db.iso_personal
                          .Where(x => filter == null ||
-                               (x.ipe_nombre_personal.Contains(filter)) || x.ipe_apellido_paterno.Contains(filter)).Count();
+                               (x.ipe_nombre_personal.ToLower().Contains(filter.ToLower().Trim())) || x.ipe_apellido_paterno.ToLower().Contains(filter.ToLower().Trim())).Count();
 
             records.CurrentPage = page;
             records.PageSize = pageSize;
@@ -235,15 +235,50 @@ namespace CBM_SART.Controllers
             return PartialView("ListaPersonal", records);
         }
 
-        public ActionResult HistorialCM(int IdPersonal)
+        public ActionResult HistorialCM(int IdPersonal, string filter = null, int page = 1, int pageSize = 10, string sort = "icm_fecha_consulta", string sortdir = "ASC")
         {
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_consulta_medica>();
+            ViewBag.idPersonal = IdPersonal;
+            ViewBag.filter = filter;
+            records.Content = db.iso_consulta_medica
+                        .Where(x => filter == null ||
+                                (x.iso_tipo_consulta_m.itc_nom_tipo_consulta_m.ToLower().Contains(filter.ToLower().Trim())
+                                )
+                              )
+                        .Where(x => x.icm_id_personal == IdPersonal)
+                        .OrderBy(sort + " " + sortdir)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
 
-            iso_personal iso_personal = db.iso_personal.Find(IdPersonal);
-            iso_historia_clinica iso_historia_clinica = iso_personal.iso_historia_clinica.First();
-            var iso_consulta_medica = iso_historia_clinica.iso_consulta_medica.ToList();
-
-            //var Personal = db.iso_personal.ToList();
-            return PartialView("HistorialCM", iso_consulta_medica);
+            // Count
+            records.TotalRecords = db.iso_consulta_medica
+                         .Where(x => filter == null ||
+                               (x.iso_tipo_consulta_m.itc_nom_tipo_consulta_m.ToLower().Contains(filter.ToLower().Trim())))
+                          .Where(x => x.icm_id_personal == IdPersonal).Count();
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+            return PartialView("HistorialCM", records);
+        }
+        public ActionResult EliminarCM(int IdConsulta, int IdPersonal, int IdHistoria)
+        {
+            int cm = db.iso_consulta_medica
+                .Where(x => x.icm_id_consulta == IdConsulta)
+                .Where(x => x.icm_id_personal == IdPersonal)
+                .Where(x => x.icm_id_historia_clinica == IdHistoria)
+                .Count();
+            if (cm > 0) { 
+                iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica
+                    .Where(x => x.icm_id_consulta == IdConsulta)
+                    .Where(x => x.icm_id_personal == IdPersonal)
+                    .Where(x => x.icm_id_historia_clinica == IdHistoria)
+                    .First();
+                db.iso_consulta_medica.Remove(iso_consulta_medica);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Edit", "HistoriaClinica", new { id = IdPersonal});
         }
 
         public int InsertarHistoria(int IdPersonal)

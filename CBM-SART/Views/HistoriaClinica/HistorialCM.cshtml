@@ -1,5 +1,4 @@
-﻿@model IEnumerable<CBM_SART.Models.iso_consulta_medica>
-
+﻿@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_consulta_medica>
 
 
 <div class="title-window" style="height:32px">
@@ -11,43 +10,131 @@
     <h4 class="modal-title">Selecione Consulta Médica</h4>
 </div>
 
-<div class="content-modal">
-    <br />
-    <table class="table table-bordered table-hover table-responsive table-condensed" id="HistorialCM">
-        <thead>
-            <tr>
-                <th scope="col">Tipo Consulta</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var colsulta in Model)
-            {
-                <tr>
-                    <td>
-                        @colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m
-                    </td>
-                    <td>
-                        @String.Format("{0:MM/dd/yyyy}", @colsulta.icm_fecha_consulta)
-                    </td>
-                    <td>
-                        <a data-modal='' href='/HistoriaClinica/Edit/@colsulta.icm_id_personal?idConsulta=@colsulta.icm_id_consulta' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>
-                        <a data-modal='' href='/Cargo/delete/1' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>
-                    </td>
-                </tr>
 
+<div class="modal-body">
+    <div class="content">
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    <input type="text"
+                           id="filter-consulta"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Tipo de Consulta Médica" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" id="btn-consulta" type="button" style="height: 28px;">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="modal-link btn btn-success" data-dismiss="modal" data-modal="" href="/HistoriaClinica/IngresarCM/@Model.Content.First().icm_id_historia_clinica" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="col-md-12 grid-content">
+            @{
+                var grid = new WebGrid(
+                                canPage: true,
+                                rowsPerPage: Model.PageSize,
+                                canSort: true,
+                                ajaxUpdateContainerId: "grid-consulta");
+
+                grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+                grid.Pager(WebGridPagerModes.All);
+
+                @grid.GetHtml(htmlAttributes: new { id = "grid-consulta" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+                grid.Column(header: "No.", style: "",
+                format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+              grid.Column("iso_tipo_consulta_m.itc_nom_tipo_consulta_m", "Tipo Consulta", canSort: false, style: "col-lg-8"),
+              grid.Column("icm_fecha_consulta", "Fecha", canSort: false, style: "col-lg-2", format: (item) => string.Format("{0:dd/MM/yyyy}", item.icm_fecha_consulta)),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a href='/HistoriaClinica/Edit/" + item.icm_id_personal + "?idConsulta=" + item.icm_id_consulta + "' id='" + item.icm_id_consulta + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-consulta' data-href='/HistoriaClinica/EliminarCM?IdConsulta=" + item.icm_id_consulta + "&IdPersonal=" + item.icm_id_personal + "&IdHistoria=" + item.icm_id_historia_clinica + "' id='" + item.icm_id_consulta + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+                                          ));
             }
-        </tbody>
-    </table>
+            <br />
+        </div>
+        <div class="">
+            
+            <div class="clear"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="paging1 paging pagination-datatables pagination pagination-centered"></div>
 
-<script type="text/javascript" src="/Scripts/Datatable/datatable.js"></script>
-<link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable-bootstrap.css">
-<link rel="stylesheet" type="text/css" href="/Content/Datatable/datatable.css">
+<div class="modal fade" id="confirm-delete-consulta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 350px;">
+        <div class="modal-content">
+            <div class="modal-header title-window">
+                Atención
+            </div>
+            <div class="modal-body" style="  margin: 15px 0;">
+                Esta seguro(a) de eliminar el registro selecionado?
+            </div>
+            <div class="modal-footer" style="margin: 0 12px;">
+                <button type="button" class="btn btn-default btn-no">No</button>
+                <a class="btn btn-danger btn-ok">Si</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+@if (ViewBag.total > 0)
+{
+    <script>
+        $('#confirm-delete-consulta').on('show.bs.modal', function (e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            $(this).find('.btn-no').click(function () {
+                $('#confirm-delete-consulta').modal('toggle');
+                var url = "@Url.Action("HistorialCM", "HistoriaClinica")?IdPersonal=@ViewBag.idPersonal";
+                $('#myModalContent').load(url);
+            });
+        });
+    </script>
+}
+<script>
+    $("#btn-consulta").click(function () {
+        filter_consulta();
+    });
 
+    $('#filter-consulta').keypress(function (e) {
+        if (e.which == 13) {//Enter key pressed
+            filter_consulta();
+        }
+    });
+    function filter_consulta() {
+        var filter = $("#filter-consulta").val();
+        var url = "@Url.Action("HistorialCM", "HistoriaClinica")?IdPersonal=@ViewBag.idPersonal&filter=" + filter;
+        $('#myModalContent').load(url);
+        return false;
+    }
 </script>

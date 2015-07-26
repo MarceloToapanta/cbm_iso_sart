@@ -11,7 +11,7 @@
 </div>
 <div class="modal-header">
 
-    <h4 class="modal-title">Nueva Consulta Medica</h4>
+    <h4 class="modal-title">Nueva Consulta Médica</h4>
 </div>
 
 
@@ -30,6 +30,12 @@
                         @Html.TextBoxFor(model => model.icm_fecha_consulta, "{0:dd/MM/yyyy}", new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker required valid" })
                         @Html.ValidationMessageFor(model => model.icm_fecha_consulta)
                     </div>
+                    @*<div class="col-md-3">
+                        <a class="modal-link btn btn-success" data-dismiss="modal" data-modal="" href="/HistoriaClinica/HistorialCM?IdPersonal=@Model.icm_id_personal" id="btnCreate">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Historial
+                        </a>
+                    </div>*@
                 </div>
                 <div class="form-group">
                     <label class="text-center" style="width:100%">Tipo Consulta Medica</label>
