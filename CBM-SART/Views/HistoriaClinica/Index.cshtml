@@ -11,7 +11,7 @@
 <div class="seccion-barra">
     <img src="~/images/label-plain-black.png" height="24" width="24" />
     Informacion de las Historias Clinicas registradas.
-    <span class="text-count">Nro. de  HC : @ViewBag.total</span>
+    <span class="text-count">Nro. de  Historias Clinicas : @ViewBag.total</span>
 </div>
 
 <div class="content">
@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-2">
                 <div class="pull-right">
-                    <a class="btn btn-success" data-modal="" href="/HistoriaClinica/Create" id="btnCreate">
+                    <a class="btn btn-success" data-modal="" href="/HistoriaClinica/ListaPersonal" id="btnCreate">
                         <span class="glyphicon glyphicon-plus"></span>
                         Nuevo
                     </a>
@@ -69,8 +69,7 @@
               grid.Column("ihc_fecha_historia_clinica", "Fecha Creación", style: "col-lg-2", format: (item) => string.Format("{0:dd/MM/yyyy}", item.ihc_fecha_historia_clinica)),
               grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
-                @Html.Raw("<a data-modal='' href='/HistoriaClinica/details/" + item.ihc_id_historia + "' id='" + item.ihc_id_historia + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
-                @Html.Raw("<a data-modal='' href='/HistoriaClinica/edit/" + item.ihc_id_historia + "' id='" + item.ihc_id_historia + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a href='/HistoriaClinica/edit/" + item.ihc_id_personal + "' id='" + item.ihc_id_personal + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
                 @Html.Raw("<a data-modal='' href='/HistoriaClinica/delete/" + item.ihc_id_historia + "' id='" + item.ihc_id_historia + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                     </text>)
 
@@ -83,7 +82,12 @@
     }
 </div>
 
-<div id='myModal' class='modal fade in' tabindex='-1'>
+<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-content" style="width: 40%; margin: 50px auto; overflow: hidden; ">
+    </div>
+</div>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in' tabindex='-1' role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div id='myModalContent'></div>
@@ -91,8 +95,37 @@
     </div>
 </div>
 
-
 @section scripts{
     @Scripts.Render("~/scripts/appjs/phones.js")
+
+<script type="text/javascript">
+    $(function () {
+        $(document).delegate(".webgrid-row-style", "click", function (e) {
+            var link = $(this).find('td:first #ipe_id_personal').attr('href');
+            var id = $(this).find('td:first #ipe_id_personal').val();
+            //Si no tiene link, crea la historia y redirecciona
+            if (link == "") {
+                if (confirm('El Empleado selecionado no registra una Historia Clinica, Desea crear una con la fecha actual?')) {
+                    var url = "/HistoriaClinica/InsertarHistoria?IdPersonal=" + id;
+                    console.log(url);
+                    $.get(url, function (IdHistoriaClinica) {
+                        console.log(IdHistoriaClinica);
+                        if (IdHistoriaClinica != "") {
+                            link = "/HistoriaClinica/Edit/" + id;
+                            location.href = link;
+                        } else {
+                            link = "/HistoriaClinica/Panel";
+                            location.href = link;
+                        }
+                    }, 'html');
+                } else {
+                    return false;
+                }
+            }
+            location.href = link;
+        });
+    });
+
+</script>
 
 }

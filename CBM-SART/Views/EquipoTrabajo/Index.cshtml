@@ -26,7 +26,7 @@
                        style="display: inline; height:30px"
                        placeholder="Buscar por Nombre del Equipo" />
                 <span class="input-group-btn">
-                    <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    <button class="btn btn-default btn-sm" style="height: 28px;" type="submit">Buscar</button>
                 </span>
 
             </div>
@@ -61,7 +61,7 @@
             grid.Column("iep_stock", "Stock",  style: "col-lg-1"),
             grid.Column(header: "Imagen Equipo", canSort: false, style: "col-lg-2",
               format: @<text>
-                @Html.Raw("<img style='max-width: 200px; max-height: 150px' src=" + @Url.Action("GetImage", "EquipoTrabajo", new { ID = item.iep_id_equipo_p }) + " />")
+                @Html.Raw("<img style='max-width: 50px; max-height: 50px' src=" + @Url.Action("GetImage", "EquipoTrabajo", new { ID = item.iep_id_equipo_p }) + " />")
               </text>),
             
             grid.Column(header: "Acción", canSort: false, style: "action",

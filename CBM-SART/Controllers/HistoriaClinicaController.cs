@@ -280,7 +280,11 @@ namespace CBM_SART.Controllers
             }
             return RedirectToAction("Edit", "HistoriaClinica", new { id = IdPersonal});
         }
-
+        public ActionResult SetVariable(string key, string value)
+        {
+            Session[key] = value;
+            return this.Json(new { success = true });
+        }
         public int InsertarHistoria(int IdPersonal)
         {
             //Si existe la historia

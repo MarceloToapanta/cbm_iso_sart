@@ -958,6 +958,9 @@ form textarea{
 /*///////////////Fin Peronal//////////////////////*/
 
 /*///////////////Historias Clinicas//////////////////////*/
+a{
+    cursor: pointer;
+}
 .block-tipo-consulta{
     border: 1px solid #ccc;
     background: #eee;

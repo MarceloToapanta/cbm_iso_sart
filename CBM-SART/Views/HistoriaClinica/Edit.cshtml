@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     Session["Sidebar"] = "VigilaciaSalud";
     Session["SidebarSelect"] = "Historia";
-    Session["TabSelect"] = "lab";
+    //Session["TabSelect"] = "lab";
 }
 
 <div class="col-md-12">
@@ -250,7 +250,13 @@
 
         $(document).ready(function () {
             var tab = "@Session["TabSelect"]";
-            console.log(tab);
+            if (tab == "") {
+                tab = "inf";
+                $.post('/HistoriaClinica/SetVariable',
+                  { key: "TabSelect", value: tab }, function (data) {
+                      console.log("Success " + data.success);
+                  });
+            }
             $('a[href="#' + tab + '"]').tab('show');
 
 
@@ -280,8 +286,11 @@
         });
 
         $('ul.nav.nav-tabs li a').on('click', function () {
-            console.log($(this).attr('href'));
-            //@Session["TabSelect"] = $(this).attr('href');
+            var val = $(this).attr('href').replace("#","");
+            $.post('/HistoriaClinica/SetVariable',
+              { key: "TabSelect", value: val }, function (data) {
+                  console.log("Success " + data.success);
+              });
         });
         $(function () {
             $(document).delegate(".webgrid-row-style", "click", function (e) {
