@@ -7,14 +7,30 @@
     {
         case 1:
             titulo = "Aspectos Generales";
-            Console.WriteLine("Case 1");
             break;
         case 2:
             titulo = "Signos Vitales";
-            Console.WriteLine("Case 2");
+            break;
+        case 3:
+            titulo = "Perímetro Abdominal";
+            break;
+        case 4:
+            titulo = "Indice de Masa Corporal";
+            break;
+        case 5:
+            titulo = "Agudeza Visual: Distante";
+            break;
+        case 6:
+            titulo = "Agudeza Visual: Cerca";
+            break;
+        case 7:
+            titulo = "Longometría Auditiva";
+            break;
+        case 9:
+            titulo = "Preguntas de Exámen Físico";
             break;
         default:
-            Console.WriteLine("Default case");
+            Console.WriteLine("No valido");
             break;
     }
 }
@@ -26,7 +42,6 @@
     <div class="search">
         <div class="col-md-10">
             <div class="input-group">
-
                 <input type="text"
                        id="filter-ef-@ViewBag.IdTipoParametro"
                        name="filter"
@@ -42,7 +57,7 @@
         </div>
         <div class="col-md-2">
             <div class="pull-right">
-                <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/CrearExamenLab?idConsulta=@ViewBag.idConsulta" id="btnCreate">
+                <a class="modal-link btn btn-success" data-modal="" href="/HistoriaClinica/CrearEFParametro?idConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro" id="btnCreate">
                     <span class="glyphicon glyphicon-plus"></span>
                     Nuevo
                 </a>
@@ -62,21 +77,61 @@
             grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
             grid.Pager(WebGridPagerModes.All);
 
-            @grid.GetHtml(htmlAttributes: new { id = "grid-ef-" + ViewBag.IdTipoParametro },   // id for ajaxUpdateContainerId parameter
+            //Arreglo de Columnas a mostrar en el grid
+            var gridColumns = new List<WebGridColumn>();
+            gridColumns.Add(grid.Column(header: "No.", style: "col-lg-1",
+            format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex));
+            gridColumns.Add(grid.Column("iso_exam_fisico_parametro.ief_nombre_examen", "Nombre", canSort: false, style: "col-lg-4"));
+
+            switch (Tipo)
+            {
+                case 1:
+                    gridColumns.Add(grid.Column("iec_campo1", "Valor", canSort: false, style: "col-lg-6"));
+                    break;
+                case 2:
+                    gridColumns.Add(grid.Column("iec_campo1", "Valor", canSort: false, style: "col-lg-1"));
+                    gridColumns.Add(grid.Column("iec_campo2", "Riesgo", canSort: false, style: "col-lg-1"));
+                    gridColumns.Add(grid.Column("iec_campo3", "Clasificación", canSort: false, style: "col-lg-2"));
+                    break;
+                case 3:
+                    gridColumns.Add(grid.Column("iec_campo1", "Valor", canSort: false, style: "col-lg-1"));
+                    break;
+                case 4:
+                    gridColumns.Add(grid.Column("iec_campo1", "Valor", canSort: false, style: "col-lg-1"));
+                    break;
+                case 5:
+                    gridColumns.Add(grid.Column("iec_campo1", "Rango", canSort: false, style: "col-lg-2"));
+                    gridColumns.Add(grid.Column("iec_campo2", "C. Lente", canSort: false, style: "col-lg-2"));
+                    gridColumns.Add(grid.Column("iec_campo3", "S. Lente", canSort: false, style: "col-lg-2"));
+                    break;
+                case 6:
+                    gridColumns.Add(grid.Column("iec_campo1", "Rango", canSort: false, style: "col-lg-2"));
+                    gridColumns.Add(grid.Column("iec_campo2", "C. Lente", canSort: false, style: "col-lg-2"));
+                    gridColumns.Add(grid.Column("iec_campo3", "S. Lente", canSort: false, style: "col-lg-2"));
+                    break;
+                case 7:
+                    gridColumns.Add(grid.Column("iec_campo1", "Rango", canSort: false, style: "col-lg-2"));
+                    gridColumns.Add(grid.Column("iec_campo2", "Tomo", canSort: false, style: "col-lg-2"));
+                    gridColumns.Add(grid.Column("iec_campo3", "Descripcion", canSort: false, style: "col-lg-2"));
+                    break;
+                case 9:
+                    gridColumns.Add(grid.Column("iec_campo2", "Detalle", canSort: false, style: "col-lg-2"));
+                    
+                    break;
+            }
+            
+            gridColumns.Add(grid.Column(header: "Acción", canSort: false, style: "action",
+                 format: @<text>
+                    @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarEFParametro?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.iec_id_exam_fisico + "&idTipoParametro=" + item.iec_id_tipo_exam_fisico + "' id='" + item.iec_id_exam_fisico + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                    @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-ef-"+ ViewBag.IdTipoParametro + "' data-href='/HistoriaClinica/EliminarEFParametro?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.iec_id_exam_fisico + "&IdTipoParametro=" + item.iec_id_tipo_exam_fisico + "' id='" + item.iec_id_exam_fisico + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                </text>));
+
+
+                @grid.GetHtml(htmlAttributes: new { id = "grid-ef-" + ViewBag.IdTipoParametro },   // id for ajaxUpdateContainerId parameter
             fillEmptyRows: false,
                       tableStyle: "table table-bordered table-hover table-responsive table-condensed",
             mode: WebGridPagerModes.All,
-            columns: grid.Columns(
-                grid.Column(header: "No.", style: "",
-                format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
-              grid.Column("iso_exam_fisico_parametro.ief_nombre_examen", "Nombre", canSort: false, style: "col-lg-3"),
-              grid.Column("iec_campo1", "Valor", canSort: false, style: "col-lg-3"),
-              grid.Column(header: "Acción", canSort: false, style: "action",
-                     format: @<text>
-                @Html.Raw("<a class='modal-link' data-modal='' href='/HistoriaClinica/ModificarExamenLab?idConsulta=" + ViewBag.idConsulta + "&IdParametro=" + item.iec_id_exam_fisico + "' id='" + item.iec_id_exam_fisico + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
-                @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-examen-lab' data-href='/HistoriaClinica/EliminarAntecente?IdConsulta=" + ViewBag.idConsulta + "&IdAntecente=" + item.iec_id_exam_fisico + "&TipoAntecente=ExamenLab' id='" + item.iec_id_exam_fisico + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
-                    </text>)
-                ));
+            columns: grid.Columns(gridColumns.ToArray()));
         }
 
 
@@ -114,31 +169,173 @@
                 $('#confirm-delete-ef-@ViewBag.IdTipoParametro').modal('toggle');
                 //Elimina
                 var url = $(e.relatedTarget).data('href')
-                $('#ms_cm_ef-@ViewBag.IdTipoParametro').load(url);
+                $('#ms_ef_@ViewBag.IdTipoParametro').load(url);
                 //Recargar Tablas
-                $('#cm_ef-@ViewBag.IdTipoParametro').fadeOut(400);
+                $('#cm_ef_@ViewBag.IdTipoParametro').fadeOut(400);
                 var url1 = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro";
-                $('#cm_ef-@ViewBag.IdTipoParametro').load(url1);
-                $('#cm_ef-@ViewBag.IdTipoParametro').fadeIn(400);
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url1);
+                $('#cm_ef_@ViewBag.IdTipoParametro').fadeIn(400);
             });
 
         });
     </script>
 }
-<script>
-    $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
-        filter_examen_lab();
-    });
 
-    $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
-        if (e.which == 13) {//Enter key pressed
-            filter_examen_lab();
-        }
-    });
-    function filter_examen_lab() {
-        var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
-        var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
-        $('#cm_ef-@ViewBag.IdTipoParametro').load(url);
-        return false;
+@{
+    switch (Tipo)
+    {
+        case 1:
+        <script>
+            $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
+                filter_ef_1();
+            });
+
+            $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
+                if (e.which == 13) {//Enter key pressed
+                    filter_ef_1();
+                }
+            });
+            function filter_ef_1() {
+                var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
+                var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url);
+                return false;
+            }
+        </script>
+            break;
+        case 2:
+        <script>
+            $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
+                filter_ef_2();
+            });
+
+            $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
+                if (e.which == 13) {//Enter key pressed
+                    filter_ef_2();
+                }
+            });
+            function filter_ef_2() {
+                var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
+                var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url);
+                return false;
+            }
+        </script>
+            break;
+        case 3:
+        <script>
+            $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
+                filter_ef_3();
+            });
+
+            $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
+                if (e.which == 13) {//Enter key pressed
+                    filter_ef_3();
+                }
+            });
+            function filter_ef_3() {
+                var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
+                var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url);
+                return false;
+            }
+        </script>
+            break;
+        case 4:
+        <script>
+            $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
+                filter_ef_4();
+            });
+
+            $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
+                if (e.which == 13) {//Enter key pressed
+                    filter_ef_4();
+                }
+            });
+            function filter_ef_4() {
+                var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
+                var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url);
+                return false;
+            }
+        </script>
+            break;
+        case 5:
+        <script>
+            $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
+                filter_ef_5();
+            });
+
+            $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
+                if (e.which == 13) {//Enter key pressed
+                    filter_ef_5();
+                }
+            });
+            function filter_ef_5() {
+                var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
+                var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url);
+                return false;
+            }
+        </script>
+            break;
+        case 6:
+        <script>
+            $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
+                filter_ef_6();
+            });
+
+            $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
+                if (e.which == 13) {//Enter key pressed
+                    filter_ef_6();
+                }
+            });
+            function filter_ef_6() {
+                var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
+                var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url);
+                return false;
+            }
+        </script>
+            break;
+        case 7:
+        <script>
+            $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
+                filter_ef_7();
+            });
+
+            $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
+                if (e.which == 13) {//Enter key pressed
+                    filter_ef_7();
+                }
+            });
+            function filter_ef_7() {
+                var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
+                var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url);
+                return false;
+            }
+        </script>
+            break;
+        case 9:
+        <script>
+            $("#btn-ef-@ViewBag.IdTipoParametro").click(function () {
+                filter_ef_9();
+            });
+
+            $('#filter-ef-@ViewBag.IdTipoParametro').keypress(function (e) {
+                if (e.which == 13) {//Enter key pressed
+                    filter_ef_9();
+                }
+            });
+            function filter_ef_9() {
+                var filter = $("#filter-ef-@ViewBag.IdTipoParametro").val();
+                var url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro&filter=" + filter;
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url);
+                return false;
+            }
+        </script>
+
+            break;
     }
-</script>
+}

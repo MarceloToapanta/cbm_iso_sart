@@ -578,6 +578,8 @@
     <Content Include="Views\HistoriaClinica\CMParametros\CrearExamenLab.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarExamenLab.cshtml" />
     <Content Include="Views\HistoriaClinica\CmEFParametro.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\CrearEFParametro.cshtml" />
+    <Content Include="Views\HistoriaClinica\CMParametros\ModificarEFParametro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

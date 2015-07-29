@@ -165,24 +165,24 @@
         <div class="block-tab-h col-md-12">
             <div class="col-md-12" style="margin-bottom: 10px;">
                 <div class="cm-block" id="cm_ante_personal"></div>
-                <div id="ms_cm_ante_personal"></div>
+                <div id="ms_cm_ante_personal" class="delete-record"></div>
             </div>
             <div class="col-md-6">
                 <div class="cm-block" id="cm_ante_familiar_morb"></div>
-                <div id="ms_cm_ante_familiar_morb"></div>
+                <div id="ms_cm_ante_familiar_morb" class="delete-record"></div>
             </div>
             <div class="col-md-6">
                 <div class="cm-block" id="cm_ante_familiar_mort"></div>
-                <div id="ms_cm_ante_familiar_mort"></div>
+                <div id="ms_cm_ante_familiar_mort" class="delete-record"></div>
             </div>
 
             <div class="col-md-12" style="margin-top: 10px;">
                 <div class="cm-block" id="cm_ante_vacuna"></div>
-                <div id="ms_cm_ante_vacuna"></div>
+                <div id="ms_cm_ante_vacuna" class="delete-record"></div>
             </div>
             <div class="col-md-12" style="margin-top: 10px;">
                 <div class="cm-block" id="cm_ante_mujer"></div>
-                <div id="ms_cm_ante_mujer"></div>
+                <div id="ms_cm_ante_mujer" class="delete-record"></div>
             </div>
         </div>
     </div>
@@ -190,11 +190,11 @@
         <div class="block-tab-h col-lg-12">
             <div class="col-md-12" style="margin-bottom: 10px;">
                 <div class="cm-block" id="cm_signo"></div>
-                <div id="ms_cm_signo"></div>
+                <div id="ms_cm_signo" class="delete-record"></div>
             </div>
             <div class="col-md-12" style="margin-bottom: 10px;">
                 <div class="cm-block" id="cm_sindrome"></div>
-                <div id="ms_cm_sindrome"></div>
+                <div id="ms_cm_sindrome" class="delete-record"></div>
             </div>
         </div>
     </div>
@@ -202,7 +202,7 @@
         <div class="block-tab-h col-lg-12">
             <div class="col-md-12" style="margin-bottom: 10px;">
                 <div class="cm-block" id="cm_habito"></div>
-                <div id="ms_cm_habito"></div>
+                <div id="ms_cm_habito" class="delete-record"></div>
             </div>
         </div>
     </div>
@@ -210,35 +210,35 @@
         <div class="block-tab-h col-lg-12" >
             <div class="col-md-6" style="margin-bottom: 10px;">
                 <div class="cm-block" id="cm_ef_1"></div>
-                <div id="ms_ef_1"></div>
+                <div id="ms_ef_1" class="delete-record"></div>
             </div>
             <div class="col-md-6" style="margin-bottom: 10px;">
                 <div class="cm-block" id="cm_ef_2"></div>
-                <div id="ms_ef_2"></div>
+                <div id="ms_ef_2" class="delete-record"></div>
             </div>
             <div class="col-md-6" style="margin-bottom: 10px;">
-                <div class="cm-block" id="cm_ef_perimetro_abdominal"></div>
-                <div id="ms_ef_perimetro_abdominal"></div>
+                <div class="cm-block" id="cm_ef_3"></div>
+                <div id="ms_ef_3" class="delete-record"></div>
             </div>
             <div class="col-md-6" style="margin-bottom: 10px;">
-                <div class="cm-block" id="cm_ef_imc"></div>
-                <div id="ms_ef_imc"></div>
+                <div class="cm-block" id="cm_ef_4"></div>
+                <div id="ms_ef_4" class="delete-record"></div>
             </div>
             <div class="col-md-6" style="margin-bottom: 10px;">
-                <div class="cm-block" id="cm_ef_agudeza_visual_distante"></div>
-                <div id="ms_ef_agudeza_visual_distante"></div>
+                <div class="cm-block" id="cm_ef_5"></div>
+                <div id="ms_ef_5" class="delete-record"></div>
             </div>
             <div class="col-md-6" style="margin-bottom: 10px;">
-                <div class="cm-block" id="cm_ef_agudeza_visual_cerca"></div>
-                <div id="ms_ef_agudeza_visual_cerca"></div>
+                <div class="cm-block" id="cm_ef_6"></div>
+                <div id="ms_ef_6" class="delete-record"></div>
             </div>
             <div class="col-md-6" style="margin-bottom: 10px;">
-                <div class="cm-block" id="cm_ef_logometria_auditiva"></div>
-                <div id="ms_ef_logometria_auditiva"></div>
+                <div class="cm-block" id="cm_ef_7"></div>
+                <div id="ms_ef_7" class="delete-record"></div>
             </div>
             <div class="col-md-6" style="margin-bottom: 10px;">
-                <div class="cm-block" id="cm_ef_preguntas"></div>
-                <div id="ms_ef_preguntas"></div>
+                <div class="cm-block" id="cm_ef_9"></div>
+                <div id="ms_ef_9" class="delete-record"></div>
             </div>
         </div>
     </div>
@@ -251,7 +251,7 @@
         <div class="block-tab-h col-lg-12">
             <div class="col-md-12" style="margin-bottom: 10px;">
                 <div class="cm-block" id="cm_examen_lab"></div>
-                <div id="ms_cm_examen_lab"></div>
+                <div id="ms_cm_examen_lab" class="delete-record"></div>
             </div>
         </div>
     </div>
@@ -316,20 +316,18 @@
             $('#cm_ef_1').load(url);
             url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=2";
             $('#cm_ef_2').load(url);
-            @*url = "@Url.Action("CmEFSignoVital", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-            $('#cm_ef_signo_vital').load(url);
-            url = "@Url.Action("CmEFPerimetroAbdominal", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-            $('#cm_ef_perimetro_abdominal').load(url);
-            url = "@Url.Action("CmEFIMC", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-            $('#cm_ef_imc').load(url);
-            url = "@Url.Action("CmEFAgudezaVisualDistante", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-            $('#cm_ef_agudeza_visual_distante').load(url);
-            url = "@Url.Action("CmEFAgudezaVisualCerca", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-            $('#cm_ef_agudeza_visual_cerca').load(url);
-            url = "@Url.Action("CmEFLogometriaAuditiva", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-            $('#cm_ef_logometria_auditiva').load(url);
-            url = "@Url.Action("CmEFPreguntas", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
-            $('#cm_ef_preguntas').load(url);*@
+            url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=3";
+            $('#cm_ef_3').load(url);
+            url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=4";
+            $('#cm_ef_4').load(url);
+            url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=5";
+            $('#cm_ef_5').load(url);
+            url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=6";
+            $('#cm_ef_6').load(url);
+            url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=7";
+            $('#cm_ef_7').load(url);
+            url = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=9";
+            $('#cm_ef_9').load(url);
             //Exámen Laboratorio
             url = "@Url.Action("CmExamenLab", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta";
             $('#cm_examen_lab').load(url);

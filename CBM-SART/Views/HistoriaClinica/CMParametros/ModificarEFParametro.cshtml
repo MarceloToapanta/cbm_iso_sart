@@ -1,0 +1,291 @@
+﻿@model CBM_SART.Models.iso_exam_fp_consulta_m
+
+@{
+
+    int Tipo = ViewBag.IdTipoParametro;
+    string titulo = "";
+    switch (Tipo)
+    {
+        case 1:
+            titulo = "Aspectos Generales";
+            break;
+        case 2:
+            titulo = "Signos Vitales";
+            break;
+        case 3:
+            titulo = "Perímetro Abdominal";
+            break;
+        case 4:
+            titulo = "Indice de Masa Corporal";
+            break;
+        case 5:
+            titulo = "Agudeza Visual: Distante";
+            break;
+        case 6:
+            titulo = "Agudeza Visual: Cerca";
+            break;
+        case 7:
+            titulo = "Longometría Auditiva";
+            break;
+        case 9:
+            titulo = "Preguntas de Exámen Física";
+            break;
+        default:
+            Console.WriteLine("No valido");
+            break;
+    }
+}
+
+<div class="title-window" style="height:32px">
+    Seleciona un @titulo.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Nuevo @titulo</h4>
+</div>
+
+<div class="modal-body">
+    <div class="form-horizontal">
+
+        <form action="/HistoriaClinica/ActualizarEFParametro" method="post" id="form">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.iec_id_consulta_medica)
+            @Html.HiddenFor(model => model.iec_id_historia_clinica)
+            @Html.HiddenFor(model => model.iec_id_personal)
+            @Html.HiddenFor(model => model.iec_id_exam_fisico)
+            @Html.HiddenFor(model => model.iec_id_tipo_exam_fisico)
+            @Html.HiddenFor(model => model.iso_exam_fisico_parametro)
+            @Html.HiddenFor(model => model.iso_consulta_medica)
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.iec_id_tipo_exam_fisico, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("iec_id_tipo_exam_fisico", (IEnumerable<SelectListItem>)ViewBag.SelectListTipoParametro, "-Selecionar-", new { @class = "form-control required", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.iec_id_tipo_exam_fisico)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.iec_id_exam_fisico, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("iec_id_exam_fisico", (IEnumerable<SelectListItem>)ViewBag.SelectListParametro, "-Selecionar-", new { @class = "form-control required valid" })
+                        @Html.ValidationMessageFor(model => model.iec_id_exam_fisico)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+
+                @{
+                    switch (Tipo)
+                    {
+                        case 1:
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.iec_campo1, "Valor", new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(model => model.iec_campo1, new { @class = "form-control required valid" })
+                                    @Html.ValidationMessageFor(model => model.iec_campo1)
+                                </div>
+                            </div>
+                            break;
+                        case 2:
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo1, "Valor", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo1, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo1)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo2, "Riesgo", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo2, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo2)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo3, "Clasificación", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo3, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo3)
+                            </div>
+                        </div>
+                            break;
+                        case 3:
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo1, "Valor", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo1, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo1)
+                            </div>
+                        </div>
+                            break;
+                        case 4:
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo1, "Valor", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo1, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo1)
+                            </div>
+                        </div>
+                            break;
+                        case 5:
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo1, "Rango", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo1, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo1)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo2, "C. Lente", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo2, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo2)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo3, "S. Lente", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo3, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo3)
+                            </div>
+                        </div>
+                            break;
+                        case 6:
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo1, "Rango", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo1, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo1)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo2, "C. Lente", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo2, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo2)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo3, "S. Lente", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo3, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo3)
+                            </div>
+                        </div>
+                            break;
+                        case 7:
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo1, "Rango", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo1, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo1)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo2, "Tomo", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo2, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo2)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo3, "Descripcion", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo3, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo3)
+                            </div>
+                        </div>
+                            break;
+                        case 9:
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.iec_campo2, "Detalle", new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.iec_campo2, new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.iec_campo2)
+                            </div>
+                        </div>
+
+                            break;
+                    }
+                }
+
+
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <span id="ms-error" class="text-center text-danger" style="display:none">
+                    Atención, Complete los campos necesarios
+                </span>
+                <button class="btn btn-primary " type="button" id="btn-guardar-ef-@ViewBag.IdTipoParametro" name="@ViewBag.TipoParametro">Guardar</button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<input type="hidden" id="out" />
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+
+    @*$("#isc_id_tipo_sintoma").change(function () {
+        if ($("#isc_id_tipo_sintoma").val() != ""){
+            $.getJSON("/HistoriaClinica/ObetenerSignoPorTipo", { idConsulta: "@ViewBag.idConsulta", idTipo: $("#isc_id_tipo_sintoma").val() },
+            function (results) {
+                console.log($("#isc_id_tipo_sintoma").val());
+                $("#isc_id_sintoma").empty();
+                $("#isc_id_sintoma").prop("disabled", false);
+                $("#isc_id_sintoma").append('<option value="">-Selecionar-</option>');
+                $.each(results, function(i, team) {
+                    $("#isc_id_sintoma").append("<option value=" + team.Value + ">" + team.Text + "</option>");
+                });
+            });
+        }
+        else {
+            $("#isc_id_sintoma").prop("disabled", true);
+        }
+    });*@
+
+
+
+    $("#btn-guardar-ef-@ViewBag.IdTipoParametro").click(function () {
+        $("#progress").show();
+        $("#ms-error").hide();
+        var url = $("#form").attr("action");
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: $('#form').serialize(),
+            success: function (data) {
+                $('#cm_ef_@ViewBag.IdTipoParametro').fadeOut(400);
+                var url_load = "@Url.Action("CmEFParametro", "HistoriaClinica")?IdConsulta=@ViewBag.idConsulta&IdTipoParametro=@ViewBag.IdTipoParametro";
+                $('#cm_ef_@ViewBag.IdTipoParametro').load(url_load);
+                //Cierra el modal
+                $("#modal-container").modal('hide');
+                $('#cm_ef_@ViewBag.IdTipoParametro').fadeIn(400);
+            },
+            error: function (error) {
+                $("#progress").hide();
+                $("#ms-error").show();
+                console.log('error: ' + error);
+            }
+        });
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+

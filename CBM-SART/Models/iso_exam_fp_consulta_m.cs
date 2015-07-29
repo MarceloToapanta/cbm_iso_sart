@@ -11,13 +11,18 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_exam_fp_consulta_m
     {
         public int iec_id_consulta_medica { get; set; }
         public int iec_id_historia_clinica { get; set; }
         public int iec_id_personal { get; set; }
+        [Display(Name = "Nombre")]
+        [Required]
         public int iec_id_exam_fisico { get; set; }
+        [Display(Name = "Tipo")]
+        [Required]
         public int iec_id_tipo_exam_fisico { get; set; }
         public string iec_campo1 { get; set; }
         public string iec_campo2 { get; set; }

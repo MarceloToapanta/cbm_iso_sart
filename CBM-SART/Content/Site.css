@@ -1093,6 +1093,7 @@ display: inline-table;
   width: 100%;
   position: absolute;
 }
+.delete-record{display:none}
 /*///////////////Fin Historias Clinicas//////////////////////*/
 
 

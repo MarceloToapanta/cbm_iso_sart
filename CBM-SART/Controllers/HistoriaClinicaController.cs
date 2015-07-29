@@ -114,7 +114,7 @@ namespace CBM_SART.Controllers
             {
                 iso_consulta_medica iso_consulta_medica_pre = iso_historia_clinica.iso_consulta_medica.Where(x => x.icm_tipo_consulta == 1).First();
                 if (iso_consulta_medica_pre != null) { idConsulta = iso_consulta_medica_pre.icm_id_consulta; }
-                
+
             }
             ViewBag.idConsulta = idConsulta;
             ViewBag.ihc_id_personal = new SelectList(db.iso_personal, "ipe_id_personal", "ipe_ced_ruc_personal", iso_historia_clinica.ihc_id_personal);
@@ -163,7 +163,8 @@ namespace CBM_SART.Controllers
             await db.SaveChangesAsync();
             //Elimina Consultas medicas
             var iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_historia_clinica == id).ToList();
-            foreach(iso_consulta_medica consulta in iso_consulta_medica ){
+            foreach (iso_consulta_medica consulta in iso_consulta_medica)
+            {
                 db.iso_consulta_medica.Remove(consulta);
                 db.SaveChanges();
             }
@@ -269,7 +270,8 @@ namespace CBM_SART.Controllers
                 .Where(x => x.icm_id_personal == IdPersonal)
                 .Where(x => x.icm_id_historia_clinica == IdHistoria)
                 .Count();
-            if (cm > 0) { 
+            if (cm > 0)
+            {
                 iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica
                     .Where(x => x.icm_id_consulta == IdConsulta)
                     .Where(x => x.icm_id_personal == IdPersonal)
@@ -278,7 +280,7 @@ namespace CBM_SART.Controllers
                 db.iso_consulta_medica.Remove(iso_consulta_medica);
                 db.SaveChanges();
             }
-            return RedirectToAction("Edit", "HistoriaClinica", new { id = IdPersonal});
+            return RedirectToAction("Edit", "HistoriaClinica", new { id = IdPersonal });
         }
         public ActionResult SetVariable(string key, string value)
         {
@@ -737,7 +739,7 @@ namespace CBM_SART.Controllers
             List<iso_sintoma> list = new List<iso_sintoma>();
             foreach (iso_sintoma_consulta_m var in asignadosm)
             {
-                list.Add(var.iso_sintoma );
+                list.Add(var.iso_sintoma);
             }
             var total = db.iso_sintoma
                 .OrderBy(x => x.ist_nombre_sintoma).ToList();
@@ -952,7 +954,7 @@ namespace CBM_SART.Controllers
         }
         ////////////////////////////Habitos"///////////////////////////////////
         ///////////////////////////Examen Fisico/////////////////////////////
-        public ActionResult CmEFParametro(int IdConsulta, int IdTipoParametro, string filter = null, int page = 1, int pageSize = 10, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
+        public ActionResult CmEFParametro(int IdConsulta, int IdTipoParametro, string filter = null, int page = 1, int pageSize = 3, string sort = "iso_antecedente_familiar.iaf_nombre_antecedente_f", string sortdir = "ASC")
         {
             iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == IdConsulta).First();
             if (String.IsNullOrEmpty(filter)) { filter = null; }
@@ -978,6 +980,75 @@ namespace CBM_SART.Controllers
             ViewBag.idConsulta = IdConsulta;
             ViewBag.IdTipoParametro = IdTipoParametro;
             return PartialView("CmEFParametro", records_mort);
+        }
+        public ActionResult CrearEFParametro(int idConsulta, int IdTipoParametro)
+        {
+            ViewBag.idConsulta = idConsulta;
+            ViewBag.IdTipoParametro = IdTipoParametro;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_exam_fp_consulta_m.ToList();
+            List<iso_exam_fisico_parametro> list = new List<iso_exam_fisico_parametro>();
+            foreach (iso_exam_fp_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_exam_fisico_parametro);
+            }
+            var total = db.iso_exam_fisico_parametro.Where(x => x.ief_tipo_examen == IdTipoParametro)
+                .OrderBy(x => x.ief_nombre_examen).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "ief_id_examen_fis", "ief_nombre_examen");
+            ViewBag.SelectListTipoParametro = new SelectList(db.iso_tipo_exam_fisico, "ite_id_tipo_ef", "ite_nombre_tipo_ef");
+            iso_exam_fp_consulta_m iso_exam_fp_consulta_m = new iso_exam_fp_consulta_m();
+            iso_exam_fp_consulta_m.iec_id_tipo_exam_fisico = IdTipoParametro;
+            return PartialView("CMParametros/CrearEFParametro", iso_exam_fp_consulta_m);
+        }
+        public string GuardarEFParametro(int idConsulta, int IdTipoParametro, iso_exam_fp_consulta_m iso_exam_fp_consulta_m)
+        {
+            //Obtiene Consulta
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            iso_exam_fp_consulta_m.iec_id_consulta_medica = iso_consulta_medica.icm_id_consulta;
+            iso_exam_fp_consulta_m.iec_id_historia_clinica = iso_consulta_medica.icm_id_historia_clinica;
+            iso_exam_fp_consulta_m.iec_id_personal = iso_consulta_medica.icm_id_personal;
+            iso_exam_fp_consulta_m.iec_id_tipo_exam_fisico = IdTipoParametro;
+            db.iso_exam_fp_consulta_m.Add(iso_exam_fp_consulta_m);
+            return db.SaveChanges().ToString();
+        }
+        public ActionResult ModificarEFParametro(int idConsulta, int IdParametro, int idTipoParametro)
+        {
+            ViewBag.idConsulta = idConsulta;
+            ViewBag.idTipoParametro = idTipoParametro;
+            iso_consulta_medica iso_consulta_medica = db.iso_consulta_medica.Where(x => x.icm_id_consulta == idConsulta).First();
+            var asignadosm = iso_consulta_medica.iso_exam_fp_consulta_m.Where(x => x.iec_id_exam_fisico != IdParametro).ToList();
+            List<iso_exam_fisico_parametro> list = new List<iso_exam_fisico_parametro>();
+            foreach (iso_exam_fp_consulta_m var in asignadosm)
+            {
+                list.Add(var.iso_exam_fisico_parametro);
+            }
+            var total = db.iso_exam_fisico_parametro.Where(x => x.ief_tipo_examen == idTipoParametro)
+                .OrderBy(x => x.ief_nombre_examen).ToList();
+            var totalresult = total.Except(list);
+            ViewBag.SelectListParametro = new SelectList(totalresult, "ief_id_examen_fis", "ief_nombre_examen");
+            ViewBag.SelectListTipoParametro = new SelectList(db.iso_tipo_exam_fisico, "ite_id_tipo_ef", "ite_nombre_tipo_ef");
+            iso_exam_fp_consulta_m iso_exam_fp_consulta_m = db.iso_exam_fp_consulta_m
+                .Where(x => x.iec_id_exam_fisico == IdParametro && x.iec_id_consulta_medica == idConsulta && x.iec_id_tipo_exam_fisico == idTipoParametro).First();
+            return PartialView("CMParametros/ModificarEFParametro", iso_exam_fp_consulta_m);
+        }
+        public string ActualizarEFParametro(iso_exam_fp_consulta_m iso_exam_fp_consulta_m)
+        {
+            db.Entry(iso_exam_fp_consulta_m).State = EntityState.Modified;
+            return db.SaveChanges().ToString();
+        }
+        public string EliminarEFParametro(int IdConsulta, int IdAntecente, int IdTipoParametro)
+        {
+            string mensaje = "No se pudo eliminar";
+            iso_exam_fp_consulta_m iso_exam_fp_consulta_m = db.iso_exam_fp_consulta_m.Where(
+                x => x.iec_id_consulta_medica == IdConsulta && x.iec_id_exam_fisico == IdAntecente
+                && x.iec_id_tipo_exam_fisico == IdTipoParametro).First();
+            db.iso_exam_fp_consulta_m.Remove(iso_exam_fp_consulta_m);
+            if (db.SaveChanges() == 1)
+            {
+                mensaje = "Registro eliminado";
+            }
+            return mensaje;
         }
         ////////////////*****************Examen Fisico"*******************/////////////////////////////
         ////////////////*****************Examen Laboratorio"*******************/////////////////////////////
@@ -1174,7 +1245,7 @@ namespace CBM_SART.Controllers
                 db.SaveChanges();
                 mensaje = "Registro eliminado";
             }
-            
+
             return mensaje;
         }
 
@@ -1199,7 +1270,7 @@ namespace CBM_SART.Controllers
             {
                 string type = string.Empty;
                 type = "application/unknown";
-                return File(cat.ipc_archivo, type,  cat.ipc_ubicacion_archivo.Replace("[Base de Datos] ",""));
+                return File(cat.ipc_archivo, type, cat.ipc_ubicacion_archivo.Replace("[Base de Datos] ", ""));
             }
             return null;
         }
