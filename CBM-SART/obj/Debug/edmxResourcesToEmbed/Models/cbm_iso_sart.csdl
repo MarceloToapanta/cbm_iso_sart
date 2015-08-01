@@ -405,6 +405,12 @@
       <End Role="iso_habitos" EntitySet="iso_habitos" />
       <End Role="iso_habito_consulta_m" EntitySet="iso_habito_consulta_m" />
     </AssociationSet>
+    <EntitySet Name="iso_modulo" EntityType="cbm_iso_sart.iso_modulo" />
+    <EntitySet Name="iso_usuario" EntityType="cbm_iso_sart.iso_usuario" />
+    <AssociationSet Name="iso_permiso_modulo" Association="cbm_iso_sart.iso_permiso_modulo">
+      <End Role="iso_modulo" EntitySet="iso_modulo" />
+      <End Role="iso_usuario" EntitySet="iso_usuario" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="iso_personal">
     <Key>
@@ -631,7 +637,7 @@
     </Key>
     <Property Name="idp_id_detalle_plan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idp_id_plan" Type="Int32" Nullable="false" />
-    <Property Name="idp_numero_plan" Type="Int32" />
+    <Property Name="idp_numero_plan" Type="Int32" Nullable="false" />
     <Property Name="idp_tarea" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="idp_observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="idp_fecha_comienzo" Type="DateTime" Precision="3" />
@@ -1646,5 +1652,41 @@
         <PropertyRef Name="ihc_id_habito" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <EntityType Name="iso_modulo">
+    <Key>
+      <PropertyRef Name="imd_id_modulo" />
+    </Key>
+    <Property Name="imd_id_modulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imd_nombre_modulo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="iso_usuario" Relationship="cbm_iso_sart.iso_permiso_modulo" FromRole="iso_modulo" ToRole="iso_usuario" />
+  </EntityType>
+  <EntityType Name="iso_usuario">
+    <Key>
+      <PropertyRef Name="ius_id_usuario" />
+    </Key>
+    <Property Name="ius_id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ius_nombre_usuario" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="ius_desc_usuario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ius_login" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ius_password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ius_permisos" Type="Byte" Nullable="false" />
+    <Property Name="ius_id_departamento" Type="Int32" />
+    <Property Name="ius_iniciales" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ius_email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="ius_firma_digital" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ius_deshabilitado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="ius_firma_archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ius_representante_direccion" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="ius_miembro_comite" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="ius_foto_ruta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ius_foto_archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ius_tipo_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ius_carga_documento" Type="Byte" />
+    <NavigationProperty Name="iso_modulo" Relationship="cbm_iso_sart.iso_permiso_modulo" FromRole="iso_usuario" ToRole="iso_modulo" />
+  </EntityType>
+  <Association Name="iso_permiso_modulo">
+    <End Type="cbm_iso_sart.iso_modulo" Role="iso_modulo" Multiplicity="*" />
+    <End Type="cbm_iso_sart.iso_usuario" Role="iso_usuario" Multiplicity="*" />
   </Association>
 </Schema>

@@ -1,0 +1,130 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_usuario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_nombre_usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_desc_usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_permisos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_id_departamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_iniciales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_firma_digital)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_deshabilitado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_firma_archivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_representante_direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_miembro_comite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_foto_ruta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_foto_archivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_tipo_usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ius_carga_documento)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_nombre_usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_desc_usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_permisos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_id_departamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_iniciales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_firma_digital)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_deshabilitado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_firma_archivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_representante_direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_miembro_comite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_foto_ruta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_foto_archivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_tipo_usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ius_carga_documento)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ius_id_usuario }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ius_id_usuario }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ius_id_usuario })
+        </td>
+    </tr>
+}
+
+</table>

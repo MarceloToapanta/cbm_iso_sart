@@ -222,7 +222,7 @@
     </Key>
     <Property Name="idp_id_detalle_plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idp_id_plan" Type="int" Nullable="false" />
-    <Property Name="idp_numero_plan" Type="int" />
+    <Property Name="idp_numero_plan" Type="int" Nullable="false" />
     <Property Name="idp_tarea" Type="nvarchar" MaxLength="255" />
     <Property Name="idp_observacion" Type="nvarchar" MaxLength="255" />
     <Property Name="idp_fecha_comienzo" Type="datetime" />
@@ -449,6 +449,13 @@
     <Property Name="imo_tiempo_exposicion" Type="varchar" MaxLength="50" />
     <Property Name="imo_numero_trabajadores" Type="int" />
   </EntityType>
+  <EntityType Name="iso_modulo">
+    <Key>
+      <PropertyRef Name="imd_id_modulo" />
+    </Key>
+    <Property Name="imd_id_modulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imd_nombre_modulo" Type="varchar" MaxLength="150" />
+  </EntityType>
   <EntityType Name="iso_pedido_exam_consulta_m">
     <Key>
       <PropertyRef Name="ipc_id_consulta_medica" />
@@ -476,6 +483,14 @@
     <Property Name="ipe_id_tipo_pexamen" Type="int" Nullable="false" />
     <Property Name="ipe_id_pexamen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ipe_nombre_pexamen" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="iso_permiso_modulo">
+    <Key>
+      <PropertyRef Name="imo_id_modulo" />
+      <PropertyRef Name="imo_id_usuario" />
+    </Key>
+    <Property Name="imo_id_modulo" Type="int" Nullable="false" />
+    <Property Name="imo_id_usuario" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="iso_personal">
     <Key>
@@ -662,6 +677,29 @@
     </Key>
     <Property Name="its_id_tipo_sintoma" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="its_nombre_tipo_sintoma" Type="varchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="iso_usuario">
+    <Key>
+      <PropertyRef Name="ius_id_usuario" />
+    </Key>
+    <Property Name="ius_id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ius_nombre_usuario" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="ius_desc_usuario" Type="varchar" MaxLength="255" />
+    <Property Name="ius_login" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ius_password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ius_permisos" Type="tinyint" Nullable="false" />
+    <Property Name="ius_id_departamento" Type="int" />
+    <Property Name="ius_iniciales" Type="varchar" MaxLength="5" />
+    <Property Name="ius_email" Type="varchar" MaxLength="60" />
+    <Property Name="ius_firma_digital" Type="varchar" MaxLength="500" />
+    <Property Name="ius_deshabilitado" Type="char" MaxLength="1" />
+    <Property Name="ius_firma_archivo" Type="image" />
+    <Property Name="ius_representante_direccion" Type="char" MaxLength="1" />
+    <Property Name="ius_miembro_comite" Type="char" MaxLength="1" />
+    <Property Name="ius_foto_ruta" Type="varchar" MaxLength="500" />
+    <Property Name="ius_foto_archivo" Type="image" />
+    <Property Name="ius_tipo_usuario" Type="varchar" MaxLength="50" />
+    <Property Name="ius_carga_documento" Type="tinyint" />
   </EntityType>
   <EntityType Name="iso_vacuna_consulta_m">
     <Key>
@@ -1183,6 +1221,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_iso_permiso_modulo_iso_modulo">
+    <End Role="iso_modulo" Type="Self.iso_modulo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="iso_permiso_modulo" Type="Self.iso_permiso_modulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_modulo">
+        <PropertyRef Name="imd_id_modulo" />
+      </Principal>
+      <Dependent Role="iso_permiso_modulo">
+        <PropertyRef Name="imo_id_modulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_permiso_modulo_iso_usuario">
+    <End Role="iso_usuario" Type="Self.iso_usuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="iso_permiso_modulo" Type="Self.iso_permiso_modulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_usuario">
+        <PropertyRef Name="ius_id_usuario" />
+      </Principal>
+      <Dependent Role="iso_permiso_modulo">
+        <PropertyRef Name="imo_id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_iso_personal_iso_cargo">
     <End Role="iso_cargo" Type="Self.iso_cargo" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -1419,8 +1485,10 @@
     <EntitySet Name="iso_matriz_mrl" EntityType="Self.iso_matriz_mrl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_matriz_profesiograma" EntityType="Self.iso_matriz_profesiograma" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_matriz_riesgo_ocupacional" EntityType="Self.iso_matriz_riesgo_ocupacional" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iso_modulo" EntityType="Self.iso_modulo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_pedido_exam_consulta_m" EntityType="Self.iso_pedido_exam_consulta_m" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_pedido_examen" EntityType="Self.iso_pedido_examen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iso_permiso_modulo" EntityType="Self.iso_permiso_modulo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_personal" EntityType="Self.iso_personal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_plan" EntityType="Self.iso_plan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_puesto_trabajo" EntityType="Self.iso_puesto_trabajo" Schema="dbo" store:Type="Tables" />
@@ -1435,6 +1503,7 @@
     <EntitySet Name="iso_tipo_pedido_exam" EntityType="Self.iso_tipo_pedido_exam" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_tipo_riesgo_ocupacional" EntityType="Self.iso_tipo_riesgo_ocupacional" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_tipo_sintoma" EntityType="Self.iso_tipo_sintoma" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iso_usuario" EntityType="Self.iso_usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_vacuna_consulta_m" EntityType="Self.iso_vacuna_consulta_m" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_iso_accidente_iso_personal" Association="Self.FK_iso_accidente_iso_personal">
       <End Role="iso_personal" EntitySet="iso_personal" />
@@ -1571,6 +1640,14 @@
     <AssociationSet Name="FK_iso_pedido_examen_iso_tipo_pedido_exam" Association="Self.FK_iso_pedido_examen_iso_tipo_pedido_exam">
       <End Role="iso_tipo_pedido_exam" EntitySet="iso_tipo_pedido_exam" />
       <End Role="iso_pedido_examen" EntitySet="iso_pedido_examen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_permiso_modulo_iso_modulo" Association="Self.FK_iso_permiso_modulo_iso_modulo">
+      <End Role="iso_modulo" EntitySet="iso_modulo" />
+      <End Role="iso_permiso_modulo" EntitySet="iso_permiso_modulo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_permiso_modulo_iso_usuario" Association="Self.FK_iso_permiso_modulo_iso_usuario">
+      <End Role="iso_usuario" EntitySet="iso_usuario" />
+      <End Role="iso_permiso_modulo" EntitySet="iso_permiso_modulo" />
     </AssociationSet>
     <AssociationSet Name="FK_iso_personal_iso_cargo" Association="Self.FK_iso_personal_iso_cargo">
       <End Role="iso_cargo" EntitySet="iso_cargo" />

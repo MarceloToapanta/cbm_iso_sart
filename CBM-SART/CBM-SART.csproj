@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ProfesiogramaController.cs" />
     <Compile Include="Controllers\PuestoTrabajoController.cs" />
     <Compile Include="Controllers\SistemaGestionController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -283,6 +284,9 @@
     <Compile Include="Models\iso_matriz_riesgo_ocupacional.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\iso_modulo.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\iso_pedido_examen.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
@@ -329,6 +333,9 @@
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iso_tipo_sintoma.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_usuario.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iso_vacuna_consulta_m.cs">
@@ -580,6 +587,12 @@
     <Content Include="Views\HistoriaClinica\CmEFParametro.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\CrearEFParametro.cshtml" />
     <Content Include="Views\HistoriaClinica\CMParametros\ModificarEFParametro.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\Delete.cshtml" />
+    <Content Include="Views\Usuario\Details.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Ingresar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,155 @@
+﻿@model CBM_SART.Models.iso_usuario
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>iso_usuario</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_nombre_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_nombre_usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_desc_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_desc_usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_permisos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_permisos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_id_departamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_id_departamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_iniciales)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_iniciales)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_firma_digital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_firma_digital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_deshabilitado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_deshabilitado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_firma_archivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_firma_archivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_representante_direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_representante_direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_miembro_comite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_miembro_comite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_foto_ruta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_foto_ruta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_foto_archivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_foto_archivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_tipo_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_tipo_usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ius_carga_documento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ius_carga_documento)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ius_id_usuario }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

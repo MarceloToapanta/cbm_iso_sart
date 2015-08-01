@@ -673,5 +673,45 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="iso_modulo">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_modulo">
+        <MappingFragment StoreEntitySet="iso_modulo">
+          <ScalarProperty Name="imd_nombre_modulo" ColumnName="imd_nombre_modulo" />
+          <ScalarProperty Name="imd_id_modulo" ColumnName="imd_id_modulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iso_usuario">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_usuario">
+        <MappingFragment StoreEntitySet="iso_usuario">
+          <ScalarProperty Name="ius_carga_documento" ColumnName="ius_carga_documento" />
+          <ScalarProperty Name="ius_tipo_usuario" ColumnName="ius_tipo_usuario" />
+          <ScalarProperty Name="ius_foto_archivo" ColumnName="ius_foto_archivo" />
+          <ScalarProperty Name="ius_foto_ruta" ColumnName="ius_foto_ruta" />
+          <ScalarProperty Name="ius_miembro_comite" ColumnName="ius_miembro_comite" />
+          <ScalarProperty Name="ius_representante_direccion" ColumnName="ius_representante_direccion" />
+          <ScalarProperty Name="ius_firma_archivo" ColumnName="ius_firma_archivo" />
+          <ScalarProperty Name="ius_deshabilitado" ColumnName="ius_deshabilitado" />
+          <ScalarProperty Name="ius_firma_digital" ColumnName="ius_firma_digital" />
+          <ScalarProperty Name="ius_email" ColumnName="ius_email" />
+          <ScalarProperty Name="ius_iniciales" ColumnName="ius_iniciales" />
+          <ScalarProperty Name="ius_id_departamento" ColumnName="ius_id_departamento" />
+          <ScalarProperty Name="ius_permisos" ColumnName="ius_permisos" />
+          <ScalarProperty Name="ius_password" ColumnName="ius_password" />
+          <ScalarProperty Name="ius_login" ColumnName="ius_login" />
+          <ScalarProperty Name="ius_desc_usuario" ColumnName="ius_desc_usuario" />
+          <ScalarProperty Name="ius_nombre_usuario" ColumnName="ius_nombre_usuario" />
+          <ScalarProperty Name="ius_id_usuario" ColumnName="ius_id_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="iso_permiso_modulo" TypeName="cbm_iso_sart.iso_permiso_modulo" StoreEntitySet="iso_permiso_modulo">
+      <EndProperty Name="iso_usuario">
+        <ScalarProperty Name="ius_id_usuario" ColumnName="imo_id_usuario" />
+      </EndProperty>
+      <EndProperty Name="iso_modulo">
+        <ScalarProperty Name="imd_id_modulo" ColumnName="imo_id_modulo" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

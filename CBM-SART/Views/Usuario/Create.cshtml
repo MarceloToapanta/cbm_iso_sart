@@ -1,0 +1,165 @@
+﻿@model CBM_SART.Models.iso_usuario
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>iso_usuario</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_nombre_usuario, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_nombre_usuario)
+                @Html.ValidationMessageFor(model => model.ius_nombre_usuario)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_desc_usuario, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_desc_usuario)
+                @Html.ValidationMessageFor(model => model.ius_desc_usuario)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_login, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_login)
+                @Html.ValidationMessageFor(model => model.ius_login)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_password, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_password)
+                @Html.ValidationMessageFor(model => model.ius_password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_permisos, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_permisos)
+                @Html.ValidationMessageFor(model => model.ius_permisos)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_id_departamento, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_id_departamento)
+                @Html.ValidationMessageFor(model => model.ius_id_departamento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_iniciales, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_iniciales)
+                @Html.ValidationMessageFor(model => model.ius_iniciales)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_email)
+                @Html.ValidationMessageFor(model => model.ius_email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_firma_digital, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_firma_digital)
+                @Html.ValidationMessageFor(model => model.ius_firma_digital)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_deshabilitado, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_deshabilitado)
+                @Html.ValidationMessageFor(model => model.ius_deshabilitado)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_firma_archivo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_firma_archivo)
+                @Html.ValidationMessageFor(model => model.ius_firma_archivo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_representante_direccion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_representante_direccion)
+                @Html.ValidationMessageFor(model => model.ius_representante_direccion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_miembro_comite, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_miembro_comite)
+                @Html.ValidationMessageFor(model => model.ius_miembro_comite)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_foto_ruta, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_foto_ruta)
+                @Html.ValidationMessageFor(model => model.ius_foto_ruta)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_foto_archivo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_foto_archivo)
+                @Html.ValidationMessageFor(model => model.ius_foto_archivo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_tipo_usuario, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_tipo_usuario)
+                @Html.ValidationMessageFor(model => model.ius_tipo_usuario)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ius_carga_documento, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ius_carga_documento)
+                @Html.ValidationMessageFor(model => model.ius_carga_documento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

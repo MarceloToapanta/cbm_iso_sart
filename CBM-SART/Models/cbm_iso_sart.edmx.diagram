@@ -95,6 +95,9 @@
         <EntityTypeShape EntityType="cbm_iso_sart.iso_habitos" Width="2.375" PointX="0.5" PointY="11.25" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_habito_consulta_m_iso_consulta_medica" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_habito_consulta_m_iso_habitos" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_modulo" Width="1.5" PointX="17.375" PointY="2.625" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_usuario" Width="1.5" PointX="19.625" PointY="1" />
+        <AssociationConnector Association="cbm_iso_sart.iso_permiso_modulo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
