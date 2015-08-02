@@ -23,14 +23,15 @@ namespace CBM_SART.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult Ingresar(iso_usuario iso_usuario, string url = "/Home/Index")
+        public ActionResult UsuarioActual(string url, iso_usuario iso_usuario)
         {
             int iso_usuario_count = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login && x.ius_password == iso_usuario.ius_password).Count();
             if (iso_usuario_count == 1)
             {
                 iso_usuario iso_usuario_actual = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login && x.ius_password == iso_usuario.ius_password).First();
                 Session["Usuario"] = iso_usuario_actual;
-                return Redirect(url);
+                //return Redirect(url);
+                return Json(new { ok = true, msj = "Usuario encontrado" });
             }
             else
             {
@@ -38,12 +39,13 @@ namespace CBM_SART.Controllers
                 if (iso_usuario_e == 0)
                 {
                     ModelState.AddModelError("", "Usuario no encontrado");
+                    return Json(new { ok = false, msj = "Usuario no encontrado" });
                 }
                 else
                 {
                     ModelState.AddModelError("", "Clave no válida");
+                    return Json(new { ok = false, msj = "Clave no válida"});
                 }
-                return View(iso_usuario);
             }
         }
         //Logout
