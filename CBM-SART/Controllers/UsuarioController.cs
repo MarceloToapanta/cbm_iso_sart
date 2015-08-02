@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CBM_SART.Models;
+using System.Linq.Dynamic;
+using System.IO;
 
 namespace CBM_SART.Controllers
 {
@@ -18,21 +20,30 @@ namespace CBM_SART.Controllers
         public ActionResult Ingresar(string url)
         {
             ViewBag.url = url;
-            return View();
+            return PartialView();
         }
         [HttpPost]
-        public ActionResult Ingresar(iso_usuario iso_usuario, string url)
+        public ActionResult Ingresar(iso_usuario iso_usuario, string url = "/Home/Index")
         {
             int iso_usuario_count = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login && x.ius_password == iso_usuario.ius_password).Count();
             if (iso_usuario_count == 1)
             {
                 iso_usuario iso_usuario_actual = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login && x.ius_password == iso_usuario.ius_password).First();
                 Session["Usuario"] = iso_usuario_actual;
-                return RedirectToAction(url);
+                return Redirect(url);
             }
             else
             {
-                return View();
+                int iso_usuario_e = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login).Count();
+                if (iso_usuario_e == 0)
+                {
+                    ModelState.AddModelError("", "Usuario no encontrado");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Clave no válida");
+                }
+                return View(iso_usuario);
             }
         }
         //Logout
@@ -41,10 +52,37 @@ namespace CBM_SART.Controllers
             Session["Usuario"] = null;
             return RedirectToAction("Index","Home");
         }
-        // GET: /Usuario/
-        public async Task<ActionResult> Index()
+        public string ExisteUsuario()
         {
-            return View(await db.iso_usuario.ToListAsync());
+            if (Session["Usuario"] == null)
+            {
+                return "false";
+            }
+            return "true";
+        }
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ius_nombre_usuario", string sortdir = "ASC")
+        {
+
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_usuario>();
+            ViewBag.filter = filter;
+            records.Content = db.iso_usuario
+                        .Where(x => filter == null ||
+                                (x.ius_nombre_usuario.ToLower().Contains(filter.ToLower().Trim())))
+                        .OrderBy(sort + " " + sortdir)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+            // Count
+            records.TotalRecords = db.iso_usuario
+                         .Where(x => filter == null ||
+                                (x.ius_nombre_usuario.ToLower().Contains(filter.ToLower().Trim()))).Count();
+
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+
+            return View(records);
         }
 
         // GET: /Usuario/Details/5

@@ -1,130 +1,115 @@
-﻿@model IEnumerable<CBM_SART.Models.iso_usuario>
-
+﻿@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_usuario>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Adminsitración de Usuario";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "Admin";
+    Session["SidebarSelect"] = "Usuario";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_nombre_usuario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_desc_usuario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_permisos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_id_departamento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_iniciales)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_firma_digital)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_deshabilitado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_firma_archivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_representante_direccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_miembro_comite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_foto_ruta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_foto_archivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_tipo_usuario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ius_carga_documento)
-        </th>
-        <th></th>
-    </tr>
+<div class="seccion-barra">
+    <img src="~/images/label-plain-black.png" height="24" width="24" />
+    Informacion de la Oraganizaciones Registradas
+    <span class="text-count">Nro. de  Empresas : @ViewBag.total</span>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_nombre_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_desc_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_permisos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_id_departamento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_iniciales)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_firma_digital)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_deshabilitado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_firma_archivo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_representante_direccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_miembro_comite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_foto_ruta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_foto_archivo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_tipo_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ius_carga_documento)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ius_id_usuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ius_id_usuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ius_id_usuario })
-        </td>
-    </tr>
+
+<div class="content">
+    @using (Html.BeginForm("index", null, FormMethod.Get))
+    {
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Nombre" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right ">
+                    <a class="btn btn-success" data-modal="" href="/Usuario/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="col-md-12 grid-content">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column("ius_iniciales", "Iniciales", style: "col-lg-1"),
+              grid.Column("ius_nombre_usuario", "Nombre", style: "col-lg-4"),
+              grid.Column("ius_email", "E-mail", style: "col-lg-4"),
+              grid.Column("ius_deshabilitado", "Desabilitado", style: "col-lg-1"),
+              grid.Column("ius_foto_ruta", "Foto Ruta", style: "col-lg-2"),
+              grid.Column(header: "Action", canSort: false, style: "action col-lg-1",
+              format: @<text>
+                @Html.Raw("<a data-modal='' href='/Usuario/details/" + item.ius_id_usuario + "' id='" + item.ius_id_usuario + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Usuario/edit/" + item.ius_id_usuario + "' id='" + item.ius_id_usuario + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/Usuario/delete/" + item.ius_id_usuario + "' id='" + item.ius_id_usuario + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+            </text>)
+                               ));
+            }
+
+
+        </div>
+        <div class="clear"></div>
+    }
+</div>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog" style="width:70%;">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
+    @*Cargar Imagen en Create*@
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').fadeIn("slow").attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        //$("#file1").change(function () {
+        $(document).delegate("#file1", "change", function (e) {
+            readURL(this);
+            //alert($("#file1").val());
+            var fic = $("#file1").val().split('\\');
+            $("#ius_foto_ruta").val("[Base de Datos] " + fic[fic.length - 1]);
+
+        });
+    </script>
 }
-
-</table>

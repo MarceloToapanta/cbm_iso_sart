@@ -11,6 +11,7 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_usuario
     {
@@ -20,9 +21,17 @@ namespace CBM_SART.Models
         }
     
         public int ius_id_usuario { get; set; }
+        [Display(Name = "Nombre")]
+        [Required]
         public string ius_nombre_usuario { get; set; }
+        [Display(Name = "Descripción")]
+        [Required]
         public string ius_desc_usuario { get; set; }
+        [Display(Name = "Usuario")]
+        [Required]
         public string ius_login { get; set; }
+        [Display(Name = "Clave")]
+        [Required]
         public string ius_password { get; set; }
         public byte ius_permisos { get; set; }
         public Nullable<int> ius_id_departamento { get; set; }
