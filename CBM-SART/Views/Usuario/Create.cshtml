@@ -4,161 +4,213 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<div class="title-window" style="height:32px">
+    Permite registrar un Nuevo Usuario.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
 
-@using (Html.BeginForm()) 
+    <h4 class="modal-title">Crear nuevo Usuario</h4>
+</div>
+
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm("Create", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data", id = "fc", @autocomplete = "off"  }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>iso_usuario</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+    @Html.ValidationSummary(true)
+    <div class="modal-body">
+        <div class="form-horizontal">
+            <div class="col-md-8">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_nombre_usuario, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_nombre_usuario)
-                @Html.ValidationMessageFor(model => model.ius_nombre_usuario)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_nombre_usuario, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ius_nombre_usuario, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_nombre_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_login, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control required", autocomplete = "off" })
+                        @Html.ValidationMessageFor(model => model.ius_login)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_password, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.ius_password, new { @class = "form-control required", autocomplete = "off" })
+                        @Html.ValidationMessageFor(model => model.ius_password)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_email, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ius_email, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_email)
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.ius_permisos, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ius_permisos, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_permisos)
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_iniciales, new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.ius_iniciales, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_iniciales)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_tipo_usuario, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ius_tipo_usuario, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_tipo_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_desc_usuario, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.ius_desc_usuario, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_desc_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_deshabilitado, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ius_deshabilitado, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_deshabilitado)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_foto_ruta, new { @class = "control-label col-md-5" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.ius_foto_ruta, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_foto_ruta)
+                    </div>
+                </div>
+
+
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_desc_usuario, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_desc_usuario)
-                @Html.ValidationMessageFor(model => model.ius_desc_usuario)
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <div class="row" style="margin-top:0;">
+                    <div class="editor-field">
+                        <div class="inline-image-preivew">
+                            <img id="blah" src="~/images/no_logo.png" alt="Logo de la Empresa" style="border: 1px solid #29ABE2; max-width: 200px; height: auto" />
+                        </div>
+                    </div>
+                    
+                </div>
+                <input type="file" />
             </div>
-        </div>
+            <div class="clear"></div>
+            <div class="col-md-12">
+                
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.ius_id_departamento, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ius_id_departamento, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_id_departamento)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_login, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_login)
-                @Html.ValidationMessageFor(model => model.ius_login)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_firma_digital, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ius_firma_digital, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_firma_digital)
+                    </div>
+                </div>*@
+
+                
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.ius_firma_archivo, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ius_firma_archivo, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_firma_archivo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_representante_direccion, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ius_representante_direccion, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_representante_direccion)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_miembro_comite, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ius_miembro_comite, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_miembro_comite)
+                    </div>
+                </div>*@
+
+                
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.ius_foto_archivo, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ius_foto_archivo)
+                        @Html.ValidationMessageFor(model => model.ius_foto_archivo)
+                    </div>
+                </div>*@
+
+                
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.ius_carga_documento, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ius_carga_documento, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.ius_carga_documento)
+                    </div>
+                </div>*@
+
+
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_password, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_password)
-                @Html.ValidationMessageFor(model => model.ius_password)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_permisos, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_permisos)
-                @Html.ValidationMessageFor(model => model.ius_permisos)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_id_departamento, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_id_departamento)
-                @Html.ValidationMessageFor(model => model.ius_id_departamento)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_iniciales, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_iniciales)
-                @Html.ValidationMessageFor(model => model.ius_iniciales)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_email)
-                @Html.ValidationMessageFor(model => model.ius_email)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_firma_digital, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_firma_digital)
-                @Html.ValidationMessageFor(model => model.ius_firma_digital)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_deshabilitado, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_deshabilitado)
-                @Html.ValidationMessageFor(model => model.ius_deshabilitado)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_firma_archivo, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_firma_archivo)
-                @Html.ValidationMessageFor(model => model.ius_firma_archivo)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_representante_direccion, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_representante_direccion)
-                @Html.ValidationMessageFor(model => model.ius_representante_direccion)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_miembro_comite, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_miembro_comite)
-                @Html.ValidationMessageFor(model => model.ius_miembro_comite)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_foto_ruta, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_foto_ruta)
-                @Html.ValidationMessageFor(model => model.ius_foto_ruta)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_foto_archivo, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_foto_archivo)
-                @Html.ValidationMessageFor(model => model.ius_foto_archivo)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_tipo_usuario, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_tipo_usuario)
-                @Html.ValidationMessageFor(model => model.ius_tipo_usuario)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ius_carga_documento, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ius_carga_documento)
-                @Html.ValidationMessageFor(model => model.ius_carga_documento)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="clear"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                <button class="btn btn-primary" type="submit" name="Guardar"> Guardar </button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+    $(document).ready(function () {
+        $("#ius_login").val("");
+        $("#ius_password").val("");
+        console.log($("#ius_login").val());
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

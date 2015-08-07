@@ -657,6 +657,7 @@ tfoot > tr > td a:hover{
   background: url("/images/sky_bg.jpg");
   border: 1px solid #ccc;
   border-radius: 8px;
+  margin-top: 5px;
 }
  .jumbotron h1{
   margin: 5px 0px ;

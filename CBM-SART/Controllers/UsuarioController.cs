@@ -99,13 +99,16 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_usuario);
+            //return View(iso_usuario);
+            return PartialView("Details", iso_usuario);
         }
 
         // GET: /Usuario/Create
         public ActionResult Create()
         {
-            return View();
+            var iso_usuario = new iso_usuario();
+            return PartialView("Create", iso_usuario);
+            //return View();
         }
 
         // POST: /Usuario/Create
@@ -117,12 +120,25 @@ namespace CBM_SART.Controllers
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["file"];
+                if (file.FileName != "")
+                {
+                    iso_usuario.ius_foto_archivo = ConvertToBytes(file);
+                }
                 db.iso_usuario.Add(iso_usuario);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            return PartialView("Create", iso_usuario);
+            //return View(iso_usuario);
+        }
 
-            return View(iso_usuario);
+        public byte[] ConvertToBytes(HttpPostedFileBase image)
+        {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(image.InputStream);
+            imageBytes = reader.ReadBytes((int)image.ContentLength);
+            return imageBytes;
         }
 
         // GET: /Usuario/Edit/5
@@ -137,7 +153,8 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_usuario);
+            //return View(iso_usuario);
+            return PartialView("Edit", iso_usuario);
         }
 
         // POST: /Usuario/Edit/5
@@ -149,11 +166,17 @@ namespace CBM_SART.Controllers
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["file1"];
+                if (file.FileName != "")
+                {
+                    iso_usuario.ius_foto_archivo = ConvertToBytes(file);
+                }
                 db.Entry(iso_usuario).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(iso_usuario);
+            return PartialView("Edit", iso_usuario);
+            //return View(iso_usuario);
         }
 
         // GET: /Usuario/Delete/5
@@ -168,7 +191,7 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_usuario);
+            return PartialView("Delete", iso_usuario);
         }
 
         // POST: /Usuario/Delete/5
