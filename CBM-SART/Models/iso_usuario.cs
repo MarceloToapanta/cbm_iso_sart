@@ -25,7 +25,6 @@ namespace CBM_SART.Models
         [Required]
         public string ius_nombre_usuario { get; set; }
         [Display(Name = "Descripción")]
-        [Required]
         public string ius_desc_usuario { get; set; }
         [Display(Name = "Usuario")]
         [Required]
@@ -35,15 +34,21 @@ namespace CBM_SART.Models
         public string ius_password { get; set; }
         public byte ius_permisos { get; set; }
         public Nullable<int> ius_id_departamento { get; set; }
+        [Display(Name = "Inicial")]
         public string ius_iniciales { get; set; }
+        [Display(Name = "Email")]
         public string ius_email { get; set; }
         public string ius_firma_digital { get; set; }
+        [Display(Name = "Deshabilitado")]
         public string ius_deshabilitado { get; set; }
         public byte[] ius_firma_archivo { get; set; }
         public string ius_representante_direccion { get; set; }
         public string ius_miembro_comite { get; set; }
+        [Display(Name = "Ruta Foto")]
         public string ius_foto_ruta { get; set; }
         public byte[] ius_foto_archivo { get; set; }
+        [Display(Name = "Tipo Usuario")]
+        [Required]
         public string ius_tipo_usuario { get; set; }
         public Nullable<byte> ius_carga_documento { get; set; }
     

@@ -106,6 +106,7 @@ namespace CBM_SART.Controllers
         // GET: /Usuario/Create
         public ActionResult Create()
         {
+
             var iso_usuario = new iso_usuario();
             return PartialView("Create", iso_usuario);
             //return View();
@@ -120,7 +121,8 @@ namespace CBM_SART.Controllers
         {
             if (ModelState.IsValid)
             {
-                HttpPostedFileBase file = Request.Files["file"];
+
+                HttpPostedFileBase file = Request.Files["file1"];
                 if (file.FileName != "")
                 {
                     iso_usuario.ius_foto_archivo = ConvertToBytes(file);

@@ -49,7 +49,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_email, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_email, new { @class = "form-control required" })
+                        @Html.TextBoxFor(model => model.ius_email, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ius_email)
                     </div>
                 </div>
@@ -63,15 +63,15 @@
                 </div>*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_iniciales, new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_iniciales, new { @class = "form-control required" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.ius_iniciales, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ius_iniciales)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_tipo_usuario, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_tipo_usuario, new { @class = "form-control required" })
+                        @Html.TextBoxFor(model => model.ius_tipo_usuario, new { @class = "form-control " })
                         @Html.ValidationMessageFor(model => model.ius_tipo_usuario)
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_desc_usuario, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextAreaFor(model => model.ius_desc_usuario, new { @class = "form-control required" })
+                        @Html.TextAreaFor(model => model.ius_desc_usuario, new { @class = "form-control " })
                         @Html.ValidationMessageFor(model => model.ius_desc_usuario)
                     </div>
                 </div>
@@ -87,31 +87,34 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_deshabilitado, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_deshabilitado, new { @class = "form-control required" })
+                        @Html.TextBoxFor(model => model.ius_deshabilitado, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ius_deshabilitado)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_foto_ruta, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_foto_ruta, new { @class = "form-control required" })
+                        @Html.TextBoxFor(model => model.ius_foto_ruta, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ius_foto_ruta)
                     </div>
                 </div>
 
 
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3">
+            <div class="col-md"></div>
+            <div class="col-md-4">
                 <div class="row" style="margin-top:0;">
-                    <div class="editor-field">
+                    <div class="editor-field" style="padding: 0px 52px; padding-top: 0px;">
                         <div class="inline-image-preivew">
-                            <img id="blah" src="~/images/no_logo.png" alt="Logo de la Empresa" style="border: 1px solid #29ABE2; max-width: 200px; height: auto" />
+                            <img id="blah" src="~/images/no_logo.png" alt="Logo de la Empresa" style="border: 1px solid #29ABE2; max-width: 240px; height: auto" />
                         </div>
+
+                        <input type='file' id="file1" name="file1" multiple accept="image/*" style="margin-top:5px;" />
+                        <p class="help-block">Seleciona imagen de Usuario</p>
                     </div>
                     
                 </div>
-                <input type="file" />
+                
             </div>
             <div class="clear"></div>
             <div class="col-md-12">
