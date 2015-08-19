@@ -29,7 +29,7 @@
                 <div class="col-md-2"></div>
                 @*@Html.LabelFor(model => model.ius_login, new { @class = "control-label col-md-2" })*@
                 <div class="col-md-8">
-                    @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control", placeholder = "Usuario", autocomplete = "off" })
+                    @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control", placeholder = "Usuario" })
                     @Html.ValidationMessageFor(model => model.ius_login)
                 </div>
                 <div class="col-md-2"></div>
@@ -39,14 +39,14 @@
                 <div class="col-md-2"></div>
                 @*@Html.LabelFor(model => model.ius_password, new { @class = "control-label col-md-2" })*@
                 <div class="col-md-8">
-                    @Html.PasswordFor(model => model.ius_password, new { @class = "form-control", placeholder = "Clave", autocomplete = "off" })
+                    @Html.PasswordFor(model => model.ius_password, new { @class = "form-control", placeholder = "Clave" })
                     @Html.ValidationMessageFor(model => model.ius_password)
                 </div>
                 <div class="col-md-2"></div>
             </div>
             @Html.ValidationSummary(true)
-
-            <div class="alert alert-dismissible alert-danger" style="display:none">
+           
+            <div class="alert alert-dismissible alert-danger" style="display:none;">
                 @*<button type="button" class="close" data-dismiss="alert">×</button>*@
                 <div id="ms-error" style="display:none"></div>
             </div>

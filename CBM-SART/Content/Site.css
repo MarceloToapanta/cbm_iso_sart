@@ -1,4 +1,7 @@
-﻿body {
+﻿html{
+    background: url("/images/fondo1.png");
+}
+body {
     padding-top: 48px;
     font-size: 11px;
     background: url("/images/cream_pixels.png");
@@ -1108,4 +1111,8 @@ display: inline-table;
     margin-right: -10px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+#ModalLogin .modal-backdrop.in{
+    opacity:1;
+    background: url("/images/fondo1.png");
 }

@@ -33,7 +33,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_login, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control required", autocomplete = "off" })
+                        @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control required"})
                         @Html.ValidationMessageFor(model => model.ius_login)
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_password, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.PasswordFor(model => model.ius_password, new { @class = "form-control required", autocomplete = "off" })
+                        @Html.PasswordFor(model => model.ius_password, new { @class = "form-control required" })
                         @Html.ValidationMessageFor(model => model.ius_password)
                     </div>
                 </div>
@@ -53,14 +53,6 @@
                         @Html.ValidationMessageFor(model => model.ius_email)
                     </div>
                 </div>
-
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.ius_permisos, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.ius_permisos, new { @class = "form-control required" })
-                        @Html.ValidationMessageFor(model => model.ius_permisos)
-                    </div>
-                </div>*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_iniciales, new { @class = "control-label col-md-3" })
                     <div class="col-md-4">
@@ -71,7 +63,15 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_tipo_usuario, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_tipo_usuario, new { @class = "form-control " })
+                        @Html.DropDownListFor(model => model.ius_tipo_usuario, new SelectList(
+                                new List<Object>{
+                                new { value = "Normal" , text = "Normal"  },
+                                new { value = "Medico" , text = "Médico" },
+                                new { value = "Administrador" , text = "Adminstrador" }
+                                },
+                                "value",
+                                "text",
+                                0), new { @class = "form-control required valid" })
                         @Html.ValidationMessageFor(model => model.ius_tipo_usuario)
                     </div>
                 </div>
@@ -87,7 +87,14 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_deshabilitado, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_deshabilitado, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.ius_deshabilitado, new SelectList(
+                                new List<Object>{
+                                new { value = "N" , text = "NO"  },
+                                new { value = "S" , text = "SI" }
+                                },
+                                "value",
+                                "text",
+                                0), new { @class = "form-control valid" })
                         @Html.ValidationMessageFor(model => model.ius_deshabilitado)
                     </div>
                 </div>
@@ -117,78 +124,13 @@
                 
             </div>
             <div class="clear"></div>
-            <div class="col-md-12">
-                
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.ius_id_departamento, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.ius_id_departamento, new { @class = "form-control required" })
-                        @Html.ValidationMessageFor(model => model.ius_id_departamento)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ius_firma_digital, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.ius_firma_digital, new { @class = "form-control required" })
-                        @Html.ValidationMessageFor(model => model.ius_firma_digital)
-                    </div>
-                </div>*@
-
-                
-
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.ius_firma_archivo, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ius_firma_archivo, new { @class = "form-control required" })
-                        @Html.ValidationMessageFor(model => model.ius_firma_archivo)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ius_representante_direccion, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ius_representante_direccion, new { @class = "form-control required" })
-                        @Html.ValidationMessageFor(model => model.ius_representante_direccion)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ius_miembro_comite, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ius_miembro_comite, new { @class = "form-control required" })
-                        @Html.ValidationMessageFor(model => model.ius_miembro_comite)
-                    </div>
-                </div>*@
-
-                
-
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.ius_foto_archivo, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ius_foto_archivo)
-                        @Html.ValidationMessageFor(model => model.ius_foto_archivo)
-                    </div>
-                </div>*@
-
-                
-
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.ius_carga_documento, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ius_carga_documento, new { @class = "form-control required" })
-                        @Html.ValidationMessageFor(model => model.ius_carga_documento)
-                    </div>
-                </div>*@
-
-
+            <div class="col-md-12">               
             </div>
 
             <div class="clear"></div>
             <div class="modal-footer">
                 <span id="progress" class="text-center" style="display: none;">
                     <img src="/images/wait.gif" alt="wiat" />
-                    Espere...
                 </span>
                 @*<input class="btn btn-primary" type="submit" value="Save" />*@
                 <button class="btn btn-primary" type="submit" name="Guardar"> Guardar </button>

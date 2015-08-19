@@ -35,6 +35,11 @@ namespace CBM_SART.Controllers
             }
             else
             {
+                if (iso_usuario.ius_login == "" || iso_usuario.ius_login == null)
+                {
+                    ModelState.AddModelError("", "Ingresar Usuario");
+                    return Json(new { ok = false, msj = "Ingresar Usuario" });
+                }
                 int iso_usuario_e = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login).Count();
                 if (iso_usuario_e == 0)
                 {
@@ -205,6 +210,32 @@ namespace CBM_SART.Controllers
             db.iso_usuario.Remove(iso_usuario);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+        public FileContentResult GetImage(int ID)
+        {
+            iso_usuario cat = db.iso_usuario.FirstOrDefault(c => c.ius_id_usuario == ID);
+            if (cat != null)
+            {
+                string type = "image/jpeg";
+                return File(cat.ius_foto_archivo, type);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public string Getlogin(int ID)
+        {
+            iso_usuario cat = db.iso_usuario.FirstOrDefault(c => c.ius_id_usuario == ID);
+            if (cat != null)
+            {
+                return cat.ius_login;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         protected override void Dispose(bool disposing)

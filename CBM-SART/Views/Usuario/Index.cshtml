@@ -63,8 +63,26 @@
               grid.Column("ius_iniciales", "Iniciales", style: "col-lg-1"),
               grid.Column("ius_nombre_usuario", "Nombre", style: "col-lg-4"),
               grid.Column("ius_email", "E-mail", style: "col-lg-4"),
-              grid.Column("ius_deshabilitado", "Desabilitado", style: "col-lg-1"),
-              grid.Column("ius_foto_ruta", "Foto Ruta", style: "col-lg-2"),
+              grid.Column("ius_deshabilitado", "Desabilitado", style: "col-lg-1",
+              format: @<text>
+                @if (item.ius_deshabilitado=="N")
+                {
+                    @Html.Raw("NO")
+                }
+                else
+                {
+                    @Html.Raw("SI")
+                }
+              </text>),
+              grid.Column(header: "Foto", canSort: false, style: "col-lg-4",
+                format: @<text>
+                @if (item.ius_foto_archivo != null)
+                {
+                    @Html.Raw("<a target='_blank' class='button' href=" + Url.Action("GetImage", "Usuario", new { ID = item.ius_id_usuario }) + ">" + item.ius_foto_ruta + "</a>")
+                }else{
+                    @Html.Raw("<span>" + item.ius_foto_ruta + "</span>")
+                }
+                    </text>),
               grid.Column(header: "Action", canSort: false, style: "action col-lg-1",
               format: @<text>
                 @Html.Raw("<a data-modal='' href='/Usuario/details/" + item.ius_id_usuario + "' id='" + item.ius_id_usuario + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")

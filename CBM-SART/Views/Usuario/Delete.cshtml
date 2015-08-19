@@ -2,160 +2,175 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>iso_usuario</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_nombre_usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_nombre_usuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_desc_usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_desc_usuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_login)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_login)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_permisos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_permisos)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_id_departamento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_id_departamento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_iniciales)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_iniciales)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_firma_digital)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_firma_digital)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_deshabilitado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_deshabilitado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_firma_archivo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_firma_archivo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_representante_direccion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_representante_direccion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_miembro_comite)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_miembro_comite)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_foto_ruta)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_foto_ruta)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_foto_archivo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_foto_archivo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_tipo_usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_tipo_usuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ius_carga_documento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ius_carga_documento)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+<div class="title-window" style="height:32px">
+    Permite eliminar el Usuario selecionado.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 </div>
+<div class="modal-header">
+    <div class="form-group">
+        <h4>
+            <span class="label label-danger">
+                Estas seguro de eliminar el Usuario?
+            </span>
+        </h4>
+    </div>
+</div>
+
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm("Delete", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data", id = "fc", @autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(x => x.ius_id_usuario)
+    @Html.HiddenFor(x => x.ius_foto_archivo)
+    <div class="modal-body">
+        <div class="form-horizontal">
+            <div class="col-md-8">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_nombre_usuario, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ius_nombre_usuario, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ius_nombre_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_login, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control", @disabled = "disabled", @id = "login" })
+                        @Html.ValidationMessageFor(model => model.ius_login)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.ius_password, new { @class = "control-label col-md-3" })*@
+                    <div class="col-md-9">
+                        @Html.HiddenFor(model => model.ius_password, new { @class = "form-control", @disabled = "disabled", @id = "password" })
+                        @Html.ValidationMessageFor(model => model.ius_password)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_email, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ius_email, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ius_email)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_iniciales, new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.ius_iniciales, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ius_iniciales)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_tipo_usuario, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.ius_tipo_usuario, new SelectList(
+                                new List<Object>{
+                                new { value = "Normal" , text = "Normal"  },
+                                new { value = "Medico" , text = "Médico" },
+                                new { value = "Administrador" , text = "Adminstrador" }
+                                },
+                                "value",
+                                "text",
+                        0), new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ius_tipo_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_desc_usuario, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.ius_desc_usuario, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ius_desc_usuario)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_deshabilitado, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.ius_deshabilitado, new SelectList(
+                                new List<Object>{
+                                new { value = "N" , text = "NO"  },
+                                new { value = "S" , text = "SI" }
+                                },
+                                "value",
+                                "text",
+                        0), new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ius_deshabilitado)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ius_foto_ruta, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ius_foto_ruta, new { @class = "form-control", @disabled = "disabled", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.ius_foto_ruta)
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md"></div>
+            <div class="col-md-4">
+                <div class="row" style="margin-top:0;">
+                    <div class="editor-field" style="padding: 0px 52px; padding-top: 0px;">
+                        @if (Model.ius_foto_archivo != null)
+                        {
+
+                            <div class="inline-image-preivew">
+                                <img id="blah" alt="Foto Usuario" style="border: 1px solid #29ABE2; max-width: 240px; height: auto" src="@Url.Action("GetImage", "Usuario", new { ID = Model.ius_id_usuario })" />
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div class="inline-image-preivew">
+                                <img id="blah" src="~/images/no_logo.png" alt="Foto Usuario" style="border: 1px solid #29ABE2; max-width: 240px; height: auto" />
+                            </div>
+                        }
+                       
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="clear"></div>
+            <div class="col-md-12">
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                </span>
+                <button class="btn btn-primary" data-dismiss="modal">No</button>
+                <input class="btn btn-danger" type="submit" value="Si" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+    $(document).ready(function () {
+        $("#ius_login").val("");
+        $("#ius_password").val("");
+        console.log($("#ius_login").val());
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

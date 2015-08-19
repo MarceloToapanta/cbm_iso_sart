@@ -8,11 +8,6 @@
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jqueryval")
-    @RenderSection("scripts", required: false)
-
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top ">
@@ -200,10 +195,16 @@
             Quito - Ecuador
         </p>
     </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+
     @*Validar Usuario*@
-    @if (Session["SidebarSelect"] != "Usuario") { 
+
         <script>
-            $(document).ready(function () {
+            $(function () {
                 var url_load = "@Url.Action("ExisteUsuario", "Usuario")";
                 $("#usuario").load(url_load, function (response, status, xhr) {
                     if (response == "false") {
@@ -211,7 +212,7 @@
                         $("#login").load(url);
                         $("#ModalLogin").modal({
                             "backdrop": "static",
-                            "keyboard": true,
+                            "keyboard": false,
                             "show": true
                         });
                         console.log("No ha ingeresado Usuario");
@@ -225,11 +226,5 @@
                 return false;
             });
         </script>
-    }
-
-    @{
-
-    //Session["empresa"] = id;
-    }
 </body>
 </html>

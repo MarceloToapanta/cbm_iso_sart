@@ -10,7 +10,16 @@
         <ul class="txt-login">
         <li>
             <div class="img-login">
-                <img height="100" width="100" src="~/images/user.gif" />
+
+                @if (Usuario.ius_foto_archivo != null)
+                {
+                    <img  width="150" src="@Url.Action("GetImage", "Usuario", new { ID = Usuario.ius_id_usuario })" />
+                }
+                else
+                {
+                    <img height="100" width="100" src="~/images/user.gif" />
+                }
+
             </div>
         </li>
         <li><a href="/Usuario/Salir">Salir</a></li>
