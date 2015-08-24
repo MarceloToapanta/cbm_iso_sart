@@ -569,6 +569,9 @@ tfoot > tr > td a:hover{
 .action-hc img{
     height:16px;
 }
+#content{
+    margin-bottom:15px;
+}
  /*////////////////////////Fin Table//////////////////////*/
  /*////////////////////////Ventanas Emergentes//////////////////////*/
  .title-window{

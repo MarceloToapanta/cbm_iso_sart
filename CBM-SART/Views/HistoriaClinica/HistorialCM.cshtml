@@ -63,10 +63,19 @@
               grid.Column("icm_fecha_consulta", "Fecha", canSort: false, style: "col-lg-2", format: (item) => string.Format("{0:dd/MM/yyyy}", item.icm_fecha_consulta)),
               grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
-                @Html.Raw("<a href='/HistoriaClinica/Edit/" + item.icm_id_personal + "?idConsulta=" + item.icm_id_consulta + "' id='" + item.icm_id_consulta + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @if (item.icm_tipo_consulta == 1 || item.icm_tipo_consulta == 3)
+                {
+                @Html.Raw("<a href='/HistoriaClinica/Edit/" + item.icm_id_personal + "?idConsulta=" + item.icm_id_consulta + "' i='" + item.icm_id_consulta + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
                 @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-consulta' data-href='/HistoriaClinica/EliminarCM?IdConsulta=" + item.icm_id_consulta + "&IdPersonal=" + item.icm_id_personal + "&IdHistoria=" + item.icm_id_historia_clinica + "' id='" + item.icm_id_consulta + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
-                    </text>)
-                                          ));
+                }
+                else
+                {
+                    @Html.Raw("<a href='/HistoriaClinica/EditConsulta/" + item.icm_id_personal + "?idConsulta=" + item.icm_id_consulta + "' i='" + item.icm_id_consulta + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                    @Html.Raw("<a data-toggle='modal' data-target='#confirm-delete-consulta' data-href='/HistoriaClinica/EliminarCM?IdConsulta=" + item.icm_id_consulta + "&IdPersonal=" + item.icm_id_personal + "&IdHistoria=" + item.icm_id_historia_clinica + "' id='" + item.icm_id_consulta + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                }
+                
+                </text>)
+                ));
             }
             <br />
         </div>

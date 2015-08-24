@@ -62,7 +62,14 @@
                 format: @<text>
                 @if (item.ipc_archivo != null)
                 {
-                    @Html.Raw("<a target='_blank' class='button' href=" + Url.Action("GetDoc", "HistoriaClinica", new { ID = item.ipc_id_pexamen }) + ">" + item.ipc_ubicacion_archivo + "</a>")
+                    if (item.iso_consulta_medica.icm_tipo_consulta == 1 || item.iso_consulta_medica.icm_tipo_consulta == 3)
+                    {
+                        @Html.Raw("<a target='_blank' class='button' href=" + Url.Action("GetDoc", "HistoriaClinica", new { ID = item.ipc_id_pexamen }) + ">" + item.ipc_ubicacion_archivo + "</a>")
+                    }
+                    else{
+                        @Html.Raw("<a target='_blank' class='button' href=" + Url.Action("GetDoc", "HistoriaClinica", new { ID = item.ipc_id_pexamen }) + ">Descargar</a>")
+                    }
+                    
                 }else{
                     @Html.Raw("<span>" + item.ipc_ubicacion_archivo + "</span>")
                 }

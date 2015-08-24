@@ -138,6 +138,30 @@ namespace CBM_SART.Controllers
             return View(iso_historia_clinica);
         }
 
+        // GET: /HistoriaClinica/EditConsulta/5
+        public async Task<ActionResult> EditConsulta(int? id, int idConsulta = 0)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            iso_historia_clinica iso_historia_clinica = db.iso_historia_clinica.Where(x => x.ihc_id_personal == id).First();
+            if (iso_historia_clinica == null)
+            {
+                return HttpNotFound();
+            }
+            //Seleciona la Consulta Medica Preocupacional
+            if (idConsulta == 0)
+            {
+                iso_consulta_medica iso_consulta_medica_pre = iso_historia_clinica.iso_consulta_medica.Where(x => x.icm_tipo_consulta == 1).First();
+                if (iso_consulta_medica_pre != null) { idConsulta = iso_consulta_medica_pre.icm_id_consulta; }
+
+            }
+            ViewBag.idConsulta = idConsulta;
+            ViewBag.ihc_id_personal = new SelectList(db.iso_personal, "ipe_id_personal", "ipe_ced_ruc_personal", iso_historia_clinica.ihc_id_personal);
+            return View(iso_historia_clinica);
+        }
+
         // GET: /HistoriaClinica/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {

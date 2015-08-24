@@ -101,7 +101,7 @@
 <div class="col-md-3" style="width:21%;">
     <span style="width: 100%; text-align: center; display: block; top: -11px; position: relative; font-weight:bold">Filtro de Historia Clinica</span>
     <select style="width: 100%; text-align: center; position: relative; top: -9px;" class="form-control" id="combo-consulta-medica">
-        @foreach (var colsulta in Model.iso_consulta_medica)
+        @foreach (var colsulta in Model.iso_consulta_medica.Where(x => x.icm_tipo_consulta == 1 || x.icm_tipo_consulta == 3))
         {
             if (ViewBag.idConsulta == colsulta.icm_id_consulta)
             {
@@ -255,7 +255,9 @@
             </div>
         </div>
     </div>
+    <div class="clear"></div>
 </div>
+
 
 
 <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
@@ -269,9 +271,6 @@
             <div id='myModalContent'></div>
         </div>
     </div>
-</div>
-<div>
-    @Html.ActionLink("Regresar", "Panel")
 </div>
 
 @section Scripts {
