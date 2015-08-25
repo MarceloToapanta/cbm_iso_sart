@@ -35,8 +35,11 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_login, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control required valid", @id = "login" })
+                        @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control required valid", @id = "login_edit" })
                         @Html.ValidationMessageFor(model => model.ius_login)
+                        <div id="userexits" class="field-validation-error">
+                            El Usuario ingresado ya existe.
+                        </div>
                     </div>
                 </div>
 
@@ -151,7 +154,7 @@
         </div>
     </div>
 }
-
+<div id="usuarioexiste" class="hidden"></div>
 <script>
     $("form").removeData("validator");
     $("form").removeData("unobtrusiveValidation");
@@ -159,9 +162,24 @@
 </script>
 <script>
     $(document).ready(function () {
-        $("#ius_login").val("");
-        $("#ius_password").val("");
-        console.log($("#ius_login").val());
+        $("#userexits").hide();
+        $("#login_edit").on("keyup", function () {
+            var url_load = "@Url.Action("loginExiste", "Usuario")" + "?ius_login=" + $("#login_edit").val();
+            $("#usuarioexiste").load(url_load, function (response, status, xhr) {
+                login = "@Model.ius_login";
+                if (response == "true" && login != $("#login_edit").val()) {
+                    console.log("encontrado");
+                    $("#login_edit").removeClass("valid");
+                    $("#userexits").show();
+                    return false;
+                } else {
+                    console.log("no encontrado");
+                    $("#login_edit").addClass("valid");
+                    $("#userexits").hide();
+                    return false;
+                }
+            });
+        });
     });
 </script>
 @section Scripts {

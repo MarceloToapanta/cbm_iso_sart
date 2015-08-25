@@ -67,6 +67,19 @@ namespace CBM_SART.Controllers
             }
             return "true";
         }
+        public string loginExiste(string ius_login)
+        {
+            if (db.iso_usuario.Where(x => x.ius_login == ius_login).Count() > 0)
+            {
+                var user = db.iso_usuario.Where(x => x.ius_login == ius_login).First();
+                return "true";
+            }
+            else
+            {
+                return "false";
+            }
+            
+        }
         public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ius_nombre_usuario", string sortdir = "ASC")
         {
 

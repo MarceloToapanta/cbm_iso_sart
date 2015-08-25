@@ -35,6 +35,9 @@
                     <div class="col-md-9">
                         @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control required"})
                         @Html.ValidationMessageFor(model => model.ius_login)
+                        <div id="userexits" class="field-validation-error">
+                            El Usuario ingresado ya existe.
+                        </div>
                     </div>
                 </div>
 
@@ -139,7 +142,7 @@
         </div>
     </div>
 }
-
+<div id="usuarioexiste" class="hidden"></div>
 <script>
     $("form").removeData("validator");
     $("form").removeData("unobtrusiveValidation");
@@ -149,7 +152,24 @@
     $(document).ready(function () {
         $("#ius_login").val("");
         $("#ius_password").val("");
-        console.log($("#ius_login").val());
+        $("#userexits").hide();
+        $("#ius_login").on("keyup", function () {
+            var url_load = "@Url.Action("loginExiste", "Usuario")" + "?ius_login=" + $(this).val();
+            $("#usuarioexiste").load(url_load, function (response, status, xhr) {
+                if (response == "true") {
+                    console.log("encontrado");
+                    $("#ius_login").removeClass("valid");
+                    $("#userexits").show();
+                    return false;
+                } else {
+                    console.log("no encontrado");
+                    $("#ius_login").addClass("valid");
+                    $("#userexits").hide();
+                    return false;
+                }
+            });
+        });
+
     });
 </script>
 @section Scripts {
