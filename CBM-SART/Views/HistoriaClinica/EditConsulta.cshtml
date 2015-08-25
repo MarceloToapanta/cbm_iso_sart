@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin-bottom:5px">
             <div class="col-md-1">
                 <label class="label-1">Motivo Consulta:</label>
             </div>
@@ -71,22 +71,23 @@
                 @Html.TextAreaFor(c => consulta.icm_motivo_consulta, 1, 100, new { @class = "form-control valid" })
             </div>
         </div>
+
         <div class="clear"></div>
         <div class="col-md-6" style="margin-bottom: 10px;">
-            <div class="cm-block" id="cm_signo"></div>
+            <div class="cm-block consulta-medica" id="cm_signo"></div>
             <div id="ms_cm_signo" class="delete-record"></div>
         </div>
         <div class="col-md-6" style="margin-bottom: 10px;">
             <div class="cm-block" id="cm_ef_1"></div>
             <div id="ms_ef_1" class="delete-record"></div>
         </div>
-
+        <div class="clear"></div>
         <span>Diagnostico</span>
         <span>Trataiento</span>
-
+        <div class="clear"></div>
 
         <div class="col-md-6" style="margin-bottom: 10px;">
-            <div class="cm-block" id="cm_examen_lab"></div>
+            <div class="cm-block consulta-medica" id="cm_examen_lab"></div>
             <div id="ms_cm_examen_lab" class="delete-record"></div>
         </div>
         <div class="col-md-6" style="margin-bottom: 10px;">
@@ -188,213 +189,7 @@
 
     //////////////////////////////////////////REINTEGRO/////////////////////////////////
 
-
-
     <div class="clear"></div>
-    <label class="label-2"> Datos Generales</label>
-    <div class="hc-container-personal">
-        <div class="col-md-10">
-            <div class="col-md-4">
-                <label class="label-3">CI:</label>@Model.iso_personal.ipe_ced_ruc_personal<br />
-                <label class="label-3">Lugar Nacimiento:</label>@String.Format("{0:MM/dd/yyyy}", @Model.iso_personal.ipe_lugar_nacimiento)<br />
-                <label class="label-3">Fecha Nacimiento:</label>@String.Format("{0:MM/dd/yyyy}", @Model.iso_personal.ipe_fecha_nacimiento)<br />
-                <label class="label-3">Género:</label>@Model.iso_personal.ipe_genero<br />
-                <label class="label-3">Edad:</label>@Model.iso_personal.ipe_edad<br />
-                <label class="label-3">Estado Civil:</label>@Model.iso_personal.ipe_estado_civil
-            </div>
-            <div class="col-md-8">
-                <label class="label-3">Dirección:</label>@Model.iso_personal.ipe_dir_domicilio<br />
-                <label class="label-3">Teléfono:</label>@Model.iso_personal.ipe_telf_1<br />
-                <label class="label-3">E-mail:</label>@Model.iso_personal.ipe_email
-                <label class="label-3">Nacionalidad:</label>@Model.iso_personal.ipe_nacionalidad<br />
-                <label class="label-3">Nivel Educativo:</label>@Model.iso_personal.ipe_nivel_educativo
-                <label class="label-3">Nro Afil IESS:</label>@Model.iso_personal.ipe_nro_afiliacion<br />
-                <label class="label-3">Profesión:</label>@Model.iso_personal.ipe_profesion<br />
-                <label class="label-3">Tipo Sangre:</label>@Model.iso_personal.ipe_tipo_sangre
-                <label class="label-3">Factor RH:</label>@Model.iso_personal.ipe_factor_rh
-                <label class="label-3">Etnia:</label>@Model.iso_personal.ipe_etnia<br />
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="foto-h">
-                @if (Model.iso_personal.ipe_foto != null)
-                {
-                    <div class="inline-image-preivew">
-                        <img id="blah" alt="Foto Personal" width="120" height="100" style="border: 1px solid #ccc; max-width: 100%; height: auto" src="@Url.Action("GetImage", "HistoriaClinica", new { id = Model.iso_personal.ipe_id_personal })" />
-                    </div>
-                }
-                else
-                {
-                    <div class="inline-image-preivew">
-                        <img id="blah" src="~/images/foto_personal.png" width="120" height="100" alt="Foto del Personal" style="border: 1px solid #ccc; max-width: 100%; height: auto; " />
-                    </div>
-                }
-            </div>
-
-        </div>
-    </div>
-    <div class="clear"></div>
-    <label class="label-2"> Datos Empresa</label>
-    <div class="clear"></div>
-    <div class="hc-container-personal col-md-9" style="width:79%;">
-        <div class="col-md-12">
-            <label class="label-3">Razón Social:</label>@if (Model.iso_personal.iso_empresa.iem_razon_social == null || Model.iso_personal.iso_empresa.iem_razon_social == "")
-            {<samp>Sin Registrar</samp>}
-            else
-            { @Model.iso_personal.iso_empresa.iem_razon_social}
-            <label class="label-3">Ciudad-Sede:</label>@if (Model.iso_personal.iso_empresa.iem_direccion_empresa == null || Model.iso_personal.iso_empresa.iem_direccion_empresa == "")
-            {<samp>Sin Registrar</samp>}
-            else
-            { @Model.iso_personal.iso_empresa.iem_direccion_empresa}
-
-        </div>
-    </div>
-    <div class="col-md-3" style="width:21%;">
-        <span style="width: 100%; text-align: center; display: block; top: -11px; position: relative; font-weight:bold">Filtro de Historia Clinica</span>
-        <select style="width: 100%; text-align: center; position: relative; top: -9px;" class="form-control" id="combo-consulta-medica">
-            @foreach (var colsulta in Model.iso_consulta_medica.Where(x => x.icm_tipo_consulta != 1 && x.icm_tipo_consulta != 3))
-            {
-                if (ViewBag.idConsulta == colsulta.icm_id_consulta)
-                {
-                    <option value="@colsulta.icm_id_consulta" selected>@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:dd/MM/yyyy}", colsulta.icm_fecha_consulta)</option>
-                }
-                else
-                {
-                    <option value="@colsulta.icm_id_consulta">@colsulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m - @String.Format("{0:dd/MM/yyyy}", colsulta.icm_fecha_consulta)</option>
-                }
-            }
-        </select>
-    </div>
-    <div class="clear"></div>
-    <div class="col-md-12" style="padding-left:0;padding-right:0">
-        <ul class="nav nav-tabs">
-            <li class=""><a href="#inf" data-toggle="tab" aria-expanded="false">Información Ocupacional</a></li>
-            <li class=""><a href="#ant" data-toggle="tab" aria-expanded="false">Antecedentes de Salud</a></li>
-            <li class=""><a href="#sig" data-toggle="tab" aria-expanded="false">Signos y Sintomas</a></li>
-            <li class=""><a href="#hab" data-toggle="tab" aria-expanded="false">Hábitos/Estilos de Vida</a></li>
-            <li class=""><a href="#exa" data-toggle="tab" aria-expanded="false">Exámen Físico</a></li>
-            <li class=""><a href="#rev" data-toggle="tab" aria-expanded="false">Revisión por Sistemas</a></li>
-            <li class=""><a href="#lab" data-toggle="tab" aria-expanded="true">Ex. Laboratorio</a></li>
-            @*
-                <li class="disabled"><a>Disabled</a></li>*@
-        </ul>
-    </div>
-
-    <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="inf">
-            <div class="block-tab-h col-lg-12">
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <label class="label-3">Fecha Ingreso:</label>@String.Format("{0:dd/MM/yyyy}", @Model.iso_personal.ipe_fecha_ingreso)<br />
-                        @*<label class="label-3">Centro de Costos:</label>@Model.iso_personal.ipe_id_centro_costo<br />*@
-                        <label class="label-3">Area:</label>@if (@Model.iso_personal.iso_departamento == null || @Model.iso_personal.iso_departamento.ide_nombre_departamento == "")
-                        {<span>Sin Registrar</span>}
-                        else
-                        { @Model.iso_personal.iso_departamento.ide_nombre_departamento}<br />
-                        <label class="label-3">Cargo:</label>@if (@Model.iso_personal.iso_cargo == null)
-                        {<span>Sin Registrar</span>}
-                        else
-                        { @Model.iso_personal.iso_cargo.icg_nombre}<br />
-                        <label class="label-3">Puesto Trabajo:</label>@if (@Model.iso_personal.iso_puesto_trabajo == null)
-                        {<span>Sin Registrar</span>}
-                        else
-                        { @Model.iso_personal.iso_puesto_trabajo.ipt_nombre_puesto_t}<br />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="label-3">Tiene Experencia:</label>@Model.iso_personal.ipe_tiene_experiencia<br />
-                        <label class="label-3">Tiene Familiares en la Empresa:</label>@Model.iso_personal.ipe_familiares_empresa<br />
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <br />
-                    <a href="#" class="btn btn-primary btn-xs">Accidentes Ocupacionales</a> <a href="#" class="btn btn-primary btn-xs">Incidentes Ocupacionales</a> <a href="#" class="btn btn-primary btn-xs">Equipos de Protección</a> <a href="#" class="btn btn-primary btn-xs">Actividades Extralaborales</a> <a href="#" class="btn btn-primary btn-xs">Trabajos Anteriores</a> <a href="#" class="btn btn-primary btn-xs"><strong>Profesiograma</strong></a>
-                </div>
-
-            </div>
-        </div>
-        <div class="tab-pane fade " id="ant">
-            <div class="block-tab-h col-md-12">
-                <div class="col-md-12" style="margin-bottom: 10px;">
-                    <div class="cm-block" id="cm_ante_personal"></div>
-                    <div id="ms_cm_ante_personal" class="delete-record"></div>
-                </div>
-                <div class="col-md-6">
-                    <div class="cm-block" id="cm_ante_familiar_morb"></div>
-                    <div id="ms_cm_ante_familiar_morb" class="delete-record"></div>
-                </div>
-                <div class="col-md-6">
-                    <div class="cm-block" id="cm_ante_familiar_mort"></div>
-                    <div id="ms_cm_ante_familiar_mort" class="delete-record"></div>
-                </div>
-
-                <div class="col-md-12" style="margin-top: 10px;">
-                    <div class="cm-block" id="cm_ante_vacuna"></div>
-                    <div id="ms_cm_ante_vacuna" class="delete-record"></div>
-                </div>
-                <div class="col-md-12" style="margin-top: 10px;">
-                    <div class="cm-block" id="cm_ante_mujer"></div>
-                    <div id="ms_cm_ante_mujer" class="delete-record"></div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade  in" id="sig">
-            <div class="block-tab-h col-lg-12">
-                <div class="col-md-12" style="margin-bottom: 10px;">
-                    <div class="cm-block" id="cm_sindrome"></div>
-                    <div id="ms_cm_sindrome" class="delete-record"></div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade in" id="hab">
-            <div class="block-tab-h col-lg-12">
-                <div class="col-md-12" style="margin-bottom: 10px;">
-                    <div class="cm-block" id="cm_habito"></div>
-                    <div id="ms_cm_habito" class="delete-record"></div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade in" id="exa">
-            <div class="block-tab-h col-lg-12">
-
-
-                <div class="col-md-6" style="margin-bottom: 10px;">
-                    <div class="cm-block" id="cm_ef_3"></div>
-                    <div id="ms_ef_3" class="delete-record"></div>
-                </div>
-                <div class="col-md-6" style="margin-bottom: 10px;">
-                    <div class="cm-block" id="cm_ef_4"></div>
-                    <div id="ms_ef_4" class="delete-record"></div>
-                </div>
-                <div class="col-md-6" style="margin-bottom: 10px;">
-                    <div class="cm-block" id="cm_ef_5"></div>
-                    <div id="ms_ef_5" class="delete-record"></div>
-                </div>
-                <div class="col-md-6" style="margin-bottom: 10px;">
-                    <div class="cm-block" id="cm_ef_6"></div>
-                    <div id="ms_ef_6" class="delete-record"></div>
-                </div>
-                <div class="col-md-6" style="margin-bottom: 10px;">
-                    <div class="cm-block" id="cm_ef_7"></div>
-                    <div id="ms_ef_7" class="delete-record"></div>
-                </div>
-                <div class="col-md-6" style="margin-bottom: 10px;">
-                    <div class="cm-block" id="cm_ef_9"></div>
-                    <div id="ms_ef_9" class="delete-record"></div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade  in" id="rev">
-            <div class="block-tab-h col-lg-12">
-                <p>Revisiones</p>
-            </div>
-        </div>
-        <div class="tab-pane fade in" id="lab">
-            <div class="block-tab-h col-lg-12">
-
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
 
 }
 
