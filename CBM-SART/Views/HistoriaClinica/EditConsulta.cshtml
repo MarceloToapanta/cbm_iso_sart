@@ -19,7 +19,7 @@
 
 @if (consultaCount > 0)
 {
-
+    //////////////////////////////////////////CONSULTA MEDICA////////////////////////////////
     if (consulta.icm_tipo_consulta == 4)
     {
         <div class="col-md-12">
@@ -80,10 +80,10 @@
             <div class="cm-block" id="cm_ef_1"></div>
             <div id="ms_ef_1" class="delete-record"></div>
         </div>
-    
+
         <span>Diagnostico</span>
         <span>Trataiento</span>
-            
+
 
         <div class="col-md-6" style="margin-bottom: 10px;">
             <div class="cm-block" id="cm_examen_lab"></div>
@@ -94,6 +94,99 @@
             <div id="ms_ef_2" class="delete-record"></div>
         </div>
     }
+    //////////////////////////////////////////SALIDA////////////////////////////////////
+    if (consulta.icm_tipo_consulta == 7)
+    {
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="col-md-5" style="padding-left:0">
+                    <div>
+                        <label class="label-1">Fecha: </label>
+                        <input data-val="true" disabled="disabled" id="icm_fecha_consulta" name="icm_fecha_consulta" style="text-align: center;width: 80px;" type="text" value="@String.Format("{0:dd/MM/yyyy}", consulta.icm_fecha_consulta)">
+                    </div>
+                    <div><label class="label-1">P. Trabajo:</label>@Model.iso_personal.iso_puesto_trabajo.ipt_nombre_puesto_t</div>
+                </div>
+                <div class="col-md-7">
+                    <div class="title-h">@consulta.iso_tipo_consulta_m.itc_nom_tipo_consulta_m</div>
+                </div>
+                <div class="col-md-12" style="padding-left:0">
+                    <div><label class="label-1">Trabajador: </label><span class="nombre-personal-h">@Model.iso_personal.ipe_apellido_paterno @Model.iso_personal.ipe_nombre_personal</span></div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="col-md-4" style="text-align:center">
+                    <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Lista de Trabajadores'><img class="cm-image" width="90" src="/images/hc/hc.jpg" /></a>
+                    Trabajadores
+                </div>
+                <div class="col-md-4" style="text-align:center">
+                    <a data-modal='' href='/HistoriaClinica/HistorialCM?IdPersonal=@Model.iso_personal.ipe_id_personal' title='Historial Consultas Médicas'><img class="cm-image" width="90" src="/images/hc/historial-cm.jpg" /></a>
+                    Historial de Consultas Médicas
+                </div>
+
+            </div>
+
+        </div>
+        <div class="clear"></div>
+        <hr style="margin-top: 5px; margin-bottom: 10px; " />
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Información de Salida</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => consulta.icm_fecha_salida, new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => consulta.icm_fecha_salida, "{0:dd/MM/yyyy}", new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker required valid" })
+                            @Html.ValidationMessageFor(model => consulta.icm_fecha_salida)
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group clear">
+                        @Html.LabelFor(model => consulta.icm_fecha_consulta, new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => consulta.icm_fecha_consulta, "{0:dd/MM/yyyy}", new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker required valid" })
+                            @Html.ValidationMessageFor(model => consulta.icm_fecha_consulta)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Reporte Evaluación Médica y Documental</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(model => consulta.icm_exam_preocu, new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => consulta.icm_exam_preocu, new SelectList(
+                                new List<Object>{
+                                new { value = "NO" , text = "NO"  },
+                                new { value = "SI" , text = "SI" }
+                                },
+                                "value",
+                                "text",
+                                0), new {@class = "form-control required valid" })
+
+                            @Html.ValidationMessageFor(model => consulta.icm_exam_preocu)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Condición General del Egreso</div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    }
+
+    //////////////////////////////////////////REINTEGRO/////////////////////////////////
 
 
 
