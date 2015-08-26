@@ -40,17 +40,22 @@ namespace CBM_SART.Controllers
                     ModelState.AddModelError("", "Ingresar Usuario");
                     return Json(new { ok = false, msj = "Ingresar Usuario" });
                 }
-                int iso_usuario_e = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login).Count();
-                if (iso_usuario_e == 0)
-                {
-                    ModelState.AddModelError("", "Usuario no encontrado");
-                    return Json(new { ok = false, msj = "Usuario no encontrado" });
-                }
                 else
                 {
-                    ModelState.AddModelError("", "Clave no válida");
-                    return Json(new { ok = false, msj = "Clave no válida"});
+                    return Json(new { ok = false, msj = "El Usuario y Clave que has indicado no pertenece a ninguna cuenta.             \n Por favor, asegúrate de escribirlos correctamente" });
                 }
+
+                //int iso_usuario_e = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login).Count();
+                //if (iso_usuario_e == 0)
+                //{
+                //    ModelState.AddModelError("", "Usuario no encontrado");
+                //    return Json(new { ok = false, msj = "Usuario no encontrado" });
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("", "Clave no válida");
+                //    return Json(new { ok = false, msj = "Clave no válida"});
+                //}
             }
         }
         //Logout

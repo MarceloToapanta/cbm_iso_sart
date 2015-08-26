@@ -68,7 +68,7 @@
     $.validator.unobtrusive.parse("form");
 </script>
 <script>
-    $("#btn-ingresar").click(function () {
+    function login() {
         $(".three-quarters-loader").show();
         $(".alert").hide();
         var url = $("#form").attr("action");
@@ -94,7 +94,19 @@
                 console.log('error: ' + error.valueOf);
             }
         });
+    }
+
+    $("#btn-ingresar").click(function () {
+        login();
     });
+
+    $(document).keypress(function (e) {
+        if (e.which == 13) {
+            login();
+        }
+    });
+
+
 </script>
 
 @section Scripts {
