@@ -1,0 +1,107 @@
+﻿@model CBM_SART.Models.iso_matriz_mrl
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>iso_matriz_mrl</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_localizacion_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_localizacion_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_proceso_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_proceso_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_sub_proceso_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_sub_proceso_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_cargo_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_cargo_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_puesto_trabajo_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_puesto_trabajo_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_nro_tabajadores_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_nro_tabajadores_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_jefe_area_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_jefe_area_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_fecha_evaluacion_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_fecha_evaluacion_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_descripcion_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_descripcion_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_id_puesto_t_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_id_puesto_t_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_ubicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_ubicacion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.imr_id_matriz_mrl }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

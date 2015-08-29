@@ -1,0 +1,113 @@
+﻿@model CBM_SART.Models.iso_matriz_mrl
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>iso_matriz_mrl</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_localizacion_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_localizacion_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_proceso_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_proceso_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_sub_proceso_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_sub_proceso_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_cargo_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_cargo_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_puesto_trabajo_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_puesto_trabajo_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_nro_tabajadores_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_nro_tabajadores_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_jefe_area_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_jefe_area_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_fecha_evaluacion_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_fecha_evaluacion_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_descripcion_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_descripcion_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_id_puesto_t_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_id_puesto_t_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imr_ubicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imr_ubicacion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

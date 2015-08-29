@@ -1,0 +1,187 @@
+﻿@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_matriz_mrl>
+
+@{
+    ViewBag.Title = "Matriz MRL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "VigilaciaSalud";
+    Session["SidebarSelect"] = "riesgos";
+}
+
+<div class="seccion-barra">
+    <img src="~/images/label-plain-black.png" height="24" width="24" />
+    Informacion de las Matrices de Riesgo MRL registradas.
+    <span class="text-count">Nro. de  Matrices : @ViewBag.total</span>
+</div>
+
+
+<div class="content">
+    @using (Html.BeginForm("index", null, FormMethod.Get))
+    {
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Puesto de Trabajo" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="btn btn-success" data-modal="" href="/MatrizMRL/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="col-md-12 grid-content">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+                    @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column(header: "Riesgos", canSort: false, style: "tareas",
+              format: @<text>
+                @Html.Raw("<a href='/MatrizMRL/Riesgos/" + item.imr_id_matriz_mrl + "' id='" + item.imr_id_matriz_mrl + "' title='Tareas'> <img width=16 src='/images/detalles1.png'> </a>")
+              </text>),
+              grid.Column("imr_localizacion_mrl", "Area", style: "col-lg-3"),
+              grid.Column("imr_cargo_mrl", "Cargo", style: "col-lg-2"),
+              grid.Column("imr_puesto_trabajo_mrl", "Puesto Trabajo", style: "col-lg-2"),
+              grid.Column("imr_nro_tabajadores_mrl", "Nro. Trab.", style: "col-lg-1"),
+              grid.Column("imr_fecha_evaluacion_mrl", "F. Evaluación", style: "col-lg-1"),
+              grid.Column("imr_descripcion_mrl", "Descripción", style: "col-lg-3"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a data-modal='' href='/MatrizMRL/details/" + item.imr_id_matriz_mrl + "' id='" + item.imr_id_matriz_mrl + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/MatrizMRL/edit/" + item.imr_id_matriz_mrl + "' id='" + item.imr_id_matriz_mrl + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/MatrizMRL/delete/" + item.imr_id_matriz_mrl + "' id='" + item.imr_id_matriz_mrl + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+
+                                                                                                                                       ));
+            }
+
+
+        </div>
+        <div class="clear"></div>
+    }
+</div>
+
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
+    <script type="text/javascript">
+        $(document).ready(function () { //////// Inicio Cargado el Documento
+            //Date Piker
+            jQuery.validator.methods["date"] = function (value, element) { return true; }
+        });
+    </script>
+}
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_localizacion_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_proceso_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_sub_proceso_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_cargo_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_puesto_trabajo_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_nro_tabajadores_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_jefe_area_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_fecha_evaluacion_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_descripcion_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_id_puesto_t_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imr_ubicacion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_localizacion_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_proceso_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_sub_proceso_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_cargo_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_puesto_trabajo_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_nro_tabajadores_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_jefe_area_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_fecha_evaluacion_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_descripcion_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_id_puesto_t_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imr_ubicacion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.imr_id_matriz_mrl }) |
+            @Html.ActionLink("Details", "Details", new { id=item.imr_id_matriz_mrl }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.imr_id_matriz_mrl })
+        </td>
+    </tr>
+}
+
+</table>*@

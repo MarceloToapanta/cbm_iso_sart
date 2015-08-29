@@ -1,0 +1,148 @@
+﻿@model CBM_SART.Models.iso_matriz_mrl
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="title-window" style="height:32px">
+    Permite registrar una Matriz de Riesgo MRL.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Crear nueva Martriz de Riesgos MRL</h4>
+</div>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_localizacion_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.imr_localizacion_mrl, (IEnumerable<SelectListItem>)ViewBag.ipe_id_empresa, "-Selecionar-", new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.imr_localizacion_mrl)
+                </div>
+            </div>
+
+          
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_cargo_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.imr_cargo_mrl, (IEnumerable<SelectListItem>)ViewBag.imr_cargo_mrl, "-Selecionar-", new { @class = "form-control required"})
+                    @Html.ValidationMessageFor(model => model.imr_cargo_mrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_puesto_trabajo_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.imr_puesto_trabajo_mrl, new SelectList(
+                                new List<Object>{
+                                new { value = "" , text = "-Selecionar-"  }
+                                },
+                                "value",
+                                "text",
+                     0), new { @class = "form-control required", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.imr_puesto_trabajo_mrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_nro_tabajadores_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.imr_nro_tabajadores_mrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.imr_nro_tabajadores_mrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_jefe_area_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.imr_jefe_area_mrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.imr_jefe_area_mrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_fecha_evaluacion_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.imr_fecha_evaluacion_mrl, new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker valid" })
+                    @Html.ValidationMessageFor(model => model.imr_fecha_evaluacion_mrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_descripcion_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.imr_descripcion_mrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.imr_descripcion_mrl)
+                </div>
+            </div>
+
+           
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
+                @*<input type="button" id="btnEmpresa" value="Upload" />*@
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            autoclose: true
+        }); //Initialise any date pickers
+    });
+
+    //$("#imr_localizacion_mrl").change(function () {
+    //    $("#imr_cargo_mrl").prop("disabled", false);
+    //});
+
+    $("#imr_cargo_mrl").change(function () {
+        var IdCargo = $(this).val();
+        PuestoAsignados("imr_puesto_trabajo_mrl", IdCargo)
+    });
+
+
+    function PuestoAsignados(updateId, value) {
+        if (value == '') { value = 0 };
+        $.getJSON("@Url.Action("PuestosPorCargo", "MatrizMRL")"
+            + "/" + value,
+            function (data) {
+                $("#" + updateId).empty();
+                $("#" + updateId).append("<option value=''>-Selecionar-</option>");
+                $("#imr_puesto_trabajo_mrl").prop("disabled", "disabled");
+                var row = 0;
+                $.each(data, function (i, item) {
+                    var nroT = 0;
+                    $("#imr_puesto_trabajo_mrl").prop("disabled", false);
+                    $("#" + updateId).append("<option value='"
+                       + item.ipt_id_puesto_t + "'>" + item.ipt_nombre_puesto_t + " </option>");
+                });
+            });
+    }
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

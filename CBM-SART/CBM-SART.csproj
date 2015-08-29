@@ -176,6 +176,7 @@
     <Compile Include="Controllers\HistoriaClinicaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidenteController.cs" />
+    <Compile Include="Controllers\MatrizMRLController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\PlanesController.cs" />
@@ -594,6 +595,11 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\Ingresar.cshtml" />
     <Content Include="Views\HistoriaClinica\EditConsulta.cshtml" />
+    <Content Include="Views\MatrizMRL\Create.cshtml" />
+    <Content Include="Views\MatrizMRL\Delete.cshtml" />
+    <Content Include="Views\MatrizMRL\Details.cshtml" />
+    <Content Include="Views\MatrizMRL\Edit.cshtml" />
+    <Content Include="Views\MatrizMRL\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
