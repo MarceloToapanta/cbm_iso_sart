@@ -600,6 +600,7 @@
     <Content Include="Views\MatrizMRL\Details.cshtml" />
     <Content Include="Views\MatrizMRL\Edit.cshtml" />
     <Content Include="Views\MatrizMRL\Index.cshtml" />
+    <Content Include="Views\MatrizMRL\Riesgos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

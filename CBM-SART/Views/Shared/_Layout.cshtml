@@ -86,77 +86,97 @@
     </div>
     <div class="body-content">
         @if (Session["Sidebar"] != "")
-        {
-            <div class="col-md-2">
-                <div id="sidebar">
-                    @Html.Partial("_LoginPartial")
-                    @if (Session["Sidebar"] == "VigilaciaSalud")
-                    {
-                        <div class="sidebar-menus">
-                            <ul class="list-panel-modulos">
-                                <li><a class="@(Session["SidebarSelect"] == "Personal" ? "select" : "")" href="@Url.Action("Index", "Personal")"><img class="boton-panel-imagen " src="@Url.Content("~/images/personal.png")" />Personal</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "Cargo" ? "select" : "")" href="@Url.Action("Index", "Cargo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "Puesto" ? "select" : "")" href="@Url.Action("Index", "PuestoTrabajo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puesto_t.png")" />Puesto de Trabajo</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "Historia" ? "select" : "")" href="@Url.Action("Index", "HistoriaClinica/Panel")"><img class="boton-panel-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "riesgos" ? "select" : "")" href="@Url.Action("Index", "MatrizMRL")"><img class="boton-panel-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "profesiograma" ? "select" : "")" href="@Url.Action("Index", "Profesiograma")"><img class="boton-panel-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "incidente" ? "select" : "")" href="@Url.Action("Index", "Incidente")"><img class="boton-panel-imagen" src="@Url.Content("~/images/incidente.png")" />Incidentes</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "accidente" ? "select" : "")" href="@Url.Action("Index", "Accidente")"><img class="boton-panel-imagen" src="@Url.Content("~/images/accidentes.png")" />Accidentes</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "indices" ? "select" : "")" href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/indicesr.png")" />Indices de Riesgo</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "equipop" ? "select" : "")" href="@Url.Action("Index", "EquipoTrabajo")"><img class="boton-panel-imagen" src="@Url.Content("~/images/equipot.png")" />Equipos de Trabajo</a></li>
-                            </ul>
-                        </div>
-                    }
-                    @if (Session["Sidebar"] == "Admin")
-                    {
-                        <div class="sidebar-menus">
-                            <ul class="list-panel-modulos">
-                                <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "Departamento" ? "select" : "")" href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "Usuario" ? "select" : "")" href="@Url.Action("Index", "Usuario")"><img class="boton-panel-imagen" src="@Url.Content("~/images/user.png")" />Administración de Usuarios</a></li>
-                                <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
-                                <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/pemisolista.png")" />Permisos Auditorias</a></li>
-                                <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
-                            </ul>
-                        </div>
-                    }
-                    @if (Session["Sidebar"] == "SistemaGestion")
-                    {
-                        <div class="sidebar-menus">
-                            <ul class="list-panel-sg">
-                                <li><a class="@(Session["SidebarSelect"] == "Inicio" ? "select" : "")" href="/SistemaGestion/"><img class="boton-panel-sg-p" src="@Url.Content("~/images/sg/inicio.png")" />PILARES DE LA GESTION SGP</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "pilar1" ? "select" : "")" href="/SistemaGestion/Nivel_1/1"><img class=" boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />GESTION ADMINISTRATIVA</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "pilar2" ? "select" : "")" href="/SistemaGestion/Nivel_1/2"><img class=" boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />GESTION TECNICA</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "pilar3" ? "select" : "")" href="/SistemaGestion/Nivel_1/3"><img class="boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />GESTION DEL TALENTO HUMANO</a></li>
-                                <li><a class="@(Session["SidebarSelect"] == "pilar4" ? "select" : "")" href="/SistemaGestion/Nivel_1/4"><img class="boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />PROCEDIMIENTOS OPERATIVOS BASICO Y/O RELEVANTES</a></li>
-                            </ul>
-                        </div>
-                    }
-                    @if (Session["Sidebar"] == "Planes")
-                    {
-                        if (Session["SidebarSelect"] == "Tareas")
-                        {
-                            <div class="sidebar-menus">
-                                <ul class="list-panel-modulos">
-                                    <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Plan")"><img class="boton-panel-imagen" src="@Url.Content("~/images/back.png")" />Regresar</a></li>
-                                    <li>
-                                        <div class="col-md-12 label label-success t-Completo">Tareas Completas: <span class="badge">@Session["nt1"]</span></div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-12 label label-warning t-Pendiente">Tareas Pendientes: <span class="badge">@Session["nt2"]</span></div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-12 label label-danger t-Atrasado">Tareas Atrasados: <span class="badge">@Session["nt3"]</span></div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-12 label label-default">Tareas Sin Estado: <span class="badge">@Session["nt4"]</span></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        }
-                    }
+{
+    <div class="col-md-2">
+        <div id="sidebar">
+            @Html.Partial("_LoginPartial")
 
+            @if (Session["Sidebar"] == "VigilaciaSalud")
+            {
+                if (Session["SidebarSelect"] == "listariesgos")
+                {
+                    <div class="sidebar-menus">
+                        <ul class="list-panel-riesgos">
+                            <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "MatrizMRL")"><img class="boton-panel-imagen" src="@Url.Content("~/images/back.png")" />Regresar</a></li>
+                            <li>@Html.ActionLink("Riesgo Mecánico:", "Riesgos", "MatrizMRL", new { tipoRiesgo = 1 }, new { @class = "r-mecanico" })<span class="badge">1</span></li>
+                            <li>@Html.ActionLink("Riesgo Físico:", "Riesgos", "MatrizMRL", new { tipoRiesgo = 2 }, new { @class = "r-fisico" })<span class="badge">2</span></li>
+                            <li>@Html.ActionLink("Riesgo Químico:", "Riesgos", "MatrizMRL", new { tipoRiesgo = 3 }, new { @class = "r-quimico" })<span class="badge">3</span></li>
+                            <li>@Html.ActionLink("Riesgo Biológico:", "Riesgos", "MatrizMRL", new { tipoRiesgo = 4 }, new { @class = "r-biologico" })<span class="badge">4</span></li>
+                            <li>@Html.ActionLink("Riesgo Ergonómico:", "Riesgos", "MatrizMRL", new { tipoRiesgo = 5 }, new { @class = "r-ergonomico" })<span class="badge">5</span></li>
+                            <li>@Html.ActionLink("Riesgo Psicosociales:", "Riesgos", "MatrizMRL", new { tipoRiesgo = 6 }, new { @class = "r-psicosociales" })<span class="badge">6</span></li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="sidebar-menus">
+                        <ul class="list-panel-modulos">
+                            <li><a class="@(Session["SidebarSelect"] == "Personal" ? "select" : "")" href="@Url.Action("Index", "Personal")"><img class="boton-panel-imagen " src="@Url.Content("~/images/personal.png")" />Personal</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "Cargo" ? "select" : "")" href="@Url.Action("Index", "Cargo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "Puesto" ? "select" : "")" href="@Url.Action("Index", "PuestoTrabajo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puesto_t.png")" />Puesto de Trabajo</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "Historia" ? "select" : "")" href="@Url.Action("Index", "HistoriaClinica/Panel")"><img class="boton-panel-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "riesgos" ? "select" : "")" href="@Url.Action("Index", "MatrizMRL")"><img class="boton-panel-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "profesiograma" ? "select" : "")" href="@Url.Action("Index", "Profesiograma")"><img class="boton-panel-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "incidente" ? "select" : "")" href="@Url.Action("Index", "Incidente")"><img class="boton-panel-imagen" src="@Url.Content("~/images/incidente.png")" />Incidentes</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "accidente" ? "select" : "")" href="@Url.Action("Index", "Accidente")"><img class="boton-panel-imagen" src="@Url.Content("~/images/accidentes.png")" />Accidentes</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "indices" ? "select" : "")" href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/indicesr.png")" />Indices de Riesgo</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "equipop" ? "select" : "")" href="@Url.Action("Index", "EquipoTrabajo")"><img class="boton-panel-imagen" src="@Url.Content("~/images/equipot.png")" />Equipos de Trabajo</a></li>
+                        </ul>
+                    </div>
+                }
+            }
+
+
+            @if (Session["Sidebar"] == "Admin")
+            {
+                <div class="sidebar-menus">
+                    <ul class="list-panel-modulos">
+                        <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
+                        <li><a class="@(Session["SidebarSelect"] == "Departamento" ? "select" : "")" href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
+                        <li><a class="@(Session["SidebarSelect"] == "Usuario" ? "select" : "")" href="@Url.Action("Index", "Usuario")"><img class="boton-panel-imagen" src="@Url.Content("~/images/user.png")" />Administración de Usuarios</a></li>
+                        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
+                        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/pemisolista.png")" />Permisos Auditorias</a></li>
+                        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
+                    </ul>
                 </div>
+            }
+            @if (Session["Sidebar"] == "SistemaGestion")
+            {
+                <div class="sidebar-menus">
+                    <ul class="list-panel-sg">
+                        <li><a class="@(Session["SidebarSelect"] == "Inicio" ? "select" : "")" href="/SistemaGestion/"><img class="boton-panel-sg-p" src="@Url.Content("~/images/sg/inicio.png")" />PILARES DE LA GESTION SGP</a></li>
+                        <li><a class="@(Session["SidebarSelect"] == "pilar1" ? "select" : "")" href="/SistemaGestion/Nivel_1/1"><img class=" boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />GESTION ADMINISTRATIVA</a></li>
+                        <li><a class="@(Session["SidebarSelect"] == "pilar2" ? "select" : "")" href="/SistemaGestion/Nivel_1/2"><img class=" boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />GESTION TECNICA</a></li>
+                        <li><a class="@(Session["SidebarSelect"] == "pilar3" ? "select" : "")" href="/SistemaGestion/Nivel_1/3"><img class="boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />GESTION DEL TALENTO HUMANO</a></li>
+                        <li><a class="@(Session["SidebarSelect"] == "pilar4" ? "select" : "")" href="/SistemaGestion/Nivel_1/4"><img class="boton-panel-sg" src="@Url.Content("~/images/sg/item.png")" />PROCEDIMIENTOS OPERATIVOS BASICO Y/O RELEVANTES</a></li>
+                    </ul>
+                </div>
+            }
+            @if (Session["Sidebar"] == "Planes")
+            {
+                if (Session["SidebarSelect"] == "Tareas")
+                {
+                    <div class="sidebar-menus">
+                        <ul class="list-panel-modulos">
+                            <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Plan")"><img class="boton-panel-imagen" src="@Url.Content("~/images/back.png")" />Regresar</a></li>
+                            <li>
+                                <div class="col-md-12 label label-success t-Completo">Tareas Completas: <span class="badge">@Session["nt1"]</span></div>
+                            </li>
+                            <li>
+                                <div class="col-md-12 label label-warning t-Pendiente">Tareas Pendientes: <span class="badge">@Session["nt2"]</span></div>
+                            </li>
+                            <li>
+                                <div class="col-md-12 label label-danger t-Atrasado">Tareas Atrasados: <span class="badge">@Session["nt3"]</span></div>
+                            </li>
+                            <li>
+                                <div class="col-md-12 label label-default">Tareas Sin Estado: <span class="badge">@Session["nt4"]</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            }
+
+        </div>
 
             </div>
 
@@ -178,7 +198,7 @@
         <div class="clear"></div>
         @*Obtiene Validacion de Usuario*@
         <div id="usuario" class="hidden"></div>
-        <div id='ModalLogin' class='modal fade in' >
+        <div id='ModalLogin' class='modal fade in'>
             <div class="modal-dialog" style="width: 30%; margin-top: 15%;">
                 <div class="modal-content">
                     <div id='login'></div>
@@ -205,28 +225,28 @@
 
     @*Validar Usuario*@
 
-        <script>
-            $(function () {
-                var url_load = "@Url.Action("ExisteUsuario", "Usuario")";
-                $("#usuario").load(url_load, function (response, status, xhr) {
-                    if (response == "false") {
-                        var url = "@Url.Action("Ingresar", "Usuario")" + "?url=" + window.location.href;
-                        $("#login").load(url);
-                        $("#ModalLogin").modal({
-                            "backdrop": "static",
-                            "keyboard": false,
-                            "show": true
-                        });
-                        console.log("No ha ingeresado Usuario");
-                        return false;
-                    } else {
-                        console.log("Usuario ingresado");
-                        return false;
-                    }
+    <script>
+        $(function () {
+            var url_load = "@Url.Action("ExisteUsuario", "Usuario")";
+            $("#usuario").load(url_load, function (response, status, xhr) {
+                if (response == "false") {
+                    var url = "@Url.Action("Ingresar", "Usuario")" + "?url=" + window.location.href;
+                    $("#login").load(url);
+                    $("#ModalLogin").modal({
+                        "backdrop": "static",
+                        "keyboard": false,
+                        "show": true
+                    });
+                    console.log("No ha ingeresado Usuario");
                     return false;
-                });
+                } else {
+                    console.log("Usuario ingresado");
+                    return false;
+                }
                 return false;
             });
-        </script>
+            return false;
+        });
+    </script>
 </body>
 </html>

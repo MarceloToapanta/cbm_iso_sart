@@ -41,11 +41,36 @@ namespace CBM_SART.Controllers
             ViewBag.total = records.TotalRecords;
 
             return View(records);
-
             //return View(db.iso_empresa.ToList());
         }
+        //Riesgos
+        public ActionResult Riesgos(int? id, int tipoRiesgo = 1, string filter = null, int page = 1, int pageSize = 15, string sort = "idm_id_riesgo_mrl", string sortdir = "ASC")
+        {
+            //var iso_detalle_matriz_mrl = db.iso_detalle_matriz_mrl.Where(x => x.idm_id_matriz_mrl == id).ToList();
+            //return View(iso_detalle_matriz_mrl);
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_detalle_matriz_mrl>();
+            ViewBag.filter = filter;
+            ViewBag.tipoRiesgo = tipoRiesgo;
+            records.Content = db.iso_detalle_matriz_mrl
+                        .Where(x => x.idm_id_tipo_riesgo_mrl == tipoRiesgo && x.idm_id_matriz_mrl == id)
+                        .OrderBy(sort + " " + sortdir)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
 
-        // GET: /MatrizMRL/Details/5
+            // Count
+            records.TotalRecords = db.iso_detalle_matriz_mrl
+                                .Where(x => x.idm_id_tipo_riesgo_mrl == tipoRiesgo && x.idm_id_matriz_mrl == id)
+                                .Count();
+
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+
+            return View(records);
+        }
+        
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)

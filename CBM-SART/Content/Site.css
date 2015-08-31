@@ -1123,3 +1123,39 @@ display: inline-table;
     opacity:1;
     background: url("/images/fondo1.png");
 }
+/*/////////////////////////////Riesgos.//////////////////////////////////////*/
+.list-panel-riesgos{
+    list-style:none;
+    padding-left:0;
+}
+.list-panel-riesgos li{
+    margin-top: 10px;
+    clear: both;
+}
+.list-panel-riesgos li a{
+    display: block;
+    width: 80%;
+    float: left;
+}
+.list-panel-riesgos li .badge{  
+    width: 20%;
+    float: right;
+}
+ .r-mecanico{
+    background: rgb(102,255,255) !important;
+ }
+ .r-fisico{
+    background: rgb(146,208,80) !important;
+ }
+ .r-quimico{
+    background: rgb(218,150,148) !important;
+ }
+ .r-biologico{
+    background: rgb(255,204,255) !important;
+ }
+ .r-ergonomico{
+    background: rgb(255,255,153) !important;
+ }
+ .r-psicosociales{
+    background: rgb(252,213,180) !important;
+ }

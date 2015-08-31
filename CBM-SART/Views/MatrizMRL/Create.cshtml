@@ -53,14 +53,6 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.imr_nro_tabajadores_mrl, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.imr_nro_tabajadores_mrl, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.imr_nro_tabajadores_mrl)
-                </div>
-            </div>
-
-            <div class="form-group">
                 @Html.LabelFor(model => model.imr_jefe_area_mrl, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.imr_jefe_area_mrl, new { @class = "form-control" })
@@ -69,8 +61,16 @@
             </div>
 
             <div class="form-group">
+                @Html.LabelFor(model => model.imr_nro_tabajadores_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.imr_nro_tabajadores_mrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.imr_nro_tabajadores_mrl)
+                </div>
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(model => model.imr_fecha_evaluacion_mrl, new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+                <div class="col-md-2">
                     @Html.TextBoxFor(model => model.imr_fecha_evaluacion_mrl, new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker valid" })
                     @Html.ValidationMessageFor(model => model.imr_fecha_evaluacion_mrl)
                 </div>
