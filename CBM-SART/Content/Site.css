@@ -1131,6 +1131,7 @@ display: inline-table;
 .list-panel-riesgos li{
     margin-top: 10px;
     clear: both;
+    height:20px;
 }
 .list-panel-riesgos li a{
     display: block;

@@ -112,6 +112,17 @@ namespace CBM_SART.Controllers
             //Seleciona la Consulta Medica Preocupacional
             if (idConsulta == 0)
             {
+                int consulta_medica_pre = iso_historia_clinica.iso_consulta_medica.Where(x => x.icm_tipo_consulta == 1).Count();
+                if (consulta_medica_pre == 0)
+                {
+                    iso_consulta_medica new_consulta_medica_pre = new iso_consulta_medica();
+                    new_consulta_medica_pre.icm_id_historia_clinica = iso_historia_clinica.ihc_id_historia;
+                    new_consulta_medica_pre.icm_id_personal = iso_historia_clinica.ihc_id_personal;
+                    new_consulta_medica_pre.icm_tipo_consulta = 1; //Preocupacional
+                    new_consulta_medica_pre.icm_fecha_consulta = DateTime.Now;
+                    db.iso_consulta_medica.Add(new_consulta_medica_pre);
+                    db.SaveChanges();
+                }
                 iso_consulta_medica iso_consulta_medica_pre = iso_historia_clinica.iso_consulta_medica.Where(x => x.icm_tipo_consulta == 1).First();
                 if (iso_consulta_medica_pre != null) { idConsulta = iso_consulta_medica_pre.icm_id_consulta; }
 
