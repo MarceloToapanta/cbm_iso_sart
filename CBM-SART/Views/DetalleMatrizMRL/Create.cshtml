@@ -1,0 +1,101 @@
+﻿@model CBM_SART.Models.iso_detalle_matriz_mrl
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>iso_detalle_matriz_mrl</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idm_id_matriz_mrl, "idm_id_matriz_mrl", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idm_id_matriz_mrl", String.Empty)
+                @Html.ValidationMessageFor(model => model.idm_id_matriz_mrl)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idm_id_riesgo_mrl, "idm_id_riesgo_mrl", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idm_id_riesgo_mrl", String.Empty)
+                @Html.ValidationMessageFor(model => model.idm_id_riesgo_mrl)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idm_id_tipo_riesgo_mrl, "idm_id_tipo_riesgo_mrl", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idm_id_tipo_riesgo_mrl", String.Empty)
+                @Html.ValidationMessageFor(model => model.idm_id_tipo_riesgo_mrl)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idm_probabilidad, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idm_probabilidad)
+                @Html.ValidationMessageFor(model => model.idm_probabilidad)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idm_consecuencia, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idm_consecuencia)
+                @Html.ValidationMessageFor(model => model.idm_consecuencia)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idm_exposicion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idm_exposicion)
+                @Html.ValidationMessageFor(model => model.idm_exposicion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idm_resultado, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idm_resultado)
+                @Html.ValidationMessageFor(model => model.idm_resultado)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idm_valoracion_gp, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idm_valoracion_gp)
+                @Html.ValidationMessageFor(model => model.idm_valoracion_gp)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idm_descripcion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idm_descripcion)
+                @Html.ValidationMessageFor(model => model.idm_descripcion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

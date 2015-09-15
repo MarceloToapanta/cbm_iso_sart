@@ -1129,34 +1129,85 @@ display: inline-table;
     padding-left:0;
 }
 .list-panel-riesgos li{
-    margin-top: 10px;
+    margin-top: 5px;
     clear: both;
-    height:20px;
+    height: 27px;
+    border: 1px solid #d5d5d5;
+    border-radius: .25em;
+}
+.list-panel-riesgos li.select {
+    border: 1px solid #555;
+    border-right: 10px solid #555;
 }
 .list-panel-riesgos li a{
     display: block;
-    width: 80%;
+    width: 100%;
     float: left;
+    height: 25px;
+    color: #fff;
+    padding: 5px 10px 5px 10px;
+}
+.list-panel-riesgos li a:hover {
+    text-decoration: none;
+    opacity:0.8;
+}
+.list-panel-riesgos li.back {
+    height: 35px;
+}
+.list-panel-riesgos li.back a{
+    color: #333;
+    padding: 0px;
+    padding-left: 3px;
+    height: 35px;
 }
 .list-panel-riesgos li .badge{  
     width: 20%;
     float: right;
+    display: none;
 }
  .r-mecanico{
-    background: rgb(102,255,255) !important;
+    background: #FFD700 !important;
  }
  .r-fisico{
-    background: rgb(146,208,80) !important;
+    background: #3498db !important;
  }
  .r-quimico{
-    background: rgb(218,150,148) !important;
+    background: #f39c12 !important;
  }
  .r-biologico{
-    background: rgb(255,204,255) !important;
+    background: #43ac6a !important;
  }
  .r-ergonomico{
-    background: rgb(255,255,153) !important;
+    background: #e74c3c !important;
  }
  .r-psicosociales{
-    background: rgb(252,213,180) !important;
+    background: #9b479f !important;
+ }
+ .gp-bajo{
+    background: #CAD9C4 !important;
+    color:#333;
+    text-align:center;
+ }
+ .gp-medio{
+    background: #F4E8AE !important;
+    color:#333;
+    text-align:center;
+ }
+ .gp-alto{
+    background: #FF0000 !important;
+    color:#fff;
+    text-align:center;
+ }
+ .gp-critico{
+    background: #F34306 !important;
+    color:#fff;
+    text-align:center;
+ }
+ .td-valoracion{
+     padding: 0 !important;
+ }
+ .td-valoracion span{
+    padding: 3px 6px;
+    width: 100%;
+    display: block;
  }

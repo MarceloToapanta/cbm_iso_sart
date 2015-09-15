@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
+    <Compile Include="Controllers\DetalleMatrizMRLController.cs" />
     <Compile Include="Controllers\DetallePlanController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EquipoTrabajoController.cs" />
@@ -601,6 +602,11 @@
     <Content Include="Views\MatrizMRL\Edit.cshtml" />
     <Content Include="Views\MatrizMRL\Index.cshtml" />
     <Content Include="Views\MatrizMRL\Riesgos.cshtml" />
+    <Content Include="Views\DetalleMatrizMRL\Create.cshtml" />
+    <Content Include="Views\DetalleMatrizMRL\Delete.cshtml" />
+    <Content Include="Views\DetalleMatrizMRL\Details.cshtml" />
+    <Content Include="Views\DetalleMatrizMRL\Edit.cshtml" />
+    <Content Include="Views\DetalleMatrizMRL\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

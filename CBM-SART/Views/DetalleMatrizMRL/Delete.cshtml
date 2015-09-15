@@ -1,0 +1,89 @@
+﻿@model CBM_SART.Models.iso_detalle_matriz_mrl
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>iso_detalle_matriz_mrl</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idm_probabilidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idm_probabilidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idm_consecuencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idm_consecuencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idm_exposicion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idm_exposicion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idm_resultado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idm_resultado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idm_valoracion_gp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idm_valoracion_gp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idm_descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idm_descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_matriz_mrl.imr_localizacion_mrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_matriz_mrl.imr_localizacion_mrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_riesgo_mrl.irm_nombre_riesgo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_riesgo_mrl.irm_nombre_riesgo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

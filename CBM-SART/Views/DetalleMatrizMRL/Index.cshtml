@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CBM_SART.Models.iso_detalle_matriz_mrl>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idm_probabilidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idm_consecuencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idm_exposicion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idm_resultado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idm_valoracion_gp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idm_descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_matriz_mrl.imr_localizacion_mrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_riesgo_mrl.irm_nombre_riesgo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idm_probabilidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idm_consecuencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idm_exposicion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idm_resultado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idm_valoracion_gp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idm_descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_matriz_mrl.imr_localizacion_mrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_riesgo_mrl.irm_nombre_riesgo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

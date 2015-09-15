@@ -1,0 +1,194 @@
+﻿@model CBM_SART.Models.iso_detalle_matriz_mrl
+
+
+<div class="title-window" style="height:32px">
+    Permite editar valores de Riesgo Laboral selecionado.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Editar Riesgo Laboral</h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="modal-body">
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.idm_id_matriz_mrl)
+
+            @Html.HiddenFor(model => model.idm_id_riesgo_mrl)
+
+            @Html.HiddenFor(model => model.idm_id_tipo_riesgo_mrl)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.idm_probabilidad, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.idm_probabilidad, new SelectList(
+                                new List<Object>{
+                                new { value = "" , text = "-Selecionar-"},
+                                new { value = "10" , text = "(10) Es resultado más posible y esperado, si se presenta la situación de Riesgo"},
+                                new { value = "6" , text = "(6) Es completamente posible, no sería nada extraño, 50% posible "},
+                                new { value = "3" , text = "(3) Sería una consecuencia o coincidencia rara "},
+                                new { value = "1" , text = "(1) Sería una coincidencia remotamente posible, se sabe que ha ocurrido"},
+                                new { value = "0.5" , text = "(0.5) Extremadamente remota pero concebible, no ha pasado en años "},
+                                new { value = "0.1" , text = "(0.1) Prácticamente imposible (posibilidad 1 en 1 000000) "}
+                                },
+                                "value",
+                                "text",
+                                0), new { @class = "form-control valid" })
+
+                    @Html.ValidationMessageFor(model => model.idm_probabilidad)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.idm_consecuencia, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.idm_consecuencia, new SelectList(
+                                new List<Object>{
+                                new { value = "" , text = "-Selecionar-"},
+                                new { value = "100" , text = "(100) Catástrofe, numerosas muertes, grandes daños, quebranto en la actividad"},
+                                new { value = "50" , text = "(50) Varias muertes daños desde 500000 a 1000000 dólares"},
+                                new { value = "25" , text = "(25) Muerte, daños de 100000 a 500000 dólares"},
+                                new { value = "15" , text = "(15) Lesiones extremadamente graves (amputación, invalidez permanente)"},
+                                new { value = "5" , text = "(5) Lesiones con baja no graves"},
+                                new { value = "1" , text = "(1) Pequeñas heridas, contusiones, golpes, pequeños daños"}
+                                },
+                                "value",
+                                "text",
+                     0), new { @class = "form-control valid" })
+                    @Html.ValidationMessageFor(model => model.idm_consecuencia)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.idm_exposicion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.idm_exposicion, new SelectList(
+                                new List<Object>{
+                                new { value = "" , text = "-Selecionar-"},
+                                new { value = "10" , text = "(10) Continuamente (o muchas veces al día)"},
+                                new { value = "6" , text = "(6) Frecuentemente (1 vez al día)"},
+                                new { value = "3" , text = "(3) Ocasionalmente (1 vez/semana – 1 vez/mes) "},
+                                new { value = "2" , text = "(2) Irregularmente (1 vez/mes – 1 vez/año)"},
+                                new { value = "1" , text = "(1) Raramente (se ha sabido que ha ocurrido)"},
+                                new { value = "0.5" , text = "(0.5) Remotamente posible (no se conoce que haya ocurrido) "}
+                                },
+                                "value",
+                                "text",
+                     0), new { @class = "form-control valid" })
+                    @Html.ValidationMessageFor(model => model.idm_exposicion)
+                </div>
+            </div>
+
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.idm_resultado, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.idm_resultado, new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessageFor(model => model.idm_resultado)
+                </div>
+
+                @Html.LabelFor(model => model.idm_valoracion_gp, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.idm_valoracion_gp, new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessageFor(model => model.idm_valoracion_gp)
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <p class="text-info ">Valoracion Grado del Peligro (GP) = Probabilidad * Consecuencia * Exposición</p>
+            </div>
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.idm_descripcion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.idm_descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idm_descripcion)
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                <button class="btn btn-primary" type="submit" name="Guardar"> Guardar </button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+
+<script>
+
+    $("#idm_probabilidad").click(function () {
+        resultado();
+    });
+    $("#idm_consecuencia").click(function () {
+        resultado();
+    });
+    $("#idm_exposicion").click(function () {
+        resultado();
+    });
+    $(document).ready(function () {
+        resultado();
+    });
+    function resultado() {
+        var resultado = 0, probabilidad, consecuencia, exposicion;
+        probabilidad = $("#idm_probabilidad").val();
+        consecuencia = $("#idm_consecuencia").val();
+        exposicion = $("#idm_exposicion").val();
+        if (probabilidad == "") { probabilidad = 0 }
+        if (consecuencia == "") { consecuencia = 0 }
+        if (exposicion == "") { exposicion = 0 }
+        resultado = probabilidad * consecuencia * exposicion;
+        $("#idm_resultado").val(resultado);
+        quitarclase();
+        if (resultado > 0 && resultado < 18) {
+            $("#idm_valoracion_gp").val("Bajo");
+            $("#idm_valoracion_gp").addClass("gp-bajo");
+        }
+        else {
+            if (resultado > 18 && resultado <= 85) {
+                $("#idm_valoracion_gp").val("Medio");
+                $("#idm_valoracion_gp").addClass("gp-medio");
+            }
+            else {
+
+                if (resultado > 85 && resultado <= 200) {
+                    $("#idm_valoracion_gp").val("Alto");
+                    $("#idm_valoracion_gp").addClass("gp-alto");
+                }
+                else {
+                    if (resultado > 200) {
+                        $("#idm_valoracion_gp").val("Crítico");
+                        $("#idm_valoracion_gp").addClass("gp-critico");
+                    }
+                }
+
+            }
+        }
+    }
+    function quitarclase() {
+        $("#idm_valoracion_gp").removeClass("gp-bajo");
+        $("#idm_valoracion_gp").removeClass("gp-medio");
+        $("#idm_valoracion_gp").removeClass("gp-alto");
+        $("#idm_valoracion_gp").removeClass("gp-critico");
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

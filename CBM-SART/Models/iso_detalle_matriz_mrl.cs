@@ -11,17 +11,27 @@ namespace CBM_SART.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class iso_detalle_matriz_mrl
     {
+        [Required]
         public int idm_id_matriz_mrl { get; set; }
+        [Required]
         public int idm_id_riesgo_mrl { get; set; }
+        [Required]
         public int idm_id_tipo_riesgo_mrl { get; set; }
+        [Display(Name = "Probabilidad")]
         public string idm_probabilidad { get; set; }
+        [Display(Name = "Consecuencia")]
         public string idm_consecuencia { get; set; }
+        [Display(Name = "Exposición")]
         public string idm_exposicion { get; set; }
+        [Display(Name = "Resultado")]
         public string idm_resultado { get; set; }
+        [Display(Name = "Valoración GP")]
         public string idm_valoracion_gp { get; set; }
+        [Display(Name = "Descripción")]
         public string idm_descripcion { get; set; }
     
         public virtual iso_matriz_mrl iso_matriz_mrl { get; set; }

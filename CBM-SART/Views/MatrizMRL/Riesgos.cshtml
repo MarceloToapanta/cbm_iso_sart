@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     Session["Sidebar"] = "VigilaciaSalud";
     Session["SidebarSelect"] = "listariesgos";
+    Session["TipoR"] = ViewBag.tipoRiesgo;
 }
 
 <div class="seccion-barra">
@@ -11,36 +12,35 @@
     Matriz de Riesgos Laborales por Puesto de Trabajo
     <span class="text-count">Riesgos : @ViewBag.total</span>
 </div>
-
 <div class="content">
     @using (Html.BeginForm("index", null, FormMethod.Get))
     {
-        <div class="search">
-            <div class="col-md-10">
-                <div class="input-group">
+        @*<div class="search">
+                <div class="col-md-10">
+                    <div class="input-group">
 
-                    <input type="text"
-                           name="filter"
-                           value="@ViewBag.filter"
-                           class="form-control"
-                           style="display: inline; height:30px"
-                           placeholder="Buscar por Puesto de Trabajo" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
-                    </span>
+                        <input type="text"
+                               name="filter"
+                               value="@ViewBag.filter"
+                               class="form-control"
+                               style="display: inline; height:30px"
+                               placeholder="Buscar por Puesto de Trabajo" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                        </span>
 
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="pull-right">
-                    <a class="btn btn-success" data-modal="" href="/MatrizMRL/Create" id="btnCreate">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Nuevo
-                    </a>
+                <div class="col-md-2">
+                    <div class="pull-right">
+                        <a class="btn btn-success" data-modal="" href="/MatrizMRL/Create" id="btnCreate">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Nuevo
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="clear"></div>
-        </div>
+                <div class="clear"></div>
+            </div>*@
 
         <div class="col-md-12 grid-content">
             @{
@@ -53,27 +53,47 @@
         grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
         grid.Pager(WebGridPagerModes.All);
 
-                            @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
             fillEmptyRows: false,
                       tableStyle: "table table-bordered table-hover table-responsive table-condensed",
             mode: WebGridPagerModes.All,
             columns: grid.Columns(
               grid.Column(header: "No.",
                 format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+              grid.Column("iso_riesgo_mrl.irm_codigo_riesgo", "Código", style: ""),
               grid.Column("iso_riesgo_mrl.irm_nombre_riesgo", "Factor de Riesgo", style: "col-lg-6"),
               grid.Column("idm_probabilidad", "Probabilidad", style: "col-lg-1"),
               grid.Column("idm_consecuencia", "Consecuencia", style: "col-lg-1"),
               grid.Column("idm_exposicion", "Exposición", style: "col-lg-1"),
               grid.Column("idm_resultado", "Resultado", style: "col-lg-1"),
-              grid.Column("idm_valoracion_gp", "Valoración GP", style: "col-lg-2"),
+              grid.Column(header: "Valoración GP", style: "col-lg-2 td-valoracion",
+              format: @<text>
+                @if (item.idm_valoracion_gp == "Bajo")
+                {
+                    @Html.Raw("<span class='gp-bajo'>" + item.idm_valoracion_gp + "</span>")
+                }
+                @if (item.idm_valoracion_gp == "Medio")
+                {
+                    @Html.Raw("<span class='gp-medio'>" + item.idm_valoracion_gp + "</span>")
+                }
+                @if (item.idm_valoracion_gp == "Alto")
+                {
+                    @Html.Raw("<span class='gp-alto'>" + item.idm_valoracion_gp + "</span>")
+                }
+                @if (item.idm_valoracion_gp == "Crítico")
+                {
+                    @Html.Raw("<span class='gp-critico'>" + item.idm_valoracion_gp + "</span>")
+                }
+
+            </text>
+              ),
               grid.Column(header: "Acción", canSort: false, style: "action",
                      format: @<text>
-                @Html.Raw("<a data-modal='' href='/MatrizMRL/details/" + item.idm_id_matriz_mrl + "' id='" + item.idm_id_matriz_mrl + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
-                @Html.Raw("<a data-modal='' href='/MatrizMRL/edit/" + item.idm_id_matriz_mrl + "' id='" + item.idm_id_matriz_mrl + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
-                @Html.Raw("<a data-modal='' href='/MatrizMRL/delete/" + item.idm_id_matriz_mrl + "' id='" + item.idm_id_matriz_mrl + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/DetalleMatrizMRL/Edit?idMatriz=" + item.idm_id_matriz_mrl + "&idDetalle=" + item.idm_id_riesgo_mrl + "&IdTipoDetalle=" + item.idm_id_tipo_riesgo_mrl + " ' id='" + item.idm_id_matriz_mrl + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/DetalleMatrizMRL/Delete/" + item.idm_id_matriz_mrl + "' id='" + item.idm_id_matriz_mrl + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                     </text>)
 
-                                                                                                                                       ));
+                                                                                                                                    ));
             }
 
 
@@ -82,68 +102,15 @@
     }
 </div>
 
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog" style="width:50%;">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
 
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.idm_probabilidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idm_consecuencia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idm_exposicion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idm_resultado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idm_valoracion_gp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idm_descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iso_matriz_mrl.imr_localizacion_mrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iso_riesgo_mrl.irm_nombre_riesgo)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.idm_probabilidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idm_consecuencia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idm_exposicion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idm_resultado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idm_valoracion_gp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idm_descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iso_matriz_mrl.imr_localizacion_mrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.iso_riesgo_mrl.irm_nombre_riesgo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
 }
-
-</table>*@

@@ -44,7 +44,7 @@ namespace CBM_SART.Controllers
             //return View(db.iso_empresa.ToList());
         }
         //Riesgos
-        public ActionResult Riesgos(int? id, int tipoRiesgo = 1, string filter = null, int page = 1, int pageSize = 15, string sort = "idm_id_riesgo_mrl", string sortdir = "ASC")
+        public ActionResult Riesgos(int? id, int tipoRiesgo = 1, string filter = null, int page = 1, int pageSize = 25, string sort = "idm_id_riesgo_mrl", string sortdir = "ASC")
         {
             //var iso_detalle_matriz_mrl = db.iso_detalle_matriz_mrl.Where(x => x.idm_id_matriz_mrl == id).ToList();
             //return View(iso_detalle_matriz_mrl);
@@ -167,6 +167,19 @@ namespace CBM_SART.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<ActionResult> EditarRiesgo(int idMatriz, int idDetalle, int IdTipoDetalle)
+        {
+            if (idMatriz == null || idDetalle == null || IdTipoDetalle == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            iso_detalle_matriz_mrl iso_detalle_matriz_mrl = await db.iso_detalle_matriz_mrl.FindAsync(idMatriz, idDetalle, IdTipoDetalle);
+            if (iso_detalle_matriz_mrl == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(iso_detalle_matriz_mrl);
+        }
 
         public ActionResult PuestosPorCargo(int id)
         {
