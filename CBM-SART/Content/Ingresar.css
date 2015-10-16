@@ -1,0 +1,80 @@
+﻿html{
+    background: url("/images/fondo1.png");
+}
+body {
+   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.container-ingresar{
+    font-size: 11px;
+    background: url("/images/cream_pixels.png");
+    width: 40%;
+    margin: 10% auto;
+    border-radius: 5px;
+}
+.form-horizontal{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.modal-header.text-center{
+    padding: 10px;
+    text-align: center;
+}
+.modal-title{
+    color: #979797;
+    font-weight: 600;
+    font-size: 12px;
+}
+input{
+    width: calc(50% - 22px);
+    height: 35px;
+    outline: none;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    border-radius: 2px;
+    color: #333;
+    font-size: 0.8rem;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+    margin-bottom: 20px;
+}
+input:focus {
+    border-color: #358efb;
+}
+button.btn{
+    width: 20%;
+    background-color: #1CB94E;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 6px 0;
+    border-radius: 2px;
+    text-transform: uppercase;
+}
+ /*////////////////////////Ventanas Emergentes//////////////////////*/
+ .title-window{
+    border-bottom: 2px solid rgb(241, 100, 72);
+    background: url("/images/nav-dark.png") !important ;
+    color: #fff;
+    font-size: 14px;
+    font-style: normal;  
+    padding: 10px 7px;
+ }
+#ms-error{
+    margin-bottom: 15px;
+    color: rgb(241, 100, 72);
+    border: 1px solid #ccc;
+    background-color: #CFCDB5;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 3px;
+    padding: 3px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
