@@ -17,10 +17,10 @@ namespace CBM_SART.Controllers
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
         //Login
-        public ActionResult Ingresar(string url)
-        {
+        public ActionResult Ingresar(string url, iso_usuario iso_usuario)
+        {        
             ViewBag.url = url;
-            return PartialView();
+            return PartialView(iso_usuario);
         }
         [HttpPost]
         public ActionResult UsuarioActual(string url, iso_usuario iso_usuario)
@@ -30,19 +30,27 @@ namespace CBM_SART.Controllers
             {
                 iso_usuario iso_usuario_actual = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login && x.ius_password == iso_usuario.ius_password).First();
                 Session["Usuario"] = iso_usuario_actual;
-                //return Redirect(url);
-                return Json(new { ok = true, msj = "Usuario encontrado" });
+                if (url == "" || url == null)
+                {
+                    url = "/";
+                }
+                return Redirect(url);
+                // return Json(new { ok = true, msj = "Usuario encontrado" });
             }
             else
             {
                 if (iso_usuario.ius_login == "" || iso_usuario.ius_login == null)
                 {
                     ModelState.AddModelError("", "Ingresar Usuario");
-                    return Json(new { ok = false, msj = "Ingresar Usuario" });
+                    Session["ErroUser"] = "Ingresar Usuario";
+                    return RedirectToAction("Ingresar", iso_usuario);
                 }
                 else
                 {
-                    return Json(new { ok = false, msj = "El Usuario y Clave que has indicado no pertenece a ninguna cuenta.             \n Por favor, asegúrate de escribirlos correctamente" });
+                    //return Json(new { ok = false, msj = "El Usuario y Clave que has indicado no pertenece a ninguna cuenta.             \n Por favor, asegúrate de escribirlos correctamente" });
+                    ModelState.AddModelError("", "El Usuario y Clave que has indicado no pertenece a ninguna cuenta.             \n Por favor, asegúrate de escribirlos correctamente");
+                    Session["ErroUser"] = "El Usuario y Clave que has indicado no pertenece a ninguna cuenta.             \n Por favor, asegúrate de escribirlos correctamente";
+                    return RedirectToAction("Ingresar", iso_usuario);
                 }
 
                 //int iso_usuario_e = db.iso_usuario.Where(x => x.ius_login == iso_usuario.ius_login).Count();

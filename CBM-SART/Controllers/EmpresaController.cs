@@ -10,18 +10,18 @@ using CBM_SART.Models;
 using System.Linq.Dynamic;
 using System.IO;
 using System.Web.Hosting;
+using CBM_SART.ActionFilter;
 
 namespace CBM_SART.Controllers
 {
+    [UserFilter]
     public class EmpresaController : Controller
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
         // GET: /Empresa/
-        //[Authorize]
         public ActionResult Index(string filter = null, int page = 1, int pageSize = 6, string sort = "iem_cod_empresa", string sortdir = "ASC")
         {
-           
             if (String.IsNullOrEmpty(filter)) { filter = null; }
             var records = new PagedList<iso_empresa>();
             ViewBag.filter = filter;
