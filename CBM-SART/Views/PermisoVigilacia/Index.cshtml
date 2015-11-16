@@ -14,19 +14,42 @@
 <div class="content">
     <div class="col-md-12">
         <div class="form-group">
-            @Html.Label("Usuarios", new { @class = "control-label col-md-1" })
-            <div class="col-md-8">
+            @Html.Label("Usuarios", "Permisos del Usuario :", new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
                 @Html.DropDownList("Usuarios", null, "-Selecionar-", new { @class = "form-control" })
-                @{
-                    if (Usuario != null)
-                    {<span> @Usuario.ius_nombre_usuario.ToString()</span>}
-                }
+                @*@{
+                        if (Usuario != null)
+                        {<span> @Usuario.ius_nombre_usuario.ToString()</span>}
+                    }*@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-
-    </div>
+    @if (Usuario != null){
+        <p class="text-muted">Selaciona los modulos al que tendrá acceso el Usuario.</p>
+        <div class="col-md-6">
+            <div class="panel panel-default" style="padding:15px">
+                @using (Html.BeginForm("Actualizar", "PermisoVigilacia", FormMethod.Post, new {id = "f" }))
+                {
+                    <input type="hidden" name="IdUsuario" value="@Usuario.ius_id_usuario" />
+                    foreach (CBM_SART.Models.iso_modulo modulo in ViewBag.Modulos)
+                    {
+                        <label for="@modulo.imd_id_modulo" class="check">
+                            <input type="checkbox" id="@modulo.imd_id_modulo" name="modulo" value="@modulo.imd_id_modulo" @(Usuario.iso_modulo.Contains(modulo) ? "checked" : "") /> @modulo.imd_nombre_modulo
+                        </label>
+                        <br />
+                    }
+                    <div style="clear:both"></div>
+                    <div class="modal-footer">
+                        <span id="progress" class="text-center" style="display: none;">
+                            <img src="/images/wait.gif" alt="wiat" />
+                            Espere...
+                        </span>
+                        <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
+                    </div>
+                }
+            </div>
+        </div>
+    }
     <div class="col-md-6">
 
     </div>
