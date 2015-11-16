@@ -93,7 +93,7 @@ namespace CBM_SART.Controllers
             }
             
         }
-        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ius_nombre_usuario", string sortdir = "ASC")
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 20, string sort = "ius_nombre_usuario", string sortdir = "ASC")
         {
 
             if (String.IsNullOrEmpty(filter)) { filter = null; }

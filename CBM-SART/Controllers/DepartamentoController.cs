@@ -22,7 +22,7 @@ namespace CBM_SART.Controllers
         //    var iso_departamento = db.iso_departamento.Include(i => i.iso_empresa);
         //    return View(await iso_departamento.ToListAsync());
         //}
-        public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ide_id_departamento", string sortdir = "ASC")
+        public ActionResult Index(string filter = null, int page = 1, int pageSize = 20, string sort = "ide_id_departamento", string sortdir = "ASC")
         {
             if (String.IsNullOrEmpty(filter)) { filter = null; }
             var records = new PagedList<iso_departamento>();

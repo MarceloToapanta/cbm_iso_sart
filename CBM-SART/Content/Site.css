@@ -225,6 +225,9 @@ border-left:0px;
 .navbar-default .navbar-collapse{
     
 }
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    border-color: transparent !important;
+}
 /*/////////////FIN NAV BAR///////////////*/
 
 #content {

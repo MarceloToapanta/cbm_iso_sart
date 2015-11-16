@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Inicio";
     Session["Sidebar"] = "Inicio";
+    CBM_SART.Models.iso_empresa empresa_actual = ViewBag.empresa_actual;
 }
 
 <div class="jumbotron">
@@ -9,24 +10,26 @@
     <p><a href="/Documentos/RES.C.D.390Reglamento del Seguro General de Riesgos del Trabajo.pdf" target="new" class="btn btn-primary btn-large">RESOLUCIÓN No. C.D.390 &raquo;</a></p>
 </div>
 
-<div class="row" style="padding: 0 15px;">
+<div class="row panel panel-default" style="padding: 0 15px; margin: 5px 0px;">
+
+    <div class="col-md-12">
+        <h1>@empresa_actual.iem_nombre_empresa</h1>
+        <img style='max-width: 200px; max-height: 150px' src="@Url.Action("GetImage", "Empresa", new { ID = empresa_actual.iem_cod_empresa })" />
+    </div>
+
     <div class="col-md-4">
         <h2>Misión</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            @empresa_actual.iem_mision_empresa
         </p>
-        <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+        @*<p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>*@
     </div>
     <div class="col-md-4">
         <h2>Visión</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+        <p>@empresa_actual.iem_vision_empresa</p>
     </div>
     <div class="col-md-4">
         <h2>Valores</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+        <p>@empresa_actual.iem_valores_empresa</p>
     </div>
 </div>
