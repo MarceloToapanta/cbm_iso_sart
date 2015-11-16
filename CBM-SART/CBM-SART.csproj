@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidenteController.cs" />
     <Compile Include="Controllers\MatrizMRLController.cs" />
+    <Compile Include="Controllers\PermisoVigilaciaController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\PlanesController.cs" />
@@ -609,6 +610,7 @@
     <Content Include="Views\DetalleMatrizMRL\Details.cshtml" />
     <Content Include="Views\DetalleMatrizMRL\Edit.cshtml" />
     <Content Include="Views\DetalleMatrizMRL\Index.cshtml" />
+    <Content Include="Views\PermisoVigilacia\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

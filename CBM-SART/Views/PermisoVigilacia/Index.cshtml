@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "Admin";
+    Session["SidebarSelect"] = "PVigilancia";
+    CBM_SART.Models.iso_usuario Usuario = ViewBag.Usuario;
+}
+
+<div class="seccion-barra">
+    <img src="~/images/label-plain-black.png" height="24" width="24" />
+    Permite asignar acceso a Módulos de Vigilancia de Salud a Usuarios
+</div>
+
+<div class="content">
+    <div class="col-md-12">
+        <div class="form-group">
+            @Html.Label("Usuarios", new { @class = "control-label col-md-1" })
+            <div class="col-md-8">
+                @Html.DropDownList("Usuarios", null, "-Selecionar-", new { @class = "form-control" })
+                @{
+                    if (Usuario != null)
+                    {<span> @Usuario.ius_nombre_usuario.ToString()</span>}
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+
+@section scripts{
+    @*Cambiar de Usuario*@
+    <script>
+        $(document).delegate("#Usuarios", "change", function (e) {
+            var IdUsuario = $(this).val();
+            if (IdUsuario > 0) {
+                window.location.href = "/PermisoVigilacia?IdUsuario=" + IdUsuario;
+            }
+        });
+    </script>
+}

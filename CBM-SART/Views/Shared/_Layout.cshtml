@@ -35,7 +35,7 @@
                             <li><a href="@Url.Action("Index", "Empresa")"><img class="boton-barra-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
                             <li><a href="@Url.Action("Index", "Departamento")"><img class="boton-barra-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
                             <li><a href="@Url.Action("Index", "Usuario")"><img class="boton-barra-imagen" src="@Url.Content("~/images/user.png")" />Administración de Usuarios</a></li>
-                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
+                            <li><a href="@Url.Action("Index", "PermisoVigilacia")"><img class=" boton-barra-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
                             <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/pemisolista.png")" />Permisos Auditorias</a></li>
                             <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
 
@@ -134,7 +134,7 @@
                         <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
                         <li><a class="@(Session["SidebarSelect"] == "Departamento" ? "select" : "")" href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
                         <li><a class="@(Session["SidebarSelect"] == "Usuario" ? "select" : "")" href="@Url.Action("Index", "Usuario")"><img class="boton-panel-imagen" src="@Url.Content("~/images/user.png")" />Administración de Usuarios</a></li>
-                        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
+                        <li><a class="@(Session["SidebarSelect"] == "PVigilancia" ? "select" : "")" href="@Url.Action("Index", "PermisoVigilacia")"><img class="boton-panel-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
                         <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/pemisolista.png")" />Permisos Auditorias</a></li>
                         <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
                     </ul>
