@@ -13,6 +13,7 @@
 
 <div class="content">
     <div class="col-md-12">
+        <p class="text-muted">Selecciona un Usuario para ver/modificar el acceso a modulos de Vigilacia de Salud.</p>
         <div class="form-group">
             @Html.Label("Usuarios", "Permisos del Usuario :", new { @class = "control-label col-md-2" })
             <div class="col-md-4">
@@ -24,32 +25,42 @@
             </div>
         </div>
     </div>
-    @if (Usuario != null){
-        <p class="text-muted">Selaciona los modulos al que tendrá acceso el Usuario.</p>
+    
+      
         <div class="col-md-6">
-            <div class="panel panel-default" style="padding:15px">
+            <div class="panel panel-default" style="padding:20px; margin-top:10px;">
+
                 @using (Html.BeginForm("Actualizar", "PermisoVigilacia", FormMethod.Post, new {id = "f" }))
                 {
-                    <input type="hidden" name="IdUsuario" value="@Usuario.ius_id_usuario" />
+                    if (Usuario != null){
+                        <input type="hidden" name="IdUsuario" value="@Usuario.ius_id_usuario" />
+                    }
                     foreach (CBM_SART.Models.iso_modulo modulo in ViewBag.Modulos)
                     {
                         <label for="@modulo.imd_id_modulo" class="check">
-                            <input type="checkbox" id="@modulo.imd_id_modulo" name="modulo" value="@modulo.imd_id_modulo" @(Usuario.iso_modulo.Contains(modulo) ? "checked" : "") /> @modulo.imd_nombre_modulo
+                            @if (Usuario != null){
+                                <input type="checkbox" id="@modulo.imd_id_modulo" name="modulo" value="@modulo.imd_id_modulo" @(Usuario.iso_modulo.Contains(modulo) ? "checked" : "") /> @modulo.imd_nombre_modulo
+                            }
+                            else
+                            {
+                                <input type="checkbox" id="@modulo.imd_id_modulo" name="modulo" disabled="disabled" /> @modulo.imd_nombre_modulo
+                            }
+                            
                         </label>
                         <br />
                     }
-                    <div style="clear:both"></div>
-                    <div class="modal-footer">
-                        <span id="progress" class="text-center" style="display: none;">
-                            <img src="/images/wait.gif" alt="wiat" />
-                            Espere...
-                        </span>
+                    
+                    if (Usuario != null){
                         <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
-                    </div>
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary " type="button" name="Guardar" disabled="disabled"> Guardar </button>
+                    }
                 }
             </div>
         </div>
-    }
+    
     <div class="col-md-6">
 
     </div>
@@ -62,6 +73,8 @@
             var IdUsuario = $(this).val();
             if (IdUsuario > 0) {
                 window.location.href = "/PermisoVigilacia?IdUsuario=" + IdUsuario;
+            } else {
+                window.location.href = "/PermisoVigilacia";
             }
         });
     </script>

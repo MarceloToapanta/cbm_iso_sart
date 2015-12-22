@@ -713,5 +713,19 @@
         <ScalarProperty Name="imd_id_modulo" ColumnName="imo_id_modulo" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="iso_permiso_medico">
+      <EntityTypeMapping TypeName="cbm_iso_sart.iso_permiso_medico">
+        <MappingFragment StoreEntitySet="iso_permiso_medico">
+          <ScalarProperty Name="ipm_dias_permiso" ColumnName="ipm_dias_permiso" />
+          <ScalarProperty Name="ipm_fecha_permiso_fin" ColumnName="ipm_fecha_permiso_fin" />
+          <ScalarProperty Name="ipm_fecha_permiso_ini" ColumnName="ipm_fecha_permiso_ini" />
+          <ScalarProperty Name="ipm_id_tipo_permisom" ColumnName="ipm_id_tipo_permisom" />
+          <ScalarProperty Name="ipm_id_personal" ColumnName="ipm_id_personal" />
+          <ScalarProperty Name="ipm_id_consulta" ColumnName="ipm_id_consulta" />
+          <ScalarProperty Name="ipm_id_historia" ColumnName="ipm_id_historia" />
+          <ScalarProperty Name="ipm_id_permiso_med" ColumnName="ipm_id_permiso_med" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

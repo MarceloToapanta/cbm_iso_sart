@@ -5,6 +5,7 @@ body {
     padding-top: 48px;
     font-size: 11px;
     background: url("/images/cream_pixels.png");
+    font-family: Verdana !important;
 }
 
 /* Set padding to keep content from hitting the edges */

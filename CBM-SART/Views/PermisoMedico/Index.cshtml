@@ -1,0 +1,154 @@
+﻿@*@model IEnumerable<CBM_SART.Models.iso_permiso_medico>*@
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_permiso_medico>
+@{
+    ViewBag.Title = "Permisos Medicos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session["Sidebar"] = "VigilaciaSalud";
+    Session["SidebarSelect"] = "Historia";
+}
+
+<div class="seccion-barra">
+    <img src="~/images/label-plain-black.png" height="24" width="24" />
+    Informacion de los Permisos Medicos registrados.
+    <span class="text-count">Nro. de  Matrices : @ViewBag.total</span>
+</div>
+
+
+<div class="content">
+    @using (Html.BeginForm("index", null, FormMethod.Get))
+    {
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    <input type="text"
+                           name="filter"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Nombre del Empleado" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="submit">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="btn btn-success" data-modal="" href="/PermisoMedico/Create" id="btnCreate">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="col-md-12 grid-content">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column("ipm_id_tipo_permisom", "Tipo Permiso", style: "col-lg-3"),
+              grid.Column("ipm_fecha_permiso_ini", "F. Inicio", style: "col-lg-2"),
+              grid.Column("ipm_fecha_permiso_fin", "F. Final", style: "col-lg-2"),
+              grid.Column("ipm_dias_permiso", "Total Días", style: "col-lg-1"),
+              grid.Column("iso_consulta_medica.icm_motivo_consulta", "Motivo Consulta", style: "col-lg-1"),
+              grid.Column(header: "Acción", canSort: false, style: "action",
+                     format: @<text>
+                @Html.Raw("<a data-modal='' href='/PermisoMedico/details/" + item.ipm_id_permiso_med + "' id='" + item.ipm_id_permiso_med + "' title='Detalles'> <span class='glyphicon glyphicon-search'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/PermisoMedico/edit/" + item.ipm_id_permiso_med + "' id='" + item.ipm_id_permiso_med + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                @Html.Raw("<a data-modal='' href='/PermisoMedico/delete/" + item.ipm_id_permiso_med + "' id='" + item.ipm_id_permiso_med + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                    </text>)
+
+                                                                                                                                            ));
+            }
+
+
+        </div>
+        <div class="clear"></div>
+    }
+</div>
+
+<div id='myModal' class='modal fade in' tabindex='-1'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/scripts/appjs/phones.js")
+    <script type="text/javascript">
+        $(document).ready(function () { //////// Inicio Cargado el Documento
+            //Date Piker
+            jQuery.validator.methods["date"] = function (value, element) { return true; }
+        });
+    </script>
+}
+
+
+
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ipm_id_tipo_permisom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipm_fecha_permiso_ini)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipm_fecha_permiso_fin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipm_dias_permiso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iso_consulta_medica.icm_motivo_consulta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipm_id_tipo_permisom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipm_fecha_permiso_ini)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipm_fecha_permiso_fin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipm_dias_permiso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iso_consulta_medica.icm_motivo_consulta)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ipm_id_permiso_med }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ipm_id_permiso_med }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ipm_id_permiso_med })
+        </td>
+    </tr>
+}
+
+</table>*@

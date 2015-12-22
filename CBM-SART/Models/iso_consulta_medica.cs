@@ -74,5 +74,6 @@ namespace CBM_SART.Models
         public virtual ICollection<iso_sintoma_consulta_m> iso_sintoma_consulta_m { get; set; }
         public virtual ICollection<iso_vacuna_consulta_m> iso_vacuna_consulta_m { get; set; }
         public virtual ICollection<iso_habito_consulta_m> iso_habito_consulta_m { get; set; }
+        public virtual ICollection<iso_permiso_medico> iso_permiso_medico { get; set; }
     }
 }

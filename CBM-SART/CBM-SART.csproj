@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidenteController.cs" />
     <Compile Include="Controllers\MatrizMRLController.cs" />
+    <Compile Include="Controllers\PermisoMedicoController.cs" />
     <Compile Include="Controllers\PermisoVigilaciaController.cs" />
     <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
@@ -295,6 +296,9 @@
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iso_pedido_exam_consulta_m.cs">
+      <DependentUpon>cbm_iso_sart.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\iso_permiso_medico.cs">
       <DependentUpon>cbm_iso_sart.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\iso_personal.cs">
@@ -611,6 +615,11 @@
     <Content Include="Views\DetalleMatrizMRL\Edit.cshtml" />
     <Content Include="Views\DetalleMatrizMRL\Index.cshtml" />
     <Content Include="Views\PermisoVigilacia\Index.cshtml" />
+    <Content Include="Views\PermisoMedico\Create.cshtml" />
+    <Content Include="Views\PermisoMedico\Delete.cshtml" />
+    <Content Include="Views\PermisoMedico\Details.cshtml" />
+    <Content Include="Views\PermisoMedico\Edit.cshtml" />
+    <Content Include="Views\PermisoMedico\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

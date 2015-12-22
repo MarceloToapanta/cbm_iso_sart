@@ -98,6 +98,8 @@
         <EntityTypeShape EntityType="cbm_iso_sart.iso_modulo" Width="1.5" PointX="17.375" PointY="2.625" />
         <EntityTypeShape EntityType="cbm_iso_sart.iso_usuario" Width="1.5" PointX="19.625" PointY="1" />
         <AssociationConnector Association="cbm_iso_sart.iso_permiso_modulo" />
+        <EntityTypeShape EntityType="cbm_iso_sart.iso_permiso_medico" Width="1.5" PointX="7.25" PointY="31.375" />
+        <AssociationConnector Association="cbm_iso_sart.FK_iso_permiso_medico_iso_consulta_medica" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

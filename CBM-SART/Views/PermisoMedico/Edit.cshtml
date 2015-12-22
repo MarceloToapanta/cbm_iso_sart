@@ -1,0 +1,86 @@
+﻿@model CBM_SART.Models.iso_permiso_medico
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>iso_permiso_medico</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ipm_id_permiso_med)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ipm_id_historia, "ipm_id_historia", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ipm_id_historia", String.Empty)
+                @Html.ValidationMessageFor(model => model.ipm_id_historia)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ipm_id_consulta, "ipm_id_consulta", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ipm_id_consulta", String.Empty)
+                @Html.ValidationMessageFor(model => model.ipm_id_consulta)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ipm_id_personal, "ipm_id_personal", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ipm_id_personal", String.Empty)
+                @Html.ValidationMessageFor(model => model.ipm_id_personal)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ipm_id_tipo_permisom, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ipm_id_tipo_permisom)
+                @Html.ValidationMessageFor(model => model.ipm_id_tipo_permisom)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ipm_fecha_permiso_ini, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ipm_fecha_permiso_ini)
+                @Html.ValidationMessageFor(model => model.ipm_fecha_permiso_ini)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ipm_fecha_permiso_fin, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ipm_fecha_permiso_fin)
+                @Html.ValidationMessageFor(model => model.ipm_fecha_permiso_fin)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ipm_dias_permiso, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ipm_dias_permiso)
+                @Html.ValidationMessageFor(model => model.ipm_dias_permiso)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

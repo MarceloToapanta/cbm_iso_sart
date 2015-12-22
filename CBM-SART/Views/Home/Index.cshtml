@@ -10,25 +10,30 @@
     <p><a href="/Documentos/RES.C.D.390Reglamento del Seguro General de Riesgos del Trabajo.pdf" target="new" class="btn btn-primary btn-large">RESOLUCIÓN No. C.D.390 &raquo;</a></p>
 </div>
 
-<div class="row panel panel-default" style="padding: 0 15px; margin: 5px 0px;">
+<div class="row panel panel-default" style="padding: 0 15px; margin: 5px 0px; min-height:360px">
+    <div class="seccion-barra">
+        <div class="col-md-6">
+            <h1>@empresa_actual.iem_nombre_empresa</h1>
 
-    <div class="col-md-12">
-        <h1>@empresa_actual.iem_nombre_empresa</h1>
-        <img style='max-width: 200px; max-height: 150px' src="@Url.Action("GetImage", "Empresa", new { ID = empresa_actual.iem_cod_empresa })" />
+        </div>
+        <div class="col-md-6" style="line-height: 75px;">
+            <img style='max-width: 200px; max-height: 150px;' src="@Url.Action("GetImage", "Empresa", new { ID = empresa_actual.iem_cod_empresa })" />
+        </div>
+        <div class="clear"></div>
     </div>
-
-    <div class="col-md-4">
+    
+    <div class="col-md-4" style="margin-bottom:20px">
         <h2>Misión</h2>
         <p>
             @empresa_actual.iem_mision_empresa
         </p>
         @*<p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>*@
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" style="margin-bottom:20px">
         <h2>Visión</h2>
         <p>@empresa_actual.iem_vision_empresa</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" style="margin-bottom:20px">
         <h2>Valores</h2>
         <p>@empresa_actual.iem_valores_empresa</p>
     </div>

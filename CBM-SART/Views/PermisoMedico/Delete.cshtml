@@ -1,0 +1,65 @@
+﻿@model CBM_SART.Models.iso_permiso_medico
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>iso_permiso_medico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ipm_id_tipo_permisom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipm_id_tipo_permisom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipm_fecha_permiso_ini)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipm_fecha_permiso_ini)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipm_fecha_permiso_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipm_fecha_permiso_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ipm_dias_permiso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ipm_dias_permiso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso_consulta_medica.icm_motivo_consulta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso_consulta_medica.icm_motivo_consulta)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

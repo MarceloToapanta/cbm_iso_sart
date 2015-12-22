@@ -1,0 +1,106 @@
+﻿@model CBM_SART.Models.iso_permiso_medico
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+
+<div class="title-window" style="height:32px">
+    Permite registrar un Nuevo Permiso Médico.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Crear nuevo Permiso Medico</h4>
+</div>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.ipm_id_historia, "ipm_id_historia", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ipm_id_historia", String.Empty)
+                        @Html.ValidationMessageFor(model => model.ipm_id_historia)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ipm_id_consulta, "ipm_id_consulta", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ipm_id_consulta", String.Empty)
+                        @Html.ValidationMessageFor(model => model.ipm_id_consulta)
+                    </div>
+                </div>
+            *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipm_id_personal, "ipm_id_personal", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ipm_id_personal", String.Empty)
+                    @Html.ValidationMessageFor(model => model.ipm_id_personal)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipm_id_tipo_permisom, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipm_id_tipo_permisom, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipm_id_tipo_permisom)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipm_fecha_permiso_ini, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipm_fecha_permiso_ini, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipm_fecha_permiso_ini)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipm_fecha_permiso_fin, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipm_fecha_permiso_fin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipm_fecha_permiso_fin)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ipm_dias_permiso, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ipm_dias_permiso, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ipm_dias_permiso)
+                </div>
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                <button class="btn btn-primary " type="submit" name="Guardar"> Guardar </button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

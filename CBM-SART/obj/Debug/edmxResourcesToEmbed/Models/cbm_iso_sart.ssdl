@@ -484,6 +484,19 @@
     <Property Name="ipe_id_pexamen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ipe_nombre_pexamen" Type="varchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="iso_permiso_medico">
+    <Key>
+      <PropertyRef Name="ipm_id_permiso_med" />
+    </Key>
+    <Property Name="ipm_id_permiso_med" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ipm_id_historia" Type="int" />
+    <Property Name="ipm_id_consulta" Type="int" />
+    <Property Name="ipm_id_personal" Type="int" />
+    <Property Name="ipm_id_tipo_permisom" Type="int" />
+    <Property Name="ipm_fecha_permiso_ini" Type="datetime" />
+    <Property Name="ipm_fecha_permiso_fin" Type="datetime" />
+    <Property Name="ipm_dias_permiso" Type="int" />
+  </EntityType>
   <EntityType Name="iso_permiso_modulo">
     <Key>
       <PropertyRef Name="imo_id_modulo" />
@@ -1221,6 +1234,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_iso_permiso_medico_iso_consulta_medica">
+    <End Role="iso_consulta_medica" Type="Self.iso_consulta_medica" Multiplicity="0..1" />
+    <End Role="iso_permiso_medico" Type="Self.iso_permiso_medico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_permiso_medico">
+        <PropertyRef Name="ipm_id_consulta" />
+        <PropertyRef Name="ipm_id_historia" />
+        <PropertyRef Name="ipm_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_iso_permiso_modulo_iso_modulo">
     <End Role="iso_modulo" Type="Self.iso_modulo" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -1488,6 +1517,7 @@
     <EntitySet Name="iso_modulo" EntityType="Self.iso_modulo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_pedido_exam_consulta_m" EntityType="Self.iso_pedido_exam_consulta_m" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_pedido_examen" EntityType="Self.iso_pedido_examen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iso_permiso_medico" EntityType="Self.iso_permiso_medico" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_permiso_modulo" EntityType="Self.iso_permiso_modulo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_personal" EntityType="Self.iso_personal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_plan" EntityType="Self.iso_plan" Schema="dbo" store:Type="Tables" />
@@ -1640,6 +1670,10 @@
     <AssociationSet Name="FK_iso_pedido_examen_iso_tipo_pedido_exam" Association="Self.FK_iso_pedido_examen_iso_tipo_pedido_exam">
       <End Role="iso_tipo_pedido_exam" EntitySet="iso_tipo_pedido_exam" />
       <End Role="iso_pedido_examen" EntitySet="iso_pedido_examen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_permiso_medico_iso_consulta_medica" Association="Self.FK_iso_permiso_medico_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_permiso_medico" EntitySet="iso_permiso_medico" />
     </AssociationSet>
     <AssociationSet Name="FK_iso_permiso_modulo_iso_modulo" Association="Self.FK_iso_permiso_modulo_iso_modulo">
       <End Role="iso_modulo" EntitySet="iso_modulo" />

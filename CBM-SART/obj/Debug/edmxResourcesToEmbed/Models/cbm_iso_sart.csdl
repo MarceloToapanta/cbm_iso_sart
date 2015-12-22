@@ -68,6 +68,7 @@
     <NavigationProperty Name="iso_sintoma_consulta_m" Relationship="cbm_iso_sart.FK_iso_sintoma_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_sintoma_consulta_m" />
     <NavigationProperty Name="iso_vacuna_consulta_m" Relationship="cbm_iso_sart.FK_iso_vacuna_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_vacuna_consulta_m" />
     <NavigationProperty Name="iso_habito_consulta_m" Relationship="cbm_iso_sart.FK_iso_habito_consulta_m_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_habito_consulta_m" />
+    <NavigationProperty Name="iso_permiso_medico" Relationship="cbm_iso_sart.FK_iso_permiso_medico_iso_consulta_medica" FromRole="iso_consulta_medica" ToRole="iso_permiso_medico" />
   </EntityType>
   <EntityType Name="iso_departamento">
     <Key>
@@ -410,6 +411,11 @@
     <AssociationSet Name="iso_permiso_modulo" Association="cbm_iso_sart.iso_permiso_modulo">
       <End Role="iso_modulo" EntitySet="iso_modulo" />
       <End Role="iso_usuario" EntitySet="iso_usuario" />
+    </AssociationSet>
+    <EntitySet Name="iso_permiso_medico" EntityType="cbm_iso_sart.iso_permiso_medico" />
+    <AssociationSet Name="FK_iso_permiso_medico_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_permiso_medico_iso_consulta_medica">
+      <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
+      <End Role="iso_permiso_medico" EntitySet="iso_permiso_medico" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="iso_personal">
@@ -1688,5 +1694,35 @@
   <Association Name="iso_permiso_modulo">
     <End Type="cbm_iso_sart.iso_modulo" Role="iso_modulo" Multiplicity="*" />
     <End Type="cbm_iso_sart.iso_usuario" Role="iso_usuario" Multiplicity="*" />
+  </Association>
+  <EntityType Name="iso_permiso_medico">
+    <Key>
+      <PropertyRef Name="ipm_id_permiso_med" />
+    </Key>
+    <Property Name="ipm_id_permiso_med" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ipm_id_historia" Type="Int32" />
+    <Property Name="ipm_id_consulta" Type="Int32" />
+    <Property Name="ipm_id_personal" Type="Int32" />
+    <Property Name="ipm_id_tipo_permisom" Type="Int32" />
+    <Property Name="ipm_fecha_permiso_ini" Type="DateTime" Precision="3" />
+    <Property Name="ipm_fecha_permiso_fin" Type="DateTime" Precision="3" />
+    <Property Name="ipm_dias_permiso" Type="Int32" />
+    <NavigationProperty Name="iso_consulta_medica" Relationship="cbm_iso_sart.FK_iso_permiso_medico_iso_consulta_medica" FromRole="iso_permiso_medico" ToRole="iso_consulta_medica" />
+  </EntityType>
+  <Association Name="FK_iso_permiso_medico_iso_consulta_medica">
+    <End Type="cbm_iso_sart.iso_consulta_medica" Role="iso_consulta_medica" Multiplicity="0..1" />
+    <End Type="cbm_iso_sart.iso_permiso_medico" Role="iso_permiso_medico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_consulta_medica">
+        <PropertyRef Name="icm_id_consulta" />
+        <PropertyRef Name="icm_id_historia_clinica" />
+        <PropertyRef Name="icm_id_personal" />
+      </Principal>
+      <Dependent Role="iso_permiso_medico">
+        <PropertyRef Name="ipm_id_consulta" />
+        <PropertyRef Name="ipm_id_historia" />
+        <PropertyRef Name="ipm_id_personal" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

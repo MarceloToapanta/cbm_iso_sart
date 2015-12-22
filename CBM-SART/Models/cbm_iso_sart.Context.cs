@@ -71,5 +71,6 @@ namespace CBM_SART.Models
         public virtual DbSet<iso_habitos> iso_habitos { get; set; }
         public virtual DbSet<iso_modulo> iso_modulo { get; set; }
         public virtual DbSet<iso_usuario> iso_usuario { get; set; }
+        public virtual DbSet<iso_permiso_medico> iso_permiso_medico { get; set; }
     }
 }
