@@ -100,6 +100,7 @@
         <AssociationConnector Association="cbm_iso_sart.iso_permiso_modulo" />
         <EntityTypeShape EntityType="cbm_iso_sart.iso_permiso_medico" Width="1.5" PointX="7.25" PointY="31.375" />
         <AssociationConnector Association="cbm_iso_sart.FK_iso_permiso_medico_iso_consulta_medica" />
+        <AssociationConnector Association="cbm_iso_sart.iso_cargo_departamento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

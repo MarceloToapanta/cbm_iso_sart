@@ -231,4 +231,3 @@ C:\Users\testuser\Documents\Visual Studio 2013\Projects\CBM-SART\CBM-SART\bin\es
 C:\Users\testuser\Documents\Visual Studio 2013\Projects\CBM-SART\CBM-SART\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\Users\testuser\Documents\Visual Studio 2013\Projects\CBM-SART\CBM-SART\obj\Debug\CBM-SART.dll
 C:\Users\testuser\Documents\Visual Studio 2013\Projects\CBM-SART\CBM-SART\obj\Debug\CBM-SART.pdb
-C:\Users\testuser\Documents\Visual Studio 2013\Projects\CBM-SART\CBM-SART\obj\Debug\CBM-SART.csprojResolveAssemblyReference.cache

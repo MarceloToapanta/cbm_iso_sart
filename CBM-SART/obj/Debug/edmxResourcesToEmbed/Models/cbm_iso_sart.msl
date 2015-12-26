@@ -727,5 +727,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="iso_cargo_departamento" TypeName="cbm_iso_sart.iso_cargo_departamento" StoreEntitySet="iso_cargo_departamento">
+      <EndProperty Name="iso_departamento">
+        <ScalarProperty Name="ide_id_departamento" ColumnName="igd_id_departamento" />
+      </EndProperty>
+      <EndProperty Name="iso_cargo">
+        <ScalarProperty Name="icg_id_cargo" ColumnName="igd_id_cargo" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

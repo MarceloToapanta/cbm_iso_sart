@@ -128,6 +128,14 @@
     <Property Name="icg_experiencia" Type="varchar" MaxLength="300" />
     <Property Name="icg_conocimiento_adicional" Type="varchar" MaxLength="300" />
   </EntityType>
+  <EntityType Name="iso_cargo_departamento">
+    <Key>
+      <PropertyRef Name="igd_id_cargo" />
+      <PropertyRef Name="igd_id_departamento" />
+    </Key>
+    <Property Name="igd_id_cargo" Type="int" Nullable="false" />
+    <Property Name="igd_id_departamento" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="iso_cargo_puesto_t">
     <Key>
       <PropertyRef Name="icp_id_puesto_t" />
@@ -854,6 +862,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_iso_cargo_departamento_iso_cargo">
+    <End Role="iso_cargo" Type="Self.iso_cargo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="iso_cargo_departamento" Type="Self.iso_cargo_departamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_cargo">
+        <PropertyRef Name="icg_id_cargo" />
+      </Principal>
+      <Dependent Role="iso_cargo_departamento">
+        <PropertyRef Name="igd_id_cargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iso_cargo_departamento_iso_departamento">
+    <End Role="iso_departamento" Type="Self.iso_departamento" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="iso_cargo_departamento" Type="Self.iso_cargo_departamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iso_departamento">
+        <PropertyRef Name="ide_id_departamento" />
+      </Principal>
+      <Dependent Role="iso_cargo_departamento">
+        <PropertyRef Name="igd_id_departamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_iso_cargo_puesto_t_iso_cargo">
     <End Role="iso_cargo" Type="Self.iso_cargo" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -1495,6 +1531,7 @@
     <EntitySet Name="iso_antecedente_vacuna" EntityType="Self.iso_antecedente_vacuna" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_avance_plan" EntityType="Self.iso_avance_plan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_cargo" EntityType="Self.iso_cargo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iso_cargo_departamento" EntityType="Self.iso_cargo_departamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_cargo_puesto_t" EntityType="Self.iso_cargo_puesto_t" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_consulta_medica" EntityType="Self.iso_consulta_medica" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="iso_departamento" EntityType="Self.iso_departamento" Schema="dbo" store:Type="Tables" />
@@ -1566,6 +1603,14 @@
     <AssociationSet Name="FK_iso_avance_plan_iso_detalle_plan" Association="Self.FK_iso_avance_plan_iso_detalle_plan">
       <End Role="iso_detalle_plan" EntitySet="iso_detalle_plan" />
       <End Role="iso_avance_plan" EntitySet="iso_avance_plan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_cargo_departamento_iso_cargo" Association="Self.FK_iso_cargo_departamento_iso_cargo">
+      <End Role="iso_cargo" EntitySet="iso_cargo" />
+      <End Role="iso_cargo_departamento" EntitySet="iso_cargo_departamento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iso_cargo_departamento_iso_departamento" Association="Self.FK_iso_cargo_departamento_iso_departamento">
+      <End Role="iso_departamento" EntitySet="iso_departamento" />
+      <End Role="iso_cargo_departamento" EntitySet="iso_cargo_departamento" />
     </AssociationSet>
     <AssociationSet Name="FK_iso_cargo_puesto_t_iso_cargo" Association="Self.FK_iso_cargo_puesto_t_iso_cargo">
       <End Role="iso_cargo" EntitySet="iso_cargo" />

@@ -50,5 +50,6 @@ namespace CBM_SART.Models
         public virtual ICollection<iso_puesto_trabajo> iso_puesto_trabajo { get; set; }
         public virtual ICollection<iso_personal> iso_personal { get; set; }
         public virtual ICollection<iso_matriz_profesiograma> iso_matriz_profesiograma { get; set; }
+        public virtual ICollection<iso_departamento> iso_departamento { get; set; }
     }
 }

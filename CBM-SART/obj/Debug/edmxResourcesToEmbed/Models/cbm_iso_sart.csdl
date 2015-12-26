@@ -19,6 +19,7 @@
     <NavigationProperty Name="iso_puesto_trabajo" Relationship="Self.iso_cargo_puesto_t" FromRole="iso_cargo" ToRole="iso_puesto_trabajo" />
     <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_personal_iso_cargo" FromRole="iso_cargo" ToRole="iso_personal" />
     <NavigationProperty Name="iso_matriz_profesiograma" Relationship="cbm_iso_sart.FK_iso_matriz_profesiograma_iso_cargo" FromRole="iso_cargo" ToRole="iso_matriz_profesiograma" />
+    <NavigationProperty Name="iso_departamento" Relationship="cbm_iso_sart.iso_cargo_departamento" FromRole="iso_cargo" ToRole="iso_departamento" />
   </EntityType>
   <EntityType Name="iso_consulta_medica">
     <Key>
@@ -83,6 +84,7 @@
     <Property Name="ide_cod_documento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="iso_empresa" Relationship="Self.FK_iso_departamento_iso_empresa" FromRole="iso_departamento" ToRole="iso_empresa" />
     <NavigationProperty Name="iso_personal" Relationship="cbm_iso_sart.FK_iso_personal_iso_departamento" FromRole="iso_departamento" ToRole="iso_personal" />
+    <NavigationProperty Name="iso_cargo" Relationship="cbm_iso_sart.iso_cargo_departamento" FromRole="iso_departamento" ToRole="iso_cargo" />
   </EntityType>
   <EntityType Name="iso_empresa">
     <Key>
@@ -416,6 +418,10 @@
     <AssociationSet Name="FK_iso_permiso_medico_iso_consulta_medica" Association="cbm_iso_sart.FK_iso_permiso_medico_iso_consulta_medica">
       <End Role="iso_consulta_medica" EntitySet="iso_consulta_medica" />
       <End Role="iso_permiso_medico" EntitySet="iso_permiso_medico" />
+    </AssociationSet>
+    <AssociationSet Name="iso_cargo_departamento" Association="cbm_iso_sart.iso_cargo_departamento">
+      <End Role="iso_cargo" EntitySet="iso_cargo" />
+      <End Role="iso_departamento" EntitySet="iso_departamento" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="iso_personal">
@@ -1724,5 +1730,9 @@
         <PropertyRef Name="ipm_id_personal" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <Association Name="iso_cargo_departamento">
+    <End Type="cbm_iso_sart.iso_cargo" Role="iso_cargo" Multiplicity="*" />
+    <End Type="cbm_iso_sart.iso_departamento" Role="iso_departamento" Multiplicity="*" />
   </Association>
 </Schema>

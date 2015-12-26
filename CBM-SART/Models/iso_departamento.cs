@@ -38,5 +38,6 @@ namespace CBM_SART.Models
     
         public virtual iso_empresa iso_empresa { get; set; }
         public virtual ICollection<iso_personal> iso_personal { get; set; }
+        public virtual ICollection<iso_cargo> iso_cargo { get; set; }
     }
 }
