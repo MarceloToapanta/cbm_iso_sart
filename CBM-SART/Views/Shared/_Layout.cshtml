@@ -32,11 +32,10 @@
                         <a href="#" class="dropdown-toggle boton-barra" data-toggle="dropdown"><img class="boton-barra-imagen" src="~/images/admin.png" />Administración<b class="caret"></b></a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Index", "Empresa")"><img class="boton-barra-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
-                            <li><a href="@Url.Action("Index", "Departamento")"><img class="boton-barra-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
+                            <li><a href="@Url.Action("Index", "Empresa")"><img class="boton-barra-imagen" src="@Url.Content("~/images/empresa.png")" />Empresas</a></li>
+                            <li><a href="@Url.Action("Index", "Departamento")"><img class="boton-barra-imagen" src="@Url.Content("~/images/departamento.png")" />Departamentos</a></li>
                             <li><a href="@Url.Action("Index", "Usuario")"><img class="boton-barra-imagen" src="@Url.Content("~/images/user.png")" />Administración de Usuarios</a></li>
                             <li><a href="@Url.Action("Index", "PermisoVigilacia")"><img class=" boton-barra-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
-                            <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/pemisolista.png")" />Permisos Auditorias</a></li>
                             <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
 
                         </ul>
@@ -47,11 +46,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img class="boton-barra-imagen" src="~/images/vigilacia.png" /> Vigilancia de la Salud <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("Index", "Personal")"><img class="boton-barra-imagen" src="@Url.Content("~/images/personal.png")" />Personal</a></li>
-                            <li><a href="@Url.Action("Index", "Cargo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
-                            <li><a href="@Url.Action("Index", "PuestoTrabajo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/puesto_t.png")" />Puesto de Trabajo</a></li>
+                            <li><a href="@Url.Action("Index", "Cargo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/puestot.png")" />Cargos</a></li>
+                            <li><a href="@Url.Action("Index", "PuestoTrabajo")"><img class="boton-barra-imagen" src="@Url.Content("~/images/puesto_t.png")" />Puestos de Trabajo</a></li>
                             <li><a href="@Url.Action("Index", "HistoriaClinica/Panel")"><img class="boton-barra-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
                             <li><a href="@Url.Action("Index", "MatrizMRL")"><img class="boton-barra-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
-                            <li><a href="@Url.Action("Index", "Profesiograma")"><img class="boton-barra-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>
+                            <li><a href="@Url.Action("Index", "Profesiograma")"><img class="boton-barra-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiogramas</a></li>
                             <li><a href="@Url.Action("Index", "Incidente")"><img class="boton-barra-imagen" src="@Url.Content("~/images/incidente.png")" />Incidentes</a></li>
                             <li><a href="@Url.Action("Index", "Accidente")"><img class="boton-barra-imagen" src="@Url.Content("~/images/accidentes.png")" />Accidentes</a></li>
                             <li><a href="#"><img class="boton-barra-imagen" src="@Url.Content("~/images/indicesr.png")" />Indices de Riesgo</a></li>
@@ -60,7 +59,7 @@
                     </li>
 
 
-                    <li class="dropdown">
+                    @*<li class="dropdown">
                         <a href="#" class="dropdown-toggle boton-barra" data-toggle="dropdown"><img class="boton-barra-imagen" src="~/images/auditoria.png" />Auditoria <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Auditorias SART</li>
@@ -72,7 +71,7 @@
                             <li><a href="#">Acciones Preventivas</a></li>
                             <li><a href="#">Poyectos de Mejora</a></li>
                         </ul>
-                    </li>
+                    </li>*@
 
                     @*<li>@Html.ActionLink("Inicio", "Index", "Home")</li>*@
                     @*<li>@Html.ActionLink("Acerca de", "About", "Home")</li>
@@ -112,11 +111,11 @@
                     <div class="sidebar-menus">
                         <ul class="list-panel-modulos">
                             <li><a class="@(Session["SidebarSelect"] == "Personal" ? "select" : "")" href="@Url.Action("Index", "Personal")"><img class="boton-panel-imagen " src="@Url.Content("~/images/personal.png")" />Personal</a></li>
-                            <li><a class="@(Session["SidebarSelect"] == "Cargo" ? "select" : "")" href="@Url.Action("Index", "Cargo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Cargo</a></li>
-                            <li><a class="@(Session["SidebarSelect"] == "Puesto" ? "select" : "")" href="@Url.Action("Index", "PuestoTrabajo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puesto_t.png")" />Puesto de Trabajo</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "Cargo" ? "select" : "")" href="@Url.Action("Index", "Cargo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puestot.png")" />Cargos</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "Puesto" ? "select" : "")" href="@Url.Action("Index", "PuestoTrabajo") "><img class=" boton-panel-imagen" src="@Url.Content("~/images/puesto_t.png")" />Puestos de Trabajo</a></li>
                             <li><a class="@(Session["SidebarSelect"] == "Historia" ? "select" : "")" href="@Url.Action("Index", "HistoriaClinica/Panel")"><img class="boton-panel-imagen" src="@Url.Content("~/images/hclinica.png")" />Historias Clinicas</a></li>
                             <li><a class="@(Session["SidebarSelect"] == "riesgos" ? "select" : "")" href="@Url.Action("Index", "MatrizMRL")"><img class="boton-panel-imagen" src="@Url.Content("~/images/riesgos.png")" />Identificacion de Riesgos</a></li>
-                            <li><a class="@(Session["SidebarSelect"] == "profesiograma" ? "select" : "")" href="@Url.Action("Index", "Profesiograma")"><img class="boton-panel-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiograma</a></li>
+                            <li><a class="@(Session["SidebarSelect"] == "profesiograma" ? "select" : "")" href="@Url.Action("Index", "Profesiograma")"><img class="boton-panel-imagen" src="@Url.Content("~/images/profesiograma.png")" />Profesiogramas</a></li>
                             <li><a class="@(Session["SidebarSelect"] == "incidente" ? "select" : "")" href="@Url.Action("Index", "Incidente")"><img class="boton-panel-imagen" src="@Url.Content("~/images/incidente.png")" />Incidentes</a></li>
                             <li><a class="@(Session["SidebarSelect"] == "accidente" ? "select" : "")" href="@Url.Action("Index", "Accidente")"><img class="boton-panel-imagen" src="@Url.Content("~/images/accidentes.png")" />Accidentes</a></li>
                             <li><a class="@(Session["SidebarSelect"] == "indices" ? "select" : "")" href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/indicesr.png")" />Indices de Riesgo</a></li>
@@ -131,11 +130,10 @@
             {
                 <div class="sidebar-menus">
                     <ul class="list-panel-modulos">
-                        <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresa</a></li>
-                        <li><a class="@(Session["SidebarSelect"] == "Departamento" ? "select" : "")" href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamento</a></li>
+                        <li><a class="@(Session["SidebarSelect"] == "Empresa" ? "select" : "")" href="@Url.Action("Index", "Empresa")"><img class="boton-panel-imagen" src="@Url.Content("~/images/empresa.png")" />Empresas</a></li>
+                        <li><a class="@(Session["SidebarSelect"] == "Departamento" ? "select" : "")" href="@Url.Action("Index", "Departamento")"><img class="boton-panel-imagen" src="@Url.Content("~/images/departamento.png")" />Departamentos</a></li>
                         <li><a class="@(Session["SidebarSelect"] == "Usuario" ? "select" : "")" href="@Url.Action("Index", "Usuario")"><img class="boton-panel-imagen" src="@Url.Content("~/images/user.png")" />Administración de Usuarios</a></li>
                         <li><a class="@(Session["SidebarSelect"] == "PVigilancia" ? "select" : "")" href="@Url.Action("Index", "PermisoVigilacia")"><img class="boton-panel-imagen" src="@Url.Content("~/images/permisomodulo.png")" />Permisos Vigilancia de Salud</a></li>
-                        <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/pemisolista.png")" />Permisos Auditorias</a></li>
                         <li><a href="#"><img class="boton-panel-imagen" src="@Url.Content("~/images/config.png")" />Configuraciones</a></li>
                     </ul>
                 </div>

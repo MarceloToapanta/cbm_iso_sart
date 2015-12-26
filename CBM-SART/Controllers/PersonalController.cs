@@ -13,10 +13,9 @@ using System.IO;
 
 namespace CBM_SART.Controllers
 {
-    public class PersonalController : Controller
+    public class PersonalController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
-
         // GET: /Personal/
         //public async Task<ActionResult> Index()
         //{
@@ -26,6 +25,7 @@ namespace CBM_SART.Controllers
 
         public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ipe_apellido_paterno", string sortdir = "ASC")
         {
+            int ide = IdEmpresa();
             if (String.IsNullOrEmpty(filter)) { filter = null; }
             var records = new PagedList<iso_personal>();
             ViewBag.filter = filter;
@@ -34,6 +34,7 @@ namespace CBM_SART.Controllers
                                 (x.ipe_nombre_personal.ToLower().Contains(filter.ToLower().Trim()))
                                 || x.ipe_apellido_paterno.ToLower().Contains(filter.ToLower().Trim())
                               )
+                        .Where(x => x.ipe_id_empresa == ide)
                         .OrderBy(sort + " " + sortdir)
                         .Skip((page - 1) * pageSize)
                         .Take(pageSize)
@@ -43,8 +44,9 @@ namespace CBM_SART.Controllers
             records.TotalRecords = db.iso_personal
                          .Where(x => filter == null ||
                                 (x.ipe_nombre_personal.ToLower().Contains(filter.ToLower().Trim()))
-                                || x.ipe_apellido_paterno.ToLower().Contains(filter.ToLower().Trim())).Count();
-
+                                || x.ipe_apellido_paterno.ToLower().Contains(filter.ToLower().Trim()))
+                         .Where(x => x.ipe_id_empresa == ide).Count();
+                        
             records.CurrentPage = page;
             records.PageSize = pageSize;
             ViewBag.total = records.TotalRecords;
@@ -68,7 +70,7 @@ namespace CBM_SART.Controllers
             }
             ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo.OrderBy(x => x.icg_nombre), "icg_id_cargo", "icg_nombre");
             ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
-            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
+            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa", IdEmpresa());
             ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo.OrderBy(x => x.ipt_nombre_puesto_t), "ipt_id_puesto_t", "ipt_nombre_puesto_t");
             return PartialView("Details", iso_personal);
         }
@@ -76,9 +78,10 @@ namespace CBM_SART.Controllers
         // GET: /Personal/Create
         public ActionResult Create()
         {
+            int ide = IdEmpresa();
             ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo.OrderBy(x => x.icg_nombre), "icg_id_cargo", "icg_nombre");
-            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
-            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
+            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.Where(x => x.ide_id_empresa == ide).OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
+            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.Where(x => x.iem_cod_empresa == ide).OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
             ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo.OrderBy(x => x.ipt_nombre_puesto_t), "ipt_id_puesto_t", "ipt_nombre_puesto_t");
             var iso_personal = new iso_personal();
             return PartialView("Create", iso_personal);
@@ -128,6 +131,7 @@ namespace CBM_SART.Controllers
         // GET: /Personal/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            int ide = IdEmpresa();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,8 +142,8 @@ namespace CBM_SART.Controllers
                 return HttpNotFound();
             }
             ViewBag.ipe_id_cargo = new SelectList(db.iso_cargo.OrderBy(x => x.icg_nombre), "icg_id_cargo", "icg_nombre");
-            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
-            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
+            ViewBag.ipe_id_departamento = new SelectList(db.iso_departamento.Where(x => x.ide_id_empresa == ide).OrderBy(x => x.ide_nombre_departamento), "ide_id_departamento", "ide_nombre_departamento");
+            ViewBag.ipe_id_empresa = new SelectList(db.iso_empresa.Where(x => x.iem_cod_empresa == ide).OrderBy(x => x.iem_nombre_empresa), "iem_cod_empresa", "iem_nombre_empresa");
             ViewBag.ipe_id_puesto_trabajo = new SelectList(db.iso_puesto_trabajo.OrderBy(x => x.ipt_nombre_puesto_t), "ipt_id_puesto_t", "ipt_nombre_puesto_t");
             return PartialView("Edit", iso_personal);
         }

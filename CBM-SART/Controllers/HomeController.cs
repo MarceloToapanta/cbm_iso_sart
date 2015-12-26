@@ -9,18 +9,16 @@ using System.Web.Mvc;
 namespace CBM_SART.Controllers
 {
     [UserFilter]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
         public ActionResult Index()
         {
-            var empresa_actual = db.iso_empresa.Where(x => x.iem_actividad == "si").First();
+            var empresa_actual = EmpresaActual();
             if (empresa_actual != null) {
                 ViewBag.empresa_actual = empresa_actual;
             }
-            
             return View();
-            
         }
 
         public FileContentResult GetImage(int ID)

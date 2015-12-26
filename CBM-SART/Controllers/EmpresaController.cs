@@ -15,7 +15,7 @@ using CBM_SART.ActionFilter;
 namespace CBM_SART.Controllers
 {
     [UserFilter]
-    public class EmpresaController : Controller
+    public class EmpresaController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
