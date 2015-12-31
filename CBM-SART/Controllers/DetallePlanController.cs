@@ -8,10 +8,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CBM_SART.Models;
+using CBM_SART.ActionFilter;
 
 namespace CBM_SART.Controllers
 {
-    public class DetallePlanController : Controller
+    [UserFilter]
+    public class DetallePlanController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 

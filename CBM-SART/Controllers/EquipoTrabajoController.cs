@@ -10,10 +10,12 @@ using System.Web.Mvc;
 using CBM_SART.Models;
 using System.Linq.Dynamic;
 using System.IO;
+using CBM_SART.ActionFilter;
 
 namespace CBM_SART.Controllers
 {
-    public class EquipoTrabajoController : Controller
+    [UserFilter]
+    public class EquipoTrabajoController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 

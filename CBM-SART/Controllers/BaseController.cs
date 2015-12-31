@@ -30,6 +30,53 @@ namespace CBM_SART.Controllers
         public int IdEmpresa()
         {
             return EmpresaActual().iem_cod_empresa;
-        }	
+        }
+        public CBM_SART.Models.iso_usuario UsuarioActual()
+        {
+            CBM_SART.Models.iso_usuario usuario_actual = (CBM_SART.Models.iso_usuario)Session["Usuario"];
+            if (usuario_actual != null)
+            {
+                return usuario_actual;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string NombreUsuario()
+        {
+            if (UsuarioActual() != null)
+            {
+                return UsuarioActual().ius_nombre_usuario;
+            }
+            else
+            {
+                return "";
+            }
+            
+        }
+        public int IdUsuario()
+        {
+            if (UsuarioActual() != null){
+                return UsuarioActual().ius_id_usuario;
+            }
+            else
+            {
+                return 0;
+            }
+            
+        }
+        public string TipoUsuario()
+        {
+            if (UsuarioActual() != null)
+            {
+                return UsuarioActual().ius_tipo_usuario;
+            }
+            else
+            {
+                return "";
+            }
+
+        }
     }
 }

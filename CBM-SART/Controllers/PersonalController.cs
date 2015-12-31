@@ -10,9 +10,11 @@ using System.Web.Mvc;
 using CBM_SART.Models;
 using System.Linq.Dynamic;
 using System.IO;
+using CBM_SART.ActionFilter;
 
 namespace CBM_SART.Controllers
 {
+    [UserFilter]
     public class PersonalController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
@@ -26,6 +28,7 @@ namespace CBM_SART.Controllers
         public ActionResult Index(string filter = null, int page = 1, int pageSize = 15, string sort = "ipe_apellido_paterno", string sortdir = "ASC")
         {
             int ide = IdEmpresa();
+            ViewBag.nombre_empresa = NombreEmpresa();
             if (String.IsNullOrEmpty(filter)) { filter = null; }
             var records = new PagedList<iso_personal>();
             ViewBag.filter = filter;

@@ -10,17 +10,28 @@ using System.Web.Mvc;
 using CBM_SART.Models;
 using System.Linq.Dynamic;
 using System.IO;
+using CBM_SART.ActionFilter;
 
 namespace CBM_SART.Controllers
 {
-    public class UsuarioController : Controller
+    
+    public class UsuarioController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
         //Login
         public ActionResult Ingresar(string url, iso_usuario iso_usuario)
-        {        
-            ViewBag.url = url;
-            return PartialView(iso_usuario);
+        {
+            if (Session["Usuario"] == null)
+            {
+                ViewBag.url = url;
+                return PartialView(iso_usuario);
+            }
+            else
+            {
+                Session["AvisoUser"] = "Usted ya inició sesion en el sistema";
+                return Redirect("/");
+            }
+            
         }
         [HttpPost]
         public ActionResult UsuarioActual(string url, iso_usuario iso_usuario)
@@ -93,10 +104,12 @@ namespace CBM_SART.Controllers
             }
             
         }
+        [UserFilter]
         public ActionResult Index(string filter = null, int page = 1, int pageSize = 20, string sort = "ius_nombre_usuario", string sortdir = "ASC")
         {
 
             if (String.IsNullOrEmpty(filter)) { filter = null; }
+            ViewBag.nombre_empresa = NombreEmpresa();
             var records = new PagedList<iso_usuario>();
             ViewBag.filter = filter;
             records.Content = db.iso_usuario
@@ -197,6 +210,7 @@ namespace CBM_SART.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include="ius_id_usuario,ius_nombre_usuario,ius_desc_usuario,ius_login,ius_password,ius_permisos,ius_id_departamento,ius_iniciales,ius_email,ius_firma_digital,ius_deshabilitado,ius_firma_archivo,ius_representante_direccion,ius_miembro_comite,ius_foto_ruta,ius_foto_archivo,ius_tipo_usuario,ius_carga_documento")] iso_usuario iso_usuario)
         {
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file = Request.Files["file1"];
@@ -206,7 +220,15 @@ namespace CBM_SART.Controllers
                 }
                 db.Entry(iso_usuario).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (controllerName != "Usuario")
+                {
+                    return Redirect("/" + controllerName + "/Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+                
             }
             return PartialView("Edit", iso_usuario);
             //return View(iso_usuario);

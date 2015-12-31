@@ -11,10 +11,12 @@ using CBM_SART.Models;
 using System.Linq.Dynamic;
 using System.IO;
 using System.Globalization;
+using CBM_SART.ActionFilter;
 
 namespace CBM_SART.Controllers
 {
-    public class HistoriaClinicaController : Controller
+    [UserFilter]
+    public class HistoriaClinicaController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 
@@ -207,6 +209,9 @@ namespace CBM_SART.Controllers
         }
         public ActionResult Panel()
         {
+            if (TipoUsuario() == "Medico" || TipoUsuario() == "Administrador"){
+                ViewBag.TipoUsuario = "Medico";
+            }
             return View();
         }
         public ActionResult IngresarCM(int id)

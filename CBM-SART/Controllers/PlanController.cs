@@ -10,10 +10,12 @@ using System.Web.Mvc;
 using CBM_SART.Models;
 using System.Linq.Dynamic;
 using System.Data.Entity.SqlServer;
+using CBM_SART.ActionFilter;
 
 namespace CBM_SART.Controllers
 {
-    public class PlanController : Controller
+    [UserFilter]
+    public class PlanController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 

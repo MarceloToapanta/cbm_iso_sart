@@ -9,7 +9,7 @@
 
 <div class="seccion-barra">
     <img src="~/images/label-plain-black.png" height="24" width="24" />
-    Informacion de la Oraganizaciones Registradas
+    @ViewBag.nombre_empresa / Informacion de los Usuarios registrados
     <span class="text-count">Nro. de  Empresas : @ViewBag.total</span>
 </div>
 
@@ -89,7 +89,7 @@
                 @Html.Raw("<a data-modal='' href='/Usuario/edit/" + item.ius_id_usuario + "' id='" + item.ius_id_usuario + "' title='Editar'> <span class='glyphicon glyphicon-edit'> </span> </a>")
                 @Html.Raw("<a data-modal='' href='/Usuario/delete/" + item.ius_id_usuario + "' id='" + item.ius_id_usuario + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> </a>")
             </text>)
-                               ));
+            ));
             }
 
 

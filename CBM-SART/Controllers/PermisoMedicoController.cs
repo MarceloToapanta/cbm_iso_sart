@@ -9,10 +9,12 @@ using System.Web;
 using System.Web.Mvc;
 using CBM_SART.Models;
 using System.Linq.Dynamic;
+using CBM_SART.ActionFilter;
 
 namespace CBM_SART.Controllers
 {
-    public class PermisoMedicoController : Controller
+    [UserFilter]
+    public class PermisoMedicoController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
 

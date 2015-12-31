@@ -10,15 +10,31 @@
     <div class="hc-vertical">
         <ul>
             <li>
-                <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Historia Clinica'><img src="/images/hc/hc.jpg" /></a>
+                @if (ViewBag.TipoUsuario == "Medico")
+                {
+                    <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Historia Clinica'><img src="/images/hc/hc.jpg" /></a>    
+                }
+                else
+                {
+                    <img src="/images/hc/hc.jpg" />
+                }
+                
                 <p>Histórias Clinicas</p>
             </li>
             <li>
-                <a href="#"><img src="/images/hc/med.jpg" /></a>
+                @if (ViewBag.TipoUsuario == "Medico")
+                {
+                    <a href="#"><img src="/images/hc/med.jpg" /></a>
+                }else
+                {
+                    <img src="/images/hc/med.jpg" />
+                }
                 <p>Médicos</p>
             </li>
             <li>
-                <a href="/PermisoMedico"><img src="/images/hc/permiso.png" /></a>
+                @if (ViewBag.TipoUsuario == "Medico")
+                {<a href="/PermisoMedico"><img src="/images/hc/permiso.png" /></a>}
+                else { <img src="/images/hc/permiso.png" />}
                 <p>Permisos Médicos</p>
             </li>
         </ul>
@@ -26,11 +42,18 @@
     <div class="hc-horizontal">
         <ul>
             <li>
-                <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Consulta Medica'><img src="/images/hc/cm.jpg" /></a>
+                @if (ViewBag.TipoUsuario == "Medico") { 
+                    <a data-modal='' href='/HistoriaClinica/ListaPersonal' title='Consulta Medica'><img src="/images/hc/cm.jpg" /></a>
+                }
+                else {<img src="/images/hc/cm.jpg" /> }
                 <p>Consultas Medicas</p>
             </li>
             <li>
-                <a href="#"><img src="/images/hc/estad.jpg" /></a>
+                @if (ViewBag.TipoUsuario == "Medico")
+                {
+                    <a href="#"><img src="/images/hc/estad.jpg" /></a>
+                }
+                else {<img src="/images/hc/estad.jpg" /> }
                 <p>Estadisticas</p>
             </li>
         </ul>

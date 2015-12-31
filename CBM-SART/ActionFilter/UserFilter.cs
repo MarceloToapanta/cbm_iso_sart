@@ -13,12 +13,40 @@ namespace CBM_SART.ActionFilter
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            var ControllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
+            var ActionName = filterContext.ActionDescriptor.ActionName;
             HttpContext ctx = HttpContext.Current;
-            if (ctx.Session["Usuario"] == null)
+            if ((ctx.Session["Usuario"] == null) && (ActionName != "GetImage"))
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary {{ "Controller", "Usuario" },
                                       { "Action", "Ingresar"}, {"url" , filterContext.HttpContext.Request.Url } });
+            }
+            else if (ctx.Session["Usuario"] != null)
+            {
+                CBM_SART.Models.iso_usuario usuario_actual = (CBM_SART.Models.iso_usuario)ctx.Session["Usuario"];
+                
+                if ((ControllerName == "Empresa" && ActionName != "GetImage" && usuario_actual.ius_tipo_usuario != "Administrador")
+                 || (ControllerName == "Departamento" && usuario_actual.ius_tipo_usuario != "Administrador")
+                 || (ControllerName == "Usuario" && ActionName != "Ingresar" && ActionName != "UsuarioActual"  && usuario_actual.ius_tipo_usuario != "Administrador")
+                 || (ControllerName == "PermisoVigilacia" && usuario_actual.ius_tipo_usuario != "Administrador")
+                 || (ControllerName == "Configuracion" && usuario_actual.ius_tipo_usuario != "Administrador"))
+                {
+                    ctx.Session["ErroUser"] = "Acceso denegado, Usted no está autorizado para visitar esta página";
+                    filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary {{ "Controller", "Home" },
+                                      { "Action", "Index"}});
+                }
+                else if ((ControllerName == "HistoriaClinica" && usuario_actual.ius_tipo_usuario == "Normal"))
+                {
+                    ctx.Session["ErroUser"] = "Acceso denegado, Usted no está autorizado para visitar los modulos de Histórias Clinicas";
+                    if (ActionName != "Panel") { 
+                        filterContext.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary {{ "Controller", "HistoriaClinica" },
+                                              { "Action", "Panel"}});
+                    }
+                }
+                
             }
 
             base.OnActionExecuting(filterContext);

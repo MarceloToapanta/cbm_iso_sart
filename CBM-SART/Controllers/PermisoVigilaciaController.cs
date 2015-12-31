@@ -1,4 +1,5 @@
-﻿using CBM_SART.Models;
+﻿using CBM_SART.ActionFilter;
+using CBM_SART.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,15 @@ using System.Web.Mvc;
 
 namespace CBM_SART.Controllers
 {
-    public class PermisoVigilaciaController : Controller
+    [UserFilter]
+    public class PermisoVigilaciaController : BaseController
     {
         private cbm_iso_sart_entities db = new cbm_iso_sart_entities();
         //
         // GET: /PermisoVigilacia/
         public ActionResult Index(int? IdUsuario)
         {
+            ViewBag.nombre_empresa = NombreEmpresa();
             var userlist = new SelectList(db.iso_usuario.Where(x => x.ius_deshabilitado == "N").ToList(), "ius_id_usuario", "ius_nombre_usuario", IdUsuario);
             ViewData["Usuarios"] = userlist;
             ViewBag.Modulos = db.iso_modulo;

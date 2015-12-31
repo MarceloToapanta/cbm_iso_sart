@@ -48,12 +48,12 @@
                         canPage: true,
                         rowsPerPage: Model.PageSize,
                         canSort: true,
-                        ajaxUpdateContainerId: "grid");
+                        ajaxUpdateContainerId: "cargo-grid");
 
         grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
         grid.Pager(WebGridPagerModes.All);
 
-        @grid.GetHtml(htmlAttributes: new { id = "grid" },   // id for ajaxUpdateContainerId parameter
+        @grid.GetHtml(htmlAttributes: new { id = "cargo-grid" },   // id for ajaxUpdateContainerId parameter
             fillEmptyRows: false,
                       tableStyle: "table table-bordered table-hover table-responsive table-condensed",
             mode: WebGridPagerModes.All,
@@ -163,8 +163,8 @@
             //    $("#contenedor-puestotrabajo").load("/Cargo/PuestoTrabajoList/" + idCargo);
             alert("venta para asignar Puesto")
         }
-        $("#grid tbody tr").click(function () {
-            $("#grid tbody tr").removeClass("select-cargo")
+        $("#cargo-grid tbody tr").click(function () {
+            $("#cargo-grid tbody tr").removeClass("select-cargo")
             $(this).addClass("select-cargo")
             var IdCargo = $(this).find(".id-cargo").attr('id');
             console.log(IdCargo);

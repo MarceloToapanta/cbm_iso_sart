@@ -94,9 +94,9 @@ namespace CBM_SART.Models
         public string ipe_tipo_sangre { get; set; }
         [Display(Name = "Factor RH")]
         public string ipe_factor_rh { get; set; }
-        [Display(Name = "Timepo A")]
+        [Display(Name = "Tiempo en Años")]
         public string ipe_tiempo_per_a { get; set; }
-        [Display(Name = "Tiempo M")]
+        [Display(Name = "Tiempo en Meses")]
         public string ipe_tiempo_per_m { get; set; }
         [Display(Name = "Descripción Cargo")]
         public string ipe_descrip_cargo { get; set; }

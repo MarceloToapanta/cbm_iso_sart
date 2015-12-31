@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CBM_SART.ActionFilter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,7 +7,8 @@ using System.Web.Mvc;
 
 namespace CBM_SART.Controllers
 {
-    public class SistemaGestionController : Controller
+    [UserFilter]
+    public class SistemaGestionController : BaseController
     {
         //
         // GET: /SistemaGestion/

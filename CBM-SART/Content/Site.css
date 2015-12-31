@@ -283,6 +283,7 @@ border-left:0px;
     background: url("/images/nav-dark.png");
     border-radius: 3px 3px 0px 0px;
     color: #fff;
+    text-align: center; 
 }
 .login-name a{
     color: #eee;
@@ -575,6 +576,9 @@ tfoot > tr > td a:hover{
 }
 #content{
     margin-bottom:15px;
+}
+#cargo-grid tr:hover{
+    cursor: pointer;
 }
  /*////////////////////////Fin Table//////////////////////*/
  /*////////////////////////Ventanas Emergentes//////////////////////*/
@@ -1127,6 +1131,10 @@ display: inline-table;
     opacity:1;
     background: url("/images/fondo1.png");
 }
+#content .alert{
+    padding: 8px !important;
+    margin-bottom: 8px !important;
+}
 /*/////////////////////////////Riesgos.//////////////////////////////////////*/
 .list-panel-riesgos{
     list-style:none;
@@ -1214,4 +1222,12 @@ display: inline-table;
     padding: 3px 6px;
     width: 100%;
     display: block;
+ }
+ .navbar-header{
+     margin-left: 75px !important;
+ }
+ @media (min-width: 1200px){
+    .container {
+        width: 1355px;
+    }
  }
