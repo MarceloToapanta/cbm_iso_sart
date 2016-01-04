@@ -20,6 +20,7 @@ namespace CBM_SART.Models
             this.iso_puesto_trabajo = new HashSet<iso_puesto_trabajo>();
             this.iso_personal = new HashSet<iso_personal>();
             this.iso_matriz_profesiograma = new HashSet<iso_matriz_profesiograma>();
+            this.iso_departamento = new HashSet<iso_departamento>();
         }
     
         public int icg_id_cargo { get; set; }

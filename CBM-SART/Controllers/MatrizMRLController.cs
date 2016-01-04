@@ -84,7 +84,7 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_matriz_mrl);
+            return PartialView(iso_matriz_mrl);
         }
 
         // GET: /MatrizMRL/Create
@@ -104,10 +104,10 @@ namespace CBM_SART.Controllers
         {
             if (ModelState.IsValid)
             {
-                string imr_localizacion_mrl = db.iso_puesto_trabajo.Where(x => x.ipt_id_puesto_t == int.Parse(iso_matriz_mrl.imr_localizacion_mrl)).First().ToString();
-                iso_matriz_mrl.imr_localizacion_mrl = "";
-                iso_matriz_mrl.imr_cargo_mrl = "";
-                iso_matriz_mrl.imr_puesto_trabajo_mrl = "";
+                //string imr_localizacion_mrl = db.iso_puesto_trabajo.Where(x => x.ipt_id_puesto_t == int.Parse(iso_matriz_mrl.imr_localizacion_mrl)).First().ToString();
+                //iso_matriz_mrl.imr_localizacion_mrl = "";
+                //iso_matriz_mrl.imr_cargo_mrl = "";
+                //iso_matriz_mrl.imr_puesto_trabajo_mrl = "";
                 db.iso_matriz_mrl.Add(iso_matriz_mrl);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -128,7 +128,9 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_matriz_mrl);
+            ViewBag.imr_localizacion_mrl = new SelectList(db.iso_departamento.OrderBy("ide_nombre_departamento asc"), "ide_id_departamento", "ide_nombre_departamento", iso_matriz_mrl.imr_localizacion_mrl);
+            ViewBag.imr_cargo_mrl = new SelectList(db.iso_cargo.OrderBy("icg_nombre asc"), "icg_id_cargo", "icg_nombre", iso_matriz_mrl.imr_cargo_mrl);
+            return PartialView(iso_matriz_mrl);
         }
 
         // POST: /MatrizMRL/Edit/5
@@ -159,7 +161,7 @@ namespace CBM_SART.Controllers
             {
                 return HttpNotFound();
             }
-            return View(iso_matriz_mrl);
+            return PartialView(iso_matriz_mrl);
         }
 
         // POST: /MatrizMRL/Delete/5

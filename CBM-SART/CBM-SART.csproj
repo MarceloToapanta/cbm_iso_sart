@@ -621,6 +621,7 @@
     <Content Include="Views\PermisoMedico\Details.cshtml" />
     <Content Include="Views\PermisoMedico\Edit.cshtml" />
     <Content Include="Views\PermisoMedico\Index.cshtml" />
+    <Content Include="Views\HistoriaClinica\ListaMedicos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -276,6 +276,34 @@ namespace CBM_SART.Controllers
             return PartialView("ListaPersonal", records);
         }
 
+        public ActionResult ListaMedicos(string filter = null, int page = 1, int pageSize = 18, string sort = "ius_nombre_usuario", string sortdir = "ASC")
+        {
+            if (String.IsNullOrEmpty(filter)) { filter = null; }
+            var records = new PagedList<iso_usuario>();
+            ViewBag.filter = filter;
+            records.Content = db.iso_usuario
+                        .Where(x => filter == null ||
+                                (x.ius_nombre_usuario.ToLower().Contains(filter.ToLower().Trim())))
+                        .Where(x => x.ius_tipo_usuario == "Medico")
+                        .OrderBy(sort + " " + sortdir)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+
+            // Count
+            records.TotalRecords = db.iso_usuario
+                         .Where(x => filter == null ||
+                               (x.ius_nombre_usuario.ToLower().Contains(filter.ToLower().Trim()))).Where(x => x.ius_tipo_usuario == "Medico").Count();
+
+            records.CurrentPage = page;
+            records.PageSize = pageSize;
+            ViewBag.total = records.TotalRecords;
+
+
+            //var Personal = db.iso_personal.ToList();
+            return PartialView("ListaMedicos", records);
+        }
+
         public ActionResult HistorialCM(int IdPersonal, string filter = null, int page = 1, int pageSize = 10, string sort = "icm_fecha_consulta", string sortdir = "ASC")
         {
             if (String.IsNullOrEmpty(filter)) { filter = null; }

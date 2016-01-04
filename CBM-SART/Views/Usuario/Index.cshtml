@@ -74,6 +74,7 @@
                     @Html.Raw("SI")
                 }
               </text>),
+              grid.Column("ius_tipo_usuario", "Tipo", style: "col-lg-1"),
               grid.Column(header: "Foto", canSort: false, style: "col-lg-4",
                 format: @<text>
                 @if (item.ius_foto_archivo != null)

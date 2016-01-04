@@ -1,118 +1,109 @@
 ﻿@model CBM_SART.Models.iso_matriz_mrl
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Editar Matriz MRL";
 }
 
-<h2>Edit</h2>
+<div class="title-window" style="height:32px">
+    Permite Editar los datos relacionados a Martriz MRL.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Información del Matriz MRL</h4>
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>iso_matriz_mrl</h4>
-        <hr />
+    <div class="modal-body">
+        <div class="form-horizontal">
+
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.imr_id_matriz_mrl)
 
         <div class="form-group">
             @Html.LabelFor(model => model.imr_localizacion_mrl, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_localizacion_mrl)
+                @Html.DropDownListFor(model => model.imr_localizacion_mrl, (IEnumerable<SelectListItem>)ViewBag.ipe_id_empresa, "-Selecionar-", new { @class = "form-control required" })
                 @Html.ValidationMessageFor(model => model.imr_localizacion_mrl)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_proceso_mrl, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_proceso_mrl)
-                @Html.ValidationMessageFor(model => model.imr_proceso_mrl)
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_cargo_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.imr_cargo_mrl, (IEnumerable<SelectListItem>)ViewBag.imr_cargo_mrl, "-Selecionar-", new { @class = "form-control required" })
+                    @Html.ValidationMessageFor(model => model.imr_cargo_mrl)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_sub_proceso_mrl, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_sub_proceso_mrl)
-                @Html.ValidationMessageFor(model => model.imr_sub_proceso_mrl)
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_puesto_trabajo_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.imr_puesto_trabajo_mrl, new SelectList(
+                                new List<Object>{
+                                new { value = "" , text = "-Selecionar-"  }
+                                },
+                                "value",
+                                "text",
+                     0), new { @class = "form-control required", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.imr_puesto_trabajo_mrl)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_cargo_mrl, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_cargo_mrl)
-                @Html.ValidationMessageFor(model => model.imr_cargo_mrl)
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_jefe_area_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.imr_jefe_area_mrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.imr_jefe_area_mrl)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_puesto_trabajo_mrl, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_puesto_trabajo_mrl)
-                @Html.ValidationMessageFor(model => model.imr_puesto_trabajo_mrl)
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_nro_tabajadores_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.imr_nro_tabajadores_mrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.imr_nro_tabajadores_mrl)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_nro_tabajadores_mrl, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_nro_tabajadores_mrl)
-                @Html.ValidationMessageFor(model => model.imr_nro_tabajadores_mrl)
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_fecha_evaluacion_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.imr_fecha_evaluacion_mrl, new { @Value = @DateTime.Now.ToShortDateString(), @class = "form-control datepicker valid" })
+                    @Html.ValidationMessageFor(model => model.imr_fecha_evaluacion_mrl)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_jefe_area_mrl, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_jefe_area_mrl)
-                @Html.ValidationMessageFor(model => model.imr_jefe_area_mrl)
+            <div class="form-group">
+                @Html.LabelFor(model => model.imr_descripcion_mrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.imr_descripcion_mrl, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.imr_descripcion_mrl)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_fecha_evaluacion_mrl, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_fecha_evaluacion_mrl)
-                @Html.ValidationMessageFor(model => model.imr_fecha_evaluacion_mrl)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_descripcion_mrl, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_descripcion_mrl)
-                @Html.ValidationMessageFor(model => model.imr_descripcion_mrl)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_id_puesto_t_mrl, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_id_puesto_t_mrl)
-                @Html.ValidationMessageFor(model => model.imr_id_puesto_t_mrl)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.imr_ubicacion, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.imr_ubicacion)
-                @Html.ValidationMessageFor(model => model.imr_ubicacion)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div style="clear:both"></div>
+            <div class="modal-footer">
+                <span id="progress" class="text-center" style="display: none;">
+                    <img src="/images/wait.gif" alt="wiat" />
+                    Espere...
+                </span>
+                @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                <button class="btn btn-primary" type="submit" name="Guardar"> Guardar </button>
+                <button class="btn btn-warning" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 }
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

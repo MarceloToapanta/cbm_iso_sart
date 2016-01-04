@@ -12,7 +12,9 @@ namespace CBM_SART
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+                        "~/Scripts/jquery-ui.js",
+                        "~/Scripts/select2.js",
+                        "~/Scripts/hideShowPassword.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
             //            "~/Scripts/jquery.validate*"));
@@ -36,6 +38,8 @@ namespace CBM_SART
                       "~/Content/bootstrap-datepicker.css",  // ** NEW for Bootstrap Datepicker
                       "~/Content/site.css",
                       "~/Content/Site.less",
+                      "~/Content/jquery-ui.css",
+                      "~/Content/select2.css",
                       "~/Content/three-quarters.css"));
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

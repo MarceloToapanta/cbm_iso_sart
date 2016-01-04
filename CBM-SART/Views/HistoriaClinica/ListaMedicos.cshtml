@@ -1,0 +1,123 @@
+﻿@*@model IEnumerable<CBM_SART.Models.iso_personal>*@
+@model CBM_SART.Models.PagedList<CBM_SART.Models.iso_usuario>
+
+
+<div class="title-window" style="height:32px">
+    Lista de Trabajadores
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Medicos que pueden acceder a História Clinica/Consulta Médica</h4>
+</div>
+<div class="content-modal">
+    @using (Html.BeginForm("ListaMedicos", null, FormMethod.Get))
+    {
+        <div class="search">
+            <div class="col-md-10">
+                <div class="input-group">
+                    <input type="text"
+                           name="filter"
+                           id="filter-lista"
+                           value="@ViewBag.filter"
+                           class="form-control"
+                           style="display: inline; height:30px"
+                           placeholder="Buscar por Nombre del Medico" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" id="btn-filtrar-lista" type="button">Buscar</button>
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <a class="btn btn-success" data-modal="" href="/Usuario/" id="btnCreate">
+                        <span class="glyphicon glyphicon-menu-right"></span>
+                        Usuarios
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="col-md-12 grid-content">
+            @{
+        var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid-lista-personal");
+
+        grid.Bind(Model.Content, rowCount: Model.TotalRecords, autoSortAndPage: false);
+        grid.Pager(WebGridPagerModes.All);
+
+        @grid.GetHtml(htmlAttributes: new { id = "grid-lista-personal" },   // id for ajaxUpdateContainerId parameter
+            fillEmptyRows: false,
+                      tableStyle: "table table-bordered table-hover table-responsive table-condensed",
+                      selectedRowStyle: "webgrid-selected-row",
+            mode: WebGridPagerModes.All,
+            columns: grid.Columns(
+              grid.Column("ius_iniciales", "Iniciales", style: "col-lg-2"),
+              grid.Column("ius_nombre_usuario", "Nombre", style: "col-lg-2"),
+              grid.Column("ius_nombre_usuario", "Nombre", style: "col-lg-2"),
+              grid.Column("ius_email", "Email", style: "col-lg-4"),
+              grid.Column("ius_password", "Clave", style: "col-lg-4",
+               format: @<text>
+               @Html.Raw("<input class='password' type='password' value='" + @item.ius_password + "' />")
+              </text>)
+             ));
+            }
+
+
+        </div>
+        <div class="clear"></div>
+    }
+</div>
+
+
+
+
+
+
+
+<script>
+    $('.password').hideShowPassword(false, true);
+    $("#btn-filtrar-lista").click(function () {
+        filter_lista();
+    });
+
+    $('#filter-lista').keypress(function (e) {
+        if (e.which == 13) {//Enter key pressed
+            filter_lista();
+            return false;
+        }
+        
+    });
+    function filter_lista() {
+        var filter = $("#filter-lista").val();
+        var url = "@Url.Action("ListaMedicos", "HistoriaClinica")?filter=" + filter;
+        $('#myModalContent').load(url);
+        return false;
+    }
+</script>
+
+
+@*<script>
+    $("#btnCreate").click(function () {
+        load_new();
+        return false;
+    });
+
+    function load_new() {
+        var url = "@Url.Action("Create", "Personal")";
+        console.log(url);
+        $(".modal-dialog").css("width", "inherit");
+        $('#myModalContent').load(url);
+        return false;
+    }
+</script>*@
+
+
+
+
+

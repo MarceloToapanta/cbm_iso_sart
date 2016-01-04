@@ -35,7 +35,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ius_login, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control required valid", @id = "login_edit" })
+                        @Html.TextBoxFor(model => model.ius_login, new { @class = "form-control required valid", @id = "login_edit", @autocomplete = "off" })
                         @Html.ValidationMessageFor(model => model.ius_login)
                         <div id="userexits" class="field-validation-error">
                             El Usuario ingresado ya existe.
@@ -44,9 +44,9 @@
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.ius_password, new { @class = "control-label col-md-3" })*@
+                    @Html.LabelFor(model => model.ius_password, new { @class = "control-label col-md-3" })
                     <div class="col-md-9">
-                        @Html.HiddenFor(model => model.ius_password, new { @class = "form-control required", @id = "password" })
+                        @Html.TextBoxFor(model => model.ius_password, new { @class = "form-control required valid", @id = "password", @autocomplete = "off" })
                         @Html.ValidationMessageFor(model => model.ius_password)
                     </div>
                 </div>

@@ -59,7 +59,6 @@ namespace CBM_SART.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.icg_area = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento");
             iso_cargo iso_cargo = await db.iso_cargo.FindAsync(id);
             if (iso_cargo == null)
             {
@@ -71,8 +70,9 @@ namespace CBM_SART.Controllers
         // GET: /Cargo/Create
         public ActionResult Create()
         {
+            int ide = IdEmpresa();
             var iso_cargo = new iso_cargo();
-            ViewBag.icg_area = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento");
+            ViewBag.Departamentos = new MultiSelectList(db.iso_departamento.Where(x => x.ide_id_empresa == ide).OrderBy("ide_nombre_departamento"), "ide_id_departamento", "ide_nombre_departamento");
             return PartialView("Create", iso_cargo);
         }
 
@@ -81,10 +81,21 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "icg_id_cargo,icg_nombre,icg_descripcion,icg_cod_clase_cargo,icg_num_trabajadores,icg_area,icg_jefe_inmediato,icg_edad,icg_genero,icg_instruccion,icg_experiencia,icg_conocimiento_adicional")] iso_cargo iso_cargo)
+        public async Task<ActionResult> Create([Bind(Include = "icg_id_cargo,icg_nombre,icg_descripcion,icg_cod_clase_cargo,icg_num_trabajadores,icg_area,icg_jefe_inmediato,icg_edad,icg_genero,icg_instruccion,icg_experiencia,icg_conocimiento_adicional")] iso_cargo iso_cargo, int[] Departamentos)
         {
             if (ModelState.IsValid)
             {
+                if (Departamentos != null)
+                {
+                    foreach (var Id in Departamentos)
+                    {
+                        iso_departamento iso_departamento_nuevo = db.iso_departamento.Find(Id);
+                        if (iso_departamento_nuevo != null)
+                        {
+                            iso_cargo.iso_departamento.Add(iso_departamento_nuevo);
+                        }
+                    }
+                }
                 db.iso_cargo.Add(iso_cargo);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -99,8 +110,9 @@ namespace CBM_SART.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.icg_area = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento");
+            int ide = IdEmpresa();
             iso_cargo iso_cargo = await db.iso_cargo.FindAsync(id);
+            ViewBag.Departamentos = new MultiSelectList(db.iso_departamento.Where(x => x.ide_id_empresa == ide).OrderBy("ide_nombre_departamento"), "ide_id_departamento", "ide_nombre_departamento", iso_cargo.iso_departamento.Select(x => x.ide_id_departamento).ToArray());
             if (iso_cargo == null)
             {
                 return HttpNotFound();
@@ -113,12 +125,33 @@ namespace CBM_SART.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "icg_id_cargo,icg_nombre,icg_descripcion,icg_cod_clase_cargo,icg_num_trabajadores,icg_area,icg_jefe_inmediato,icg_edad,icg_genero,icg_instruccion,icg_experiencia,icg_conocimiento_adicional")] iso_cargo iso_cargo)
+        public async Task<ActionResult> Edit([Bind(Include = "icg_id_cargo,icg_nombre,icg_descripcion,icg_cod_clase_cargo,icg_num_trabajadores,icg_area,icg_jefe_inmediato,icg_edad,icg_genero,icg_instruccion,icg_experiencia,icg_conocimiento_adicional")] iso_cargo iso_cargo, int[] Departamentos)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(iso_cargo).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                iso_cargo edit = db.iso_cargo.Find(iso_cargo.icg_id_cargo);
+                edit.icg_nombre = iso_cargo.icg_nombre;
+                edit.icg_descripcion = iso_cargo.icg_descripcion;
+                edit.icg_cod_clase_cargo = iso_cargo.icg_cod_clase_cargo;
+                edit.icg_num_trabajadores = iso_cargo.icg_num_trabajadores;
+                edit.icg_jefe_inmediato = iso_cargo.icg_jefe_inmediato;
+                edit.icg_edad = iso_cargo.icg_edad;
+                edit.icg_genero = iso_cargo.icg_genero;
+                edit.icg_instruccion = iso_cargo.icg_instruccion;
+                edit.icg_experiencia = iso_cargo.icg_experiencia;
+                edit.icg_conocimiento_adicional = iso_cargo.icg_conocimiento_adicional;
+
+                if (edit.iso_departamento == null) edit.iso_departamento = new List<iso_departamento>();
+
+                foreach (var item in edit.iso_departamento.ToList())
+                {
+                    edit.iso_departamento.Remove(item);
+                }
+                foreach (var item in Departamentos)
+                {
+                    edit.iso_departamento.Add(db.iso_departamento.Find(item));
+                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return PartialView("Edit", iso_cargo);
@@ -131,7 +164,8 @@ namespace CBM_SART.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.icg_area = new SelectList(db.iso_departamento, "ide_id_departamento", "ide_nombre_departamento");
+            int ide = IdEmpresa();
+            ViewBag.Departamentos = new MultiSelectList(db.iso_departamento.Where(x => x.ide_id_empresa == ide).OrderBy("ide_nombre_departamento"), "ide_id_departamento", "ide_nombre_departamento");
             iso_cargo iso_cargo = await db.iso_cargo.FindAsync(id);
             if (iso_cargo == null)
             {
@@ -150,7 +184,8 @@ namespace CBM_SART.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        public ActionResult AsignarPuestoT(int id) {
+        public ActionResult AsignarPuestoT(int id)
+        {
             iso_cargo iso_cargo = db.iso_cargo.Find(id);
             //Asignados
             var puestosasignados = iso_cargo.iso_puesto_trabajo;
@@ -159,20 +194,25 @@ namespace CBM_SART.Controllers
             var puestosdisponibles = db.iso_puesto_trabajo.ToList();
             var totalpuestosdisponibles = puestosdisponibles.Except(puestosasignados);
             ViewBag.puestosdisponibles = totalpuestosdisponibles;
-            return PartialView("AsignarPuestoT",iso_cargo);
+            return PartialView("AsignarPuestoT", iso_cargo);
         }
         public ActionResult PuestosAsignados(int id)
         {
             if (id != 0)
             {
                 var iso_cargo = db.iso_cargo.Find(id);
-                var puestos = iso_cargo.iso_puesto_trabajo.Select((x=>new{
-                    x.ipt_id_puesto_t, x.ipt_nro_trbajadores, x.ipt_nombre_puesto_t}));
+                var puestos = iso_cargo.iso_puesto_trabajo.Select((x => new
+                {
+                    x.ipt_id_puesto_t,
+                    x.ipt_nro_trbajadores,
+                    x.ipt_nombre_puesto_t
+                }));
                 return this.Json(puestos, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                var puestos = db.iso_puesto_trabajo.Select((x => new {
+                var puestos = db.iso_puesto_trabajo.Select((x => new
+                {
                     x.ipt_id_puesto_t,
                     x.ipt_nro_trbajadores,
                     x.ipt_nombre_puesto_t
@@ -180,7 +220,7 @@ namespace CBM_SART.Controllers
                 return this.Json(puestos.ToList(), JsonRequestBehavior.AllowGet);
             }
 
-            
+
         }
 
 
@@ -230,7 +270,7 @@ namespace CBM_SART.Controllers
             for (int i = 0; i < puestos.Length; i++)
             {
                 iso_puesto_trabajo ord = new iso_puesto_trabajo();
-                ord  = db.iso_puesto_trabajo.Find(puestos[i]);
+                ord = db.iso_puesto_trabajo.Find(puestos[i]);
                 if (ord != null)
                 {
                     iso_cargo.iso_puesto_trabajo.Add(ord);

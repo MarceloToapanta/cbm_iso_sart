@@ -2,14 +2,19 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="title-window" style="height:32px">
+    Permite visualizar e imprimir los datos relacionados al Departamento.
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-header">
+
+    <h4 class="modal-title">Información del Departamento</h4>
+</div>
 
 <div>
-    <h4>iso_matriz_mrl</h4>
-	<hr />
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.imr_localizacion_mrl)

@@ -1226,6 +1226,28 @@ display: inline-table;
  .navbar-header{
      margin-left: 75px !important;
  }
+ /*select2 styles*/
+ .select2-container{
+     width:100% !important;
+ }
+ .select2-container .select2-search__field{
+     width:100% !important;
+ }
+ .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: solid #66afe9 1px !important;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.select2-container .select2-selection--multiple{
+    min-height: 29px !important;
+}
+#grid-lista-personal .hideShowPassword-toggle.hideShowPassword-toggle-show, #grid-lista-personal .hideShowPassword-toggle.hideShowPassword-toggle-hide{
+    top: 0px !important;
+}
+#grid-lista-personal .hideShowPassword-wrapper, #grid-lista-personal .hideShowPassword-wrapper .password {
+    width: 100% !important;
+}
  @media (min-width: 1200px){
     .container {
         width: 1355px;
